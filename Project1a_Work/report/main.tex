@@ -1,0 +1,246 @@
+\documentclass[sigconf]{acmart}
+
+% Project 1a is a course report rather than an ACM publication.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand{\footnotetextcopyrightpermission}[1]{}
+\pagestyle{plain}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Every red TODO must be replaced before submission.
+\newcommand{\reporttodo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+\title{Project 1a: Testing WolfBite}
+
+% Replace placeholders with all four team members and university emails.
+\author{Abigail Close}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{aeclose2@ncsu.edu}
+
+\author{Team Member 2}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{replace-member2@ncsu.edu}
+
+\author{Team Member 3}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{replace-member3@ncsu.edu}
+
+\author{Team Member 4}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{replace-member4@ncsu.edu}
+
+\begin{document}
+
+\begin{abstract}
+% Replace this with 3--5 concise sentences after the analysis is complete.
+We reverse engineered the high-level design of WolfBite, a Flutter/Firebase
+WIC shopping assistant, using multiple large language models and direct
+repository evidence. We designed and executed tests against the resulting use
+cases, traced those tests to the design, and assessed gaps in the inherited
+test suite. This report presents the evidence without repairing the inherited
+application.
+\end{abstract}
+
+\maketitle
+
+\section{Product Choice (D1)}
+
+\textbf{Product:} WolfBite.\\
+\textbf{Repository:}
+\url{https://github.com/closeabigaile/SEf26_project}.\\
+\textbf{Tested commit:} \texttt{cc22b3c}.
+
+% Move the finalized ``why we selected WolfBite'' paragraph from the Google
+% Doc here. Mention an abandoned product only if the team actually tried one.
+WolfBite was selected because \reporttodo{insert the team's final, honest
+selection rationale}. \reporttodo{State whether another product was attempted
+and abandoned; if none was attempted, say so briefly.}
+
+\subsection{Build and Execution Baseline}
+
+% Summarize baseline.md; do not paste every command or all raw output.
+The inherited web application built and displayed its sign-in page. During the
+initial test run, 22 tests passed, while five test files did not compile because
+fresh dependency resolution selected incompatible Firestore and fake-Firestore
+interfaces. We classified this as dependency/code rot and did not repair it.
+
+\section{Reverse-Engineered Use Cases (D2)}
+
+% Do not paste the current Codex-only draft yet. First reconcile it with Claude
+% and Gemini. Include all 20 final use cases in the required usecases0.md format.
+% Use compact subsections or tables, keeping branches in Extensions.
+
+\subsection{UC1: \reporttodo{Final actor-goal name}}
+
+\textbf{Primary actor:} \reporttodo{actor}\\
+\textbf{Stakeholders and interests:} \reporttodo{final content}\\
+\textbf{Preconditions:} \reporttodo{final content}\\
+\textbf{Trigger:} \reporttodo{final content}\\
+\textbf{Main success scenario:}
+\begin{enumerate}
+  \item \reporttodo{replace with numbered final steps}
+\end{enumerate}
+\textbf{Extensions:}
+\begin{enumerate}
+  \item[1a.] \reporttodo{replace with a meaningful branch tied to a step}
+\end{enumerate}
+\textbf{Postconditions:} \reporttodo{final content}
+
+% IMPORTANT: Repeat the complete format above for UC2--UC20. The final report
+% must contain exactly 20 reconciled use cases. Keep the main scenario clean and
+% put all branches in Extensions. Do not submit the Codex-only draft unchanged.
+
+\section{Designed Tests and Results (D3)}
+
+The team's test code is available at
+\url{https://github.com/closeabigaile/SEf26_project}.
+The complete raw test outputs are available at
+\url{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/raw_test_output}.
+
+% Replace these example rows with real executed tests. Include representative
+% raw-output excerpts or figures and link to complete repository evidence.
+\begin{table*}[t]
+  \caption{Test results}
+  \label{tab:results}
+  \centering
+  \begin{tabular}{p{0.19\textwidth}p{0.24\textwidth}p{0.18\textwidth}p{0.27\textwidth}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \texttt{replace\_with\_test} & \reporttodo{UC/extension and rationale} & \reporttodo{expected observable behavior} & \reporttodo{PASS/FAIL/BLOCKED, actual result, and explanation} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Raw Output Samples}
+
+% Include short, readable samples showing both passes and failures. Do not hide
+% failures. Complete output belongs in Project1a_Work/raw_test_output/.
+\reporttodo{Insert representative raw output showing executed passes and
+failures, or figures with readable captions.}
+
+\section{Traceability and Inherited Tests (D4)}
+
+\begin{table*}[t]
+  \caption{Test-to-use-case traceability}
+  \label{tab:traceability}
+  \centering
+  \begin{tabular}{p{0.25\textwidth}p{0.15\textwidth}p{0.48\textwidth}}
+    \toprule
+    Test & Use case(s) & What it proves \\
+    \midrule
+    \texttt{replace\_with\_test} & UC1 & \reporttodo{evidence-based mapping} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Coverage Gaps}
+
+% Name use cases with no team test and tests mapping to no use case. Explain
+% rather than inventing coverage.
+\reporttodo{Name uncovered use cases and orphan tests in both directions, or
+state that none remain and cite the completed table.}
+
+\subsection{Assessment of the Inherited Tests}
+
+% Only finalize after the independent design/test pass. State which use cases
+% inherited tests cover, where they are blind, and how compilation failures
+% limit the conclusion.
+\reporttodo{Compare inherited tests with all 20 use cases; identify blind spots
+and explain the five compilation failures without repairing them.}
+
+\section{Cross-Model Comparison and Prompt Notes (D5)}
+
+Complete model transcripts and screenshots are stored in the repository under
+\url{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/model_outputs}.
+
+\begin{table*}[t]
+  \caption{Keeper-prompt comparison across models}
+  \label{tab:model-comparison}
+  \centering
+  \begin{tabular}{p{0.05\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.11\textwidth}p{0.23\textwidth}}
+    \toprule
+    Prompt & Codex & Claude & Gemini & Local & Evidence settling disagreements \\
+    \midrule
+    K1 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
+    K2 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
+    K3 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
+    K4 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Errors Caught}
+
+% Transfer the best verified bullets from prompt_notes/. Include errors from
+% every model, how the team caught them, and the evidence used.
+\reporttodo{For each model, give real wrong outputs, how they were caught, and
+the repository or execution evidence that disproved them.}
+
+\subsection{Prompt Utility}
+
+% State which prompts earned their keep, which did not, and one line explaining
+% why for each. Mention prompts invented beyond the ten starters.
+\reporttodo{Identify prompts that earned their keep and prompts that did not,
+with one concise reason for each; include the team's original keeper prompts.}
+
+\subsection{Model-Specific Strengths and Weaknesses}
+
+% Include one repository-specific strength/weakness line for each model.
+\reporttodo{Add one WolfBite-specific strength and weakness line for Codex,
+Claude, Gemini, and the local model if used.}
+
+\subsection{Local Model}
+
+% Report its result, or one honest sentence explaining why no local model ran.
+\reporttodo{Report the local-model result, or give one honest sentence explaining
+why the optional local model did not run.}
+
+\section{Demo Video}
+
+The 2--5 minute demonstration video is available at
+\reporttodo{insert a shareable video URL}. It shows WolfBite running and includes
+real executions of the team's passing and failing tests. The team verified that
+the link is accessible without requesting permission.
+
+\section{Conclusion}
+
+% Keep this short: strongest coverage finding, strongest inherited-test gap,
+% and what cross-model checking changed.
+\reporttodo{Summarize the strongest coverage finding, the most important
+inherited-test gap, and what cross-model checking changed.}
+
+% FINAL CHECK BEFORE DOWNLOADING THE PDF:
+% [ ] Exactly 20 reconciled use cases are present in the required format.
+% [ ] Team tests actually ran; representative pass and failure output is shown.
+% [ ] Every test appears in the results and traceability tables.
+% [ ] Uncovered use cases and orphan tests are honestly identified.
+% [ ] Inherited tests are assessed only after the independent design pass.
+% [ ] Codex, Claude, and Gemini transcripts/screenshots are linked as evidence.
+% [ ] Real model mistakes and disagreements are explained with evidence.
+% [ ] Local-model result or honest non-use sentence is present.
+% [ ] Video is 2--5 minutes, shows real runs, and its link works.
+% [ ] No red TODO text remains in the compiled PDF.
+% [ ] The compiled PDF is visibly ACM sigconf two-column format.
+
+\end{document}
