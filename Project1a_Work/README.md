@@ -24,8 +24,8 @@ be evaluated as-is.
 ## Current status
 
 - Step 1 — fork, clone, build, and run: completed.
-- Step 2 — reverse-engineer 20 use cases: Codex draft and keeper-prompt pass
-  completed; Claude and Gemini runs and team reconciliation remain.
+- Step 2 — reverse-engineer 20 use cases: completed and reconciled from Codex
+  Sol, Gemini, GPT-5.6-terra, limited local Llama, and production evidence.
 - Steps 3–8 — test design/execution, tables, inherited-test assessment,
   cross-model reconciliation, report, and video: not completed.
 
@@ -38,8 +38,8 @@ Project1a_Work/
 ├── keeper_prompts.md          Prompts shared unchanged across models
 ├── model_outputs/
 │   ├── codex/                 Complete Codex outputs
-│   ├── claude/                Complete Claude outputs
 │   ├── gemini/                Complete Gemini outputs
+│   ├── codex_terra/           Complete GPT-5.6-terra outputs
 │   └── local/                 Optional local-model outputs or explanation
 ├── prompt_notes/              Errors caught and prompt/model reflections
 ├── use_cases/                 Drafts, evidence map, and reconciled final 20
@@ -47,6 +47,7 @@ Project1a_Work/
 ├── raw_test_output/           Complete outputs from executing team tests
 ├── tables/                    Results, traceability, and model comparison
 ├── report/                    ACM LaTeX source and working report artifacts
+├── documents/                 Updated working DOCX and exported report PDFs
 └── video/                     Outline, shot list, and external video link only
 ```
 
@@ -60,7 +61,7 @@ unchanged.
 Use descriptive names such as:
 
 ```text
-model_outputs/claude/K1_claude_2026-08-27_name.md
+model_outputs/codex_terra/K1_raw_output.md
 model_outputs/gemini/K2_gemini_2026-08-27_name.md
 raw_test_output/test_login_invalid_email_2026-08-30.txt
 ```
@@ -82,6 +83,11 @@ Prompt ID:
 - `prompt_notes/prompt_notes_codex.md` — sheet-ready Codex prompt notes.
 - `use_cases/usecases_codex_draft.md` — evidence-based draft of 20 use cases;
   this is not final until the cross-model reconciliation is complete.
+- `use_cases/usecases_final.md` — reconciled and production-verified final 20
+  used for D2 and team test assignments.
+- `prompt_notes/prompt_notes_gemini.md` and
+  `prompt_notes/prompt_notes_codex_terra.md` — verified model-specific notes
+  for D5.
 
 ## Before submission
 
@@ -92,4 +98,3 @@ Prompt ID:
 - Record real model disagreements and how repository evidence settled them.
 - Compile the report with `\documentclass[sigconf]{acmart}`.
 - Confirm the 2–5 minute video link works and shows real test runs.
-

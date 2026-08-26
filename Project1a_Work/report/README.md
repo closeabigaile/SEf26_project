@@ -31,6 +31,6 @@ representative samples, and link to the full evidence.
 | Errors caught, prompt verdicts, model comparison | `Cross-Model Comparison and Prompt Notes (D5)` |
 | Shareable video URL | `Demo Video` |
 
-Do not transfer the current Codex-only use-case draft as if it were final. It
-must first be reconciled with Claude, Gemini, and repository evidence.
-
+Use the reconciled final use cases rather than the Codex-only draft. They were
+checked across Codex Sol, GPT-5.6-terra, Gemini, limited local Llama, and direct
+repository evidence.

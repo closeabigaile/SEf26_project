@@ -1,9 +1,9 @@
 # Keeper prompts for cross-model comparison
 
-Run every prompt below unchanged from the repository root in Codex, Claude
-Code, and Gemini CLI. Tell each tool it may inspect the whole repository but
-must not edit anything. Save raw output or screenshots. A local fourth model
-is best-effort.
+Run every prompt below unchanged from the repository root in Codex Sol,
+GPT-5.6-terra, and Gemini. Tell each tool it may inspect the whole repository
+but must not edit anything. Save raw output or screenshots. The local Llama
+run is best-effort and had limited pasted context.
 
 ## K1 — Evidence-ranked actor goals
 
@@ -91,10 +91,9 @@ code and supplies concrete cross-model disagreement material for D5.
 For each prompt, record one verdict per model and the evidence that settled
 disagreements. Do not write “all agreed” without checking line references.
 
-| Prompt | Codex verdict | Claude verdict | Gemini verdict | Local model | Evidence that settled disagreement |
+| Prompt | Codex Sol verdict | GPT-5.6-terra verdict | Gemini verdict | Local model | Evidence that settled disagreement |
 |---|---|---|---|---|---|
 | K1 | pending summary | | | | |
 | K2 | pending summary | | | | |
 | K3 | pending summary | | | | |
 | K4 | pending summary | | | | |
-
