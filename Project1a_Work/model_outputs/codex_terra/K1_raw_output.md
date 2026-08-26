@@ -3,7 +3,7 @@ Interface: OpenAI Codex CLI
 Name: Supreme
 Date: August 25, 2026
 Prompt ID: K1 - Evidence-ranked actor goals
-Repository commit: EAD 03bc584b9a4e03aa8eca51b872435d07b4e7009f
+Repository commit: 03bc584b9a4e03aa8eca51b872435d07b4e7009f
 
 
 • Ranked by apparent end-user value; evidence is production code only (tests excluded).
