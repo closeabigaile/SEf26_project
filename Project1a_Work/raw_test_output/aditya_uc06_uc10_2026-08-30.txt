@@ -1,0 +1,67 @@
+00:00 +0: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: UC6 - Review product nutrition UC6-T1 identified product -> normalized nutrition
+00:00 +1: UC6 - Review product nutrition UC6-T2 missing or nonnumeric nutrients -> zero defaults
+00:00 +2: UC6 - Review product nutrition UC6-T3 exact thresholds -> all inclusive qualities apply
+00:00 +3: UC6 - Review product nutrition UC6-T4 nutrition matching no rule -> no qualities
+00:00 +4: UC6 - Review product nutrition UC6-T5 more than three qualities -> compact view shows three
+00:00 +5: UC7 - Compare healthier alternatives UC7-T1 eligible same-category candidates -> ranked healthier list
+00:00 +6: UC7 - Compare healthier alternatives UC7-T2 candidate pool -> excludes original, ineligible, and other category
+00:00 +7: UC7 - Compare healthier alternatives UC7-T3 more than maximum healthier candidates -> first five ranked
+00:00 +8: UC7 - Compare healthier alternatives UC7-T4 candidate missing nutrition -> zero-score candidate can qualify
+00:00 +9: UC7 - Compare healthier alternatives UC7-T5 no better candidate -> empty alternatives
+00:00 +10: UC7 - Compare healthier alternatives UC7-T6 blank category -> no search results
+00:00 +10 -1: UC7 - Compare healthier alternatives UC7-T6 blank category -> no search results [E]
+  Expected: empty
+    Actual: [
+              {
+                'name': 'Unexpected result',
+                'category': '',
+                'fdcId': 50,
+                'eligible': true,
+                'foodNutrients': [],
+                'healthScore': 0.0,
+                'upc': 'blank-category'
+              }
+            ]
+
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/project1a/aditya_uc6-10_test.dart 405:7        main.<fn>.<fn>
+
+00:01 +10 -1: UC8 - Add product to basket UC8-T1 identified covered product -> basket and usage increment
+00:01 +11 -1: UC8 - Add product to basket UC8-T2 exhausted allowance -> unchanged basket and usage
+00:01 +12 -1: UC8 - Add product to basket UC8-T3 existing UPC -> quantity flow without duplicate line
+00:01 +13 -1: UC8 - Add product to basket UC8-T4 signed-out shopper -> rejected unchanged basket
+00:01 +14 -1: UC8 - Add product to basket UC8-T5 raw category -> canonical in-memory basket state
+00:01 +15 -1: UC9 - Choose healthier alternative UC9-T1 available alternative -> exact product submitted
+00:02 +16 -1: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: Found 1 widget with text "Added healthier item: Better cereal"
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart:592:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart line 592
+The test description was:
+  UC9-T2 rejected alternative -> must not report success
+00:02 +16 -2: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success [E]
+  Test failed. See exception logs above.
+
+00:02 +16 -2: UC10 - Scan receipt UC10-T1 ready -> source dialog cancelled -> ready unchanged
+00:02 +17 -2: UC10 - Scan receipt UC10-T2 source chosen -> image selection cancelled -> ready
+00:02 +18 -2: UC10 - Scan receipt UC10-T3 OCR failure -> visible error and ready state
+00:03 +19 -2: UC10 - Scan receipt UC10-T4 OCR text without candidate -> zero-candidate status
+00:03 +20 -2: UC10 - Scan receipt UC10-T5 spaced or hyphenated code -> no candidate
+00:03 +21 -2: (tearDownAll)
+00:03 +21 -2: Some tests failed.
