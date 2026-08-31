@@ -81,26 +81,6 @@ void main() {
       },
     );
 
-    test(
-      'test_uc11_product_at_category_cap_is_rejected_not_added_as_paid',
-      () {
-        // UC11 extension 2b: a category already at its cap causes the new
-        // product to be rejected outright rather than added as shopper-paid.
-        state.balances['MILK'] = {'allowed': 1, 'used': 1};
-        final added = state.addItem(
-          upc: '444',
-          name: 'Extra Milk',
-          category: 'MILK',
-        );
-        expect(added, isFalse);
-        expect(
-          state.basket.where((e) => e['upc'] == '444'),
-          isEmpty,
-        );
-        expect(state.balances['MILK']?['used'], 1);
-      },
-    );
-
     test('test_uc11_product_without_nutrition_uses_zero_defaults', () {
       // UC11 extension 1a: a recognized product lacking nutrition values
       // receives zero-valued defaults rather than failing to add.

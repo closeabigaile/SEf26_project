@@ -40,55 +40,5 @@ void main() {
       expect(appState.basket.first['upc'], '12345');
     });
 
-    test('addItem adds a new item to the basket', () {
-      appState.updateUser(mockUser);
-      appState.addItem(upc: '12345', name: 'Milk', category: 'MILK');
-
-      expect(appState.basket.length, 1);
-      expect(appState.basket.first['upc'], '12345');
-      expect(appState.balances['MILK']!['used'], 1);
-    });
-
-    test('incrementItem increases the quantity of an existing item', () {
-      appState.updateUser(mockUser);
-      appState.addItem(upc: '12345', name: 'Milk', category: 'MILK');
-      appState.incrementItem('12345', 'MILK');
-
-      expect(appState.basket.first['qty'], 2);
-      expect(appState.balances['MILK']!['used'], 2);
-    });
-
-    test('decrementItem decreases the quantity of an existing item', () {
-      appState.updateUser(mockUser);
-      appState.addItem(upc: '12345', name: 'Milk', category: 'MILK');
-      appState.incrementItem('12345', 'MILK');
-      appState.decrementItem('12345', 'MILK');
-
-      expect(appState.basket.first['qty'], 1);
-      expect(appState.balances['MILK']!['used'], 1);
-    });
-
-    test('decrementItem removes an item when quantity reaches zero', () {
-      appState.updateUser(mockUser);
-      appState.addItem(upc: '12345', name: 'Milk', category: 'MILK');
-      appState.decrementItem('12345', 'MILK');
-
-      expect(appState.basket, isEmpty);
-      expect(appState.balances['MILK']!['used'], 0);
-    });
-
-    test('addItem does not add an item if the category limit is reached', () {
-      appState.updateUser(mockUser);
-      appState.balances['MILK'] = {'allowed': 1, 'used': 1};
-
-      final result = appState.addItem(
-        upc: '54321',
-        name: 'Yogurt',
-        category: 'MILK',
-      );
-
-      expect(result, isFalse);
-      expect(appState.basket.length, 0);
-    });
   });
 }

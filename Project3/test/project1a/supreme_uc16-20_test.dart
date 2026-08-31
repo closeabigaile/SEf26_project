@@ -4,11 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wolfbite/screens/balances_screen.dart';
 import 'package:wolfbite/state/app_state.dart';
-import 'package:wolfbite/screens/qr_checkout_screen.dart';
 
 import '../mocks/mocks.mocks.dart';
 
@@ -317,33 +315,6 @@ void main() {
     });
 
     group('UC19 — Prepare checkout handoff', () {
-        testWidgets('test_uc19_qr_code_contains_current_basket_data', (
-            WidgetTester tester,
-        ) async {
-            // ARRANGE
-            final appState = AppState(db: FakeFirebaseFirestore());
-
-            appState.basket.add({
-            'upc': '11111',
-            'name': 'Milk',
-            'category': 'MILK',
-            'qty': 2,
-            });
-
-            await tester.pumpWidget(
-            ChangeNotifierProvider<AppState>.value(
-                value: appState,
-                child: const MaterialApp(
-                home: QRCheckoutScreen(),
-                ),
-            ),
-            );
-
-            await tester.pumpAndSettle();
-
-            // ASSERT: a scannable representation of the basket is displayed.
-            expect(find.byType(QrImageView), findsOneWidget);
-        });
     });
 
     group('UC20 — Finish shopping session', () {

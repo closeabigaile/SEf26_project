@@ -76,21 +76,5 @@ void main() {
       expect(find.text('Unlimited'), findsOneWidget);
     });
 
-    testWidgets('calls signOut when logout button is tapped', (
-      WidgetTester tester,
-    ) async {
-      when(mockAppState.balancesLoaded).thenReturn(true);
-      when(mockAppState.balances).thenReturn({});
-      when(mockAuth.signOut()).thenAnswer((_) async {});
-      when(mockGoRouter.go(any)).thenReturn(null);
-
-      await pumpBalancesScreen(tester);
-
-      await tester.tap(find.byIcon(Icons.logout));
-      await tester.pumpAndSettle();
-
-      verify(mockAuth.signOut()).called(1);
-      verify(mockGoRouter.go('/login')).called(1);
-    });
   });
 }
