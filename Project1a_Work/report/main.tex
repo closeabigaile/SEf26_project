@@ -7,16 +7,16 @@
 \pagestyle{plain}
 
 \usepackage{booktabs}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{xcolor}
-
-% Every red TODO must be replaced before submission.
-\newcommand{\reporttodo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\usepackage{placeins}
+\setlength{\emergencystretch}{1.5em}
 
 \title{Project 1a: Testing WolfBite}
+\acmConference[CSC 510]{CSC 510: Software Engineering}{August 2026}{Raleigh, NC}
+\acmYear{2026}
 
-% Replace placeholders with all four team members and university emails.
 \author{Abigail Close}
 \affiliation{%
   \institution{North Carolina State University}
@@ -52,13 +52,15 @@
 \begin{document}
 
 \begin{abstract}
-% Replace this with 3--5 concise sentences after the analysis is complete.
 We reverse engineered the high-level design of WolfBite, a Flutter/Firebase
 WIC shopping assistant, using multiple large language models and direct
 repository evidence. We designed and executed tests against the resulting use
-cases, traced those tests to the design, and assessed gaps in the inherited
-test suite. This report presents the evidence without repairing the inherited
-application.
+cases, traced those tests to the design, and assessed the inherited suite only
+after completing the independent design pass. The curated suite executed 123
+tests: 112 passed, three exposed unhandled or misleading user paths, one
+exposed a test-scope mismatch, and seven encountered the same Flutter
+shader-renderer failure. This report presents those findings without repairing
+the inherited application.
 \end{abstract}
 
 \maketitle
@@ -66,9 +68,12 @@ application.
 \section{Product Choice (D1)}
 
 \textbf{Product:} WolfBite.\\
-\textbf{Repository:}
+\textbf{Original repository:}
+\url{https://github.com/SuyeshJadhav/CSC510_G19}.\\
+\textbf{Team fork:}
 \url{https://github.com/closeabigaile/SEf26_project}.\\
-\textbf{Tested commit:} \texttt{cc22b3c}.
+\textbf{Production baseline commit:} \texttt{cc22b3c}.\\
+\textbf{Curated-suite commit:} \texttt{8461250}.
 
 We selected WolfBite because it is a user-facing Flutter application with
 several interconnected features, including authentication, barcode and receipt
@@ -81,11 +86,12 @@ evaluate and abandon another project before selecting WolfBite.
 
 \subsection{Build and Execution Baseline}
 
-% Summarize baseline.md; do not paste every command or all raw output.
 The inherited web application built and displayed its sign-in page. During the
 initial test run, 22 tests passed, while five test files did not compile because
 fresh dependency resolution selected incompatible Firestore and fake-Firestore
 interfaces. We classified this as dependency/code rot and did not repair it.
+Git history on \texttt{main} contains separate Project 1a commits from all four
+authors and merge commits for each assigned use-case range.
 
 \section{Reverse-Engineered Use Cases (D2)}
 
@@ -280,135 +286,482 @@ is distinct from finishing the local shopping session.
 
 \section{Designed Tests and Results (D3)}
 
-The team's test code is available at
-\url{https://github.com/closeabigaile/SEf26_project}.
-The complete raw test outputs are available at
-\url{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/raw_test_output}.
+The repository contains the four
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project3/test/project1a}{assigned Project 1a test files}, the
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project3/test/active/project1a_coverage_gaps_test.dart}{11-test gap file},
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/raw_test_output}{complete raw output for the four original targeted runs}, and
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tests}{their per-test result narratives}.
+The four independently designed files initially executed 76 tests: 72 passed
+and four failed. Curation then removed 21 weaker duplicates
+from active discovery and added 11 tests for transition and persistence gaps.
+The final active suite contains 85 team-designed tests and 38 inherited tests.
 
-% Replace these example rows with real executed tests. Include representative
-% raw-output excerpts or figures and link to complete repository evidence.
-\begin{table*}[t]
-  \caption{Test results}
-  \label{tab:results}
+\begin{table}[H]
+  \caption{Executed-suite summary}
+  \label{tab:suite-summary}
   \centering
-  \begin{tabular}{p{0.19\textwidth}p{0.24\textwidth}p{0.18\textwidth}p{0.27\textwidth}}
+  \small
+  \begin{tabular}{lrrr}
     \toprule
-    Test & Why we tried it & Expected & What happened \\
+    Scope & Executed & Passed & Failed \\
     \midrule
-    \texttt{replace\_with\_test} & \reporttodo{UC/extension and rationale} & \reporttodo{expected observable behavior} & \reporttodo{PASS/FAIL/BLOCKED, actual result, and explanation} \\
+    Initial team files & 76 & 72 & 4 \\
+    Final active suite & 123 & 112 & 11 \\
     \bottomrule
   \end{tabular}
-\end{table*}
+\end{table}
+
+The recorded final command was
+\texttt{flutter test --concurrency=1 --coverage} on Flutter 3.47.2. It exited
+with status 1. Failures in UC1, UC3, and UC9 exposed unhandled or misleading
+user paths. UC7-T6 also failed, but it directly called the service with a blank
+category while the production screen skips that call; it is a test-scope
+mismatch, not evidence of a user-visible UC7 failure. Seven widget failures
+reported the same SDK renderer error while exercising Material ink effects:
+\path{ink_sparkle.frag} could not be decoded because runtime-stage buffer
+verification failed. The UC17 harness using \path{NoSplash} passed, supporting
+the environment/renderer classification. No failed result was hidden or
+changed.
+
+\begin{table}[H]
+  \caption{Representative test results (1 of 2)}
+  \label{tab:results-1}
+  \centering
+  \scriptsize
+  \begin{tabular}{p{0.32\columnwidth}p{0.58\columnwidth}}
+    \toprule
+    Test & Why / expected / observed \\
+    \midrule
+    \path{test_uc01_valid_registration_creates_account_and_profile}
+      & \textbf{Why:} UC1 crosses Authentication, Firestore, sign-out, and navigation.
+        \textbf{Expected:} create account/profile and open login.
+        \textbf{PASS:} exact credentials/UID were used, sign-out called, and \path{/login} opened. \\
+    \path{test_uc01_profile_save_failure_does_not_complete_registration_flow}
+      & \textbf{Why:} UC1 extension 4a separates account creation from profile persistence.
+        \textbf{Expected:} report failure; do not claim completion.
+        \textbf{FAIL:} the exception escaped with no message; sign-out/navigation did not occur. \\
+    \path{test_uc03_sign_out_failure_leaves_shopper_signed_in}
+      & \textbf{Why:} UC3 extension 2a requires a failed sign-out to remain failed.
+        \textbf{Expected:} preserve state and handle the error.
+        \textbf{FAIL:} login navigation was withheld, but the exception escaped unexplained. \\
+    \path{UC7-T6 blank category -> no search results}
+      & \textbf{Why:} probe the blank-category boundary.
+        \textbf{Expected:} no search or alternatives.
+        \textbf{TEST-SCOPE FAIL:} the direct service call returned a product;
+        the production screen does not make this call when category is blank. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{Representative test results (2 of 2)}
+  \label{tab:results-2}
+  \centering
+  \scriptsize
+  \begin{tabular}{p{0.32\columnwidth}p{0.58\columnwidth}}
+    \toprule
+    Test & Why / expected / observed \\
+    \midrule
+    \path{UC9-T2 rejected alternative -> must not report success}
+      & \textbf{Why:} UC9 must honor \path{AppState.addItem}'s rejection.
+        \textbf{Expected:} suppress success.
+        \textbf{FAIL:} UI displayed \emph{Added healthier item: Better cereal}. \\
+    \path{test_uc11_duplicate_recognized_upc_increments_but_addition_count_is_undercounted}
+      & \textbf{Why:} UC11 extension 2a predicts quantity/report divergence.
+        \textbf{Expected:} quantity two; second return false.
+        \textbf{PASS:} both conditions occurred, confirming underreporting. \\
+    \path{test_uc16_paid_quantity_is_decreased_before_covered_quantity}
+      & \textbf{Why:} UC16 extension 1a protects covered usage.
+        \textbf{Expected:} paid unit removed first.
+        \textbf{PASS:} paid was removed; covered quantity/usage stayed unchanged. \\
+    Seven Material-ink widget executions (names absent from summary)
+      & \textbf{Why:} classify host failures separately.
+        \textbf{Expected:} render and reach assertions.
+        \textbf{ENVIRONMENT FAIL} (7): identical \path{ink_sparkle.frag} verification error. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Raw Output Samples}
 
-% Include short, readable samples showing both passes and failures. Do not hide
-% failures. Complete output belongs in Project1a_Work/raw_test_output/.
-\reporttodo{Insert representative raw output showing executed passes and
-failures, or figures with readable captions.}
+The four committed targeted-run logs preserve full output and stack traces for
+the original assigned files. Short excerpts show both conforming and
+nonconforming executions:
+\begin{scriptsize}
+\begin{verbatim}
+The test description was:
+test_uc03_sign_out_failure_leaves_shopper_signed_in
+00:02 +23 -2: Some tests failed.
+00:02 +15: All tests passed!
+\end{verbatim}
+\end{scriptsize}
+The failure excerpt is from the UC1--UC5 run; the passing counter is from the
+original UC11--UC15 run. The repository records the final full-suite summary
+as 112 passed and 11 failed out of 123, but does not contain that run's complete
+console output.
+% TODO PROJECT1A: Commit and link the complete raw 123-test run; the repository
+% currently preserves its summary plus complete raw targeted-run logs.
+% TODO PROJECT1A: Add per-test expected/actual results for the 11 gap tests and
+% identify the seven renderer-failing tests from that raw full-suite output.
 
 \section{Traceability and Inherited Tests (D4)}
 
+The
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tables}{complete test-level traceability sources}
+are available in the repository.
+Tables~\ref{tab:trace-1}--\ref{tab:trace-4} account for all 85 current
+team-designed tests by stable test prefix or ID and include the 11
+post-curation gap tests. Grouping repeated tests by use case keeps the ACM
+report readable without substituting test names for evidence.
+
 \begin{table*}[t]
-  \caption{Test-to-use-case traceability}
-  \label{tab:traceability}
+  \caption{Team test-to-use-case traceability, UC1--UC5}
+  \label{tab:trace-1}
   \centering
-  \begin{tabular}{p{0.25\textwidth}p{0.15\textwidth}p{0.48\textwidth}}
+  \small
+  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
     \toprule
-    Test & Use case(s) & What it proves \\
+    Active tests & UC & What the assertions prove \\
     \midrule
-    \texttt{replace\_with\_test} & UC1 & \reporttodo{evidence-based mapping} \\
+    \path{test_uc01_*} (5) & UC1 & Valid creation, local validation, authentication rejection, and the unhandled profile-save failure. \\
+    \path{test_uc02_*} (5) & UC2 & Valid navigation, invalid email, six-character boundary, credential rejection, and single pending submission. \\
+    \path{test_uc03_*} (5) & UC3 & Sign-out invocation/navigation, local-state cleanup, already-signed-out routing, and the unhandled failure. \\
+    \path{test_uc04_*} (5) & UC4 & Current, absent, partial, missing-nutrition, and previous-period saved sessions. \\
+    \path{test_uc05_*} (5) & UC5 & Matching, empty, unknown, failed, and concurrent UPC lookups without basket mutation. \\
     \bottomrule
   \end{tabular}
 \end{table*}
+
+\begin{table*}[t]
+  \caption{Team test-to-use-case traceability, UC6--UC10}
+  \label{tab:trace-2}
+  \centering
+  \small
+  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+    \toprule
+    Active tests & UC & What the assertions prove \\
+    \midrule
+    \path{UC6-T1}--\path{UC6-T5} (5) & UC6 & Normalization, zero defaults, inclusive thresholds, no-match behavior, and the three-badge limit. \\
+    \path{UC7-T1}--\path{UC7-T6} (6) & UC7 & Filtering, ranking, five-result limit, zero-default risk, no-better result, and the direct-service blank-category mismatch. \\
+    \path{UC8-T1}--\path{UC8-T5} plus persistence (6) & UC8 & Accepted/capped/duplicate/signed-out/category-normalized additions and successful persistence. \\
+    \path{UC9-T1}--\path{UC9-T2} (2) & UC9 & Exact alternative submission and the false success message after state rejection. \\
+    \path{UC10-T1}--\path{UC10-T5} (5) & UC10 & Source and picker cancellation, OCR failure, no-candidate input, and spaced/hyphenated code rejection. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+  \caption{Team test-to-use-case traceability, UC11--UC15}
+  \label{tab:trace-3}
+  \centering
+  \small
+  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+    \toprule
+    Active tests & UC & What the assertions prove \\
+    \midrule
+    \path{test_uc11_*} (3) & UC11 & Multiple receipt products, duplicate-UPC quantity/reporting behavior, and missing-nutrition defaults. \\
+    \path{test_uc12_*} (3) & UC12 & Product/category/total display, empty state, and separate covered/paid lines. \\
+    \path{test_uc13_*} (3) & UC13 & Nutrition expansion, zero defaults, and return to the collapsed summary. \\
+    \path{test_uc14_*} plus three gap tests (5) & UC14 & UI delegation below/at cap, real under-cap mutation, missing-product no-op, and persistence. \\
+    \path{test_uc15_*} plus missing-original gap (4) & UC15 & Paid-line creation/increment, uncapped PAID state, and no paid line without the original product. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+  \caption{Team test-to-use-case traceability, UC16--UC20}
+  \label{tab:trace-4}
+  \centering
+  \small
+  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+    \toprule
+    Active tests & UC & What the assertions prove \\
+    \midrule
+    \path{test_uc16_*} plus persistence (6) & UC16 & Covered decrease, removal at zero, paid-first order, missing-product no-op, nonnegative usage, and persistence. \\
+    \path{test_uc17_*} plus three gap tests (7) & UC17 & Single/multi-category clearing, missing category, nonnegative usage, persistence, and confirm/cancel UI paths. \\
+    \path{test_uc18_*} (2) & UC18 & PAID's unlimited presentation and full progress at allowance. \\
+    No active team test; inherited QR test retained & UC19 & Active source checks that a QR widget is rendered from basket JSON; external scan/cashier acceptance is not proved. \\
+    \path{test_uc20_*} plus two gap tests (3) & UC20 & Basket clearing with retained usage, persisted cleared state, and failure leaving local state cleared. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+\FloatBarrier
 
 \subsection{Coverage Gaps}
 
-% Name use cases with no team test and tests mapping to no use case. Explain
-% rather than inventing coverage.
-\reporttodo{Name uncovered use cases and orphan tests in both directions, or
-state that none remain and cite the completed table.}
+All 85 active team-designed tests map to at least one final use case; there are
+no orphan tests. Nineteen of 20 use cases have an active team-designed test.
+UC19 does not: its team-written QR-rendering duplicate was removed and the
+inherited QR test remained canonical. At the main-outcome level, 18 of 20 use
+cases are covered. UC10 has team tests for error and cancellation extensions
+but lacks an offline happy-path OCR-to-matched-product test because the screen
+hard-codes \path{AplService}, \path{ImagePicker}, and the live OCR request.
+UC19 lacks a team test and an assertion over the encoded payload or external
+cashier interoperability.
+
+\begin{table}[H]
+  \caption{Final active-suite coverage audit}
+  \label{tab:coverage}
+  \centering
+  \small
+  \begin{tabular}{lrrr}
+    \toprule
+    Criterion & Covered & Total & Percent \\
+    \midrule
+    Executable lines & 967 & 1,150 & 84.1\% \\
+    Main outcomes & 18 & 20 & 90.0\% \\
+    Requirement paths & 69 & 106 & 65.1\% \\
+    Decision outcomes & 55 & 84 & 65.5\% \\
+    Exception paths & 7 & 19 & 36.8\% \\
+    Persistence outcomes & 10 & 23 & 43.5\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+LCOV contained no branch records, so a numeric source-branch percentage would
+be fabricated. Uncovered Project 1a paths include exception and persistence
+behavior, UC10's 13/14-digit window plus unmatched and duplicate OCR
+candidates, UC19 payload validation, UC4 retrieval/reset-save failure, UC7
+backend failure, and UC9 duplicate/persistence behavior. The suite also
+contains 18 meaningful boundary checks; no percentage is assigned because the
+possible-boundary denominator is not finite.
 
 \subsection{Assessment of the Inherited Tests}
 
-% Only finalize after the independent design/test pass. State which use cases
-% inherited tests cover, where they are blind, and how compilation failures
-% limit the conclusion.
-\reporttodo{Compare inherited tests with all 20 use cases; identify blind spots
-and explain the five compilation failures without repairing them.}
+The inherited suite was inspected only after the independent use-case and test
+design pass. In the as-is baseline, 22 tests in signup, login, and balances
+passed, but five files (state, basket, scan, QR checkout, and APL service) did
+not compile. Fresh dependency resolution paired Firestore 6.8.0 with
+fake-Firestore 4.1.1, whose \path{WriteBatch.update} interfaces are
+incompatible. Source assertions in those files describe intent, not executable
+baseline evidence; the dependency rot was reported and not repaired.
+
+\begin{table}[H]
+  \caption{Inherited tests, UC1--UC5}
+  \label{tab:inherited-1}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+    \toprule
+    UC & Verdict & Blind spots \\
+    \midrule
+    UC1 & Partial, executable & No profile-save failure after account creation or incomplete-profile recovery. \\
+    UC2 & Largely covered & No direct proof that repeated pending submission makes only one request or that every protected route stays closed. \\
+    UC3 & Partial & No sign-out exception handling, account-specific state cleanup, already-signed-out path, or cross-user isolation. \\
+    UC4 & Weak; baseline blocked & One intended restore test; no missing/partial session, zero-default nutrition, month/year reset, retrieval failure, or reset-save failure. \\
+    UC5 & Strong source intent; baseline blocked & No empty-input/stale-result sequence, cancelled barcode, unchanged-basket proof, or false/missing eligibility case. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{Inherited tests, UC6--UC10}
+  \label{tab:inherited-2}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+    \toprule
+    UC & Verdict & Blind spots \\
+    \midrule
+    UC6 & Partial source intent & Scan rendering touches nutrition, but thresholds, missing/nonnumeric values, no-match, and the three-badge limit were not established. \\
+    UC7 & Partial source intent & Same-category eligible substitutes were intended; blank category, ranking, original exclusion, limit, missing nutrition, and backend failure were blind. \\
+    UC8 & Partial source intent & Basic Add/cap UI existed; signed-out rejection, category normalization, return-value meaning, and persistence outcomes were blind. \\
+    UC9 & Weak source intent & The alternatives sheet was rendered, but state rejection, false success reporting, duplicate quantity, and persistence were untested. \\
+    UC10 & None & No inherited receipt-scanner tests; OCR cancellation, parsing windows, deduplication, and service failures were blind. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{Inherited tests, UC11--UC15}
+  \label{tab:inherited-3}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+    \toprule
+    UC & Verdict & Blind spots \\
+    \midrule
+    UC11 & None & No receipt-to-basket tests, including duplicate-count underreporting, cap rejection, or missing nutrition. \\
+    UC12 & Partial; baseline blocked & Basic basket rendering/control intent, but no dependable empty-state or covered/paid separation evidence. \\
+    UC13 & Weak; baseline blocked & No direct missing/partial nutrition or expand-collapse requirement coverage. \\
+    UC14 & Partial; baseline blocked & Basic increment intent, but no missing-product, at-cap transition, or persistence evidence. \\
+    UC15 & Weak & No production-state proof of paid-line creation/increment, missing original, covered-usage invariance, or the unlimited-display quirk. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{Inherited tests, UC16--UC20}
+  \label{tab:inherited-4}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+    \toprule
+    UC & Verdict & Blind spots \\
+    \midrule
+    UC16 & Partial; baseline blocked & Basic decrement/removal intent, but no paid-first order, missing product, nonnegative usage, or persistence. \\
+    UC17 & None & Confirmation/cancellation, multi-category reversal, missing category, nonnegative clamp, and persistence were blind. \\
+    UC18 & Useful, executable & Loading, empty, limited, and generic unlimited displays existed; PAID-specific semantics and exact-cap progress were absent. \\
+    UC19 & Partial; baseline blocked & A QR widget was rendered from basket JSON, but payload content, unusable QR, and cashier interoperability were not validated. \\
+    UC20 & Misleading test double & The inherited checkout double reset usage unlike production; it cannot prove benefit retention or persistence-failure behavior. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Overall, inherited coverage was strongest in authentication UI and basic
+balance presentation, and weakest in receipt processing, persistence/error
+paths, month restoration, paid-overflow semantics, and checkout correctness.
+Three user-facing full-suite failures occupy those blind spots: profile
+persistence, sign-out failure, and false success after a rejected alternative.
+The fourth non-renderer failure, UC7-T6, bypasses the screen's blank-category
+guard and therefore identifies a test-to-use-case mismatch rather than a
+WolfBite user-flow failure.
 
 \section{Cross-Model Comparison and Prompt Notes (D5)}
 
-Complete model transcripts and screenshots are stored in the repository under
-\url{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/model_outputs}.
+Complete
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/model_outputs}{raw model transcripts}
+and
+\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/prompt_notes}{model-specific audit notes}
+are stored in the repository.
 
-\begin{table*}[t]
-  \caption{Keeper-prompt comparison across models}
+\begin{table}[H]
+  \caption{Prompt-by-model verdicts, K1--K2}
   \label{tab:model-comparison}
   \centering
-  \begin{tabular}{p{0.05\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.11\textwidth}p{0.23\textwidth}}
+  \scriptsize
+  \begin{tabular}{@{}p{0.08\columnwidth}p{0.20\columnwidth}p{0.62\columnwidth}@{}}
     \toprule
-    Prompt & Codex Sol & GPT-5.6-terra & Gemini & Local & Evidence settling disagreements \\
+    Prompt & Model & Verdict \\
     \midrule
-    K1 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
-    K2 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
-    K3 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
-    K4 & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{verdict} & \reporttodo{result or N/A} & \reporttodo{file/line or observed run} \\
+    K1 & Codex Sol & Defensible 20; reset is an extension and tracking is absent. \\
+    K1 & Terra & Strong after narrowing eligibility, capacity, and transaction wording. \\
+    K1 & Gemini & Useful inventory; overstated eligibility, swap, signup outcome, and checkout. \\
+    K1 & Local & Fabricated citations and promoted helpers to goals. \\
+    K2 & Codex Sol & Found paid overflow, receipt/checkout separation, and unawaited saves. \\
+    K2 & Terra & Best evidence/inference labels; qualified persistence and pre-checkout invariant. \\
+    K2 & Gemini & Useful trace; contradicted itself at the cap and overstated reset timing. \\
+    K2 & Local & Shallow; honestly used N/A when context was absent. \\
     \bottomrule
   \end{tabular}
-\end{table*}
+\end{table}
+
+\begin{table}[H]
+  \caption{Prompt-by-model verdicts, K3--K4}
+  \label{tab:model-comparison-2}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.08\columnwidth}p{0.20\columnwidth}p{0.62\columnwidth}@{}}
+    \toprule
+    Prompt & Model & Verdict \\
+    \midrule
+    K3 & Codex Sol & Specific cap, rollover, OCR, nutrition, and paid-first boundaries. \\
+    K3 & Terra & Strong source of nontrivial extensions and tests. \\
+    K3 & Gemini & Valuable selectively; many entries were redesign proposals. \\
+    K3 & Local & Generic boundaries with no valid evidence citations. \\
+    K4 & Codex Sol & Found stale README/CI and weaker eligibility/checkout claims. \\
+    K4 & Terra & Strong partial/absent claim audit; verdicts retained. \\
+    K4 & Gemini & Tracking correct; receipt, eligibility, checkout, and platform claims needed narrowing. \\
+    K4 & Local & Inferred implementation from dependency names. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Repository evidence settled the disagreements: direct UPC lookup does not
+filter eligibility; signup signs out; routes contain no tracking; several state
+saves are unawaited; checkout retains usage; receipt Add All does not call
+checkout; production thresholds, OCR windows, rollover, and paid-first
+decrement define the real boundaries; and CI targets missing \path{Project2}.
 
 \subsection{Errors Caught}
 
-% Transfer the best verified bullets from prompt_notes/. Include errors from
-% every model, how the team caught them, and the evidence used.
-\reporttodo{For each model, give real wrong outputs, how they were caught, and
-the repository or execution evidence that disproved them.}
+\begin{itemize}
+  \item \textbf{Codex Sol:} initially allowed the domain label
+  \emph{approved} to imply guaranteed WIC eligibility. Inspection of
+  \path{AplService.findByUpc} showed that any matching document is returned;
+  only substitute lookup filters \path{eligible}. Code/route inventory also
+  disproved README order tracking and separated receipt recognition, Add All,
+  QR handoff, and local session completion.
+  \item \textbf{GPT-5.6-terra:} promoted category-cap checking and
+  \emph{complete transaction} to actor goals, stated persistence too strongly,
+  and applied a basket/usage equality invariant after checkout. The state code
+  showed that capacity is subordinate to add/review flows, saves are often
+  unawaited, and post-checkout usage intentionally remains while the basket is
+  empty.
+  \item \textbf{Gemini:} claimed signup enters the app, an alternative is
+  atomically swapped, direct lookup verifies WIC eligibility, and checkout is
+  permanently committed. The signup, scan, APL, QR, and state paths instead
+  show sign-out-to-login, additive selection, unfiltered direct lookup, and no
+  cashier acknowledgement. Its K4 receipt verdict also contradicted its own
+  explanation and was corrected to partial/misleading.
+  \item \textbf{Local Llama 3 8B:} fabricated file-line citations, turned
+  private persistence/notification helpers into user goals, and inferred QR
+  implementation from the dependency list. Manual comparison against the
+  cited files found no grounding, so none of its unique claims entered D2
+  without independent verification.
+\end{itemize}
 
 \subsection{Prompt Utility}
 
-% State which prompts earned their keep, which did not, and one line explaining
-% why for each. Mention prompts invented beyond the ten starters.
-\reporttodo{Identify prompts that earned their keep and prompts that did not,
-with one concise reason for each; include the team's original keeper prompts.}
+The team used four keeper prompts: K1
+evidence-ranked actor goals, K2 state-transition/invariant audit, K3 hostile
+boundary miner, and K4 contradiction adjudicator. K1 earned its keep by
+forcing exactly 20 ranked, cited goals; K2 exposed paid overflow, unawaited
+persistence, and receipt/checkout separation; K3 produced the best nontrivial
+test boundaries; and K4 most directly caught stale prose and CI claims. The
+generic starter first-contact prompt did not earn a place in final evidence
+beyond orientation, and the fragility prompt produced prioritization
+hypotheses rather than proof of failure. Local K1, K3, and K4 outputs were not
+useful because they lacked repository grounding; local K2's explicit N/A
+answers were useful as an honesty check.
 
 \subsection{Model-Specific Strengths and Weaknesses}
 
-% Include one repository-specific strength/weakness line for each model.
-\reporttodo{Add one WolfBite-specific strength and weakness line for Codex,
-GPT-5.6-terra, Gemini, and the local model if used.}
+\begin{itemize}
+  \item \textbf{Codex Sol} connected Flutter UI, state, Firestore, routes,
+  workflow, and history into testable invariants; first-pass summaries could
+  still over-trust domain labels or promote system behavior into user goals.
+  \item \textbf{GPT-5.6-terra} most consistently distinguished evidence from
+  inference and found silent failures; its wording still inherited
+  \emph{eligibility} and \emph{transaction}, and its OpenAI/Codex lineage
+  limits independence from Sol.
+  \item \textbf{Gemini} quickly produced a broad, independent inventory of
+  visible behavior; it regularly promoted UI labels and README prose into
+  stronger guarantees than the code supports.
+  \item \textbf{Local Llama 3 8B} followed fixed output formats reasonably
+  well; with only manually pasted README and \path{app_state.dart} context, it
+  substituted plausible guesses and fabricated citations for repository
+  evidence.
+\end{itemize}
 
 \subsection{Local Model}
 
-% Report its result, or one honest sentence explaining why no local model ran.
-\reporttodo{Report the local-model result, or give one honest sentence explaining
-why the optional local model did not run.}
+All four keeper prompts were attempted with Llama 3 8B through Ollama. The
+runner could not browse the repository, so only README and
+\path{app_state.dart} were pasted. K2 honestly marked two missing-context flows
+N/A; K1 fabricated citations, K3 supplied 25 uncited generic boundaries, and
+K4 reasoned from dependencies rather than production code. The local output
+was retained as comparison evidence but not trusted without source
+verification.
 
 \section{Demo Video}
 
-The 2--5 minute demonstration video is available at
-\reporttodo{insert a shareable video URL}. It shows WolfBite running and includes
-real executions of the team's passing and failing tests. The team verified that
-the link is accessible without requesting permission.
+% TODO PROJECT1A: Add the verified public 2--5 minute demo-video URL.
+% The README demo link belongs to the inherited product and is not evidence of
+% the required Project 1a test/use-case demonstration.
+% Project3/Wolfbite_demo.mp4 is also inherited (2025), not a Project 1a video.
+
 
 \section{Conclusion}
 
-% Keep this short: strongest coverage finding, strongest inherited-test gap,
-% and what cross-model checking changed.
-\reporttodo{Summarize the strongest coverage finding, the most important
-inherited-test gap, and what cross-model checking changed.}
+The curated suite reaches 84.1\% executable-line coverage and exercises the
+main outcomes of 18 of 20 use cases, but its more important result is three
+honest user-facing mismatches, one test-scope mismatch, and the quantified
+weakness in exception (36.8\%) and persistence (43.5\%) paths. The inherited
+suite is strongest in authentication UI and basic balances, while receipt
+processing, restoration, paid overflow, error handling, and checkout semantics
+remain its largest blind spots. Cross-model checking prevented README claims
+and domain labels from becoming false requirements.
 
-% FINAL CHECK BEFORE DOWNLOADING THE PDF:
-% [ ] Exactly 20 reconciled use cases are present in the required format.
-% [ ] Team tests actually ran; representative pass and failure output is shown.
-% [ ] Every test appears in the results and traceability tables.
-% [ ] Uncovered use cases and orphan tests are honestly identified.
-% [ ] Inherited tests are assessed only after the independent design pass.
-% [ ] Codex Sol, GPT-5.6-terra, Gemini, and local transcripts are linked as evidence.
-% [ ] Real model mistakes and disagreements are explained with evidence.
-% [ ] Local-model result or honest non-use sentence is present.
-% [ ] Video is 2--5 minutes, shows real runs, and its link works.
-% [ ] No red TODO text remains in the compiled PDF.
-% [ ] The compiled PDF is visibly ACM sigconf two-column format.
 
 \end{document}
