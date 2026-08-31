@@ -1,0 +1,124 @@
+Upgrading analysis_options.yaml to exclude build and platform directories.
+00:00 +0: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart
+00:00 +0: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:00 +1: UC1 — Create account test_uc01_blank_fields_prevent_submission
+00:00 +2: UC1 — Create account test_uc01_invalid_email_prevents_submission
+00:00 +3: UC1 — Create account test_uc01_rejected_registration_displays_error
+00:01 +4: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following FirebaseException was thrown running a test:
+[cloud_firestore/unknown] Profile save failed
+
+When the exception was thrown, this was the stack:
+#0      PostExpectation.thenThrow.<anonymous closure> (package:mockito/src/mock.dart:598:7)
+#1      Mock.noSuchMethod (package:mockito/src/mock.dart:194:47)
+#2      MockDocumentReference.set (file:///Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/mocks/mocks.mocks.dart:1787:14)
+#3      _SignupPageState._signup (package:wolfbite/screens/signup_page.dart:58:63)
+<asynchronous suspension>
+
+The test description was:
+  test_uc01_profile_save_failure_does_not_complete_registration_flow
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +4 -1: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow [E]
+  Test failed. See exception logs above.
+  The test description was: test_uc01_profile_save_failure_does_not_complete_registration_flow
+  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test (but after the test had completed):
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "SnackBar": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect (package:matcher/src/expect/expect.dart:182:3)
+#2      expect (package:matcher/src/expect/expect.dart:65:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:473:18)
+#4      main.<anonymous closure>.<anonymous closure> (file:///Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart:224:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: test_uc01_profile_save_failure_does_not_complete_registration_flow
+  
+00:01 +4 -1: UC2 — Sign in test_uc02_valid_credentials_authenticate_and_open_shopping_features
+00:01 +5 -1: UC2 — Sign in test_uc02_invalid_email_prevents_authentication
+00:01 +6 -1: UC2 — Sign in test_uc02_short_password_prevents_authentication
+00:01 +7 -1: UC2 — Sign in test_uc02_rejected_credentials_leave_shopper_signed_out
+00:01 +8 -1: UC2 — Sign in test_uc02_second_submission_is_blocked_while_sign_in_is_pending
+00:01 +9 -1: UC3 — Sign out test_uc03_logout_action_requests_authentication_sign_out
+00:01 +10 -1: UC3 — Sign out test_uc03_successful_sign_out_returns_shopper_to_login
+00:01 +11 -1: UC3 — Sign out test_uc03_successful_sign_out_removes_account_specific_local_state
+00:01 +12 -1: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following FirebaseAuthException was thrown running a test:
+[firebase_auth/network-error] Offline
+
+When the exception was thrown, this was the stack:
+#0      PostExpectation.thenThrow.<anonymous closure> (package:mockito/src/mock.dart:598:7)
+#1      Mock.noSuchMethod (package:mockito/src/mock.dart:194:47)
+#2      MockFirebaseAuth.signOut (file:///Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/mocks/mocks.mocks.dart:625:14)
+#3      BalancesScreen._signOut (package:wolfbite/screens/balances_screen.dart:36:43)
+#4      BalancesScreen.build.<anonymous closure> (package:wolfbite/screens/balances_screen.dart:56:30)
+#5      _InkResponseState.handleTap (package:flutter/src/material/ink_well.dart:1224:21)
+#6      GestureRecognizer.invokeCallback (package:flutter/src/gestures/recognizer.dart:362:24)
+#7      TapGestureRecognizer.handleTapUp (package:flutter/src/gestures/tap.dart:758:11)
+#8      BaseTapGestureRecognizer._checkUp (package:flutter/src/gestures/tap.dart:383:5)
+#9      BaseTapGestureRecognizer.acceptGesture (package:flutter/src/gestures/tap.dart:353:7)
+#10     GestureArenaManager.sweep (package:flutter/src/gestures/arena.dart:173:27)
+#11     GestureBinding.handleEvent (package:flutter/src/gestures/binding.dart:542:20)
+#12     GestureBinding.dispatchEvent (package:flutter/src/gestures/binding.dart:508:22)
+#13     RendererBinding.dispatchEvent (package:flutter/src/rendering/binding.dart:473:11)
+#14     GestureBinding._handlePointerEventImmediately (package:flutter/src/gestures/binding.dart:447:7)
+#15     GestureBinding.handlePointerEvent (package:flutter/src/gestures/binding.dart:404:5)
+#16     TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous closure> (package:flutter_test/src/binding.dart:1571:42)
+#17     TestWidgetsFlutterBinding.withPointerEventSource (package:flutter_test/src/binding.dart:1581:11)
+#18     TestWidgetsFlutterBinding.handlePointerEventForSource (package:flutter_test/src/binding.dart:1571:5)
+#19     WidgetTester.sendEventToBinding.<anonymous closure> (package:flutter_test/src/widget_tester.dart:869:15)
+#22     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#23     WidgetTester.sendEventToBinding (package:flutter_test/src/widget_tester.dart:868:27)
+#24     TestGesture.up.<anonymous closure> (package:flutter_test/src/test_pointer.dart:587:26)
+#27     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#28     TestGesture.up (package:flutter_test/src/test_pointer.dart:580:27)
+#29     WidgetController.tapAt.<anonymous closure> (package:flutter_test/src/controller.dart:1155:21)
+<asynchronous suspension>
+#30     TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#31     main.<anonymous closure>.<anonymous closure> (file:///Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart:480:7)
+<asynchronous suspension>
+#32     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#33     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+The test description was:
+  test_uc03_sign_out_failure_leaves_shopper_signed_in
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +12 -2: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in [E]
+  Test failed. See exception logs above.
+  The test description was: test_uc03_sign_out_failure_leaves_shopper_signed_in
+  
+00:01 +12 -2: UC3 — Sign out test_uc03_existing_signed_out_state_still_returns_to_login
+00:01 +13 -2: UC4 — Resume shopping session test_uc04_current_month_saved_session_restores_basket_and_balances
+00:01 +14 -2: UC4 — Resume shopping session test_uc04_missing_saved_session_starts_empty
+00:01 +15 -2: UC4 — Resume shopping session test_uc04_partial_saved_session_uses_empty_values_for_missing_sections
+00:01 +16 -2: UC4 — Resume shopping session test_uc04_missing_nutrition_uses_zero_values
+00:01 +17 -2: UC4 — Resume shopping session test_uc04_previous_month_session_resets_basket_and_used_benefits
+📅 New month detected! Resetting balances...
+00:01 +18 -2: UC5 — Identify product test_uc05_matching_upc_displays_product_information
+00:01 +19 -2: UC5 — Identify product test_uc05_empty_manual_entry_performs_no_lookup
+00:01 +20 -2: UC5 — Identify product test_uc05_unknown_upc_reports_not_found_and_clears_result
+00:01 +21 -2: UC5 — Identify product test_uc05_lookup_failure_displays_error
+00:02 +22 -2: UC5 — Identify product test_uc05_second_lookup_is_ignored_while_first_is_pending
+00:02 +23 -2: Some tests failed.
+
+Failing tests:
+  /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow
+  /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in
