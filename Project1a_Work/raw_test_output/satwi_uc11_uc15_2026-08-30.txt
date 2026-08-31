@@ -1,0 +1,18 @@
+C:\Users\satwi\OneDrive\Desktop\SEf26_project\Project3>flutter test test/project1a/satwi_uc11-15_test.dart --reporter expanded
+00:00 +0: loading C:/Users/satwi/OneDrive/Desktop/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart
+00:00 +0: UC11 — Add receipt products (state-level) test_uc11_multiple_recognized_products_are_each_added
+00:00 +1: UC11 — Add receipt products (state-level) test_uc11_duplicate_recognized_upc_increments_but_addition_count_is_undercounted
+00:00 +2: UC11 — Add receipt products (state-level) test_uc11_product_at_category_cap_is_rejected_not_added_as_paid
+00:00 +3: UC11 — Add receipt products (state-level) test_uc11_product_without_nutrition_uses_zero_defaults
+00:00 +4: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:01 +5: UC12 — Review basket test_uc12_empty_basket_shows_empty_state
+00:01 +6: UC12 — Review basket test_uc12_covered_and_paid_lines_for_same_upc_display_separately
+00:01 +7: UC13 — Review basket-product nutrition test_uc13_expanding_item_shows_nutrition_facts
+00:01 +8: UC13 — Review basket-product nutrition test_uc13_missing_nutrition_map_shows_zero_defaults
+00:01 +9: UC13 — Review basket-product nutrition test_uc13_collapsing_hides_nutrition_facts
+00:01 +10: UC14 — Increase product quantity test_uc14_increase_button_calls_increment_when_under_cap
+00:01 +11: UC14 — Increase product quantity test_uc14_increase_button_still_active_at_cap_and_reports_paid_intent
+00:01 +12: UC15 — Add shopper-paid quantity (state-level) test_uc15_increment_at_cap_creates_separate_paid_line
+00:01 +13: UC15 — Add shopper-paid quantity (state-level) test_uc15_second_paid_request_increments_existing_paid_line
+00:02 +14: UC15 — Add shopper-paid quantity (state-level) test_uc15_paid_category_has_no_allowance_cap_confirming_unlimited_display
+00:02 +15: All tests passed!
