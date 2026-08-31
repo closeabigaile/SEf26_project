@@ -1,0 +1,15 @@
+00:00 +0: loading /Users/supremeconstantine/SWE-Projects/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart
+00:00 +0: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:00 +1: UC16 - Decrease product quantity test_uc16_quantity_reaching_zero_removes_selection
+00:00 +2: UC16 - Decrease product quantity test_uc16_paid_quantity_is_decreased_before_covered_quantity
+00:00 +3: UC16 - Decrease product quantity test_uc16_missing_product_causes_no_quantity_change
+00:00 +4: UC16 - Decrease product quantity test_uc16_benefit_usage_does_not_go_below_zero
+00:00 +5: UC17 — Clear basket test_uc17_clear_removes_all_products_and_reverses_usage
+00:00 +6: UC17 — Clear basket test_uc17_clear_reverses_usage_across_multiple_categories
+00:00 +7: UC17 — Clear basket test_uc17_missing_category_balance_still_removes_product
+00:00 +8: UC17 — Clear basket test_uc17_clear_does_not_make_usage_negative
+00:00 +9: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:01 +10: UC18 — Review benefit balances test_uc18_usage_at_allowance_shows_full_progress
+00:01 +11: UC19 — Prepare checkout handoff test_uc19_qr_code_contains_current_basket_data
+00:01 +12: UC20 — Finish shopping session test_uc20_checkout_clears_basket_but_retains_benefit_usage
+00:01 +13: All tests passed!
