@@ -2,16 +2,17 @@
 
 **Scope:** UC8, UC14–UC17, and UC20  
 **Test file:** `Project3/test/active/project1a_coverage_gaps_test.dart`  
-**Execution date:** August 31, 2026  
-**Command:** `flutter test --concurrency=1 --coverage`  
-**Result:** 11 tests executed and 11 passed as part of the final active-suite run.
+**Execution date:** September 1, 2026
+
+**Command:** team-only Project 1a suite command documented in `Project3/test/active/README.md`
+
+**Result:** All 11 tests passed within the 86-test Project 1a run.
 
 These tests were added after active-suite curation to cover state-transition,
 widget-interaction, and persistence gaps. Expected results are defined by the
-test assertions. Actual results below are documented from the recorded final
-active-suite result and failure classification. The repository does not contain
-the complete raw console output from that 123-test run, so this narrative does
-not substitute for the missing raw-output artifact.
+test assertions. Actual results below come from the expanded team-only run
+preserved at
+`Project1a_Work/raw_test_output/project1a_team_suite_2026-09-01.txt`.
 
 ## UC8 — Add product to basket
 
@@ -54,11 +55,9 @@ not substitute for the missing raw-output artifact.
 | `checkout saves an empty basket and retains used benefits` | The inherited checkout test double resets benefit usage unlike production, so persistence must be checked against the real `AppState.checkout()` behavior. | Firestore saves an empty basket while retaining MILK usage of 2. | **PASS** — the persisted basket was empty and persisted MILK usage remained 2. |
 | `save failure leaves the local basket cleared and reports failure` | Verify the current failure ordering when checkout clears local state before persistence rejects the write. | Checkout throws a `FirebaseException`; the local basket remains cleared and MILK usage remains 1. | **PASS** — the persistence exception propagated, the local basket was empty, and MILK usage stayed 1. |
 
-## Evidence limitation
+## Execution evidence
 
-The final active-suite summary records 123 executed tests, 112 passes, and 11
-classified failures. None of the classified failures belongs to this gap-test
-file, and the summary explicitly records the new UC17 widget harness as passing.
-The complete raw output should still be committed if it can be recovered or the
-suite can be rerun, because per-test narrative results are not a replacement for
-the requested raw execution evidence.
+The expanded September 1 team-only run names every gap test and records all 11
+as passing. Its final counter is 82 passes and four failures across all 86
+team-designed tests; the four named failures belong to the original UC1, UC3,
+UC7, and UC9 files, not this gap-test file.

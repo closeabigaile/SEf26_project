@@ -157,6 +157,40 @@ Widget _appWithRouter({
 
 void main() {
   group('BasketScreen', () {
+    testWidgets('empty state + navigation to /scan', (tester) async {
+      final app = TestAppState(); // empty basket
+      await tester.pumpWidget(_appWithRouter(app: app));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Your basket is empty'), findsOneWidget);
+      expect(find.text('Scan products to add them here'), findsOneWidget);
+
+      // Tap the CTA by text (robust against FilledButton internals)
+      await tester.tap(find.text('Start Scanning'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Scan page'), findsOneWidget);
+    });
+
+    testWidgets('renders items and total badge', (tester) async {
+      final app = TestAppState();
+      // Two items: MILK x2, BREAD x1 => total 3
+      app.addItem(upc: '111', name: 'Whole Milk Gallon', category: 'Milk', nutrition: app.nutrition);
+      app.incrementItem('111', 'Milk');
+      app.addItem(upc: '222', name: 'Brown Bread', category: 'Bread', nutrition: app.nutrition);
+
+      await tester.pumpWidget(_appWithRouter(app: app));
+      await tester.pumpAndSettle();
+
+      // Header badge should show totalItems = 3
+      expect(find.text('Total Items:'), findsOneWidget);
+      expect(find.text('3'), findsWidgets);
+
+      // Item tiles present by names
+      expect(find.text('Whole Milk Gallon'), findsOneWidget);
+      expect(find.text('Brown Bread'), findsOneWidget);
+    });
+
     testWidgets('increment and decrement update qty; remove at zero', (
       tester,
     ) async {
@@ -186,6 +220,29 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Your basket is empty'), findsOneWidget);
+    });
+
+    testWidgets('plus adds as paid when canAdd == false', (tester) async {
+      final app = TestAppState();
+      // Force category cap reached: allowed=1, used=1, qty=1
+      app.balances['MILK'] = {'allowed': 1, 'used': 1};
+      app.basket.add({
+        'upc': '444',
+        'name': '2% Milk',
+        'category': 'MILK',
+        'qty': 1,
+      });
+      app.tick();
+
+      await tester.pumpWidget(_appWithRouter(app: app));
+      await tester.pumpAndSettle();
+
+      final plus = find.widgetWithIcon(IconButton, Icons.add_circle_outline);
+      expect(plus, findsOneWidget);
+
+      final plusBtn = tester.widget<IconButton>(plus);
+      expect(plusBtn.onPressed, isNotNull);
+      expect(plusBtn.tooltip, 'Will add as paid');
     });
 
     testWidgets('tooltips exist for add/remove controls', (tester) async {

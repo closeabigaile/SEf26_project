@@ -61,6 +61,23 @@ void main() {
       expect(emailField.keyboardType, TextInputType.emailAddress);
     });
 
+    testWidgets('validates invalid email format', (tester) async {
+      await tester.pumpWidget(MaterialApp(home: const LoginScreen()));
+      await tester.enterText(find.byType(TextFormField).first, 'notanemail');
+      await tester.tap(find.text('Sign In'));
+      await tester.pumpAndSettle();
+      expect(find.text('Invalid email'), findsOneWidget);
+    });
+
+    testWidgets('validates short password', (tester) async {
+      await tester.pumpWidget(MaterialApp(home: const LoginScreen()));
+      await tester.enterText(find.byType(TextFormField).first, 'test@test.com');
+      await tester.enterText(find.byType(TextFormField).last, '123');
+      await tester.tap(find.text('Sign In'));
+      await tester.pumpAndSettle();
+      expect(find.text('Min 6 chars'), findsOneWidget);
+    });
+
     // --- NEW TEST FOR 100% COVERAGE ---
     testWidgets('When "Create account" is tapped, Then navigates to /signup', (
       tester,
@@ -79,6 +96,36 @@ void main() {
 
   // --- Group 2: Tests for Login Logic ---
   group('LoginScreen Submission Logic', () {
+    testWidgets(
+      'Given valid credentials, When Sign In is tapped, Then calls Firebase and navigates to /scan',
+      (tester) async {
+        when(
+          mockAuth.signInWithEmailAndPassword(
+            email: anyNamed('email'),
+            password: anyNamed('password'),
+          ),
+        ).thenAnswer((_) async => MockUserCredential());
+
+        await tester.pumpWidget(createWidgetWithMocks());
+
+        await tester.enterText(
+          find.byType(TextFormField).at(0),
+          'test@test.com',
+        );
+        await tester.enterText(find.byType(TextFormField).at(1), 'password123');
+        await tester.tap(find.text('Sign In'));
+        await tester.pumpAndSettle();
+
+        verify(
+          mockAuth.signInWithEmailAndPassword(
+            email: 'test@test.com',
+            password: 'password123',
+          ),
+        ).called(1);
+        verify(mockGoRouter.go('/scan')).called(1);
+      },
+    );
+
     // --- NEW TEST FOR 100% COVERAGE ---
     testWidgets(
       'Given valid credentials, When form is submitted via keyboard, Then calls Firebase and navigates',

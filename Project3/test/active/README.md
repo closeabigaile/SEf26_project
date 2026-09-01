@@ -1,8 +1,23 @@
-# Active Test Suite
+# Project 1a Test Execution
 
-The active suite is every test under `Project3/test`. Duplicate cases were
-removed from the repository after their original source files were copied,
-unchanged, to the local-only archive outside the Git worktree.
+Project 1a requires the team-designed tests to be run and reported separately
+from the tests inherited with WolfBite. The current team suite contains the
+four assigned use-case files plus the post-curation coverage-gap file.
+
+From `Project3`, run only the 86 team-designed Project 1a tests with:
+
+```text
+flutter test test/project1a test/active/project1a_coverage_gaps_test.dart --concurrency=1 --coverage --reporter expanded
+```
+
+To save the expanded output as submission evidence, add:
+
+```text
+--file-reporter expanded:../Project1a_Work/raw_test_output/project1a_team_suite_2026-09-01.txt
+```
+
+The inherited tests under `test/screens`, `test/services`, and `test/state`
+are assessed separately for D4. They are not part of the Project 1a D3 result.
 
 ## Newly added active coverage
 
@@ -31,7 +46,7 @@ An existing test remains active when it supplies at least one unique:
 When tests overlap, the active suite keeps the test with the stronger
 postconditions. A historical test is not excluded merely because it fails.
 
-## Active source files
+## Team-designed source files
 
 The curated suite includes:
 
@@ -39,9 +54,7 @@ The curated suite includes:
 - `test/project1a/aditya_uc6-10_test.dart`
 - `test/project1a/satwi_uc11-15_test.dart`
 - `test/project1a/supreme_uc16-20_test.dart`
-- the inherited tests under `test/screens`, `test/services`, and `test/state`;
 - `test/active/project1a_coverage_gaps_test.dart`.
 
-Run the suite from `Project3` with `flutter test --concurrency=1`. The single
-worker is intentional because it minimizes concurrent Flutter engine and
-renderer activity on the host.
+The single worker is intentional because it minimizes concurrent Flutter
+engine and renderer activity on the host.

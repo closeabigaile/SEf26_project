@@ -56,11 +56,11 @@ We reverse engineered the high-level design of WolfBite, a Flutter/Firebase
 WIC shopping assistant, using multiple large language models and direct
 repository evidence. We designed and executed tests against the resulting use
 cases, traced those tests to the design, and assessed the inherited suite only
-after completing the independent design pass. The curated suite executed 123
-tests: 112 passed, three exposed unhandled or misleading user paths, one
-exposed a test-scope mismatch, and seven encountered the same Flutter
-shader-renderer failure. This report presents those findings without repairing
-the inherited application.
+after completing the independent design pass. Our 86 team-designed tests
+executed independently of the inherited suite: 82 passed, three exposed
+unhandled or misleading user paths, and one exposed a test-scope mismatch.
+This report presents those findings without repairing the inherited
+application.
 \end{abstract}
 
 \maketitle
@@ -289,16 +289,16 @@ is distinct from finishing the local shopping session.
 The repository contains the four
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project3/test/project1a}{assigned Project 1a test files}, the
 \href{https://github.com/closeabigaile/SEf26_project/blob/main/Project3/test/active/project1a_coverage_gaps_test.dart}{11-test gap file}, its
-\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tests/coverage_gap_test_results_2026-08-31.md}{per-test expected-versus-actual results},
-\href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/raw_test_output}{complete raw output for the four original targeted runs}, and
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tests/coverage_gap_test_results_2026-09-01.md}{per-test expected-versus-actual results},
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tests/aditya_uc06-10_test_results.md}{Aditya's 23 per-test results},
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/raw_test_output/project1a_team_suite_2026-09-01.txt}{complete expanded output for the current team suite}, and
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tests}{their per-test result narratives}.
 The four independently designed files initially executed 76 tests: 72 passed
-and four failed. Curation then removed 21 weaker duplicates
-from active discovery and added 11 tests for transition and persistence gaps.
-The team-authored UC19 test was subsequently restored so that every use case
-retains a team-designed test. The current active suite therefore contains 86
-team-designed tests and 38 inherited tests (124 total). The recorded full-suite
-run predates that restoration and executed 123 tests.
+and four failed. Curation removed one overlapping team test, added 11 tests for
+transition and persistence gaps, and retained the team-authored UC19 test so
+that every use case has team-designed evidence. The current Project 1a suite
+therefore contains 86 tests. The prior project's tests are excluded from D3
+and assessed separately in D4, as required by the assignment.
 
 \begin{table}[H]
   \caption{Executed-suite summary}
@@ -310,22 +310,20 @@ run predates that restoration and executed 123 tests.
     Scope & Executed & Passed & Failed \\
     \midrule
     Initial team files & 76 & 72 & 4 \\
-    Recorded full-suite run & 123 & 112 & 11 \\
+    Current Project 1a suite & 86 & 82 & 4 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The recorded final command was
-\texttt{flutter test --concurrency=1 --coverage} on Flutter 3.47.2. It exited
-with status 1. Failures in UC1, UC3, and UC9 exposed unhandled or misleading
-user paths. UC7-T6 also failed, but it directly called the service with a blank
-category while the production screen skips that call; it is a test-scope
-mismatch, not evidence of a user-visible UC7 failure. Seven widget failures
-reported the same SDK renderer error while exercising Material ink effects:
-\path{ink_sparkle.frag} could not be decoded because runtime-stage buffer
-verification failed. The UC17 harness using \path{NoSplash} passed, supporting
-the environment/renderer classification. No failed result was hidden or
-changed.
+The recorded final command selected \path{test/project1a} and
+\path{test/active/project1a_coverage_gaps_test.dart}, then used
+\path{--concurrency=1 --coverage --reporter expanded} on Flutter 3.47.2. It
+exited with status 1. Failures in UC1, UC3, and UC9 exposed unhandled or
+misleading user paths. UC7-T6 also failed, but it directly called the service
+with a blank category while the production screen skips that call; it is a
+test-scope mismatch, not evidence of a user-visible UC7 failure. All 11 gap
+tests and the restored UC19 test passed. No inherited tests or SDK-renderer
+failures are included in these D3 totals.
 
 \begin{table}[H]
   \caption{Representative test results (1 of 2)}
@@ -378,18 +376,14 @@ changed.
       & \textbf{Why:} UC16 extension 1a protects covered usage.
         \textbf{Expected:} paid unit removed first.
         \textbf{PASS:} paid was removed; covered quantity/usage stayed unchanged. \\
-    Seven Material-ink widget executions (names absent from summary)
-      & \textbf{Why:} classify host failures separately.
-        \textbf{Expected:} render and reach assertions.
-        \textbf{ENVIRONMENT FAIL} (7): identical \path{ink_sparkle.frag} verification error. \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \subsection{Raw Output Samples}
 
-The four committed targeted-run logs preserve full output and stack traces for
-the original assigned files. Short excerpts show both conforming and
+The committed team-suite log preserves the complete expanded execution of all
+86 current Project 1a tests. Short excerpts show both conforming and
 nonconforming executions:
 \begin{scriptsize}
 \begin{verbatim}
@@ -399,20 +393,16 @@ test_uc03_sign_out_failure_leaves_shopper_signed_in
 00:02 +15: All tests passed!
 \end{verbatim}
 \end{scriptsize}
-The failure excerpt is from the UC1--UC5 run; the passing counter is from the
-original UC11--UC15 run. The repository records the final full-suite summary
-as 112 passed and 11 failed out of 123, but does not contain that run's complete
-console output.
-% TODO PROJECT1A: Commit and link the complete raw 123-test run; the repository
-% currently preserves its summary plus complete raw targeted-run logs.
-% TODO PROJECT1A: Identify the seven renderer-failing tests from the missing
-% raw full-suite output.
+The failure excerpt is from UC1--UC5; the passing counter is from the original
+UC11--UC15 run. The current expanded log ends at 82 passes and four named
+failures, providing the raw-output evidence for the D3 totals above.
 
 \section{Traceability and Inherited Tests (D4)}
 
 The
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tables}{complete test-level traceability sources}
-are available in the repository.
+are available in the repository; the 11 post-curation tests also have a
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tables/coverage_gap_test_traceability_2026-09-01.md}{dedicated exact-name traceability table}.
 Tables~\ref{tab:trace-1}--\ref{tab:trace-4} account for all 86 current
 team-designed tests by stable test prefix or ID and include the 11
 post-curation gap tests. Grouping repeated tests by use case keeps the ACM
@@ -499,11 +489,11 @@ team-written UC19 QR-rendering test was restored. At the main-outcome level,
 18 of 20 use cases are covered. UC10 has team tests for error and cancellation extensions
 but lacks an offline happy-path OCR-to-matched-product test because the screen
 hard-codes \path{AplService}, \path{ImagePicker}, and the live OCR request.
-UC19 lacks a team test and an assertion over the encoded payload or external
-cashier interoperability.
+UC19 has a team QR-rendering test but lacks an assertion over the encoded
+payload or external cashier interoperability.
 
 \begin{table}[H]
-  \caption{Final active-suite coverage audit}
+  \caption{Project 1a team-suite coverage audit}
   \label{tab:coverage}
   \centering
   \small
@@ -511,7 +501,7 @@ cashier interoperability.
     \toprule
     Criterion & Covered & Total & Percent \\
     \midrule
-    Executable lines & 967 & 1,150 & 84.1\% \\
+    Executable lines & 891 & 1,150 & 77.5\% \\
     Main outcomes & 18 & 20 & 90.0\% \\
     Requirement paths & 69 & 106 & 65.1\% \\
     Decision outcomes & 55 & 84 & 65.5\% \\
@@ -532,7 +522,10 @@ possible-boundary denominator is not finite.
 \subsection{Assessment of the Inherited Tests}
 
 The inherited suite was inspected only after the independent use-case and test
-design pass. In the as-is baseline, 22 tests in signup, login, and balances
+design pass. Nineteen overlapping inherited declarations that had been removed
+during suite curation were restored exactly to their original six files. They
+remain excluded from the explicitly selected D3 command but available unchanged
+for this D4 assessment. In the as-is baseline, 22 tests in signup, login, and balances
 passed, but five files (state, basket, scan, QR checkout, and APL service) did
 not compile. Fresh dependency resolution paired Firestore 6.8.0 with
 fake-Firestore 4.1.1, whose \path{WriteBatch.update} interfaces are
@@ -614,9 +607,9 @@ baseline evidence; the dependency rot was reported and not repaired.
 Overall, inherited coverage was strongest in authentication UI and basic
 balance presentation, and weakest in receipt processing, persistence/error
 paths, month restoration, paid-overflow semantics, and checkout correctness.
-Three user-facing full-suite failures occupy those blind spots: profile
+Three user-facing Project 1a failures occupy those blind spots: profile
 persistence, sign-out failure, and false success after a rejected alternative.
-The fourth non-renderer failure, UC7-T6, bypasses the screen's blank-category
+The fourth Project 1a failure, UC7-T6, bypasses the screen's blank-category
 guard and therefore identifies a test-to-use-case mismatch rather than a
 WolfBite user-flow failure.
 
@@ -757,7 +750,7 @@ verification.
 
 \section{Conclusion}
 
-The curated suite reaches 84.1\% executable-line coverage and exercises the
+The 86 team-designed tests reach 77.5\% executable-line coverage and exercise the
 main outcomes of 18 of 20 use cases, but its more important result is three
 honest user-facing mismatches, one test-scope mismatch, and the quantified
 weakness in exception (36.8\%) and persistence (43.5\%) paths. The inherited

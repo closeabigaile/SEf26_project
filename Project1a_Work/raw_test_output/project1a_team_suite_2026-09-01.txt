@@ -1,0 +1,238 @@
+00:00 +0: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart
+00:00 +0: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:01 +1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_blank_fields_prevent_submission
+00:01 +2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_invalid_email_prevents_submission
+00:02 +3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_rejected_registration_displays_error
+00:02 +4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following FirebaseException was thrown running a test:
+[cloud_firestore/unknown] Profile save failed
+
+When the exception was thrown, this was the stack:
+#0      PostExpectation.thenThrow.<anonymous closure> (package:mockito/src/mock.dart:560:7)
+#1      Mock.noSuchMethod (package:mockito/src/mock.dart:186:47)
+#2      MockDocumentReference.set (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/mocks/mocks.mocks.dart:1787:14)
+#3      _SignupPageState._signup (package:wolfbite/screens/signup_page.dart:58:63)
+<asynchronous suspension>
+
+The test description was:
+  test_uc01_profile_save_failure_does_not_complete_registration_flow
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +4 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow [E]
+  Test failed. See exception logs above.
+  The test description was: test_uc01_profile_save_failure_does_not_complete_registration_flow
+  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test (but after the test had completed):
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "SnackBar": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect (package:matcher/src/expect/expect.dart:182:3)
+#2      expect (package:matcher/src/expect/expect.dart:65:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:473:18)
+#4      main.<anonymous closure>.<anonymous closure> (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart:222:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: test_uc01_profile_save_failure_does_not_complete_registration_flow
+  
+00:02 +4 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC2 — Sign in test_uc02_valid_credentials_authenticate_and_open_shopping_features
+00:03 +5 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC2 — Sign in test_uc02_invalid_email_prevents_authentication
+00:03 +6 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC2 — Sign in test_uc02_short_password_prevents_authentication
+00:03 +7 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC2 — Sign in test_uc02_rejected_credentials_leave_shopper_signed_out
+00:03 +8 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC2 — Sign in test_uc02_second_submission_is_blocked_while_sign_in_is_pending
+00:03 +9 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_logout_action_requests_authentication_sign_out
+00:03 +10 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_successful_sign_out_returns_shopper_to_login
+00:03 +11 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_successful_sign_out_removes_account_specific_local_state
+00:03 +12 -1: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following FirebaseAuthException was thrown running a test:
+[firebase_auth/network-error] Offline
+
+When the exception was thrown, this was the stack:
+#0      PostExpectation.thenThrow.<anonymous closure> (package:mockito/src/mock.dart:560:7)
+#1      Mock.noSuchMethod (package:mockito/src/mock.dart:186:47)
+#2      MockFirebaseAuth.signOut (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/mocks/mocks.mocks.dart:625:14)
+#3      BalancesScreen._signOut (package:wolfbite/screens/balances_screen.dart:36:43)
+#4      BalancesScreen.build.<anonymous closure> (package:wolfbite/screens/balances_screen.dart:56:30)
+#5      _InkResponseState.handleTap (package:flutter/src/material/ink_well.dart:1224:21)
+#6      GestureRecognizer.invokeCallback (package:flutter/src/gestures/recognizer.dart:362:24)
+#7      TapGestureRecognizer.handleTapUp (package:flutter/src/gestures/tap.dart:758:11)
+#8      BaseTapGestureRecognizer._checkUp (package:flutter/src/gestures/tap.dart:383:5)
+#9      BaseTapGestureRecognizer.acceptGesture (package:flutter/src/gestures/tap.dart:353:7)
+#10     GestureArenaManager.sweep (package:flutter/src/gestures/arena.dart:173:27)
+#11     GestureBinding.handleEvent (package:flutter/src/gestures/binding.dart:542:20)
+#12     GestureBinding.dispatchEvent (package:flutter/src/gestures/binding.dart:508:22)
+#13     RendererBinding.dispatchEvent (package:flutter/src/rendering/binding.dart:473:11)
+#14     GestureBinding._handlePointerEventImmediately (package:flutter/src/gestures/binding.dart:447:7)
+#15     GestureBinding.handlePointerEvent (package:flutter/src/gestures/binding.dart:404:5)
+#16     TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous closure> (package:flutter_test/src/binding.dart:1571:42)
+#17     TestWidgetsFlutterBinding.withPointerEventSource (package:flutter_test/src/binding.dart:1581:11)
+#18     TestWidgetsFlutterBinding.handlePointerEventForSource (package:flutter_test/src/binding.dart:1571:5)
+#19     WidgetTester.sendEventToBinding.<anonymous closure> (package:flutter_test/src/widget_tester.dart:869:15)
+#22     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#23     WidgetTester.sendEventToBinding (package:flutter_test/src/widget_tester.dart:868:27)
+#24     TestGesture.up.<anonymous closure> (package:flutter_test/src/test_pointer.dart:587:26)
+#27     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#28     TestGesture.up (package:flutter_test/src/test_pointer.dart:580:27)
+#29     WidgetController.tapAt.<anonymous closure> (package:flutter_test/src/controller.dart:1155:21)
+<asynchronous suspension>
+#30     TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#31     main.<anonymous closure>.<anonymous closure> (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart:478:7)
+<asynchronous suspension>
+#32     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#33     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+The test description was:
+  test_uc03_sign_out_failure_leaves_shopper_signed_in
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +12 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in [E]
+  Test failed. See exception logs above.
+  The test description was: test_uc03_sign_out_failure_leaves_shopper_signed_in
+  
+00:03 +12 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_existing_signed_out_state_still_returns_to_login
+00:04 +13 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_current_month_saved_session_restores_basket_and_balances
+00:04 +14 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_missing_saved_session_starts_empty
+00:04 +15 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_partial_saved_session_uses_empty_values_for_missing_sections
+00:04 +16 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_missing_nutrition_uses_zero_values
+00:04 +17 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_previous_month_session_resets_basket_and_used_benefits
+📅 New month detected! Resetting balances...
+00:04 +18 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC5 — Identify product test_uc05_matching_upc_displays_product_information
+00:04 +19 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC5 — Identify product test_uc05_empty_manual_entry_performs_no_lookup
+00:04 +20 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC5 — Identify product test_uc05_unknown_upc_reports_not_found_and_clears_result
+00:04 +21 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC5 — Identify product test_uc05_lookup_failure_displays_error
+00:04 +22 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC5 — Identify product test_uc05_second_lookup_is_ignored_while_first_is_pending
+00:05 +23 -2: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart
+00:11 +23 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: (setUpAll)
+00:11 +23 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC6 - Review product nutrition UC6-T1 identified product -> normalized nutrition
+00:11 +24 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC6 - Review product nutrition UC6-T2 missing or nonnumeric nutrients -> zero defaults
+00:11 +25 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC6 - Review product nutrition UC6-T3 exact thresholds -> all inclusive qualities apply
+00:11 +26 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC6 - Review product nutrition UC6-T4 nutrition matching no rule -> no qualities
+00:11 +27 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC6 - Review product nutrition UC6-T5 more than three qualities -> compact view shows three
+00:11 +28 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T1 eligible same-category candidates -> ranked healthier list
+00:11 +29 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T2 candidate pool -> excludes original, ineligible, and other category
+00:12 +30 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T3 more than maximum healthier candidates -> first five ranked
+00:12 +31 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T4 candidate missing nutrition -> zero-score candidate can qualify
+00:12 +32 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T5 no better candidate -> empty alternatives
+00:12 +33 -2: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T6 blank category -> no search results
+00:12 +33 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T6 blank category -> no search results [E]
+  Expected: empty
+    Actual: [
+              {
+                'name': 'Unexpected result',
+                'category': '',
+                'fdcId': 50,
+                'eligible': true,
+                'foodNutrients': [],
+                'healthScore': 0.0,
+                'upc': 'blank-category'
+              }
+            ]
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test\project1a\aditya_uc6-10_test.dart 404:7        main.<fn>.<fn>
+  
+00:12 +33 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC8 - Add product to basket UC8-T1 identified covered product -> basket and usage increment
+00:12 +34 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC8 - Add product to basket UC8-T2 exhausted allowance -> unchanged basket and usage
+00:12 +35 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC8 - Add product to basket UC8-T3 existing UPC -> quantity flow without duplicate line
+00:12 +36 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC8 - Add product to basket UC8-T4 signed-out shopper -> rejected unchanged basket
+00:12 +37 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC8 - Add product to basket UC8-T5 raw category -> canonical in-memory basket state
+00:12 +38 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T1 available alternative -> exact product submitted
+00:13 +39 -3: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: _TextWidgetFinder:<Found 1 widget with text "Added healthier item: Better cereal": [
+            Text("Added healthier item: Better cereal", dependencies: [DefaultSelectionStyle,
+DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart:591:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart line 591
+The test description was:
+  UC9-T2 rejected alternative -> must not report success
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:13 +39 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success [E]
+  Test failed. See exception logs above.
+  The test description was: UC9-T2 rejected alternative -> must not report success
+  
+00:13 +39 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC10 - Scan receipt UC10-T1 ready -> source dialog cancelled -> ready unchanged
+00:13 +40 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC10 - Scan receipt UC10-T2 source chosen -> image selection cancelled -> ready
+00:13 +41 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC10 - Scan receipt UC10-T3 OCR failure -> visible error and ready state
+00:13 +42 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC10 - Scan receipt UC10-T4 OCR text without candidate -> zero-candidate status
+00:13 +43 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC10 - Scan receipt UC10-T5 spaced or hyphenated code -> no candidate
+00:13 +44 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: (tearDownAll)
+00:14 +44 -4: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart
+00:15 +44 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_multiple_recognized_products_are_each_added
+00:15 +45 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_duplicate_recognized_upc_increments_but_addition_count_is_undercounted
+00:15 +46 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_product_without_nutrition_uses_zero_defaults
+00:15 +47 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:16 +48 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_empty_basket_shows_empty_state
+00:16 +49 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_covered_and_paid_lines_for_same_upc_display_separately
+00:16 +50 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_expanding_item_shows_nutrition_facts
+00:17 +51 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_missing_nutrition_map_shows_zero_defaults
+00:17 +52 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_collapsing_hides_nutrition_facts
+00:17 +53 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC14 — Increase product quantity test_uc14_increase_button_calls_increment_when_under_cap
+00:17 +54 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC14 — Increase product quantity test_uc14_increase_button_still_active_at_cap_and_reports_paid_intent
+00:17 +55 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_increment_at_cap_creates_separate_paid_line
+00:17 +56 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_second_paid_request_increments_existing_paid_line
+00:17 +57 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_paid_category_has_no_allowance_cap_confirming_unlimited_display
+00:17 +58 -4: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart
+00:18 +58 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:18 +59 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_quantity_reaching_zero_removes_selection
+00:18 +60 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_paid_quantity_is_decreased_before_covered_quantity
+00:18 +61 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_missing_product_causes_no_quantity_change
+00:18 +62 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_benefit_usage_does_not_go_below_zero
+00:18 +63 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_removes_all_products_and_reverses_usage
+00:18 +64 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_reverses_usage_across_multiple_categories
+00:18 +65 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_missing_category_balance_still_removes_product
+00:18 +66 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_does_not_make_usage_negative
+00:18 +67 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:19 +68 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_usage_at_allowance_shows_full_progress
+00:19 +69 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC19 — Prepare checkout handoff test_uc19_qr_code_contains_current_basket_data
+00:19 +70 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC20 — Finish shopping session test_uc20_checkout_clears_basket_but_retains_benefit_usage
+00:20 +71 -4: loading C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart
+00:20 +71 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions available allowance increments quantity and covered usage
+00:21 +72 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions missing covered product leaves quantity and usage unchanged
+00:21 +73 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions missing original product cannot create a shopper-paid line
+00:21 +74 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC8 accepted addition persists basket and benefit usage
+00:21 +75 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC14 quantity increase persists quantity and covered usage
+00:21 +76 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC16 quantity decrease persists quantity and released usage
+00:21 +77 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC17 clear persists empty basket and reversed usage
+00:21 +78 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:22 +79 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation confirming clear invokes the state transition once
+00:22 +80 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC20 persisted checkout state checkout saves an empty basket and retains used benefits
+00:22 +81 -4: C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC20 persisted checkout state save failure leaves the local basket cleared and reports failure
+00:22 +82 -4: Some tests failed.
+
+Failing tests:
+  C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_profile_save_failure_does_not_complete_registration_flow
+  C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/abigail_uc1-5_test.dart: UC3 — Sign out test_uc03_sign_out_failure_leaves_shopper_signed_in
+  C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC7 - Compare healthier alternatives UC7-T6 blank category -> no search results
+  C:/Users/adity/Coding/SEProject1/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success

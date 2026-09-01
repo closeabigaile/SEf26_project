@@ -1,13 +1,13 @@
-# Active-suite coverage: 2026-08-31
+# Project 1a team-suite coverage: 2026-09-01
 
-Coverage recorded on 2026-08-31 applies to the complete curated suite under
-`Project3/test`.
+Coverage applies only to the 86 team-designed Project 1a tests. Inherited tests
+under `test/screens`, `test/services`, and `test/state` were excluded.
 
 ## Instrumented code coverage
 
 | Metric | Covered | Total | Percentage |
 |---|---:|---:|---:|
-| Executable lines | 967 | 1,150 | 84.1% |
+| Executable lines | 891 | 1,150 | 77.5% |
 
 Flutter's LCOV output did not contain branch records, so a numeric source-code
 branch percentage cannot honestly be derived from that file.
@@ -31,7 +31,7 @@ There are also 18 distinct meaningful boundary checks. A percentage is not
 reported because the use cases do not define a finite denominator for every
 possible input boundary.
 
-The 84.1% executable-line result is acceptable for a student project and is
+The 77.5% executable-line result is acceptable for a student project and is
 more informative than targeting 100% blindly. New work should prioritize the
 specific exception and persistence gaps above; reaching 100% line coverage
 would not prove correct requirements, assertions, or state transitions.

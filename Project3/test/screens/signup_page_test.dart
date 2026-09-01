@@ -110,6 +110,17 @@ void main() {
       expect(find.byIcon(Icons.visibility_off), findsOneWidget);
     });
 
+    testWidgets('validates all empty fields', (tester) async {
+      await tester.pumpWidget(createWidgetWithMocks());
+      await tester.tap(find.text('Sign Up'));
+      await tester.pumpAndSettle();
+
+      // Check all validation messages from your code
+      expect(find.text('Enter your name'), findsOneWidget);
+      expect(find.text('Enter a valid email'), findsOneWidget);
+      expect(find.text('Use at least 6 characters'), findsOneWidget);
+      expect(find.text('Enter your address'), findsOneWidget);
+    });
   });
 
   // --- Group 2: Navigation ---
@@ -124,6 +135,46 @@ void main() {
 
   // --- Group 3: Submission Logic ---
   group('SignupPage Submission Logic', () {
+    testWidgets(
+      'Given valid form, When Sign Up is tapped, Then creates user, saves profile, signs out, and navigates to /login',
+      (tester) async {
+        await tester.pumpWidget(createWidgetWithMocks());
+        await fillValidForm(tester);
+
+        await tester.tap(find.text('Sign Up'));
+        await tester.pumpAndSettle();
+
+        // 1. Verify Auth was called
+        verify(
+          mockAuth.createUserWithEmailAndPassword(
+            email: 'test@test.com',
+            password: 'password123',
+          ),
+        ).called(1);
+
+        // 2. Verify Firestore was called with the correct UID and data
+        verify(mockCollectionRef.doc('mock-uid-123')).called(1);
+        verify(
+          mockDocRef.set(
+            argThat(
+              isA<Map<String, dynamic>>()
+                  .having((map) => map['name'], 'name', 'Test User')
+                  .having((map) => map['email'], 'email', 'test@test.com')
+                  .having((map) => map['address'], 'address', '123 Main St'),
+            ),
+          ),
+        ).called(1);
+
+        // 3. --- VERIFY YOUR LOGIC ---
+        // We check that signOut() was called
+        verify(mockAuth.signOut()).called(1);
+
+        // 4. --- VERIFY YOUR LOGIC ---
+        // We check that it navigated to /login
+        verify(mockGoRouter.go('/login')).called(1);
+      },
+    );
+
     testWidgets(
       'Given auth fails, When Sign Up is tapped, Then shows SnackBar and does NOT save profile',
       (tester) async {

@@ -14,10 +14,24 @@ That directory is outside this Git worktree and will not be pushed.
 - UC17: cancel and confirm paths through the clear-basket dialog; and
 - UC20: successful checkout persistence and persistence-failure behavior.
 
-## Duplicate tests removed from the active suite
+## Team-designed suite curation
 
-The following 21 weaker duplicates were initially removed from Git's active
-test discovery and remain recoverable in the local archive:
+The four assigned Project 1a files originally contained 76 tests. Two
+team-designed tests were initially removed as overlaps:
+
+- UC11: category-cap rejection from Satwi's file.
+- UC19: QR-widget existence from Supreme's file.
+
+After review, the team-authored UC19 test was restored so that every finalized
+use case retains an active team-designed test. The current D3 suite is therefore
+76 original tests minus one UC11 overlap plus 11 gap tests: 86 tests total.
+
+The local archive preserves the four original assigned files unchanged.
+
+## Inherited-suite review
+
+During curation, 19 overlapping tests from the prior project's inherited suite
+were temporarily removed from broad Flutter discovery:
 
 - Signup: empty-form validation; successful registration workflow.
 - Login: invalid-email validation; short-password validation; successful
@@ -27,11 +41,11 @@ test discovery and remain recoverable in the local archive:
 - Scan: found, not-found, exception, concurrent-request, and healthier-item-add
   cases.
 - Basket: empty-state/navigation, item rendering, and paid-intent cases.
-- UC11: category-cap rejection from Satwi's file.
-- UC19: QR-widget existence from Supreme's file.
 
-After review, the team-authored UC19 test was restored so that every finalized
-use case retains an active team-designed test. The inherited QR checkout test
-also remains active; both currently verify QR-widget presentation, while direct
-payload and cashier-interoperability validation remain coverage gaps. Therefore,
-20 of the 21 initially removed duplicates remain outside active discovery.
+All 19 were subsequently restored to their original files exactly as they
+existed before commit `8461250`. This leaves the inherited suite unchanged for
+D4 assessment. It does not affect D3 because the documented Project 1a command
+selects only `test/project1a` and the 11-test gap file; inherited directories are
+not selected. The inherited QR test remains alongside the restored team-authored
+UC19 test; both verify QR presentation, while payload and cashier
+interoperability remain coverage gaps.
