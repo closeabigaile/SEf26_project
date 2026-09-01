@@ -288,13 +288,17 @@ is distinct from finishing the local shopping session.
 
 The repository contains the four
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project3/test/project1a}{assigned Project 1a test files}, the
-\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project3/test/active/project1a_coverage_gaps_test.dart}{11-test gap file},
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project3/test/active/project1a_coverage_gaps_test.dart}{11-test gap file}, its
+\href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tests/coverage_gap_test_results_2026-08-31.md}{per-test expected-versus-actual results},
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/raw_test_output}{complete raw output for the four original targeted runs}, and
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tests}{their per-test result narratives}.
 The four independently designed files initially executed 76 tests: 72 passed
 and four failed. Curation then removed 21 weaker duplicates
 from active discovery and added 11 tests for transition and persistence gaps.
-The final active suite contains 85 team-designed tests and 38 inherited tests.
+The team-authored UC19 test was subsequently restored so that every use case
+retains a team-designed test. The current active suite therefore contains 86
+team-designed tests and 38 inherited tests (124 total). The recorded full-suite
+run predates that restoration and executed 123 tests.
 
 \begin{table}[H]
   \caption{Executed-suite summary}
@@ -306,7 +310,7 @@ The final active suite contains 85 team-designed tests and 38 inherited tests.
     Scope & Executed & Passed & Failed \\
     \midrule
     Initial team files & 76 & 72 & 4 \\
-    Final active suite & 123 & 112 & 11 \\
+    Recorded full-suite run & 123 & 112 & 11 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -401,15 +405,15 @@ as 112 passed and 11 failed out of 123, but does not contain that run's complete
 console output.
 % TODO PROJECT1A: Commit and link the complete raw 123-test run; the repository
 % currently preserves its summary plus complete raw targeted-run logs.
-% TODO PROJECT1A: Add per-test expected/actual results for the 11 gap tests and
-% identify the seven renderer-failing tests from that raw full-suite output.
+% TODO PROJECT1A: Identify the seven renderer-failing tests from the missing
+% raw full-suite output.
 
 \section{Traceability and Inherited Tests (D4)}
 
 The
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tables}{complete test-level traceability sources}
 are available in the repository.
-Tables~\ref{tab:trace-1}--\ref{tab:trace-4} account for all 85 current
+Tables~\ref{tab:trace-1}--\ref{tab:trace-4} account for all 86 current
 team-designed tests by stable test prefix or ID and include the 11
 post-curation gap tests. Grouping repeated tests by use case keeps the ACM
 report readable without substituting test names for evidence.
@@ -480,7 +484,7 @@ report readable without substituting test names for evidence.
     \path{test_uc16_*} plus persistence (6) & UC16 & Covered decrease, removal at zero, paid-first order, missing-product no-op, nonnegative usage, and persistence. \\
     \path{test_uc17_*} plus three gap tests (7) & UC17 & Single/multi-category clearing, missing category, nonnegative usage, persistence, and confirm/cancel UI paths. \\
     \path{test_uc18_*} (2) & UC18 & PAID's unlimited presentation and full progress at allowance. \\
-    No active team test; inherited QR test retained & UC19 & Active source checks that a QR widget is rendered from basket JSON; external scan/cashier acceptance is not proved. \\
+    \path{test_uc19_qr_code_contains_current_basket_data} plus inherited QR test & UC19 & Both active tests check that a QR widget is rendered for a nonempty basket; payload content and external scan/cashier acceptance are not proved. \\
     \path{test_uc20_*} plus two gap tests (3) & UC20 & Basket clearing with retained usage, persisted cleared state, and failure leaving local state cleared. \\
     \bottomrule
   \end{tabular}
@@ -489,11 +493,10 @@ report readable without substituting test names for evidence.
 
 \subsection{Coverage Gaps}
 
-All 85 active team-designed tests map to at least one final use case; there are
-no orphan tests. Nineteen of 20 use cases have an active team-designed test.
-UC19 does not: its team-written QR-rendering duplicate was removed and the
-inherited QR test remained canonical. At the main-outcome level, 18 of 20 use
-cases are covered. UC10 has team tests for error and cancellation extensions
+All 86 active team-designed tests map to at least one final use case; there are
+no orphan tests. All 20 use cases have an active team-designed test after the
+team-written UC19 QR-rendering test was restored. At the main-outcome level,
+18 of 20 use cases are covered. UC10 has team tests for error and cancellation extensions
 but lacks an offline happy-path OCR-to-matched-product test because the screen
 hard-codes \path{AplService}, \path{ImagePicker}, and the live OCR request.
 UC19 lacks a team test and an assertion over the encoded payload or external

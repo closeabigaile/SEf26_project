@@ -16,8 +16,8 @@ That directory is outside this Git worktree and will not be pushed.
 
 ## Duplicate tests removed from the active suite
 
-The following 21 weaker duplicates remain recoverable in the local archive but
-were removed from Git's active test discovery:
+The following 21 weaker duplicates were initially removed from Git's active
+test discovery and remain recoverable in the local archive:
 
 - Signup: empty-form validation; successful registration workflow.
 - Login: invalid-email validation; short-password validation; successful
@@ -30,5 +30,8 @@ were removed from Git's active test discovery:
 - UC11: category-cap rejection from Satwi's file.
 - UC19: QR-widget existence from Supreme's file.
 
-The inherited QR checkout test remains active because it is now the canonical
-UC19 widget test.
+After review, the team-authored UC19 test was restored so that every finalized
+use case retains an active team-designed test. The inherited QR checkout test
+also remains active; both currently verify QR-widget presentation, while direct
+payload and cashier-interoperability validation remain coverage gaps. Therefore,
+20 of the 21 initially removed duplicates remain outside active discovery.
