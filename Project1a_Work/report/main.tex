@@ -5,8 +5,11 @@
 \settopmatter{printacmref=false}
 \renewcommand{\footnotetextcopyrightpermission}[1]{}
 \pagestyle{plain}
+\raggedbottom
 
 \usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -293,6 +296,10 @@ The repository contains the four
 \href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/tests/aditya_uc06-10_test_results.md}{Aditya's 23 per-test results},
 \href{https://github.com/closeabigaile/SEf26_project/blob/main/Project1a_Work/raw_test_output/project1a_team_suite_2026-09-01.txt}{complete expanded output for the current team suite}, and
 \href{https://github.com/closeabigaile/SEf26_project/tree/main/Project1a_Work/tests}{their per-test result narratives}.
+The six appendix tables, Tables~\ref{tab:complete-results-1}--
+\ref{tab:complete-results-6}, reproduce the required rationale, expected
+result, and actual result for every active test; the smaller tables below
+highlight representative findings.
 The four independently designed files initially executed 76 tests: 72 passed
 and four failed. Curation removed one overlapping team test, added 11 tests for
 transition and persistence gaps, and retained the team-authored UC19 test so
@@ -330,7 +337,7 @@ failures are included in these D3 totals.
   \label{tab:results-1}
   \centering
   \scriptsize
-  \begin{tabular}{p{0.32\columnwidth}p{0.58\columnwidth}}
+  \begin{tabular}{L{0.32\columnwidth}L{0.58\columnwidth}}
     \toprule
     Test & Why / expected / observed \\
     \midrule
@@ -360,7 +367,7 @@ failures are included in these D3 totals.
   \label{tab:results-2}
   \centering
   \scriptsize
-  \begin{tabular}{p{0.32\columnwidth}p{0.58\columnwidth}}
+  \begin{tabular}{L{0.32\columnwidth}L{0.58\columnwidth}}
     \toprule
     Test & Why / expected / observed \\
     \midrule
@@ -413,7 +420,7 @@ report readable without substituting test names for evidence.
   \label{tab:trace-1}
   \centering
   \small
-  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+  \begin{tabular}{L{0.29\textwidth}L{0.08\textwidth}L{0.53\textwidth}}
     \toprule
     Active tests & UC & What the assertions prove \\
     \midrule
@@ -431,7 +438,7 @@ report readable without substituting test names for evidence.
   \label{tab:trace-2}
   \centering
   \small
-  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+  \begin{tabular}{L{0.29\textwidth}L{0.08\textwidth}L{0.53\textwidth}}
     \toprule
     Active tests & UC & What the assertions prove \\
     \midrule
@@ -449,7 +456,7 @@ report readable without substituting test names for evidence.
   \label{tab:trace-3}
   \centering
   \small
-  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+  \begin{tabular}{L{0.29\textwidth}L{0.08\textwidth}L{0.53\textwidth}}
     \toprule
     Active tests & UC & What the assertions prove \\
     \midrule
@@ -467,7 +474,7 @@ report readable without substituting test names for evidence.
   \label{tab:trace-4}
   \centering
   \small
-  \begin{tabular}{p{0.29\textwidth}p{0.08\textwidth}p{0.53\textwidth}}
+  \begin{tabular}{L{0.29\textwidth}L{0.08\textwidth}L{0.53\textwidth}}
     \toprule
     Active tests & UC & What the assertions prove \\
     \midrule
@@ -537,7 +544,7 @@ baseline evidence; the dependency rot was reported and not repaired.
   \label{tab:inherited-1}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.09\columnwidth}L{0.28\columnwidth}L{0.53\columnwidth}@{}}
     \toprule
     UC & Verdict & Blind spots \\
     \midrule
@@ -555,7 +562,7 @@ baseline evidence; the dependency rot was reported and not repaired.
   \label{tab:inherited-2}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.09\columnwidth}L{0.28\columnwidth}L{0.53\columnwidth}@{}}
     \toprule
     UC & Verdict & Blind spots \\
     \midrule
@@ -573,7 +580,7 @@ baseline evidence; the dependency rot was reported and not repaired.
   \label{tab:inherited-3}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.09\columnwidth}L{0.28\columnwidth}L{0.53\columnwidth}@{}}
     \toprule
     UC & Verdict & Blind spots \\
     \midrule
@@ -591,7 +598,7 @@ baseline evidence; the dependency rot was reported and not repaired.
   \label{tab:inherited-4}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.09\columnwidth}p{0.28\columnwidth}p{0.53\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.09\columnwidth}L{0.28\columnwidth}L{0.53\columnwidth}@{}}
     \toprule
     UC & Verdict & Blind spots \\
     \midrule
@@ -626,7 +633,7 @@ are stored in the repository.
   \label{tab:model-comparison}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.08\columnwidth}p{0.20\columnwidth}p{0.62\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.08\columnwidth}L{0.20\columnwidth}L{0.62\columnwidth}@{}}
     \toprule
     Prompt & Model & Verdict \\
     \midrule
@@ -647,7 +654,7 @@ are stored in the repository.
   \label{tab:model-comparison-2}
   \centering
   \scriptsize
-  \begin{tabular}{@{}p{0.08\columnwidth}p{0.20\columnwidth}p{0.62\columnwidth}@{}}
+  \begin{tabular}{@{}L{0.08\columnwidth}L{0.20\columnwidth}L{0.62\columnwidth}@{}}
     \toprule
     Prompt & Model & Verdict \\
     \midrule
@@ -705,7 +712,7 @@ boundary miner, and K4 contradiction adjudicator. K1 earned its keep by
 forcing exactly 20 ranked, cited goals; K2 exposed paid overflow, unawaited
 persistence, and receipt/checkout separation; K3 produced the best nontrivial
 test boundaries; and K4 most directly caught stale prose and CI claims. The
-generic starter first-contact prompt did not earn a place in final evidence
+generic first-contact starter prompt did not earn a place in the final evidence
 beyond orientation, and the fragility prompt produced prioritization
 hypotheses rather than proof of failure. Local K1, K3, and K4 outputs were not
 useful because they lacked repository grounding; local K2's explicit N/A
@@ -733,31 +740,467 @@ answers were useful as an honesty check.
 \subsection{Local Model}
 
 All four keeper prompts were attempted with Llama 3 8B through Ollama. The
-runner could not browse the repository, so only README and
+local-model session could not browse the repository, so only README and
 \path{app_state.dart} were pasted. K2 honestly marked two missing-context flows
-N/A; K1 fabricated citations, K3 supplied 25 uncited generic boundaries, and
+N/A; K1 fabricated citations, K3 supplied 25 generic uncited boundaries, and
 K4 reasoned from dependencies rather than production code. The local output
-was retained as comparison evidence but not trusted without source
+was retained as comparison evidence, but was not trusted without source
 verification.
 
 \section{Demo Video}
 
-% TODO PROJECT1A: Add the verified public 2--5 minute demo-video URL.
-% The README demo link belongs to the inherited product and is not evidence of
-% the required Project 1a test/use-case demonstration.
-% Project3/Wolfbite_demo.mp4 is also inherited (2025), not a Project 1a video.
+The demonstration shows WolfBite running and the Project 1a test suite
+executing, including both passing and failing results. It is available at
+\href{https://github.com/closeabigaile/SEf26_project/blob/b305f53b39b6edbcd82c1117e4cde536c6ad7b42/Project1a_Work/video/proj1a_video.mp4}
+{WolfBite Project 1a Demo Video}.
 
 
 \section{Conclusion}
 
-The 86 team-designed tests reach 77.5\% executable-line coverage and exercise the
-main outcomes of 18 of 20 use cases, but its more important result is three
-honest user-facing mismatches, one test-scope mismatch, and the quantified
-weakness in exception (36.8\%) and persistence (43.5\%) paths. The inherited
-suite is strongest in authentication UI and basic balances, while receipt
-processing, restoration, paid overflow, error handling, and checkout semantics
-remain its largest blind spots. Cross-model checking prevented README claims
-and domain labels from becoming false requirements.
+Across 86 team-designed tests, 82 passed, three exposed user-facing mismatches,
+and one exposed a test-scope mismatch. Coverage reached 77.5\% of executable
+lines and 18 of 20 main use-case outcomes, but exception and persistence paths
+remained weakest. Cross-model checking prevented unsupported README and domain
+claims from becoming requirements and sharpened our assessment of the inherited
+suite's blind spots.
 
+
+\clearpage
+\appendix
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, UC1--UC3 (15 tests)}
+  \label{tab:complete-results-1}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2.5pt}
+  \renewcommand{\arraystretch}{0.94}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \path{test_uc01_valid_registration_creates_account_and_profile}
+      & UC1 main path requires both an authentication account and a saved profile.
+      & Create the account/profile, end the initial session, and open login.
+      & \textbf{PASS:} exact credentials and UID were used; profile save, sign-out, and \path{/login} navigation occurred. \\
+    \path{test_uc01_blank_fields_prevent_submission}
+      & UC1 extension 2a rejects missing required information.
+      & Show field errors without authentication or profile writes.
+      & \textbf{PASS:} all four validation messages appeared and neither service was called. \\
+    \path{test_uc01_invalid_email_prevents_submission}
+      & UC1 extension 2a rejects invalid account information.
+      & Show an email error and make no account request.
+      & \textbf{PASS:} ``Enter a valid email'' appeared and no authentication/profile request occurred. \\
+    \path{test_uc01_rejected_registration_displays_error}
+      & UC1 extension 3a says rejected creation must be reported.
+      & Show the error, save no profile, and remain on signup.
+      & \textbf{PASS:} ``Email already in use'' appeared; no save, sign-out, or navigation occurred. \\
+    \path{test_uc01_profile_save_failure_does_not_complete_registration_flow}
+      & UC1 extension 4a separates account creation from profile persistence.
+      & Report the failed profile save and do not claim completion.
+      & \textbf{FAIL:} the Firestore exception escaped with no message; sign-out and navigation did not occur. \\
+    \path{test_uc02_valid_credentials_authenticate_and_open_shopping_features}
+      & UC2 main path requires valid credentials to provide protected access.
+      & Authenticate once and navigate to the shopping interface.
+      & \textbf{PASS:} exact credentials were sent once and \path{/scan} opened. \\
+    \path{test_uc02_invalid_email_prevents_authentication}
+      & UC2 extension 2a rejects an invalid email locally.
+      & Show an email error and make no authentication request.
+      & \textbf{PASS:} ``Invalid email'' appeared; authentication and protected navigation did not occur. \\
+    \path{test_uc02_short_password_prevents_authentication}
+      & UC2 extension 2b defines the six-character boundary.
+      & Reject a five-character password without authentication.
+      & \textbf{PASS:} ``Min 6 chars'' appeared and no authentication request occurred. \\
+    \path{test_uc02_rejected_credentials_leave_shopper_signed_out}
+      & UC2 extension 3a requires rejected credentials to preserve signed-out state.
+      & Report rejection and withhold protected navigation.
+      & \textbf{PASS:} ``Invalid credentials'' appeared, login remained visible, and \path{/scan} did not open. \\
+    \path{test_uc02_second_submission_is_blocked_while_sign_in_is_pending}
+      & UC2 extension 3b prevents duplicate pending submissions.
+      & A second action creates no second Firebase request.
+      & \textbf{PASS:} progress replaced the active button and Firebase received exactly one request. \\
+    \path{test_uc03_logout_action_requests_authentication_sign_out}
+      & UC3 steps 1--2 require the logout action to end authentication.
+      & Call \path{signOut} exactly once.
+      & \textbf{PASS:} the logout control called \path{signOut} once. \\
+    \path{test_uc03_successful_sign_out_returns_shopper_to_login}
+      & UC3 step 4 makes sign-in available after logout.
+      & Remove protected access and navigate to login.
+      & \textbf{PASS:} successful sign-out requested \path{/login}. \\
+    \path{test_uc03_successful_sign_out_removes_account_specific_local_state}
+      & UC3 step 3 requires account-specific local state cleanup.
+      & Clear basket, balances, and loaded account state.
+      & \textbf{PASS:} signed-out state cleared basket/balances and reset the loaded flag. \\
+    \path{test_uc03_sign_out_failure_leaves_shopper_signed_in}
+      & UC3 extension 2a requires failed sign-out to remain failed safely.
+      & Preserve the session and handle the authentication error.
+      & \textbf{FAIL:} login navigation was withheld, but the exception escaped without explanation. \\
+    \path{test_uc03_existing_signed_out_state_still_returns_to_login}
+      & UC3 extension 4a covers an already-signed-out state.
+      & Present login and hide protected shopping features.
+      & \textbf{PASS:} login appeared and the protected Scan Product interface was absent. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, UC4--UC6 (15 tests)}
+  \label{tab:complete-results-2}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2.5pt}
+  \renewcommand{\arraystretch}{0.94}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \path{test_uc04_current_month_saved_session_restores_basket_and_balances}
+      & UC4 main path restores the shopper's saved current-month state.
+      & Load basket, quantities, product data, and benefits.
+      & \textbf{PASS:} MILK usage, product identity, quantity, name, and nutrition were restored. \\
+    \path{test_uc04_missing_saved_session_starts_empty}
+      & UC4 extension 2a covers a shopper with no saved state.
+      & Finish loading with an empty session.
+      & \textbf{PASS:} basket/balances were empty and an empty Firestore scaffold was saved. \\
+    \path{test_uc04_partial_saved_session_uses_empty_values_for_missing_sections}
+      & UC4 extension 3a permits partial persisted state.
+      & Restore available data and default missing collections to empty.
+      & \textbf{PASS:} MILK balance restored and the missing basket became empty without failure. \\
+    \path{test_uc04_missing_nutrition_uses_zero_values}
+      & UC4 extension 3b defines missing-nutrition defaults.
+      & Restore the product with zero-valued nutrition.
+      & \textbf{PASS:} calories, fat, sodium, sugar, and protein all became \path{0.0}. \\
+    \path{test_uc04_previous_month_session_resets_basket_and_used_benefits}
+      & UC4 extension 4a covers benefit-period rollover.
+      & Clear the old basket and reset used benefits.
+      & \textbf{PASS:} a prior-year session produced an empty basket and zero MILK/CEREAL usage. \\
+    \path{test_uc05_matching_upc_displays_product_information}
+      & UC5 main path identifies a matching UPC without basket mutation.
+      & Show product name, category, code, and nutrition.
+      & \textbf{PASS:} exact UPC was queried, details appeared, and the basket stayed unchanged. \\
+    \path{test_uc05_empty_manual_entry_performs_no_lookup}
+      & UC5 extension 1b defines blank manual entry.
+      & Make no lookup and leave product/basket state unchanged.
+      & \textbf{PASS:} the service was not called, no result appeared, and basket stayed empty. \\
+    \path{test_uc05_unknown_upc_reports_not_found_and_clears_result}
+      & UC5 extension 2b prevents a stale result after no match.
+      & Report not found, clear the prior product, and preserve basket state.
+      & \textbf{PASS:} the message appeared, prior result cleared, and basket remained empty. \\
+    \path{test_uc05_lookup_failure_displays_error}
+      & UC5 extension 2c requires lookup failure to be visible.
+      & Show an error with no product or basket mutation.
+      & \textbf{PASS:} service failure became a visible error and no product appeared. \\
+    \path{test_uc05_second_lookup_is_ignored_while_first_is_pending}
+      & UC5 extension 2a prevents concurrent lookup duplication.
+      & A repeated action creates no second service call.
+      & \textbf{PASS:} the pending first request blocked a second call. \\
+    \path{UC6-T1 identified product -> normalized nutrition}
+      & UC6 requires raw APL nutrients to feed the product review.
+      & Normalize all seven displayed nutrition/eligibility fields.
+      & \textbf{PASS:} all seven normalized fields matched. \\
+    \path{UC6-T2 missing or nonnumeric nutrients -> zero defaults}
+      & UC6 extension 1a covers malformed or absent nutrients.
+      & Substitute numeric zero values without crashing.
+      & \textbf{PASS:} calories, fat, sodium, and protein defaulted to \path{0.0}. \\
+    \path{UC6-T3 exact thresholds -> all inclusive qualities apply}
+      & UC6 extension 1b checks every equality boundary.
+      & Award all qualities whose inclusive thresholds are met.
+      & \textbf{PASS:} all six expected qualities were present. \\
+    \path{UC6-T4 nutrition matching no rule -> no qualities}
+      & UC6 extension 2a covers a product outside every rule.
+      & Return an empty qualities list.
+      & \textbf{PASS:} no quality was returned. \\
+    \path{UC6-T5 more than three qualities -> compact view shows three}
+      & UC6 extension 2b bounds the compact presentation.
+      & Render exactly three quality tooltips.
+      & \textbf{PASS:} exactly three tooltips rendered. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, UC7--UC10 (18 tests)}
+  \label{tab:complete-results-3}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2.5pt}
+  \renewcommand{\arraystretch}{0.91}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \texttt{UC7-T1 eligible same-category candidates -> ranked healthier list}
+      & UC7 main path requires eligible, healthier same-category ranking.
+      & Return only the two healthier candidates in score order.
+      & \textbf{PASS:} \path{best} then \path{good} returned in ascending score order. \\
+    \texttt{UC7-T2 candidate pool -> excludes original, ineligible, and other category}
+      & UC7 extensions require three candidate exclusions.
+      & Exclude the original, ineligible, and other-category products.
+      & \textbf{PASS:} no candidate remained. \\
+    \texttt{UC7-T3 more than maximum healthier candidates -> first five ranked}
+      & UC7 step 4 limits presentation to five results.
+      & Return the five best scores from seven qualifying products.
+      & \textbf{PASS:} exactly scores \path{0.1} through \path{0.5} returned. \\
+    \texttt{UC7-T4 candidate missing nutrition -> zero-score candidate can qualify}
+      & UC7 extension 2a records the missing-nutrition scoring risk.
+      & Missing nutrition produces a qualifying zero score.
+      & \textbf{PASS:} UPC \path{missing} qualified with score \path{0.0}. \\
+    \texttt{UC7-T5 no better candidate -> empty alternatives}
+      & UC7 extension 2c rejects equal-score candidates.
+      & Return no alternatives.
+      & \textbf{PASS:} the alternatives list was empty. \\
+    \texttt{UC7-T6 blank category -> no search results}
+      & Probe the blank-category boundary attributed to the UC7 screen flow.
+      & Perform no search and return no alternatives.
+      & \textbf{SCOPE FAIL:} direct service use returned a product; the production screen guards the call. \\
+    \texttt{UC8-T1 identified covered product -> basket and usage increment}
+      & UC8 main path couples a covered addition with benefit usage.
+      & Add quantity one and increase MILK usage to one.
+      & \textbf{PASS:} addition, basket quantity, and usage assertions matched. \\
+    \texttt{UC8-T2 exhausted allowance -> unchanged basket and usage}
+      & UC8 extension 1a enforces the category cap.
+      & Reject addition without basket or usage mutation.
+      & \textbf{PASS:} the operation returned false and state was unchanged. \\
+    \texttt{UC8-T3 existing UPC -> quantity flow without duplicate line}
+      & UC8 extension 2a delegates a duplicate UPC to quantity increase.
+      & Keep one line at quantity two and usage two.
+      & \textbf{PASS:} one quantity-two line remained and usage became two. \\
+    \texttt{UC8-T4 signed-out shopper -> rejected unchanged basket}
+      & UC8 extension 2b requires authentication for mutation.
+      & Reject the addition and preserve empty state.
+      & \textbf{PASS:} the operation returned false with no basket/balance mutation. \\
+    \texttt{UC8-T5 raw category -> canonical in-memory basket state}
+      & Category spacing/case must not split benefit balances.
+      & Canonicalize both basket and balance keys.
+      & \textbf{PASS:} both locations stored \path{MILK PRODUCTS}. \\
+    \texttt{UC9-T1 available alternative -> exact product submitted}
+      & UC9 main path must submit the chosen alternative, not the original.
+      & Send exact fields to \path{addItem} and report success.
+      & \textbf{PASS:} the exact alternative was submitted once and success appeared. \\
+    \texttt{UC9-T2 rejected alternative -> must not report success}
+      & UC9 extensions require the UI to honor state rejection.
+      & Suppress the success message after a false return.
+      & \textbf{FAIL:} UI displayed ``Added healthier item: Better cereal.'' \\
+    \texttt{UC10-T1 ready -> source dialog cancelled -> ready unchanged}
+      & UC10 extension 1a covers cancellation before source selection.
+      & Preserve the ready prompt and selection control.
+      & \textbf{PASS:} both ready-state elements remained visible. \\
+    \texttt{UC10-T2 source chosen -> image selection cancelled -> ready}
+      & UC10 extension 1a also covers platform-picker cancellation.
+      & Return to a retryable ready state without processing.
+      & \textbf{PASS:} selection and upload/analyze controls remained available. \\
+    \texttt{UC10-T3 OCR failure -> visible error and ready state}
+      & UC10 extension 2a requires OCR failure to be explained.
+      & Show the API error and permit retry.
+      & \textbf{PASS:} API 500 text and the selection control were visible. \\
+    \texttt{UC10-T4 OCR text without candidate -> zero-candidate status}
+      & UC10 extension 3a covers OCR text without a 12--14 digit candidate.
+      & Report no candidates and permit retry.
+      & \textbf{PASS:} the zero-candidate status and selection control appeared. \\
+    \texttt{UC10-T5 spaced or hyphenated code -> no candidate}
+      & UC10 extension 3b defines separated-digit parsing behavior.
+      & Treat spaced/hyphenated groups as no candidate.
+      & \textbf{PASS:} the screen reported no UPC candidates. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, UC11--UC15 (14 tests)}
+  \label{tab:complete-results-4}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2.5pt}
+  \renewcommand{\arraystretch}{0.94}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \path{test_uc11_multiple_recognized_products_are_each_added}
+      & UC11 main path evaluates and adds each distinct receipt product.
+      & Create two lines and increment both categories.
+      & \textbf{PASS:} both products and both used counts increased by one. \\
+    \path{test_uc11_duplicate_recognized_upc_increments_but_addition_count_is_undercounted}
+      & UC11 extension 2a predicts quantity/report divergence for a duplicate.
+      & Increment one line to two while the second call returns false.
+      & \textbf{PASS:} one quantity-two line remained; returns were true then false. \\
+    \path{test_uc11_product_without_nutrition_uses_zero_defaults}
+      & UC11 extension 1a defines missing-nutrition defaults.
+      & Add the product with zero-valued nutrition.
+      & \textbf{PASS:} product was added and calories/protein defaulted to \path{0.0}. \\
+    \path{test_uc12_basket_displays_items_quantities_and_categories}
+      & UC12 main path presents current products and quantities.
+      & Show both names/categories and a total-items summary.
+      & \textbf{PASS:} both product/category pairs and ``Total Items'' appeared. \\
+    \path{test_uc12_empty_basket_shows_empty_state}
+      & UC12 extension 1a requires an explanatory empty state.
+      & Show an empty message and a way to start scanning.
+      & \textbf{PASS:} ``Your basket is empty'' and ``Start Scanning'' appeared. \\
+    \path{test_uc12_covered_and_paid_lines_for_same_upc_display_separately}
+      & UC12 extension 1c distinguishes covered and paid quantities.
+      & Render the same product separately under MILK and PAID.
+      & \textbf{PASS:} ``Whole Milk'' appeared twice under the two categories. \\
+    \path{test_uc13_expanding_item_shows_nutrition_facts}
+      & UC13 main path exposes stored nutrition on request.
+      & Reveal the stored calorie, fat, sodium, sugar, and protein values.
+      & \textbf{PASS:} the panel showed the exact stored calorie, fat, and sodium values. \\
+    \path{test_uc13_missing_nutrition_map_shows_zero_defaults}
+      & UC13 extension 2a covers a completely absent nutrition map.
+      & Show zero defaults without a crash.
+      & \textbf{PASS:} the panel showed \path{0.0 cal} and \path{0.0mg}. \\
+    \path{test_uc13_collapsing_hides_nutrition_facts}
+      & UC13 step 4 returns from details to the basket summary.
+      & Hide the panel and restore the collapsed control.
+      & \textbf{PASS:} facts disappeared and ``Show Nutritional Info'' returned. \\
+    \path{test_uc14_increase_button_calls_increment_when_under_cap}
+      & UC14 main path delegates an under-cap increase to state.
+      & Call \path{incrementItem} for the correct product/category once.
+      & \textbf{PASS:} \path{incrementItem('1', 'MILK')} was called once. \\
+    \path{test_uc14_increase_button_still_active_at_cap_and_reports_paid_intent}
+      & UC14 extension 1a continues at-cap requests into UC15.
+      & Keep the control active, signal paid intent, and delegate once.
+      & \textbf{PASS:} tooltip said ``Will add as paid'' and state was called once. \\
+    \path{test_uc15_increment_at_cap_creates_separate_paid_line}
+      & UC15 main path creates shopper-paid quantity after coverage is exhausted.
+      & Create one PAID line without increasing MILK usage.
+      & \textbf{PASS:} a quantity-one PAID line appeared and MILK usage stayed three. \\
+    \path{test_uc15_second_paid_request_increments_existing_paid_line}
+      & UC15 extension 2a prevents duplicate paid lines.
+      & Keep one PAID line at quantity two after two requests.
+      & \textbf{PASS:} exactly one PAID line existed with quantity two. \\
+    \path{test_uc15_paid_category_has_no_allowance_cap_confirming_unlimited_display}
+      & UC15 extension 4a explains why PAID appears unlimited.
+      & Store a null allowance for PAID.
+      & \textbf{PASS:} \path{balances['PAID']['allowed']} was null. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, UC16--UC20 (13 tests)}
+  \label{tab:complete-results-5}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2.5pt}
+  \renewcommand{\arraystretch}{0.94}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \path{test_uc16_decrease_covered_quantity_updates_quantity_and_usage}
+      & UC16 main path couples covered decrement with benefit release.
+      & Decrease quantity and covered usage by one.
+      & \textbf{PASS:} both quantity and usage decreased correctly. \\
+    \path{test_uc16_quantity_reaching_zero_removes_selection}
+      & UC16 step 4 removes a zero-quantity selection.
+      & Remove the product and reduce usage to zero.
+      & \textbf{PASS:} product was removed and usage became zero. \\
+    \path{test_uc16_paid_quantity_is_decreased_before_covered_quantity}
+      & UC16 extension 1a defines paid-first removal.
+      & Decrease PAID first and preserve covered quantity/usage.
+      & \textbf{PASS:} PAID was removed first and covered state stayed unchanged. \\
+    \path{test_uc16_missing_product_causes_no_quantity_change}
+      & UC16 extension 1c covers an unknown matching product.
+      & Leave basket quantities and benefit usage unchanged.
+      & \textbf{PASS:} no quantity or usage changed. \\
+    \path{test_uc16_benefit_usage_does_not_go_below_zero}
+      & UC16 extension 3a requires a nonnegative usage clamp.
+      & Keep usage at zero after decrement.
+      & \textbf{PASS:} usage remained zero. \\
+    \path{test_uc17_clear_removes_all_products_and_reverses_usage}
+      & UC17 main path clears products and provisional usage.
+      & Empty the basket and reverse associated usage.
+      & \textbf{PASS:} basket cleared and usage was reversed. \\
+    \path{test_uc17_clear_reverses_usage_across_multiple_categories}
+      & UC17 main path must handle all affected categories.
+      & Remove every product and reverse each category's usage.
+      & \textbf{PASS:} all products and category usage were reversed. \\
+    \path{test_uc17_missing_category_balance_still_removes_product}
+      & UC17 extension 4a covers absent category balance data.
+      & Remove the product without requiring a balance update.
+      & \textbf{PASS:} product was removed and missing balance data caused no issue. \\
+    \path{test_uc17_clear_does_not_make_usage_negative}
+      & UC17 extension 4b clamps usage below the removed quantity.
+      & Clear the basket and leave usage at zero.
+      & \textbf{PASS:} usage remained zero rather than negative. \\
+    \path{test_uc18_paid_category_is_displayed_as_unlimited}
+      & UC18 extension 2a records the PAID presentation quirk.
+      & Show ``Unlimited'' and the PAID used-item count.
+      & \textbf{PASS:} PAID displayed as unlimited with correct usage text. \\
+    \path{test_uc18_usage_at_allowance_shows_full_progress}
+      & UC18 extension 3a checks the exact-cap boundary.
+      & Show full allowance text and progress \path{1.0}.
+      & \textbf{PASS:} usage text was correct and progress was full. \\
+    \path{test_uc19_qr_code_contains_current_basket_data}
+      & UC19 main path requires a scannable checkout handoff.
+      & Render a QR widget for the nonempty basket.
+      & \textbf{PASS:} a \path{QrImageView} rendered; payload content was not asserted. \\
+    \path{test_uc20_checkout_clears_basket_but_retains_benefit_usage}
+      & UC20 main path distinguishes purchased usage from provisional basket state.
+      & Empty the basket while retaining recorded benefit usage.
+      & \textbf{PASS:} basket cleared and benefit usage remained unchanged. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[!p]
+  \caption{Complete active-test results, post-curation gap tests (11 tests)}
+  \label{tab:complete-results-6}
+  \centering
+  \tiny
+  \setlength{\tabcolsep}{2pt}
+  \renewcommand{\arraystretch}{1.12}
+  \begin{tabular}{@{}L{0.26\textwidth}L{0.21\textwidth}L{0.20\textwidth}L{0.27\textwidth}@{}}
+    \toprule
+    Test & Why we tried it & Expected & What happened \\
+    \midrule
+    \texttt{UC8 accepted addition persists basket and benefit usage}
+      & UC8's original tests proved local mutation but not persistence.
+      & Save the milk line and one used MILK benefit.
+      & \textbf{PASS:} Firestore contained UPC \path{milk-1} and MILK usage one. \\
+    \texttt{available allowance increments quantity and covered usage}
+      & UC14 needed the real under-cap transition, not only UI delegation.
+      & Increase covered quantity/usage from one to two with no PAID line.
+      & \textbf{PASS:} both values became two and no PAID line appeared. \\
+    \texttt{missing covered product leaves quantity and usage unchanged}
+      & UC14 extension 2a prevents an unknown UPC from mutating another line.
+      & Preserve existing quantity and MILK usage at one.
+      & \textbf{PASS:} basket quantity and benefit usage were unchanged. \\
+    \texttt{UC14 quantity increase persists quantity and covered usage}
+      & UC14 local mutation does not prove the resumed-session state.
+      & Persist basket quantity two and MILK usage two.
+      & \textbf{PASS:} both persisted values were two. \\
+    \texttt{missing original product cannot create a shopper-paid line}
+      & UC15 extension 2b prevents paid quantity without a source product.
+      & Keep one original line, no PAID line, and usage one.
+      & \textbf{PASS:} basket length and usage stayed one; no PAID line appeared. \\
+    \texttt{UC16 quantity decrease persists quantity and released usage}
+      & UC16 needed durable evidence for both changed values.
+      & Persist basket quantity one and MILK usage one after decrement.
+      & \textbf{PASS:} both persisted values were one. \\
+    \texttt{UC17 clear persists empty basket and reversed usage}
+      & UC17 needed proof that clearing and usage release are durable.
+      & Persist an empty basket and zero MILK usage.
+      & \textbf{PASS:} persisted basket was empty and MILK usage was zero. \\
+    \texttt{cancelling clear leaves the basket unchanged}
+      & UC17 extension 2a requires cancellation before destructive state change.
+      & Never call \path{clearBasket}; keep Milk visible.
+      & \textbf{PASS:} no clear call occurred and the Milk line remained. \\
+    \texttt{confirming clear invokes the state transition once}
+      & UC17 confirmation must delegate exactly once.
+      & Selecting Clear All calls \path{clearBasket} once.
+      & \textbf{PASS:} \path{clearBasket} was invoked exactly once. \\
+    \texttt{checkout saves an empty basket and retains used benefits}
+      & UC20 required persistence against real production checkout behavior.
+      & Save an empty basket while retaining MILK usage two.
+      & \textbf{PASS:} persisted basket was empty and MILK usage remained two. \\
+    \texttt{save failure leaves the local basket cleared and reports failure}
+      & UC20 extension 4a checks the local-clear-before-save failure order.
+      & Throw a Firebase error while leaving basket empty and usage one.
+      & \textbf{PASS:} exception propagated, basket stayed empty, and usage stayed one. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+\FloatBarrier
 
 \end{document}
