@@ -1,0 +1,219 @@
+\documentclass[sigconf]{acmart}
+
+% CSC 510 course report rather than an ACM publication.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\raggedbottom
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{placeins}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\emergencystretch}{1.5em}
+
+\newcommand{\pending}[1]{\textit{[#1]}}
+
+\title{Project 1b: Requirements for the Next Version of WolfBite}
+\acmConference[CSC 510]{CSC 510: Software Engineering}{September 2026}{Raleigh, NC}
+\acmYear{2026}
+
+\author{Abigail Close}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{aeclose2@ncsu.edu}
+
+\author{Aditya Mahajan}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{amahaja8@ncsu.edu}
+
+\author{Satwi Shah}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{stshah2@ncsu.edu}
+
+\author{Supreme Constantine}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{spconsta@ncsu.edu}
+
+\begin{document}
+
+\begin{abstract}
+\pending{Summarize the named audience, verified market gap, proposed product,
+one-month scope, measurable benefit, and LLM-assisted evidence process.}
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+WolfBite is a Flutter/Firebase shopping assistant for WIC participants. In
+Project 1a, the team reverse engineered its behavior and independently tested
+its principal user flows. This report uses market evidence and independent LLM
+analysis to decide whether to extend WolfBite or pivot, then defines a product
+that four students can build and test in one month.
+
+\pending{State the final decision and preview the report's contribution.}
+
+\section{D1: Audience and Market Survey}
+
+\subsection{Method}
+
+The team used multiple LLMs as independent analysts and verified their output
+against direct sources. A rival was retained only when at least two models
+named it or one model supplied a live, relevant URL. The team separately
+checked whether each retained product was real, addressed a comparable
+audience or problem, and supported the attributed capabilities.
+
+\subsection{Verified Rivals}
+
+\begin{table*}[t]
+  \caption{Verified rivals and market evidence.}
+  \label{tab:rivals}
+  \centering
+  \small
+  \begin{tabular}{L{2.2cm}L{2.5cm}L{3.0cm}L{3.0cm}L{1.4cm}L{3.0cm}}
+    \toprule
+    Product & Audience & Main strength & Main weakness & Price & Evidence \\
+    \midrule
+    \multicolumn{6}{l}{\pending{Insert at least three validated rivals.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Gap None of the Rivals Fills}
+
+\pending{State one precise gap, the named audience affected, supporting and
+counterevidence checked, and why the gap is feasible within one month.}
+
+\section{D2: Mission, Impact, and Stakeholders}
+
+\subsection{Mission Statement}
+
+\pending{Write the five-sentence why/what/so-what mission statement without
+buzzwords. Include one concrete detail that a rival could not copy-paste.}
+
+\subsection{Measurable Claim and M0 Evaluation}
+
+\pending{Define the metric, baseline, target threshold, test population or
+fixture, and evaluation procedure that Project 2's M0 will use.}
+
+\subsection{Stakeholders}
+
+\begin{table}[t]
+  \caption{Stakeholders and requirements consequences.}
+  \label{tab:stakeholders}
+  \centering
+  \small
+  \begin{tabular}{L{1.7cm}L{2.2cm}L{3.2cm}}
+    \toprule
+    Stakeholder & Need or fear & Design response \\
+    \midrule
+    \multicolumn{3}{l}{\pending{Insert verified stakeholder analysis.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{D3: Engineering Plan}
+
+\subsection{Before: Project 1a}
+
+\begin{itemize}
+  \item \pending{Add three to five completed, evidenced milestones.}
+\end{itemize}
+
+\subsection{Now: One-Month Build and Test}
+
+\begin{itemize}
+  \item \pending{Add three to five ambitious but checkable milestones.}
+\end{itemize}
+
+\subsection{Future: After the One-Month Project}
+
+\begin{itemize}
+  \item \pending{Add three to five credible future milestones.}
+\end{itemize}
+
+\subsection{Support Material and Constraints}
+
+\begin{table*}[t]
+  \caption{Regulations, standards, licenses, and domain material.}
+  \label{tab:support}
+  \centering
+  \small
+  \begin{tabular}{L{3.0cm}L{1.6cm}L{1.8cm}L{4.2cm}L{4.4cm}}
+    \toprule
+    Source & Type & Priority & Design area affected & Requirement or check created \\
+    \midrule
+    \multicolumn{5}{l}{\pending{Insert cited authoritative sources.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\section{D5: LLM Analysis and Verification}
+
+\subsection{Models, Prompts, and Evidence}
+
+\pending{Identify every model and runner, the required market-survey and
+red-team runs, the team's original keeper prompt, and where raw transcripts or
+screenshots are preserved. Explain the local-model result or its absence.}
+
+\subsection{Prompt-by-Model Comparison}
+
+\begin{table*}[t]
+  \caption{Comparison of the market-survey and red-team prompts.}
+  \label{tab:model-comparison}
+  \centering
+  \small
+  \begin{tabular}{L{2.2cm}L{2.0cm}L{3.6cm}L{3.6cm}L{3.6cm}}
+    \toprule
+    Model & Prompt & Most useful result & Weakness or disagreement & Team adjudication \\
+    \midrule
+    \multicolumn{5}{l}{\pending{Insert one evidence-backed row per model and required prompt.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Wrong Outputs and How We Caught Them}
+
+\pending{Describe concrete errors, the evidence that exposed each one, and how
+the correction changed the rival list or requirements. Zero caught errors
+would not demonstrate checking.}
+
+\subsection{Most and Least Useful Prompts}
+
+\pending{Name the most and least useful prompts and explain why using actual
+outputs, not generic model commentary.}
+
+\subsection{Model Strengths and Weaknesses}
+
+\pending{Give one concise, evidence-backed strengths/weaknesses line per
+model. Highlight useful disagreement rather than claiming universal agreement.}
+
+\section{Conclusion}
+
+\pending{Restate the verified gap, product decision, measurable benefit, and
+why the one-month plan is both ambitious and testable.}
+
+% Add citations to report/references.bib, then enable these lines:
+% \bibliographystyle{ACM-Reference-Format}
+% \bibliography{references}
+
+\end{document}
