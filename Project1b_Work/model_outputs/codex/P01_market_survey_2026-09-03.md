@@ -1,11 +1,11 @@
 # Codex P01 -- Market survey
 
-- Model: GPT-5.6 Sol (Codex)
-- Runner: Codex desktop
-- Date: 2026-09-03
-- Repository baseline: `c9daaac307b3` (`Project1b setup`)
-- Prompt ID: P01
-- Web access used: Yes
+Model: GPT-5.6 Sol (Codex)  
+Runner: Codex desktop  
+Date: 2026-09-03  
+Repository commit: `c9daaac307b3` aka "Project1b setup"
+Prompt ID: P01  
+Web access used: Yes  
 Input files/context: `Project1b_Work/inputs/product_context.md` and verified
 Project 1a findings
 
