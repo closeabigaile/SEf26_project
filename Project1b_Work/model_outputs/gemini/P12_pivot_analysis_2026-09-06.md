@@ -57,7 +57,7 @@ Then answer plainly: stay the course, or pivot? One paragraph. No hedging.
 
 Rules: do not invent team skills. Do not assume access to live WIC, EBT,
 retailer, or government systems. Judge feasibility against approximately 160
-total total team hours, including tests and evaluation.
+total team hours, including tests and evaluation.
 ```
 
 ## Complete raw response
