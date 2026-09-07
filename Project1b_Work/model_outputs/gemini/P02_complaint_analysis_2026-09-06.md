@@ -69,8 +69,8 @@ complaint-derived opportunity from a verified market gap.
 
 | rank | theme | complaint IDs | independent reports | severity (1--3) | frequency-times-severity score | short verbatim evidence | fixed, partial, not fixed, or unknown | reasoning |
 |---|---|---|---|---|---|---|---|---|
-| 1 | Scanner and Database Inaccuracy | C01, C02, C04, C06, C09, C10 | 6 | 3 | 18 | "doesn't always show everything that's available" | partial | Found across WICShopper, Bnft, and myWIC. C10 was reported fixed, and C09 has a workaround, but C01, C02, C04, and C06 remain unfixed. |
-| 2 | Login and Authentication Failures | C05, C07 | 2 | 3 | 6 | "logs me out multiple times" | not fixed | Recent Bnft reports describe repeated lockouts during single trips. |
+| 1 | Scanner and Database Inaccuracy | C01, C02, C04, C06, C09, C10 | 6 | 3 | 18 | "doesn't always show everything that's available" | partial | Found across WICShopper, Bnft, and myWIC; C10 was later reported fixed and C09 has a reinstall workaround, but the corpus provides no evidence about whether C01/C02/C04/C06 are currently fixed. |
+| 2 | Login and Authentication Failures | C05, C07 | 2 | 3 | 6 | "logs me out multiple times" | unknown | Two independent reports indicate repeated logouts/re-login; the corpus does not establish whether a current app version has fixed this. |
 | 3 | Profile Update Lockout | C08 | 1 | 3 | 3 | "Cannot update phone number" | unknown | Older 2023 Bnft report with no confirmed fix. |
 | 4 | Benefit State Inaccuracy | C03 | 1 | 2 | 2 | "my benefits have expired" | unknown | WICShopper report with no resolution evidence. |
 | 5 | Missing Configuration/Features | C11, C12 | 1 | 2 | 2 | "none of them will register" | unknown | myWIC Mosaic report, potentially a clinic config issue rather than app defect. |
