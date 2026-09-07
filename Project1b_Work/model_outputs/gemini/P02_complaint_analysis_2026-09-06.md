@@ -6,7 +6,7 @@
 - Repository baseline: unknown
 - Prompt ID: P02
 - Web access used: No
-- Input files/context: None
+- Input files/context: Embedded prompt context from Project1b_Work/prompts/gemini_antigravity_runbook.md
 
 ## Exact prompt
 
