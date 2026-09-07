@@ -17,7 +17,7 @@
 
 \newcommand{\pending}[1]{\textit{[#1]}}
 
-\title{Project 1b: Requirements for the Next Version of WolfBite}
+\title{Project 1b}
 \acmConference[CSC 510]{CSC 510: Software Engineering}{September 2026}{Raleigh, NC}
 \acmYear{2026}
 
@@ -72,36 +72,91 @@ that four students can build and test in one month.
 
 \pending{State the final decision and preview the report's contribution.}
 
-\section{D1: Audience and Market Survey}
+\section{D1: Market Survey}
 
 \subsection{Method}
 
-The team used multiple LLMs as independent analysts and verified their output
-against direct sources. A rival was retained only when at least two models
-named it or one model supplied a live, relevant URL. The team separately
-checked whether each retained product was real, addressed a comparable
-audience or problem, and supported the attributed capabilities.
+We ran the shared market-survey Prompt~1 with four LLM analysts: Codex,
+Terra, Gemini, and local Ollama, to generate rival candidates. We retained a
+rival only when at least two models named it or one model supplied a live,
+relevant URL. We then checked official product sources and independently
+audited the three strongest rivals. Each final rival independently satisfies
+the live-URL qualification rule through an official product source.
 
 \subsection{Verified Rivals}
 
+Table~\ref{tab:rivals} summarizes the three verified rivals.
+
 \begin{table*}[t]
-  \caption{Verified rivals and market evidence.}
+  \caption{D1 validated WIC rivals.}
   \label{tab:rivals}
   \centering
   \small
-  \begin{tabular}{L{2.2cm}L{2.5cm}L{3.0cm}L{3.0cm}L{1.4cm}L{3.0cm}}
+  \begin{tabular}{L{2.3cm}L{3.4cm}L{4.3cm}L{4.8cm}}
     \toprule
-    Product & Audience & Main strength & Main weakness & Price & Evidence \\
+    Rival & Evidence it is real & What it does & Relevant limitation \\
     \midrule
-    \multicolumn{6}{l}{\pending{Insert at least three validated rivals.}} \\
+    WICShopper &
+    Official App Store listing and vendor purchase-history documentation
+    \cite{wicshopper-appstore,wicshopper-redemption-history} &
+    Shows benefits, scans eligibility, provides food guidance, and records
+    item/category purchase history in supported agencies &
+    No documented workflow connects a scan/checkout mismatch to its likely
+    cause and recovery steps. \\
+    \addlinespace
+    myWIC Mosaic &
+    Official App Store listing \cite{mywic-mosaic-appstore} &
+    Shows benefits, tracks purchases, scans products, and supports shopping,
+    appointments, and certification &
+    No documented item-level explanation and recovery workflow for an
+    unexpectedly uncovered item. \\
+    \addlinespace
+    Bnft &
+    Official App Store listing \cite{bnft-appstore} &
+    Shows balances, scans benefit eligibility, manages cards, and provides
+    transaction history &
+    No documented item-level reconciliation or explanation for conflicting
+    scan and checkout results. \\
     \bottomrule
   \end{tabular}
 \end{table*}
 
-\subsection{Gap None of the Rivals Fills}
+\subsection{Selected Gap and Audience}
 
-\pending{State one precise gap, the named audience affected, supporting and
-counterevidence checked, and why the gap is feasible within one month.}
+\textbf{Gap:} Our feature audit found no documented integrated, item-level
+explanation-and-recovery workflow in WICShopper, myWIC Mosaic, or Bnft for
+cases where an app indicates that a product is eligible but checkout rejects
+it. Such a workflow could connect the rejected item, the participant's current
+benefit or food category, and purchase evidence to likely causes and
+actionable next steps.
+
+\textbf{Audience:} WIC caregivers and participants shopping for their
+households, especially those managing young children while an item they
+expected to be covered is rejected at checkout.
+
+This need is supported by participant research reporting difficulty
+identifying WIC-eligible foods and stigma during shopping and checkout
+\cite{fiedler2026,chauvenet2019}. WIC caregivers also rank balance checking and
+barcode scanning among their highest-priority app features \cite{weber2021}.
+Together, this evidence suggests that eligibility uncertainty during shopping
+remains consequential for the target audience.
+
+We also evaluated two alternative gaps. We rejected nutrition comparison
+because participant evidence for that need was comparatively weak. We rejected
+broader receipt reconciliation because all three rivals already provide some
+form of purchase or transaction history. The narrower explanation-and-recovery
+gap therefore has stronger support from both the competitor audit and
+participant evidence.
+
+\subsection{Counterevidence and Scope}
+
+The conclusion has \textbf{medium confidence}. WICShopper already provides
+item-level purchase history in some agencies, myWIC tracks purchases, and Bnft
+provides transaction history. Public documentation may also omit
+program-specific features. In one month, the team can build and test a
+WolfBite prototype using fixed mismatch scenarios, rule-based likely causes,
+and recovery guidance. Without state benefit-system data, the prototype must
+not claim to know an authoritative point-of-sale rejection reason.
 
 \section{D2: Mission, Impact, and Stakeholders}
 
@@ -212,8 +267,7 @@ model. Highlight useful disagreement rather than claiming universal agreement.}
 \pending{Restate the verified gap, product decision, measurable benefit, and
 why the one-month plan is both ambitious and testable.}
 
-% Add citations to report/references.bib, then enable these lines:
-% \bibliographystyle{ACM-Reference-Format}
-% \bibliography{references}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
 
 \end{document}
