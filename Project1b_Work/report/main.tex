@@ -162,29 +162,123 @@ not claim to know an authoritative point-of-sale rejection reason.
 
 \subsection{Mission Statement}
 
-\pending{Write the five-sentence why/what/so-what mission statement without
-buzzwords. Include one concrete detail that a rival could not copy-paste.}
+WIC participants and caregivers can face uncertainty when a product appears
+eligible in an app but is rejected at checkout, a setting in which participant
+research has documented difficulty identifying eligible foods and stigma
+during shopping and checkout \cite{fiedler2026,chauvenet2019}. That conflict
+can add confusion and friction during a household shopping trip. We propose
+extending WolfBite with an item-level explanation-and-recovery workflow that
+connects the rejected item's UPC and package details, the participant's current
+benefit or food category, and available eligibility or purchase evidence. For
+a bounded set of mocked mismatch scenarios, the workflow will distinguish app
+evidence from facts that only a retailer or WIC agency can confirm, then show
+rule-based likely causes and actionable next steps. This guidance is intended
+to help participants and caregivers choose a next action after an unexpected
+rejection while keeping uncertain information visible.
 
 \subsection{Measurable Claim and M0 Evaluation}
 
-\pending{Define the metric, baseline, target threshold, test population or
-fixture, and evaluation procedure that Project 2's M0 will use.}
+\textbf{M0 measurable claim:} During Project 2 M0, we will test whether the
+explanation-and-recovery workflow produces a task-success rate of at least
+80\% and at least 20 percentage points higher than the baseline workflow. A
+trial succeeds when a test user selects the prepared scenario's reference next
+step within 60 seconds without facilitator help. The baseline is a control
+version of the current WolfBite flow that shows the pre-checkout eligibility
+result and a mocked checkout rejection but provides no explanation or recovery
+guidance. The new and baseline flows will use the same counterbalanced,
+synthetic mismatch scenarios, so the evaluation requires neither live WIC
+data nor retailer point-of-sale access. These values are project targets to be
+measured at M0, not achieved results.
 
 \subsection{Stakeholders}
 
-\begin{table}[t]
-  \caption{Stakeholders and requirements consequences.}
+The four Prompt~5 outputs used different labels for related roles. To avoid
+inflating the list with synonyms, Table~\ref{tab:stakeholders} includes a
+stakeholder group when there is a direct equivalent between LLMs.
+
+\begin{table*}[t]
+  \caption{Overlapping Prompt 5 stakeholders and requirements consequences.}
   \label{tab:stakeholders}
   \centering
   \small
-  \begin{tabular}{L{1.7cm}L{2.2cm}L{3.2cm}}
+  \setlength{\defaultaddspace}{0.3em}
+  \begin{tabular}{L{3.0cm}L{5.0cm}L{7.0cm}}
     \toprule
     Stakeholder & Need or fear & Design response \\
     \midrule
-    \multicolumn{3}{l}{\pending{Insert verified stakeholder analysis.}} \\
+    WIC participants, caregivers, and household representatives &
+    Misleading eligibility guidance, uncertainty after a rejection, or the
+    wrong household state &
+    Identify the active household context and show evidence limits, likely
+    causes, and a short recovery action for the selected item. \\
+    \addlinespace
+    Infants, children, and pregnant or postpartum benefit recipients &
+    Eligibility or nutrition guidance could be mistaken for advice about what
+    is healthy or appropriate &
+    Keep coverage guidance separate from health claims and represent missing
+    information as unknown rather than zero or safe. \\
+    \addlinespace
+    WIC clinic staff, program administrators, and agencies &
+    Extra support burden or a prototype mistaken for official WIC authority &
+    Show data source and freshness, and route unresolved cases to the
+    appropriate agency contact. \\
+    \addlinespace
+    Cashiers, authorized retailers, and store managers &
+    Checkout delay, disputes, or incorrect UPC and package information when
+    the app and register disagree &
+    Treat the register outcome as authoritative, provide concise recovery
+    guidance, and make no payment or point-of-sale integration claim. \\
+    \addlinespace
+    State WIC IT teams, EBT processors, and card-system vendors &
+    Unsupported integrations, security risks, or simulated balances presented
+    as official data &
+    Use mock adapters and simulated data, document the integration boundary,
+    and make no live balance or payment claim. \\
+    \addlinespace
+    Approved-product-list stewards, manufacturers, and product-data providers &
+    Stale, copied, misattributed, or misidentified UPC, package, and category
+    records &
+    Retain source/version provenance and test stale, duplicate, and conflicting
+    records before presenting a likely cause. \\
+    \addlinespace
+    Privacy, security, and legal reviewers &
+    Exposure of household, benefit, receipt, location, or diagnostic data and
+    liability from unsupported claims &
+    Minimize stored data, exclude card credentials, use privacy-safe logs, and
+    state the prototype's limits at decision points. \\
+    \addlinespace
+    Program regulators and compliance personnel &
+    Misrepresented eligibility, unnecessary data collection, or exclusion of
+    protected users &
+    Trace eligibility statements to their source and test explicit privacy,
+    accessibility, and nondiscrimination requirements. \\
+    \addlinespace
+    Participants with disabilities or limited English proficiency, and their
+    advocates &
+    Camera-only controls, color-only status, small targets, or unclear language
+    could block the recovery task &
+    Preserve manual entry, pair color and icons with text, use semantic labels
+    and plain language, and test text scaling and assistive navigation. \\
+    \addlinespace
+    Receipt OCR and other outside data-service providers &
+    Sensitive uploads, unsupported formats, or use outside service terms &
+    Keep OCR outside the core recovery path; if retained, require consent,
+    validate inputs, minimize retention, and provide a mock service. \\
+    \addlinespace
+    Application developers and maintainers &
+    Unreproducible failures, sensitive logs, or one-month scope growth &
+    Use a bounded rule set, deterministic fixtures, and privacy-safe
+    diagnostics. \\
+    \addlinespace
+    Project sponsors, funders, and procurement decision-makers &
+    Misleading public-benefit claims, hidden integration costs, or a prototype
+    that cannot be maintained &
+    Define a narrow pilot, measurable outcomes, and explicit external
+    dependencies rather than promising statewide deployment. \\
     \bottomrule
   \end{tabular}
-\end{table}
+\end{table*}
+\FloatBarrier
 
 \section{D3: Engineering Plan}
 
