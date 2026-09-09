@@ -1,0 +1,367 @@
+\documentclass[sigconf]{acmart}
+
+% CSC 510 course report rather than an ACM publication.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\raggedbottom
+
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{placeins}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\emergencystretch}{1.5em}
+
+\newcommand{\pending}[1]{\textit{[#1]}}
+
+\title{Project 1b}
+\acmConference[CSC 510]{CSC 510: Software Engineering}{September 2026}{Raleigh, NC}
+\acmYear{2026}
+
+\author{Abigail Close}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{aeclose2@ncsu.edu}
+
+\author{Aditya Mahajan}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{amahaja8@ncsu.edu}
+
+\author{Satwi Shah}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{stshah2@ncsu.edu}
+
+\author{Supreme Constantine}
+\affiliation{%
+  \institution{North Carolina State University}
+  \city{Raleigh}
+  \state{North Carolina}
+  \country{USA}}
+\email{spconsta@ncsu.edu}
+
+\begin{document}
+
+\begin{abstract}
+\pending{Summarize the named audience, verified market gap, proposed product,
+one-month scope, measurable benefit, and LLM-assisted evidence process.}
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+WolfBite is a Flutter/Firebase shopping assistant for WIC participants. In
+Project 1a, the team reverse engineered its behavior and independently tested
+its principal user flows. This report uses market evidence and independent LLM
+analysis to decide whether to extend WolfBite or pivot, then defines a product
+that four students can build and test in one month.
+
+\pending{State the final decision and preview the report's contribution.}
+
+\section{D1: Market Survey}
+
+\subsection{Method}
+
+We ran the shared market-survey Prompt~1 with four LLM analysts: Codex,
+Terra, Gemini, and local Ollama, to generate rival candidates. We retained a
+rival only when at least two models named it or one model supplied a live,
+relevant URL. We then checked official product sources and independently
+audited the three strongest rivals. Each final rival independently satisfies
+the live-URL qualification rule through an official product source.
+
+\subsection{Verified Rivals}
+
+Table~\ref{tab:rivals} summarizes the three verified rivals.
+
+\begin{table*}[t]
+  \caption{D1 validated WIC rivals.}
+  \label{tab:rivals}
+  \centering
+  \small
+  \begin{tabular}{L{2.3cm}L{3.4cm}L{4.3cm}L{4.8cm}}
+    \toprule
+    Rival & Evidence it is real & What it does & Relevant limitation \\
+    \midrule
+    WICShopper &
+    Official App Store listing and vendor purchase-history documentation
+    \cite{wicshopper-appstore,wicshopper-redemption-history} &
+    Shows benefits, scans eligibility, provides food guidance, and records
+    item/category purchase history in supported agencies &
+    No documented workflow connects a scan/checkout mismatch to its likely
+    cause and recovery steps. \\
+    \addlinespace
+    myWIC Mosaic &
+    Official App Store listing \cite{mywic-mosaic-appstore} &
+    Shows benefits, tracks purchases, scans products, and supports shopping,
+    appointments, and certification &
+    No documented item-level explanation and recovery workflow for an
+    unexpectedly uncovered item. \\
+    \addlinespace
+    Bnft &
+    Official App Store listing \cite{bnft-appstore} &
+    Shows balances, scans benefit eligibility, manages cards, and provides
+    transaction history &
+    No documented item-level reconciliation or explanation for conflicting
+    scan and checkout results. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Selected Gap and Audience}
+
+\textbf{Gap:} Our feature audit found no documented integrated, item-level
+explanation-and-recovery workflow in WICShopper, myWIC Mosaic, or Bnft for
+cases where an app indicates that a product is eligible but checkout rejects
+it. Such a workflow could connect the rejected item, the participant's current
+benefit or food category, and purchase evidence to likely causes and
+actionable next steps.
+
+\textbf{Audience:} WIC caregivers and participants shopping for their
+households, especially those managing young children while an item they
+expected to be covered is rejected at checkout.
+
+This need is supported by participant research reporting difficulty
+identifying WIC-eligible foods and stigma during shopping and checkout
+\cite{fiedler2026,chauvenet2019}. WIC caregivers also rank balance checking and
+barcode scanning among their highest-priority app features \cite{weber2021}.
+Together, this evidence suggests that eligibility uncertainty during shopping
+remains consequential for the target audience.
+
+We also evaluated two alternative gaps. We rejected nutrition comparison
+because participant evidence for that need was comparatively weak. We rejected
+broader receipt reconciliation because all three rivals already provide some
+form of purchase or transaction history. The narrower explanation-and-recovery
+gap therefore has stronger support from both the competitor audit and
+participant evidence.
+
+\subsection{Counterevidence and Scope}
+
+The conclusion has \textbf{medium confidence}. WICShopper already provides
+item-level purchase history in some agencies, myWIC tracks purchases, and Bnft
+provides transaction history. Public documentation may also omit
+program-specific features. In one month, the team can build and test a
+WolfBite prototype using fixed mismatch scenarios, rule-based likely causes,
+and recovery guidance. Without state benefit-system data, the prototype must
+not claim to know an authoritative point-of-sale rejection reason.
+
+\section{D2: Mission, Impact, and Stakeholders}
+
+\subsection{Mission Statement}
+
+WIC participants and caregivers can face uncertainty when a product appears
+eligible in an app but is rejected at checkout, a setting in which participant
+research has documented difficulty identifying eligible foods and stigma
+during shopping and checkout \cite{fiedler2026,chauvenet2019}. That conflict
+can add confusion and friction during a household shopping trip. We propose
+extending WolfBite with an item-level explanation-and-recovery workflow that
+connects the rejected item's UPC and package details, the participant's current
+benefit or food category, and available eligibility or purchase evidence. For
+a bounded set of mocked mismatch scenarios, the workflow will distinguish app
+evidence from facts that only a retailer or WIC agency can confirm, then show
+rule-based likely causes and actionable next steps. This guidance is intended
+to help participants and caregivers choose a next action after an unexpected
+rejection while keeping uncertain information visible.
+
+\subsection{Measurable Claim and M0 Evaluation}
+
+\textbf{M0 measurable claim:} During Project 2 M0, we will test whether the
+explanation-and-recovery workflow produces a task-success rate of at least
+80\% and at least 20 percentage points higher than the baseline workflow. A
+trial succeeds when a test user selects the prepared scenario's reference next
+step within 60 seconds without facilitator help. The baseline is a control
+version of the current WolfBite flow that shows the pre-checkout eligibility
+result and a mocked checkout rejection but provides no explanation or recovery
+guidance. The new and baseline flows will use the same counterbalanced,
+synthetic mismatch scenarios, so the evaluation requires neither live WIC
+data nor retailer point-of-sale access. These values are project targets to be
+measured at M0, not achieved results.
+
+\subsection{Stakeholders}
+
+The four Prompt~5 outputs used different labels for related roles. To avoid
+inflating the list with synonyms, Table~\ref{tab:stakeholders} includes a
+stakeholder group when there is a direct equivalent between LLMs.
+
+\begin{table*}[t]
+  \caption{Overlapping Prompt 5 stakeholders and requirements consequences.}
+  \label{tab:stakeholders}
+  \centering
+  \small
+  \setlength{\defaultaddspace}{0.3em}
+  \begin{tabular}{L{3.0cm}L{5.0cm}L{7.0cm}}
+    \toprule
+    Stakeholder & Need or fear & Design response \\
+    \midrule
+    WIC participants, caregivers, and household representatives &
+    Misleading eligibility guidance, uncertainty after a rejection, or the
+    wrong household state &
+    Identify the active household context and show evidence limits, likely
+    causes, and a short recovery action for the selected item. \\
+    \addlinespace
+    Infants, children, and pregnant or postpartum benefit recipients &
+    Eligibility or nutrition guidance could be mistaken for advice about what
+    is healthy or appropriate &
+    Keep coverage guidance separate from health claims and represent missing
+    information as unknown rather than zero or safe. \\
+    \addlinespace
+    WIC clinic staff, program administrators, and agencies &
+    Extra support burden or a prototype mistaken for official WIC authority &
+    Show data source and freshness, and route unresolved cases to the
+    appropriate agency contact. \\
+    \addlinespace
+    Cashiers, authorized retailers, and store managers &
+    Checkout delay, disputes, or incorrect UPC and package information when
+    the app and register disagree &
+    Treat the register outcome as authoritative, provide concise recovery
+    guidance, and make no payment or point-of-sale integration claim. \\
+    \addlinespace
+    State WIC IT teams, EBT processors, and card-system vendors &
+    Unsupported integrations, security risks, or simulated balances presented
+    as official data &
+    Use mock adapters and simulated data, document the integration boundary,
+    and make no live balance or payment claim. \\
+    \addlinespace
+    Approved-product-list stewards, manufacturers, and product-data providers &
+    Stale, copied, misattributed, or misidentified UPC, package, and category
+    records &
+    Retain source/version provenance and test stale, duplicate, and conflicting
+    records before presenting a likely cause. \\
+    \addlinespace
+    Privacy, security, and legal reviewers &
+    Exposure of household, benefit, receipt, location, or diagnostic data and
+    liability from unsupported claims &
+    Minimize stored data, exclude card credentials, use privacy-safe logs, and
+    state the prototype's limits at decision points. \\
+    \addlinespace
+    Program regulators and compliance personnel &
+    Misrepresented eligibility, unnecessary data collection, or exclusion of
+    protected users &
+    Trace eligibility statements to their source and test explicit privacy,
+    accessibility, and nondiscrimination requirements. \\
+    \addlinespace
+    Participants with disabilities or limited English proficiency, and their
+    advocates &
+    Camera-only controls, color-only status, small targets, or unclear language
+    could block the recovery task &
+    Preserve manual entry, pair color and icons with text, use semantic labels
+    and plain language, and test text scaling and assistive navigation. \\
+    \addlinespace
+    Receipt OCR and other outside data-service providers &
+    Sensitive uploads, unsupported formats, or use outside service terms &
+    Keep OCR outside the core recovery path; if retained, require consent,
+    validate inputs, minimize retention, and provide a mock service. \\
+    \addlinespace
+    Application developers and maintainers &
+    Unreproducible failures, sensitive logs, or one-month scope growth &
+    Use a bounded rule set, deterministic fixtures, and privacy-safe
+    diagnostics. \\
+    \addlinespace
+    Project sponsors, funders, and procurement decision-makers &
+    Misleading public-benefit claims, hidden integration costs, or a prototype
+    that cannot be maintained &
+    Define a narrow pilot, measurable outcomes, and explicit external
+    dependencies rather than promising statewide deployment. \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+\FloatBarrier
+
+\section{D3: Engineering Plan}
+
+\subsection{Before: Project 1a}
+
+\begin{itemize}
+  \item \pending{Add three to five completed, evidenced milestones.}
+\end{itemize}
+
+\subsection{Now: One-Month Build and Test}
+
+\begin{itemize}
+  \item \pending{Add three to five ambitious but checkable milestones.}
+\end{itemize}
+
+\subsection{Future: After the One-Month Project}
+
+\begin{itemize}
+  \item \pending{Add three to five credible future milestones.}
+\end{itemize}
+
+\subsection{Support Material and Constraints}
+
+\begin{table*}[t]
+  \caption{Regulations, standards, licenses, and domain material.}
+  \label{tab:support}
+  \centering
+  \small
+  \begin{tabular}{L{3.0cm}L{1.6cm}L{1.8cm}L{4.2cm}L{4.4cm}}
+    \toprule
+    Source & Type & Priority & Design area affected & Requirement or check created \\
+    \midrule
+    \multicolumn{5}{l}{\pending{Insert cited authoritative sources.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\section{D5: LLM Analysis and Verification}
+
+\subsection{Models, Prompts, and Evidence}
+
+\pending{Identify every model and runner, the required market-survey and
+red-team runs, the team's original keeper prompt, and where raw transcripts or
+screenshots are preserved. Explain the local-model result or its absence.}
+
+\subsection{Prompt-by-Model Comparison}
+
+\begin{table*}[t]
+  \caption{Comparison of the market-survey and red-team prompts.}
+  \label{tab:model-comparison}
+  \centering
+  \small
+  \begin{tabular}{L{2.2cm}L{2.0cm}L{3.6cm}L{3.6cm}L{3.6cm}}
+    \toprule
+    Model & Prompt & Most useful result & Weakness or disagreement & Team adjudication \\
+    \midrule
+    \multicolumn{5}{l}{\pending{Insert one evidence-backed row per model and required prompt.}} \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\subsection{Wrong Outputs and How We Caught Them}
+
+\pending{Describe concrete errors, the evidence that exposed each one, and how
+the correction changed the rival list or requirements. Zero caught errors
+would not demonstrate checking.}
+
+\subsection{Most and Least Useful Prompts}
+
+\pending{Name the most and least useful prompts and explain why using actual
+outputs, not generic model commentary.}
+
+\subsection{Model Strengths and Weaknesses}
+
+\pending{Give one concise, evidence-backed strengths/weaknesses line per
+model. Highlight useful disagreement rather than claiming universal agreement.}
+
+\section{Conclusion}
+
+\pending{Restate the verified gap, product decision, measurable benefit, and
+why the one-month plan is both ambitious and testable.}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}
