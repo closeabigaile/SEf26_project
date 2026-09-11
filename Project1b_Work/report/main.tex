@@ -290,9 +290,86 @@ stakeholder group when there is a direct equivalent between LLMs.
 
 \subsection{Now: One-Month Build and Test}
 
+Our one-month goal is to make WolfBite a more complete, usable shopping app.
+We will improve nutrition explanations, add an optional basket-wide suggestion
+mode, and make the main screens easier to use. A small checkout-help feature
+retains D2's explanation-and-recovery goal; the nutrition improvements support
+the shopping experience rather than establish a new verified market gap.
+Benefit information and checkout rejection scenarios will remain simulated.
+
 \begin{itemize}
-  \item \pending{Add three to five ambitious but checkable milestones.}
+  \item \textbf{M0: Check whether checkout help is useful.}
+  Compare the current flow with the checkout-help feature using the same
+  prepared rejection scenarios. Keep D2's target: at least 80\% of trials
+  choose the reference next step within 60 seconds without help, with success
+  at least 20 percentage points above the baseline. Build a script that scores
+  trial logs and runs in CI; check it with known passing and failing examples.
+  Synthetic logs test the script, not real usability. Report pilot results
+  separately if volunteers are available, and record a re-plan decision if
+  measured results miss the target.
+
+  \item \textbf{M1: Better nutrition information and food-choice explainers.}
+  Extend the existing nutrition panel and badges with units, serving or
+  reference amounts, and short explanations of the values behind a label or
+  comparison. Show available sodium, sugar, fiber, protein, and fat information,
+  including tradeoffs between options rather than a single unexplained
+  ``healthier'' score. Reuse the nutrition utility and product records, preserve
+  missing values as unknown, and retain the measurement basis in saved basket
+  items. Check educational wording against cited nutrition sources during
+  implementation. Unit and widget tests must verify displayed values and units,
+  explanation rules, comparable serving bases, and missing-data cases; unknown
+  values must never earn a favorable badge or comparison.
+
+  \item \textbf{M2: Basket-wide suggestions for more balanced food choices.}
+  Add an optional ``Basket balance'' mode alongside individual substitutions.
+  Use basket quantities and M1's nutrition data to summarize food-group variety
+  and rank possible swaps by their effect on the whole basket. Start with a
+  small mock catalog with known package amounts and food-group mappings, and
+  explicit demonstration targets for sodium, added sugar, and fiber. Prioritize
+  only comparisons with known, compatible units and package amounts; flag
+  incomplete totals and skip suggestions that depend on missing measurements.
+  Rank candidates against
+  the basket's largest target gap, rather than ranking each food in isolation;
+  show before/after values and any tradeoffs for up to three suggestions.
+  Reuse the APL category lookup, restrict swaps to the same benefit category
+  and compatible package size, and recheck simulated allowances before applying
+  one shopper-confirmed swap at a time. Recalculate after each change. Tests
+  must show that the same item can receive different suggestions in different
+  baskets, quantities affect results, and previews leave the basket unchanged.
+  Also test confirmed swaps, balance consistency, missing measurement data,
+  and no suitable candidate. This is a shopping aid with illustrative targets,
+  not a personalized diet plan or a claim that a basket represents daily intake.
+
+  \item \textbf{M3: A clearer, more complete shopping interface.}
+  Improve the existing scan, basket, and benefits screens with consistent
+  typography, spacing, product cards, and clearly labeled primary actions.
+  Make nutrition explanations and the two suggestion modes easy to find;
+  distinguish covered and shopper-paid items with text as well as color.
+  Add useful loading, empty, error, and retry states. Widget tests and a manual
+  walkthrough must cover scan-to-basket navigation, opening an explainer,
+  previewing a basket suggestion, and checking benefits. Verify phone and
+  desktop layouts, enlarged text, and screen-reader labels without clipped
+  content or inaccessible controls. Existing quantity and navigation tests
+  must continue to pass.
+
+  \item \textbf{M4: Add straightforward help for a rejected item.}
+  Add an action on a basket item that opens a short explanation and next step
+  for prepared package-size, category-balance, and stale-information scenarios.
+  Use simple rules over mock item and benefit records, with an ``unable to
+  determine'' response when evidence is missing. Test each explanation and
+  the full item-to-help flow, including returning to the basket without
+  changing its contents. Label the advice as possible causes, not an official
+  checkout decision; use this feature in M0's comparison.
 \end{itemize}
+
+Build the M0 script and M1's measurement handling in week 1, implement and test
+basket suggestions in weeks 2--3, and develop the interface and bounded
+checkout-help cases alongside them. Reserve week 4 for integration and the
+evaluation. Keep basket suggestions to one-swap previews over the mock catalog;
+multi-item optimization and personalized meal planning are outside this month.
+Add tests alongside each change, run relevant Project 1a regressions in CI,
+and document how another team can run the mock demo and extend the catalog,
+explanation rules, basket targets, and checkout-help cases.
 
 \subsection{Future: After the One-Month Project}
 
