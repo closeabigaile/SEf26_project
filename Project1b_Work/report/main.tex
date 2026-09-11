@@ -377,18 +377,100 @@ explanation rules, basket targets, and checkout-help cases.
   \item \pending{Add three to five credible future milestones.}
 \end{itemize}
 
-\subsection{Support Material and Constraints}
+\subsection{Support Material}
+
+Table~\ref{tab:support} separates material that governs the WIC program from
+technical and accessibility guidance that constrains this prototype and from
+licenses that govern redistribution.  The design consequences are requirements
+for the Project~2 explanation-and-recovery workflow, not claims that WolfBite
+is a WIC agency, retailer system, or EBT processor.
 
 \begin{table*}[t]
-  \caption{Regulations, standards, licenses, and domain material.}
+  \caption{Support material and the Project~2 design checks it creates.}
   \label{tab:support}
   \centering
-  \small
-  \begin{tabular}{L{3.0cm}L{1.6cm}L{1.8cm}L{4.2cm}L{4.4cm}}
+  \footnotesize
+  \begin{tabular}{L{3.8cm}L{5.1cm}L{6.1cm}}
     \toprule
-    Source & Type & Priority & Design area affected & Requirement or check created \\
+    Support material and source & What it says that matters here & Effect on WolfBite's design \\
     \midrule
-    \multicolumn{5}{l}{\pending{Insert cited authoritative sources.}} \\
+    \textbf{Federal regulation: 7 CFR Part 246, especially
+    \S~246.10(b) and (e)(12).} USDA Food and Nutrition Service (FNS);
+    \href{https://www.ecfr.gov/current/title-7/subtitle-B/chapter-II/subchapter-A/part-246/section-246.10}{eCFR text} and
+    \href{https://www.fns.usda.gov/wic/food-packages/regulatory-requirements}{FNS regulatory summary}. &
+    The federal rule supplies minimum food and package criteria.  It also
+    permits a state agency to add criteria and requires the agency to identify
+    acceptable brands and package sizes.  FNS therefore cautions that a state
+    need not authorize every food that meets the federal requirements. &
+    An eligibility result must identify its jurisdiction, exact UPC/package,
+    source, and source date.  Meeting only federal criteria will be labeled as
+    general guidance, never as a guarantee of purchase.  The workflow will
+    distinguish that evidence from state authorization and from the retailer's
+    actual checkout result. \\
+    \addlinespace[0.2em]
+    \textbf{State domain guidance: North Carolina WIC Authorized Product List
+    (APL).} NC Department of Health and Human Services (NCDHHS);
+    \href{https://www.ncdhhs.gov/divisions/child-and-family-well-being/community-nutrition-services-section/wic/vendors/nc-wic-authorized-product-list-apl}{APL and UPC-submission page} and
+    \href{https://www.ncdhhs.gov/wic-vendor-manual-0}{WIC Vendor Manual}. &
+    NCDHHS maintains an APL by UPC; products can be added, changed, or removed,
+    and vendor systems must receive APL updates.  A product that appears to fit
+    a federal category is not thereby present in North Carolina's current APL. &
+    The bounded NC scenarios will use a dated APL fixture keyed by UPC and
+    package details.  A missing, changed, or stale APL record may be shown only
+    as a likely cause.  Recovery will link to the current NC list and agency
+    help or suggest checking an authorized alternative, rather than declaring
+    the item approved or diagnosing the register. \\
+    \addlinespace[0.2em]
+    \textbf{Technical/domain guidance: WIC EBT Technical Implementation Guide
+    and Operating Rules.} USDA FNS;
+    \href{https://www.fns.usda.gov/wic/ebt/technical-implementation-guide-operating-rules}{official resource page}. &
+    These resources standardize WIC EBT online purchase messages and file
+    handling for state agencies, authorized vendors, processors, and other EBT
+    stakeholders.  They describe the transaction ecosystem; they do not turn
+    a shopping assistant into an EBT system. &
+    Fixtures and explanations will keep agency, APL, benefit, and retailer
+    evidence separate.  Project~2 will use mock adapters and no card number,
+    PIN, live purchase message, or balance mutation.  It will say ``likely
+    cause'' when only the state or retailer transaction system could supply an
+    authoritative result. \\
+    \addlinespace[0.2em]
+    \textbf{Accessibility standard/design target: WCAG 2.2 Level AA.}
+    World Wide Web Consortium (W3C);
+    \href{https://www.w3.org/TR/WCAG22/}{WCAG 2.2} and
+    \href{https://www.w3.org/WAI/standards-guidelines/mobile/}{W3C mobile guidance}. &
+    Relevant success criteria prohibit color as the only means of conveying
+    information (1.4.1), set minimum contrast (1.4.3) and target-size/spacing
+    rules (2.5.8), require identified errors and known corrections
+    (3.3.1/3.3.3), and keep repeated help consistent (3.2.6).  W3C explains how
+    WCAG guidance can also inform native mobile applications. &
+    Approval, rejection, and uncertainty will use text plus an icon, not color
+    alone.  The flow will use semantic labels, readable contrast, scalable
+    text, adequately sized or spaced controls, a manual-UPC alternative to the
+    camera, a specific error and next action, and consistently placed agency
+    help.  Tests will cover text scaling and assistive navigation. \\
+    \addlinespace[0.2em]
+    \textbf{Application license: MIT License.} The inherited WolfBite
+    \texttt{Project3/LICENSE.md}; the same license is visible in the
+    \href{https://github.com/SuyeshJadhav/CSC510_G19/blob/main/Project2/LICENSE.md}{upstream repository}. &
+    MIT permits use, modification, and redistribution, provided the copyright
+    and permission notice remain in copies or substantial portions; it also
+    disclaims warranties. &
+    We will keep the inherited copyright and MIT text with redistributed
+    WolfBite code and will not describe the prototype as warranted or officially
+    approved. \\
+    \addlinespace[0.2em]
+    \textbf{Selected dependency licenses.} The declared packages are in
+    \texttt{Project3/pubspec.yaml}; official package records confirm
+    \href{https://pub.dev/packages/provider/license}{provider (MIT)},
+    \href{https://pub.dev/packages/mobile_scanner/license}{mobile\_scanner (BSD 3-Clause)}, and
+    \href{https://pub.dev/packages/firebase_core/license}{firebase\_core (BSD 3-Clause)}. &
+    MIT requires its copyright and permission notice.  BSD 3-Clause requires
+    its copyright, conditions, and disclaimer in source or binary distributions
+    as applicable and prohibits using contributor names for endorsement. &
+    Releases will preserve applicable third-party notices.  Before adding an
+    APL, accessibility, or scanning package, the team will record the resolved
+    version and license, check compatibility, and reject any dependency whose
+    redistribution duties the project cannot meet. \\
     \bottomrule
   \end{tabular}
 \end{table*}
