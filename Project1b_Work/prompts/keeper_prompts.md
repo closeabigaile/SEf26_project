@@ -36,6 +36,79 @@ out. If you cannot support a claim, write "unknown" -- do not fill the cell
 with something plausible.
 ```
 
+### P10 -- Red team (finalized proposal version, 2026-09-13)
+
+```text
+You are hostile to our proposal. Below: our mission statement, milestones,
+and market survey.
+
+Attack on three fronts:
+1. Nobody wants it -- the need is imagined.
+2. They cannot build it -- the month is too short, the team too green.
+3. Someone does it better -- name who.
+
+Make each attack as strong as you honestly can; no strawmen. Then, for each
+attack, state what evidence would defeat it. We will go collect that evidence
+-- or concede the point and change the plan.
+
+Mission statement:
+WIC participants and caregivers can face uncertainty when a product appears
+eligible in an app but is rejected at checkout. We propose extending WolfBite
+with an item-level explanation-and-recovery workflow that connects the
+rejected item's UPC and package details, the participant's current benefit or
+food category, and available eligibility or purchase evidence. For bounded
+mocked mismatch scenarios, the workflow will distinguish app evidence from
+facts that only a retailer or WIC agency can confirm, then show rule-based
+possible causes and actionable next steps. The Project 2 M0 target is at least
+80% task success and at least a 20-percentage-point improvement over a baseline
+that shows the same eligibility result and mocked rejection without recovery
+guidance. Success means selecting the scenario's reference next step within 60
+seconds without facilitator help. These are targets, not achieved results.
+
+Milestones for the one-month build-and-test period:
+- M0: Compare the checkout-help flow with the baseline on the same prepared
+  scenarios. Build and test a reproducible scoring script and measure the 80%
+  task-success and 20-percentage-point improvement targets.
+- M1: Add clearer nutrition units, serving or reference amounts, value
+  explanations, and tradeoffs while preserving missing values as unknown.
+  Verify data rules, units, comparisons, persistence, and missing-data behavior
+  with unit and widget tests.
+- M2: Add basket-aware, one-swap suggestions using a bounded mock catalog,
+  compatible units and package amounts, and simulated allowances. Test
+  quantity effects, basket-dependent rankings, previews, confirmed swaps,
+  recalculation, missing data, balance consistency, and no-candidate cases.
+- M3: Improve the scan, basket, and benefits interfaces, including loading,
+  empty, error, and retry states and discoverable explanation and suggestion
+  features. Verify principal flows, phone and desktop layouts, enlarged text,
+  screen-reader labels, non-color status, and existing regressions.
+- M4: For prepared package-size, category-balance, stale-information, and
+  missing-evidence scenarios, show a rule-based possible cause and next action
+  from a basket item. Test every rule and the complete item-to-help-and-back
+  flow without changing basket contents.
+
+Market survey:
+The team ran a shared market-survey prompt with Codex, ChatGPT Terra, Gemini,
+and local Ollama, then checked the strongest candidates against official
+product sources. The three validated direct rivals are WICShopper, myWIC
+Mosaic, and Bnft. WICShopper shows benefits, scans eligibility, provides food
+guidance, and records item or category purchase history in supported agencies.
+myWIC Mosaic shows benefits, tracks purchases, scans products, and supports
+shopping, appointments, and certification. Bnft shows balances, scans benefit
+eligibility, manages cards, and provides transaction history.
+
+The selected gap is the absence from those rivals' public documentation of an
+integrated, item-level explanation-and-recovery workflow for cases in which an
+app indicates eligibility but checkout rejects the product. Participant
+research supports continued difficulty identifying WIC-eligible foods and
+stigma during shopping and checkout, and caregivers rank balance checking and
+barcode scanning as high-priority app features. However, the gap has only
+medium confidence: all three rivals provide some purchase or transaction
+history, public documentation may omit relevant program-specific features,
+and the team has no live WIC, EBT, retailer, or point-of-sale data. WolfBite
+will therefore use simulated benefit and rejection scenarios and must not
+claim an authoritative rejection reason or override a register result.
+```
+
 ## Current discovery prompts
 
 - P02 -- Mine the complaints

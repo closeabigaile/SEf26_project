@@ -16,6 +16,7 @@ Save the complete, unedited Codex runs here. Required later: P01 and P10.
 - `P08_mission_statement_2026-09-07.md` -- Mission statement
 - `P09_milestone_reality_check_2026-09-09.md` -- Milestone feasibility and
   revised one-month plan
+- `P10_red_team_2026-09-13.md` -- Red-team analysis of the finalized proposal
 - `P12_pivot_analysis_2026-09-03.md` -- Pivot analysis
 - `P13_d3_milestone_plan_2026-09-09.md` -- Complete Before/Now/Future D3
   milestone plan
