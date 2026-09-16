@@ -72,45 +72,122 @@ Prompt 5 outputs and the D2 stakeholder table.
 
 ## Milestones
 
-Keep three to five clear, checkable goals in each group.
-
 ### Before -- Project 1a
 
-- **TODO — awaiting team input:** Approve and insert three to five completed,
-  evidence-backed Project 1a milestones.
+1. **Set up and analyze the inherited WolfBite application.** The team cloned,
+   ran, and inspected the existing Flutter/Firebase project so later decisions
+   were based on implemented behavior rather than the product description.
+2. **Map the documented behavior to the implementation.** The team finalized
+   20 code-traceable use cases and connected their primary, alternative, and
+   exception paths to production code.
+3. **Create and execute automated use-case tests.** The team authored 86 tests
+   spanning UC1--UC20; the recorded run had 82 passes and four retained
+   failures that became evidence for the next version.
+4. **Document traceability, failures, and coverage.** The Project 1a report and
+   supporting records preserve the test results, failure classifications, and
+   77.5% executable-line coverage baseline.
 
 ### Now -- one-month build and test
 
-1. **M0 — Check whether checkout help is useful.** Compare the checkout-help
-   flow with the baseline on the same prepared scenarios. Build and test a
-   reproducible scoring script and measure the 80% task-success and
-   20-percentage-point improvement targets without presenting them as results.
-2. **M1 — Better nutrition information and food-choice explainers.** Add units,
-   serving or reference amounts, value explanations, and visible tradeoffs;
-   preserve missing values as unknown. Verify the data rules, units,
-   explanations, comparable measurement bases, persistence, and missing-data
-   behavior with unit and widget tests.
-3. **M2 — Basket-wide suggestions for more balanced food choices.** Use a
-   bounded mock catalog, known compatible units/package amounts, and simulated
-   allowances to preview up to three basket-aware, one-swap suggestions. Test
-   quantity effects, basket-dependent rankings, unchanged previews, confirmed
-   swaps, recalculation, missing data, balance consistency, and the absence of
-   suitable candidates.
-4. **M3 — A clearer, more complete shopping interface.** Improve the scan,
-   basket, and benefits screens; add clear loading, empty, error, and retry
-   states; and make the explanation and suggestion features discoverable.
-   Verify the principal flows, phone/desktop layouts, enlarged text,
-   screen-reader labels, non-color status, and existing regressions.
-5. **M4 — Add straightforward help for a rejected item.** For prepared
-   package-size, category-balance, stale-information, and missing-evidence
-   scenarios, show a rule-based possible cause and next action from a basket
-   item. Test every rule and the complete item-to-help-and-back flow without
-   changing basket contents.
+Prompt 10 did not justify a pivot, but Codex, Terra, and Gemini independently
+identified a scope and dependency risk. The team therefore preserves the five
+agreed milestones while making M4 and M0 the critical path. M1--M3 are bounded
+supporting improvements and may not consume the time reserved for integration,
+regression testing, or the M0 evaluation.
+
+1. **M0 — Check whether checkout help is useful.**
+   - **Build and purpose:** Create a reproducible baseline-versus-help protocol
+     and scoring script using the same synthetic mismatch scenarios. This was
+     selected because D1 supports the underlying checkout problem but P10
+     correctly notes that demand for this particular recovery workflow remains
+     unproven.
+   - **Feasibility and completion:** The comparison uses existing screens,
+     fixed fixtures, and no live WIC/POS integration. It is complete when the
+     scoring script passes known-answer tests and the team reports task success,
+     time, facilitator help, and the percentage-point difference against the
+     80% and 20-point targets without presenting targets as achieved results.
+   - **Risk protection:** Define the baseline, acceptable next actions, trial
+     count, and handling of multiple reasonable actions before collecting data.
+     Synthetic logs validate the script, not user demand.
+
+2. **M1 — Better nutrition information and food-choice explainers.**
+   - **Build and purpose:** Extend the existing nutrition panel and utilities
+     with units, serving/reference amounts, short explanations, and visible
+     tradeoffs. Project 1a found misleading missing-data behavior, so this is a
+     product-correctness improvement rather than a new verified market gap.
+   - **Feasibility and completion:** Reuse the current product records and limit
+     work to sodium, sugar, fiber, protein, and fat values already available.
+     It is complete when unit/widget tests verify displayed values, comparable
+     measurement bases, persistence, and that unknown values never receive a
+     favorable badge or comparison.
+   - **Risk protection:** Do not add a live nutrition service or personalized
+     health advice. This milestone remains secondary to the M4/M0 path.
+
+3. **M2 — Basket-wide suggestions for more balanced food choices.**
+   - **Build and purpose:** Add optional basket-aware, one-swap previews that
+     reuse the basket, alternatives, M1 measurements, and simulated allowances.
+     This improves the inherited product, but P10 and the market audit show it
+     is not the evidence-backed core gap.
+   - **Feasibility and completion:** Restrict the feature to a small mock
+     catalog, known compatible units/package amounts, and at most three
+     suggestions. It is complete when tests cover basket-dependent ranking,
+     quantity effects, unchanged previews, confirmed swaps, recalculation,
+     missing data, balance consistency, and no-candidate cases.
+   - **Risk protection:** Expand integration only after M1's measurement rules
+     are stable and the M4-to-M0 fixtures, interface, and evaluation protocol
+     are defined. Defer extra targets, multi-item optimization, and visual
+     polish if the critical path slips.
+
+4. **M3 — A clearer, more complete shopping interface.**
+   - **Build and purpose:** Improve the principal scan, basket, and benefits
+     flows; expose the explanation/suggestion actions; and add necessary
+     loading, empty, error, and retry states. This supports usability and
+     accessibility across all retained features.
+   - **Feasibility and completion:** Treat this as targeted work on existing
+     screens, not a full redesign. It is complete when widget tests and a manual
+     walkthrough cover the principal flows, phone/desktop layouts, enlarged
+     text, semantic labels, non-color status, and existing regressions.
+   - **Risk protection:** Implement functional and accessibility requirements
+     before optional visual polish; defer nonessential styling if M4/M0 slips.
+
+5. **M4 — Add straightforward help for a rejected item.**
+   - **Build and purpose:** Add the core item-to-help flow for prepared
+     package-size, category-balance, stale-information, and missing-evidence
+     cases. This directly implements the medium-confidence D1 gap.
+   - **Feasibility and completion:** Use deterministic rules over versioned
+     mock item/benefit fixtures rather than live integrations. It is complete
+     when every rule and uncertainty fallback has a unit test and the full
+     item-to-help-and-back flow returns without changing basket contents.
+   - **Risk protection:** Label outputs as possible causes, include ``unable to
+     determine,'' preserve source/freshness boundaries, and never promise
+     checkout acceptance or override the register. M4 must reach a tested
+     vertical slice before secondary milestone scope expands.
+
+**Execution decision:** Within the roughly 160-hour team budget, week 1 protects
+the M0 protocol and M1 measurement rules while defining M4's fixtures and flow;
+bounded M2 work then proceeds in weeks 2--3 while M4 and targeted M3 work are
+developed alongside it. Week 4 remains reserved for integration and evaluation.
+If the M4/M0 critical path slips, defer M2 extensions and nonessential M3
+polish; do not cut rule tests, uncertainty labels, regression testing,
+accessibility basics, or the M0 comparison.
 
 ### Future -- after the one-month project
 
-- **TODO — awaiting team input:** Approve and insert three to five credible
-  Project 3 milestones.
+1. **Permissioned, versioned state APL synchronization.** Replace static
+   eligibility fixtures with a monitored adapter that records jurisdiction,
+   version, refresh time, conflicts, and stale-state information.
+2. **Partner-backed read-only benefit and rejection-evidence pilot.** Evaluate
+   recovery with authorized participant or transaction evidence without
+   approving purchases, processing payments, or modifying benefits.
+3. **Privacy-reviewed on-device receipt recognition and reconciliation.** Use
+   local recognition where practical, connect item/quantity evidence to basket
+   and benefit information, and retain a manual fallback.
+4. **Spanish and broader accessibility validation.** Add professionally
+   reviewed Spanish content and test disability, literacy, language, device,
+   and network conditions.
+5. **Production hardening and operational release.** Add access-control tests,
+   monitoring, backups, retention/deletion policies, security review, and
+   deployment-specific compliance work after scope and partnerships are stable.
 
 ## Scope and evidence boundaries
 
