@@ -504,102 +504,106 @@ is a WIC agency, retailer system, or EBT processor.
 The four model/runner pairings were GPT-5.6 Sol through Codex desktop,
 collected by Abigail Close; GPT-5.6 Terra through ChatGPT, collected by Supreme
 Constantine; Gemini 3.1 Pro (High) through Antigravity, collected by Aditya
-Mahajan; and Llama 3 8B through local Ollama, run by Satwi Shah. All four
-completed Prompt~1, the required market survey. The team's exact P01 keeper is
-preserved in \path{Project1b_Work/prompts/keeper_prompts.md}; the Codex and
-Gemini records embed that version, while the Terra and local records preserve
-the similar earlier wording they actually received. Complete raw transcripts
-are stored by model under \path{Project1b_Work/model_outputs/}. Rival
-normalization and verification are separate from those raw outputs in
-\path{Project1b_Work/rivals/validated_rivals.md}.
+Mahajan; and Llama 3 8B through local Ollama, run by Satwi Shah. Each model
+completed the required market-survey Prompt~1 and the three-part red-team
+Prompt~10. Keeper prompts are preserved in
+\path{Project1b_Work/prompts/keeper_prompts.md}, and raw transcripts are stored
+by model under \path{Project1b_Work/model_outputs/}. The Codex and Gemini P01
+records contain the exact keeper; Terra and local P01 preserve the similar
+earlier wording they received. The finalized local P10 output is usable but
+less reproducible because its transcript contains a prompt placeholder rather
+than the exact pasted text.
 
-The local P01 run produced ten candidates without live browsing. Verification
-retained its normalized WICShopper entry as a direct rival, classified several
-real products as merely adjacent, and rejected or left unverified the remaining
-unsupported candidates. The run is therefore useful evidence about local-model
-limitations, but not independent confirmation of its links or feature claims.
-
-The finalized P10 keeper and Codex run are preserved in the same prompt and
-model-output directories. \pending{TODO --- awaiting team input: run the
-finalized P10 with Terra and Gemini and rerun it with local Ollama; the existing
-local P10 used the superseded milestone set.}
+Prompt~1 generated candidates; it was not accepted as market proof. WICShopper
+appeared in all four outputs after name normalization, myWIC Mosaic in three,
+and Bnft in two. Live-source and scope checks produced the strongest direct set
+reported in D1: WICShopper, myWIC Mosaic, and Bnft. This comparison also exposed
+the value of multiple models: Terra emphasized state fragmentation, Gemini
+corroborated several direct products, Codex supplied the most complete live
+evidence, and the non-browsing local model produced mostly adjacent or
+unverified candidates that forced stricter checking.
 
 \subsection{Prompt-by-Model Comparison}
 
 \begin{table*}[t]
-  \caption{Comparison of the market-survey and red-team prompts.}
+  \caption{Cross-model Prompt~10 comparison and team adjudication.}
   \label{tab:model-comparison}
   \centering
-  \small
-  \begin{tabular}{L{2.2cm}L{2.0cm}L{3.6cm}L{3.6cm}L{3.6cm}}
+  \footnotesize
+  \begin{tabular}{L{2.1cm}L{4.1cm}L{4.4cm}L{4.5cm}}
     \toprule
-    Model & Prompt & Most useful result & Weakness or disagreement & Team adjudication \\
+    Model & Strongest useful attack & Evidence judgment & Team response and model limitation \\
     \midrule
-    Codex & P01 &
-    Returned ten candidates with live evidence URLs and warned that an omitted
-    feature is not proof of a market gap. &
-    Mixed platform-level products with state-specific applications; detailed
-    feature and price claims still required checking. &
-    Verify every product and narrow the strongest direct set to WICShopper,
-    myWIC Mosaic, and Bnft. \\
+    Codex &
+    Checkout friction does not prove demand for this exact workflow, and
+    M1--M3 may crowd out the M4-to-M0 critical path. &
+    Supported: direct demand and deployed-rival behavior remain unverified;
+    the dependency/scope risk is real. &
+    Treat WolfBite as an evaluation-first prototype and defer secondary scope
+    if needed. Codex could not directly observe users or deployed rivals. \\
     \addlinespace
-    Terra & P01 &
-    Focused on direct state WIC applications and identified geographic
-    fragmentation. &
-    Supplied source labels rather than the requested URL strings. &
-    Retain candidates corroborated elsewhere; exclude the three Terra-only
-    candidates that lacked a qualifying URL. \\
+    Terra &
+    Agencies, processors, retailers, and POS systems own the authoritative
+    evidence WolfBite lacks; the roadmap also exceeds the core mission. &
+    Supported as a structural constraint, although those institutions are not
+    direct software rivals. &
+    Keep claims non-authoritative, use fixed scenarios, and prioritize M4/M0.
+    Terra's competitor category was broader than D1's product definition. \\
     \addlinespace
-    Gemini & P01 &
-    Corroborated the three strongest rivals and several state applications with
-    relevant links. &
-    Returned seven rather than ten rows and included weakness claims not
-    established by its linked product pages. &
-    Verify product existence independently and discard the unsupported
-    weakness claims. \\
+    Gemini &
+    Five milestones are too much for roughly 160 hours, and WICShopper is
+    better positioned through program-connected data. &
+    The scope concern is supported; the absolute ``impossible'' verdict and
+    demand to abandon M1--M3 were not backed by measured estimates. &
+    Preserve the agreed milestones in bounded form with an explicit cut order
+    protecting M4/M0. \\
     \addlinespace
-    Local Ollama & P01 &
-    Identified WICShopper and exposed how a non-browsing model expands toward
-    adjacent grocery products. &
-    Included dead or irrelevant links, non-WIC products, and unsupported
-    receipt-scanning claims. &
-    Normalize WIC Shopper to WICShopper; do not count the remaining entries as
-    strong direct rivals. \\
-    \addlinespace
-    \multicolumn{5}{l}{\pending{TODO --- awaiting team input: add comparable P10 rows for all four models.}} \\
+    Local Ollama &
+    Established rivals have more development, testing, and adoption, so
+    WolfBite needs a clear differentiator. &
+    Rival maturity is real, but its claim that mismatch recovery is an edge
+    case had no prevalence evidence; it missed the detailed scope conflict. &
+    Retain the medium-confidence gap and test usefulness at M0. The output was
+    generic and its saved prompt was incomplete. \\
     \bottomrule
   \end{tabular}
 \end{table*}
 
+All four models challenged market need, feasibility, and competitors, but they
+did not produce identical conclusions. Gemini called the plan indefensible
+unless M1--M3 were removed; Codex and Terra defended a bounded prototype with a
+cut order; Ollama did not recommend a pivot. The supported team conclusion is
+that P10 found no reason to abandon WolfBite. It did require an execution
+adjustment: M4 and M0 form the critical path, M1--M3 remain bounded supporting
+work, and secondary scope must yield if the core flow or evaluation slips. The
+main remaining risk is whether participants will use non-authoritative help at
+checkout; M0 tests that question rather than assuming the answer.
+
 \subsection{Wrong Outputs and How We Caught Them}
 
 The team checked candidate identity, URL relevance, product scope, and feature
-claims separately instead of accepting model prose as evidence. This process
-caught the following concrete problems in P01:
+claims separately instead of accepting model prose as evidence. Concrete
+corrections included:
 
 \begin{itemize}
-  \item Gemini returned seven products, not the requested ten. We counted the
-  raw rows and evaluated those seven rather than inventing replacements. Its
-  claims about scanner accuracy, frequent login errors, and reinstalling were
-  not established by the supplied product listings, so those claims were not
-  used as market findings.
-  \item Terra placed source descriptions such as ``Washington State DOH'' in
-  the evidence field rather than URLs. Under the qualification rule, its
-  uncorroborated Indiana WIC, Wisconsin MyWIC, and SC WIC Mobile App entries
-  were excluded.
-  \item The local model supplied dead, irrelevant, or unsupported links for
-  FreshConnect, a generic ``WIC Mobile App,'' StoreWise, and Grocery IQ. Live
-  URL and scope checks removed them from the qualifying direct-rival set.
-  Ibotta, Fetch Rewards, Checkout 51, Out of Milk, and AnyList were verified as
-  adjacent rebate or grocery tools, not direct WIC competitors.
-  \item The local output attributed receipt scanning to Out of Milk and
-  AnyList, but the reviewed product pages did not support those claims. The
-  team discarded them rather than using them to justify a receipt feature.
-  \item An initial team note also called the local run's WICShopper URL
-  apparently fabricated and claimed zero overlap with Terra. Name normalization
-  and a live redirect check showed that ``WIC Shopper'' was WICShopper. The
-  final audit therefore credited all four models and retained it as the
-  strongest direct rival while preserving the incorrect note for transparency.
+  \item Gemini P01 returned seven products rather than ten, and its linked
+  listings did not establish its scanner, login, or reinstall-frequency claims.
+  We kept verified product identities but discarded those weaknesses.
+  \item Terra P01 supplied source labels instead of URL strings. Its
+  uncorroborated Indiana WIC, Wisconsin MyWIC, and SC WIC entries therefore
+  failed the team's evidence rule.
+  \item Live checks rejected local P01's FreshConnect, generic ``WIC Mobile
+  App,'' StoreWise, and Grocery IQ entries and reclassified several rebate/list
+  applications as adjacent. Product pages also failed to support its claimed
+  receipt scanning for Out of Milk and AnyList.
+  \item An initial team note incorrectly reported zero Terra/local overlap and
+  treated the local WICShopper URL as fabricated. Name normalization and the
+  live redirect showed the product was real, so WICShopper was credited to all
+  four models.
+  \item Gemini P10 called the full plan impossible without supplying an effort
+  breakdown, while local P10 called mismatches an edge case without prevalence
+  data. We retained both as risks to test, not verified findings; neither claim
+  overrode the inherited code evidence or the team's bounded scope decision.
 \end{itemize}
 
 These corrections prevented unsupported products and weaknesses from becoming
@@ -608,45 +612,58 @@ receipt novelty to a medium-confidence explanation-and-recovery gap.
 
 \subsection{Most and Least Useful Prompts}
 
-P01 was useful as a discovery prompt: its four runs supplied rival candidates,
-revealed the state-by-state fragmentation of WIC applications, and provided
-names for independent verification. It was not sufficient as market proof.
-Even the strongest run required feature checking, and the local run showed how
-confident but unverified links and adjacent products could distort the rival
-set. The team therefore used P01 to generate candidates, not to establish the
-final gap. \pending{TODO --- awaiting team input: compare the completed
-common-version P10 outputs before naming the final most and least useful
-prompts.}
+The most useful prompts were the custom focused-gap validation (P07) and the
+required red team (P10). P07 separated competitor absence from participant
+demand, rejected nutrition comparison and broad receipt reconciliation as the
+primary gaps, and produced the narrower medium-confidence gap. P10 independently
+exposed the demand, authority, and scope risks and led to the M4/M0 priority
+rule. P01 was essential but limited: it generated and corroborated rivals, yet
+every answer required source checking. The least useful for the final decision
+was P06's three-futures exercise. Its SAFE/BOLD/WILD concepts supported
+ideation, but speculative OCR and community directions supplied no market
+validation and did not determine the selected gap or build plan.
 
 \subsection{Model Strengths and Weaknesses}
 
-Based on P01, the models contributed different strengths and failure modes:
+Across P01 and P10, the models contributed different strengths and failure
+modes:
 
 \begin{itemize}
-  \item \textbf{Codex} supplied the most complete set of live links and an
-  explicit warning against inferring feature absence, but its broad list mixed
-  market platforms with state-specific implementations.
-  \item \textbf{Terra} stayed close to direct WIC workflows and exposed program
-  fragmentation, but its source labels did not satisfy the requested URL
-  evidence format.
-  \item \textbf{Gemini} provided relevant corroborating products and links,
-  but stopped at seven entries and attached unverified failure-frequency claims
-  to several rivals.
-  \item \textbf{Local Ollama} usefully demonstrated the risk of running market
-  discovery without browsing, but most of its list was unsupported or adjacent
-  to WIC rather than directly competitive.
+  \item \textbf{Codex} had the strongest source completeness and evidence-
+  boundary reasoning, but produced broad, verbose analyses still dependent on
+  external user and competitor validation.
+  \item \textbf{Terra} gave the strongest critique of roadmap alignment and
+  authoritative data, but its P01 evidence fields lacked URLs and its P10
+  competitor category extended beyond competing software.
+  \item \textbf{Gemini} gave the clearest, most forceful scope challenge, but
+  its P01 was incomplete and its P10 feasibility verdict was overconfident.
+  \item \textbf{Local Ollama} completed the attack structure locally and named
+  the verified rivals in P10, but its non-browsing P01 was factually weak and
+  its P10 was generic and incompletely preserved.
 \end{itemize}
 
-This disagreement improved the audit: the browsing models supplied stronger
-direct candidates, while the local model made the need for URL and scope
-verification unmistakable. \pending{TODO --- awaiting team input: revise these
-lines if the common-version P10 runs reveal additional model-specific strengths
-or weaknesses.}
+The disagreement improved the analysis without being manufactured: it exposed
+both factual verification failures and a real policy choice between removing
+M1--M3 and retaining them behind an M4/M0 scope gate.
 
 \section{Conclusion}
 
-\pending{Restate the verified gap, product decision, measurable benefit, and
-why the one-month plan is both ambitious and testable.}
+Project 1b found a medium-confidence opportunity to help WIC participants when
+an app eligibility result conflicts with checkout. WICShopper, myWIC Mosaic,
+and Bnft already cover substantial parts of the shopping workflow, so the
+proposal is limited to a documented gap in integrated, item-level explanation
+and recovery rather than a claim that competitors provide no assistance.
+
+Using four LLMs broadened rival discovery and produced useful disagreement, but
+independent checks removed unsupported products, URLs, and feature claims. The
+red-team runs did not justify a pivot; they showed that demand for this exact
+workflow and access to authoritative checkout evidence remain the central
+risks. Project 2 will therefore proceed as a bounded, simulated, evaluation-
+first extension of WolfBite. The team will protect the M4 recovery flow and M0
+comparison as the critical path, retain M1--M3 within their defined testable
+limits, and defer secondary scope if that critical path slips. The next step is to build the
+fixed scenarios and vertical slice, preserve the Project 1a regression
+baseline, and measure the proposed benefit rather than assume it.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
