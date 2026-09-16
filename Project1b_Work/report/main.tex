@@ -396,7 +396,55 @@ explanation rules, basket targets, and checkout-help cases.
 \subsection{Future: After the One-Month Project}
 
 \begin{itemize}
-  \item \pending{Add three to five credible future milestones.}
+  \item \textbf{Permissioned, versioned state APL synchronization.}
+  Replace the dated NC APL fixtures used in M4's rejection-recovery scenarios
+  with a monitored, permissioned adapter to the live state Authorized Product
+  List, recording jurisdiction, data version, refresh timestamp, and known
+  conflicts. This directly extends M4's rule-based likely-cause engine by
+  giving it real, dated evidence instead of mocked fixtures, but requires
+  state data-sharing permission and an operational update owner, which is
+  why it stays out of the one-month scope.
+
+  \item \textbf{Partner-backed read-only benefit and rejection-evidence
+  pilot.}
+  Pilot the M0/M4 checkout-help workflow using authorized participant benefit
+  and real transaction-rejection evidence from a willing WIC agency, EBT
+  processor, or retailer partner, without allowing WolfBite to approve
+  purchases, process payments, or modify benefit balances. This would let the
+  team validate whether M4's rule-based causes match real rejection reasons,
+  moving the prototype from synthetic scenarios toward evidence-backed
+  recovery guidance. It depends on securing a data-sharing agreement and a
+  confidentiality/security review with a program partner.
+
+  \item \textbf{Privacy-reviewed on-device receipt recognition and
+  reconciliation.}
+  Extend M4's item-level recovery flow with on-device receipt scanning,
+  reconciling actual purchased items and quantities against the basket and
+  benefit records without uploading a full receipt image to a third-party OCR
+  service. This responds to the receipt-privacy concern identified in the D2
+  stakeholder analysis for outside data-service providers, and requires
+  resolving device-support, receipt-format variability, and duplicate/quantity
+  matching that are out of scope for the one-month build.
+
+  \item \textbf{Spanish-language and broader accessibility validation.}
+  Add professionally reviewed Spanish-language content across the nutrition
+  explainers (M1), basket-balance suggestions (M2), redesigned interface (M3),
+  and rejection-recovery flow (M4), and validate all four against a wider
+  range of disability, literacy, language, device, and network conditions than
+  M3's baseline WCAG~2.2 Level AA pass. This extends the D2 stakeholder
+  finding that participants with disabilities or limited English proficiency
+  could be blocked by camera-only controls or unclear language, but requires
+  translation expertise and broader participant recruitment beyond the
+  one-month timeframe.
+
+  \item \textbf{Production hardening and operational release.}
+  Add the access-control testing, security review, monitoring,
+  backup/retention policies, and deployment-specific compliance work needed to
+  move WolfBite from a tested student prototype into a safely operable public
+  release, including resolving the dependency-licensing and lockfile gaps
+  identified in the Project~1a baseline audit. This milestone only becomes
+  relevant once M0's evaluation confirms the checkout-help workflow is worth
+  deploying beyond the course prototype.
 \end{itemize}
 
 \subsection{Support Material}
