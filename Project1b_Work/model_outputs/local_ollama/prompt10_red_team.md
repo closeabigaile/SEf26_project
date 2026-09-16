@@ -1,12 +1,32 @@
 Model: Llama 3 8B (Ollama, local)
 Runner: Satwi
-Date: 2026-09-11
 Prompt ID: 10 (Red Team) — re-run against finalized D2/D3 content
 
 ## Prompt
 
-[paste the exact prompt you used, including the finalized mission
-statement, milestones, and market survey]
+You are hostile to our proposal. Below: our mission statement, milestones, and market survey.
+
+Mission Statement:
+WIC participants and caregivers can face uncertainty when a product appears eligible in an app but is rejected at checkout, a setting in which participant research has documented difficulty identifying eligible foods and stigma during shopping and checkout. That conflict can add confusion and friction during a household shopping trip. We propose extending WolfBite with an item-level explanation-and-recovery workflow that connects the rejected item's UPC and package details, the participant's current benefit or food category, and available eligibility or purchase evidence. For a bounded set of mocked mismatch scenarios, the workflow will distinguish app evidence from facts that only a retailer or WIC agency can confirm, then show rule-based likely causes and actionable next steps.
+
+Milestones (Now - Project 2):
+M0: Check whether checkout help is useful - compare current flow with checkout-help feature using prepared rejection scenarios, targeting 80% success within 60 seconds, 20 points above baseline.
+M1: Better nutrition information and food-choice explainers - extend nutrition panel with units, serving amounts, and explanations.
+M2: Basket-wide suggestions for more balanced food choices - add "Basket balance" mode ranking swaps by effect on whole basket.
+M3: A clearer, more complete shopping interface - improve scan, basket, and benefits screens with consistent design and accessibility.
+M4: Add straightforward help for a rejected item - add action on basket item opening explanation and next step for package-size, category-balance, and stale-information scenarios.
+
+Market Survey:
+We identified three verified rivals: WICShopper (scanning, balances, purchase history), myWIC Mosaic (benefits, purchase tracking, scanning), and Bnft (balances, scanning, transaction history). None of these documents an integrated, item-level explanation-and-recovery workflow for cases where an app indicates a product is eligible but checkout rejects it. Our gap: WIC caregivers and participants lack a workflow connecting a rejected item's evidence to likely causes and actionable next steps.
+
+Attack on three fronts:
+1. Nobody wants it — the need is imagined.
+2. They cannot build it — the month is too short, the team too green.
+3. Someone does it better — name who.
+
+Make each attack as strong as you honestly can; no strawmen. Then, for each attack, state what evidence would defeat it. We will go collect that evidence — or concede the point and change the plan.
+
+Hard constraint: we are four graduate students with one month to build AND test the next version of this product.
 
 ## Ollama Output
 
