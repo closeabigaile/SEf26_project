@@ -15,8 +15,6 @@
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \setlength{\emergencystretch}{1.5em}
 
-\newcommand{\pending}[1]{\textit{[#1]}}
-
 \title{Project 1b}
 \acmConference[CSC 510]{CSC 510: Software Engineering}{September 2026}{Raleigh, NC}
 \acmYear{2026}
@@ -307,7 +305,24 @@ stakeholder group when there is a direct equivalent between LLMs.
 \subsection{Before: Project 1a}
 
 \begin{itemize}
-  \item \pending{Add three to five completed, evidenced milestones.}
+  \item \textbf{Set up and analyze the inherited WolfBite application.}
+  The team cloned, ran, and inspected the existing Flutter/Firebase project so
+  later decisions were based on implemented behavior rather than only the
+  product description.
+
+  \item \textbf{Map the documented behavior to the implementation.}
+  The team finalized 20 code-traceable use cases and connected their primary,
+  alternative, and exception paths to the relevant production code.
+
+  \item \textbf{Create and execute automated use-case tests.}
+  The team authored 86 tests spanning UC1--UC20. The recorded Project~1a run
+  produced 82 passes and four retained failures that became evidence for the
+  next version.
+
+  \item \textbf{Document traceability, failures, and coverage.}
+  The Project~1a report and supporting records preserve the test results,
+  failure classifications, use-case traceability, and the 77.5\%
+  executable-line coverage baseline.
 \end{itemize}
 
 \subsection{Now: One-Month Build and Test}
@@ -323,9 +338,10 @@ Benefit information and checkout rejection scenarios will remain simulated.
   \item \textbf{M0: Check whether checkout help is useful.}
   Compare the current flow with the checkout-help feature using the same
   prepared rejection scenarios. Keep D2's target: at least 80\% of trials
-  choose the reference next step within 60 seconds without help, with success
-  at least 20 percentage points above the baseline. Build a script that scores
-  trial logs and runs in CI; check it with known passing and failing examples.
+  choose the reference next step within 60 seconds without facilitator help,
+  with success at least 20 percentage points above the baseline. Build a script
+  that scores trial logs and runs in CI; check it with known passing and failing
+  examples.
   Synthetic logs test the script, not real usability. Report pilot results
   separately if volunteers are available, and record a re-plan decision if
   measured results miss the target.
@@ -384,19 +400,40 @@ Benefit information and checkout rejection scenarios will remain simulated.
   checkout decision; use this feature in M0's comparison.
 \end{itemize}
 
-Build the M0 script and M1's measurement handling in week 1, implement and test
-basket suggestions in weeks 2--3, and develop the interface and bounded
-checkout-help cases alongside them. Reserve week 4 for integration and the
-evaluation. Keep basket suggestions to one-swap previews over the mock catalog;
-multi-item optimization and personalized meal planning are outside this month.
-Add tests alongside each change, run relevant Project 1a regressions in CI,
-and document how another team can run the mock demo and extend the catalog,
-explanation rules, basket targets, and checkout-help cases.
+Build the M0 script and M1's measurement handling and define M4's fixtures and
+flow in week 1. In weeks 2--3, implement the bounded basket suggestions while
+completing M4 and targeted M3 work. Reserve week 4 for integration and the
+evaluation. M4 and M0 are the critical path; if they slip, defer M2 extensions
+and nonessential M3 polish. Keep basket suggestions to one-swap previews over
+the mock catalog; multi-item optimization and personalized meal planning are
+outside this month. Add tests alongside each change, run relevant Project 1a
+regressions in CI, and document how another team can run the mock demo and
+extend the catalog, explanation rules, basket targets, and checkout-help cases.
 
 \subsection{Future: After the One-Month Project}
 
 \begin{itemize}
-  \item \pending{Add three to five credible future milestones.}
+  \item \textbf{Permissioned, versioned state APL synchronization.}
+  Replace static eligibility fixtures with a monitored adapter that records
+  jurisdiction, version, refresh time, conflicts, and stale-state information.
+
+  \item \textbf{Partner-backed read-only evidence pilot.}
+  Evaluate recovery with authorized participant or transaction evidence without
+  approving purchases, processing payments, or modifying benefits.
+
+  \item \textbf{Privacy-reviewed on-device receipt recognition and
+  reconciliation.}
+  Use local recognition where practical, connect item and quantity evidence to
+  basket and benefit information, and retain a manual fallback.
+
+  \item \textbf{Spanish and broader accessibility validation.}
+  Add professionally reviewed Spanish content and test disability, literacy,
+  language, device, and network conditions.
+
+  \item \textbf{Production hardening and operational release.}
+  Add access-control tests, monitoring, backups, retention and deletion
+  policies, security review, and deployment-specific compliance work after
+  scope and partnerships are stable.
 \end{itemize}
 
 \subsection{Support Material}
@@ -510,9 +547,10 @@ Prompt~10. Keeper prompts are preserved in
 \path{Project1b_Work/prompts/keeper_prompts.md}, and raw transcripts are stored
 by model under \path{Project1b_Work/model_outputs/}. The Codex and Gemini P01
 records contain the exact keeper; Terra and local P01 preserve the similar
-earlier wording they received. The finalized local P10 output is usable but
-less reproducible because its transcript contains a prompt placeholder rather
-than the exact pasted text.
+earlier wording they received. The finalized Gemini and local P10 outputs are
+usable but less reproducible: Gemini's saved file omits the pasted prompt text,
+and the local transcript contains a prompt placeholder rather than the exact
+text.
 
 Prompt~1 generated candidates; it was not accepted as market proof. WICShopper
 appeared in all four outputs after name normalization, myWIC Mosaic in three,
@@ -648,22 +686,20 @@ M1--M3 and retaining them behind an M4/M0 scope gate.
 
 \section{Conclusion}
 
-Project 1b found a medium-confidence opportunity to help WIC participants when
-an app eligibility result conflicts with checkout. WICShopper, myWIC Mosaic,
-and Bnft already cover substantial parts of the shopping workflow, so the
-proposal is limited to a documented gap in integrated, item-level explanation
-and recovery rather than a claim that competitors provide no assistance.
+Project 1b identified a medium-confidence opportunity to help WIC participants
+when an app marks an item as eligible but checkout rejects it. WICShopper, myWIC
+Mosaic, and Bnft cover much of the shopping process, but our review found no
+documented item-level explanation and recovery workflow.
 
-Using four LLMs broadened rival discovery and produced useful disagreement, but
-independent checks removed unsupported products, URLs, and feature claims. The
-red-team runs did not justify a pivot; they showed that demand for this exact
-workflow and access to authoritative checkout evidence remain the central
-risks. Project 2 will therefore proceed as a bounded, simulated, evaluation-
-first extension of WolfBite. The team will protect the M4 recovery flow and M0
-comparison as the critical path, retain M1--M3 within their defined testable
-limits, and defer secondary scope if that critical path slips. The next step is to build the
-fixed scenarios and vertical slice, preserve the Project 1a regression
-baseline, and measure the proposed benefit rather than assume it.
+Using four LLMs helped us find and compare more competitors, while our own
+checks removed claims we could not verify. Prompt~10 did not give us a reason to
+change projects, but it warned that our plan may be too large for one month and
+that WolfBite cannot access official checkout data. Other milestone and
+feasibility prompts showed that the project should still be manageable if we
+use mock scenarios, set clear goals, and focus first on M4 and M0. In
+Project~2, we will follow this plan, cut lower-priority work if needed, keep our
+Project~1a tests working, and evaluate whether the checkout-help feature is
+actually useful.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
