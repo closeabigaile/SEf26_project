@@ -14,7 +14,7 @@
 | Model | Strongest attack | Evidence needed to defeat it | Team response | Weakness/error |
 |---|---|---|---|---|
 | Codex | | | | |
-| ChatGPT Terra | | | | |
+| ChatGPT Terra | Argued that WolfBite is structurally disadvantaged because state WIC agencies, EBT processors, retailers, and POS systems control the authoritative eligibility, balance, and transaction data that WolfBite lacks. | A jurisdiction-specific competitor audit, evidence that authoritative systems do not provide useful rejection explanations, a credible future integration/data path, and comparative testing showing WolfBite improves users' next-step decisions. | Keep WolfBite positioned as a bounded prototype that explains possible causes rather than claiming authoritative checkout decisions; use fixed mismatch scenarios and evaluate whether the recovery workflow actually improves task success. | Terra broadened the competitor attack beyond user-facing apps to agencies, EBT processors, retailers, and POS systems. This is a useful structural threat, but those systems are not directly comparable products in the same sense as WICShopper, myWIC Mosaic, or Bnft. |
 | Gemini | | | | |
 | Local Ollama | | | | |
 
