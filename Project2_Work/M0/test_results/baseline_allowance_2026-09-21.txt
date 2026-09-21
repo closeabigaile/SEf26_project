@@ -1,0 +1,9 @@
+00:00 +0: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/aditya_uc6-10_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: UC8 - Add product to basket UC8-T1 identified covered product -> basket and usage increment
+00:00 +1: UC8 - Add product to basket UC8-T2 exhausted allowance -> unchanged basket and usage
+00:00 +2: UC8 - Add product to basket UC8-T3 existing UPC -> quantity flow without duplicate line
+00:00 +3: UC8 - Add product to basket UC8-T4 signed-out shopper -> rejected unchanged basket
+00:00 +4: UC8 - Add product to basket UC8-T5 raw category -> canonical in-memory basket state
+00:00 +5: (tearDownAll)
+00:00 +5: All tests passed!

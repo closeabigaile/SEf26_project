@@ -1,0 +1,42 @@
+00:00 +0: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart
+00:00 +0: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:00 +1: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_quantity_reaching_zero_removes_selection
+00:00 +2: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_paid_quantity_is_decreased_before_covered_quantity
+00:00 +3: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_missing_product_causes_no_quantity_change
+00:00 +4: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_benefit_usage_does_not_go_below_zero
+00:00 +5: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_removes_all_products_and_reverses_usage
+00:00 +6: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_reverses_usage_across_multiple_categories
+00:00 +7: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_missing_category_balance_still_removes_product
+00:00 +8: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC17 — Clear basket test_uc17_clear_does_not_make_usage_negative
+00:00 +9: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:00 +10: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_usage_at_allowance_shows_full_progress
+00:00 +11: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC19 — Prepare checkout handoff test_uc19_qr_code_contains_current_basket_data
+00:00 +12: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/supreme_uc16-20_test.dart: UC20 — Finish shopping session test_uc20_checkout_clears_basket_but_retains_benefit_usage
+00:00 +13: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart
+00:00 +13: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_multiple_recognized_products_are_each_added
+00:00 +14: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_duplicate_recognized_upc_increments_but_addition_count_is_undercounted
+00:00 +15: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC11 — Add receipt products (state-level) test_uc11_product_without_nutrition_uses_zero_defaults
+00:00 +16: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:01 +17: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_empty_basket_shows_empty_state
+00:01 +18: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_covered_and_paid_lines_for_same_upc_display_separately
+00:01 +19: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_expanding_item_shows_nutrition_facts
+00:01 +20: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_missing_nutrition_map_shows_zero_defaults
+00:01 +21: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_collapsing_hides_nutrition_facts
+00:01 +22: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC14 — Increase product quantity test_uc14_increase_button_calls_increment_when_under_cap
+00:01 +23: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC14 — Increase product quantity test_uc14_increase_button_still_active_at_cap_and_reports_paid_intent
+00:01 +24: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_increment_at_cap_creates_separate_paid_line
+00:01 +25: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_second_paid_request_increments_existing_paid_line
+00:01 +26: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/project1a/satwi_uc11-15_test.dart: UC15 — Add shopper-paid quantity (state-level) test_uc15_paid_category_has_no_allowance_cap_confirming_unlimited_display
+00:01 +27: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart
+00:01 +27: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions available allowance increments quantity and covered usage
+00:01 +28: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions missing covered product leaves quantity and usage unchanged
+00:01 +29: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC14 and UC15 quantity transitions missing original product cannot create a shopper-paid line
+00:01 +30: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC8 accepted addition persists basket and benefit usage
+00:01 +31: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC14 quantity increase persists quantity and covered usage
+00:01 +32: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC16 quantity decrease persists quantity and released usage
+00:01 +33: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: Persisted basket mutations UC17 clear persists empty basket and reversed usage
+00:01 +34: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:02 +35: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation confirming clear invokes the state transition once
+00:02 +36: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC20 persisted checkout state checkout saves an empty basket and retains used benefits
+00:02 +37: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/active/project1a_coverage_gaps_test.dart: UC20 persisted checkout state save failure leaves the local basket cleared and reports failure
+00:02 +38: All tests passed!
