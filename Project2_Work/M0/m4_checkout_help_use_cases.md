@@ -1,5 +1,7 @@
 # M0/M4 Shared Checkout-Help Use Cases
 
+**Status:** Scenarios accepted by Abigail, owner of M0 and M4. Shared specification ready for M4 implementation; feature behavior and user usefulness remain unverified.
+
 **Related findings:** [M0 Checkout-Help Findings](m0_checkout_help_findings.md)
 
 ## Purpose and Scope
@@ -87,12 +89,12 @@ The explanation identifies a possible shortfall. Returning from help does not re
 
 **Goal:** Help the shopper recognize that outdated information prevents a confident explanation of the rejection.
 
-“Stale” means the available product or benefit information is too old to rely on under an agreed freshness rule. It does not mean the food is expired or prove why checkout rejected it.
+“Stale” means the available product or benefit information is too old to rely on under the shared mock freshness rule. It does not mean the food is expired or prove why checkout rejected it.
 
 **Preconditions:**
 
 * The affected item remains in the basket after a scripted rejection.
-* Mock product or benefit evidence is explicitly outside the freshness window agreed by M0 and M4.
+* Mock product or benefit evidence has an explicit `outdated` freshness status. `current` means usable for this example; `unknown` or a missing status does not establish staleness. These are fixture statuses, not a live timestamp policy.
 * No verified current replacement information is available.
 * The outdated evidence cannot reliably establish a package-size mismatch or balance shortfall.
 
@@ -148,14 +150,15 @@ These are requirements for future tests, not reported test results. The example 
 * [ ] Each scenario and the fallback are tested through the complete basket-item → help → return-to-basket flow.
 * [ ] Basket contents, quantities, payment classifications, and benefit usage are unchanged after opening and closing help in every case.
 
-## Decisions to Confirm with M0
+## Shared Scenario Decisions
 
-* How the scenario represents rejection or an unsupported item while keeping that item in the basket.
-* The mock package-size fields, units, and the synthetic 24 oz versus 18 oz rule.
-* How remaining balance accounts for other allocations without counting the affected item twice, and how its original category is identified.
-* The freshness window and fixed evaluation time used by tests; import/write timestamps alone do not establish source verification.
-* How conflicting evidence is handled. The three primary examples intentionally isolate one cause.
+* **Rejection:** Supply a scripted rejection or unsupported indication with the affected item still in the basket. No live checkout response is required.
+* **Package size:** Use 24 oz selected versus 18 oz permitted, with matching units, sufficient balance, and current evidence. These are synthetic rules.
+* **Balance:** Use one unit required and zero available after other allocations. The affected item has no covered allocation; retain its original benefit category even if marked `PAID`.
+* **Freshness:** Mock records use `current`, `outdated`, or `unknown`. Only explicit `outdated` evidence supports the stale-information explanation. This scope does not require an age threshold or live source verification.
+* **Fallback:** Missing or conflicting evidence that cannot support one clear explanation produces “Unable to determine.” Outdated evidence must not support a definite package-size or balance diagnosis.
+* **Shared reference:** This document is the specification for both M4 feature tests and M0's later evaluation. Keep scenario IDs and next steps aligned with the [M0 findings](m0_checkout_help_findings.md).
 
-Keep scenario evidence and next steps aligned with the [M0 findings](m0_checkout_help_findings.md) when these decisions are made. M0 owns the later baseline comparison and scoring checks; they are not part of implementing these use cases.
+M0 owns the later baseline comparison and scoring checks. Their timing and scoring details are outside Task 1 and do not block implementation of these use cases.
 
 Participant testing was not conducted, and user usefulness remains unverified. This document does not establish that M4 is implemented, its tests pass, or the M0 evaluation targets have been met.
