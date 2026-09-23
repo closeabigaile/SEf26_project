@@ -6,6 +6,8 @@ M0 evaluates whether checkout help improves a shopper's ability to identify the 
 
 **Task 1 documentation is complete:** Abigail, owner of both milestones, accepted the three shared scenarios below. The companion [M0/M4 use-case specification](m4_checkout_help_use_cases.md) provides the detailed interaction flows and M4 acceptance criteria.
 
+The current final evaluation status, including passed checks, unverified targets, limitations, and needed changes, is recorded in [M0 Evaluation Results and Limitations](m0_evaluation_results.md).
+
 These scenarios use mock records and simulated rejection. A live Approved Product List (APL) or working scanner is not required to define them.
 
 ## 2. Current Behavior and What M4 Adds
