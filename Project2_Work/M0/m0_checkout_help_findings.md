@@ -4,6 +4,12 @@
 
 M0 evaluates whether checkout help improves a shopper's ability to identify the expected next step after an item is rejected. M4 builds that help.
 
+### Measurable Hypothesis
+
+Compared with the current WolfBite checkout flow, M4 checkout help will enable at least 80% of evaluation trials to identify the expected next step after a rejected item within 60 seconds and without outside assistance. This success rate will be at least 20 percentage points higher than the baseline rate.
+
+The metric is the percentage of successful trials. The current WolfBite checkout flow is the baseline condition, and the M4 checkout-help flow is the comparison condition. A successful trial requires the expected next step to be identified within an inclusive 60-second limit and without outside assistance.
+
 **Task 1 documentation is complete:** Abigail, owner of both milestones, accepted the three shared scenarios below. The companion [M0/M4 use-case specification](m4_checkout_help_use_cases.md) provides the detailed interaction flows and M4 acceptance criteria.
 
 The current final evaluation status, including passed checks, unverified targets, limitations, and needed changes, is recorded in [M0 Evaluation Results and Limitations](m0_evaluation_results.md).
@@ -130,4 +136,4 @@ Relevant baseline checks include:
 
 Run relevant baseline, M4 feature, and scoring checks during later tasks. The [CI workflow](../../.github/workflows/flutter-ci.yml) currently points at `Project2` rather than `Project3` and targets `main`; review this when setting up automated checks.
 
-**Evaluation status:** No tests were run or scoring script created as part of this documentation task. Participant testing was not conducted, and user usefulness remains unverified. Task 1 completion does not mean that M4 is implemented or that M0's evaluation targets have passed.
+**Evaluation status:** Relevant baseline tests passed locally. The Task 3 scoring script and synthetic fixtures produce the expected passing and failing calculations, and the scorer's automated tests pass locally. A scoring-specific GitHub Actions workflow has been added; its remote run remains pending until these changes are pushed. Participant testing was not conducted, user usefulness remains unverified, and M4 has not been implemented.

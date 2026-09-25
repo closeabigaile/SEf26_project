@@ -1,0 +1,47 @@
+name: M0 Checkout Trial Scoring
+
+# Run this workflow whenever the M0 scorer, its data, its documentation, or
+# this workflow changes. A pull request to any branch also runs the same check.
+on:
+  push:
+    paths:
+      - "Project2_Work/M0/**"
+      - ".github/workflows/m0-scoring.yml"
+  pull_request:
+    paths:
+      - "Project2_Work/M0/**"
+      - ".github/workflows/m0-scoring.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  scoring-tests:
+    name: Test M0 scoring instrument
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    defaults:
+      run:
+        working-directory: Project2_Work/M0
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run scoring unit tests
+        run: python3 -m unittest -v test_evaluate_checkout_trials.py
+
+      - name: Demonstrate known passing example
+        run: python3 evaluate_checkout_trials.py trial_data/passing_example.json
+
+      # This command should print an evaluation result of FAIL. That is a
+      # successful demonstration because it proves the instrument can report
+      # unmet requirements. The unit tests verify the exact failing numbers.
+      - name: Demonstrate known failing example
+        run: python3 evaluate_checkout_trials.py trial_data/failing_example.json
