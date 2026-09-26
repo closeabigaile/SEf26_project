@@ -60,13 +60,21 @@ flutter test test/screens/qr_checkout_screen_test.dart test/screens/basket_scree
 
 Use new output filenames for future runs to preserve this evidence.
 
+## September 26 CI Verification
+
+The same three baseline selections passed in [M0 Checkout Baseline, run 36263549665](https://github.com/closeabigaile/SEf26_project/actions/runs/36263549665) for commit `e628c4150b553d1b91f7500b1353912a28978500` on `M0-evaluate-checkout-help`. All three test steps and report upload completed successfully. The 50 tests also passed in a clean temporary local copy before the push.
+
+The [dedicated baseline workflow](../../.github/workflows/m0-checkout-baseline.yml) uses Ubuntu, Flutter `3.47.2`, the `Project3` working directory, and committed dependency versions installed with `flutter pub get --enforce-lockfile`. Its report artifact is named `m0-checkout-baseline-results`. This supplements the September 21 local evidence above; those original logs are preserved.
+
+The workflow runs on pushes and pull requests that change `Project3/**`, `Project2_Work/M0/**`, or the workflow itself. To inspect a run, open GitHub **Actions → M0 Checkout Baseline → Test M0 checkout baseline**, then expand the three test steps. The run summary also contains the downloadable reports.
+
 ## Limitations and Remaining Work
 
 * **Passing tests do not mean all checkout behavior is correct.** In particular, the save-failure test expects an exception and a locally cleared basket. It does not prove recovery or a shopper-facing error message. Review this behavior separately before treating checkout persistence as robust.
 * **QR coverage is limited.** The QR tests assert widget presence, not exact encoded basket data, cashier scanning, or a complete Finish Transaction button/navigation interaction. The inherited QR test's replacement `checkout` method resets usage, unlike production; its render-only test does not verify production checkout behavior.
 * **M4 scenarios are not covered yet.** Package-size explanations, balance-help explanations, stale-information handling, the fallback, and returning from help to an unchanged basket still need M4 feature tests using the [shared use cases](m4_checkout_help_use_cases.md).
-* **CI was not run.** The existing [workflow](../../.github/workflows/flutter-ci.yml) points at `Project2`, while the application is in `Project3`. CI configuration and remote execution remain separate work.
+* **CI covers this selection only.** The dedicated M0 baseline workflow passes. The legacy [full-application workflow](../../.github/workflows/flutter-ci.yml) still points at `Project2` and needs separate review.
 * **This was a selected baseline run, not the full application suite.** No code fixes were required to get these selected tests to pass.
 * **Participant testing was not conducted, and user usefulness remains unverified.** These results do not establish the 60-second, 80% success, or 20-percentage-point improvement targets.
 
-**Task 2 status:** The local baseline-checkout portion is complete and recorded. M4 feature verification remains pending until M4 is implemented; the full milestone also requires the relevant checks to pass in CI.
+**Task 2 status:** The baseline-checkout portion is complete locally and in CI. M4 feature verification, including its CI checks, remains pending until M4 is implemented.

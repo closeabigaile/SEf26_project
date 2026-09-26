@@ -87,7 +87,7 @@ The 13 tests check the known examples, the inclusive 60-second boundary, incorre
 
 ## Continuous Integration
 
-`.github/workflows/m0-scoring.yml` runs the same tests and both examples in GitHub Actions. A successful remote workflow run still needs to be confirmed after these files are committed and pushed.
+`.github/workflows/m0-scoring.yml` runs the same tests and both examples in GitHub Actions. [Run 36263549773](https://github.com/closeabigaile/SEf26_project/actions/runs/36263549773) completed successfully on September 26, 2026, for commit `e628c4150b553d1b91f7500b1353912a28978500`. The selected Flutter baseline tests run separately in `.github/workflows/m0-checkout-baseline.yml`.
 
 ## Limitations
 
