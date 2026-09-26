@@ -1,6 +1,8 @@
 # Miscellaneous
 *.class
 *.lock
+# Keep the application dependency versions reproducible in checkout CI.
+!pubspec.lock
 *.log
 *.pyc
 *.swp

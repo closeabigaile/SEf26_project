@@ -1,0 +1,76 @@
+name: M0 Checkout Baseline
+
+# Run the selected checkout baseline on any branch when its inputs change.
+on:
+  push:
+    paths:
+      - "Project3/**"
+      - "Project2_Work/M0/**"
+      - ".github/workflows/m0-checkout-baseline.yml"
+  pull_request:
+    paths:
+      - "Project3/**"
+      - "Project2_Work/M0/**"
+      - ".github/workflows/m0-checkout-baseline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checkout-baseline:
+    name: Test M0 checkout baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: Project3
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.47.2"
+
+      - name: Install locked dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Prepare test reports
+        run: mkdir -p build/m0-baseline-results
+
+      - name: Test team checkout and basket behavior (38 tests)
+        run: >-
+          flutter test
+          test/project1a/supreme_uc16-20_test.dart
+          test/project1a/satwi_uc11-15_test.dart
+          test/active/project1a_coverage_gaps_test.dart
+          --no-pub --concurrency=1 --reporter expanded
+          --file-reporter expanded:build/m0-baseline-results/team.txt
+
+      - name: Test UC8 addition and allowance behavior (5 tests)
+        run: >-
+          flutter test test/project1a/aditya_uc6-10_test.dart
+          --plain-name 'UC8 - Add product to basket'
+          --no-pub --concurrency=1 --reporter expanded
+          --file-reporter expanded:build/m0-baseline-results/allowance.txt
+
+      - name: Test inherited QR checkout and basket screens (7 tests)
+        run: >-
+          flutter test
+          test/screens/qr_checkout_screen_test.dart
+          test/screens/basket_screen_test.dart
+          --no-pub --concurrency=1 --reporter expanded
+          --file-reporter expanded:build/m0-baseline-results/inherited.txt
+
+      - name: Upload baseline test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m0-checkout-baseline-results
+          path: Project3/build/m0-baseline-results/*.txt
+          if-no-files-found: warn
