@@ -36,7 +36,7 @@
       },
       "expected_help": {
         "possible_cause": "package_size_mismatch",
-        "explanation": "Possible cause: this package is 24 oz, while the benefit information available here lists an 18 oz package. This may explain the rejection; it is not the checkout system's official reason.",
+        "explanation": "Possible cause: this package is 24 oz, while the benefit information available here lists a permitted package size of 18 oz. This may explain the rejection; it is not the checkout system's official reason.",
         "suggested_next_step": "Check the package label against current benefit information and look for an otherwise eligible 18 oz package."
       }
     },
