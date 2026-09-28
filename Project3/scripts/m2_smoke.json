@@ -1,0 +1,9 @@
+[
+  {
+    "upc": "M2_TEST_20260927",
+    "name": "TEST ONLY - M2 Firestore write check",
+    "category": "TEST_M2",
+    "eligible": false,
+    "foodNutrients": []
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "asOf": "2026-09-27",
+  "basketUpcs": ["V1"],
+  "context": {
+    "mode": "bodybuilding",
+    "lifeStage": "adult",
+    "training": true,
+    "targets": {
+      "lifeStage": "adult",
+      "sourceUrl": "https://example.org/test-target",
+      "caloriesPerDay": 1500,
+      "proteinGramsPerDay": 90,
+      "sodiumMgMaxPerDay": 2300
+    }
+  }
+}

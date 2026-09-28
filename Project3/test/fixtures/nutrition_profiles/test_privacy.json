@@ -1,0 +1,6 @@
+{
+  "testProfile": "TEST PROFILE 1 - privacy shopper",
+  "asOf": "2026-09-27",
+  "basketUpcs": ["FDC1101639"],
+  "context": {"mode": "privacy", "lifeStage": "unknown"}
+}

@@ -1,0 +1,6 @@
+upc,pricePerServing,priceObservedAt,priceSourceUrl,priceMappingNote
+FDC1103193,0.25,2026-09-27,https://business.walmart.com/ip/Fresh-Carrots-2-lb-Bag/10535757,2.26 USD per 907 g bag approximated as 100 g edible scenario portion; excludes trimming loss
+FDC1100185,0.28,2026-09-27,https://business.walmart.com/ip/Great-Value-Cage-Free-Large-White-Eggs-12-Count/421705528,1.67 USD per 12 large eggs; two eggs approximated as 100 g edible portion
+FDC1100379,0.33,2026-09-27,https://business.walmart.com/ip/Great-Value-No-Salt-Added-Canned-Black-Beans-15-oz-Can/39778876,0.92 USD per 425 g can scaled to 150 g scenario portion; generic reduced-sodium nutrition is not the exact no-salt product
+FDC1100761,0.43,2026-09-27,https://business.walmart.com/ip/Sam-s-Choice-Whole-Wheat-Greek-Style-Pita-16-8-oz-6-Count/673661845,2.58 USD per six pitas; one pita approximately 80 g
+FDC1101631,0.07,2026-09-27,https://business.walmart.com/ip/Great-Value-Natural-Brown-Long-Grain-Rice-2-lbs/347659037,1.37 USD per about 20 dry servings; one cooked serving approximated as 150 g
