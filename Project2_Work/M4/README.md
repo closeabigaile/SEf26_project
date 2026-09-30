@@ -1,6 +1,11 @@
-# M4 Checkout-Help Mock Cases
+# M4 Checkout Help
 
-Issue 1 prepares **mock data and expected messages only**. The four records are in
+**Current implementation:** see the [Issue 3 frontend and demo guide](issue3_frontend.md).
+The basket provides per-item help and a separate read-only sample basket using
+the same action and dialog. All 139 M4 tests pass locally. Real evidence-provider integration and CI verification
+remain outstanding.
+
+Issue 1 prepared **mock data and expected messages only**. The four records are in
 [checkout_help_scenarios.json](../../Project3/assets/mock/checkout_help_scenarios.json)
 and follow the accepted [M0/M4 shared use cases](../M0/m4_checkout_help_use_cases.md).
 The three primary scenario IDs and the additional fallback ID are unchanged.
@@ -26,9 +31,9 @@ detecting a real checkout rejection.
 * Verified that every expected explanation and next step matches the shared M0
   wording and that the documentation links resolve.
 
-Issue 1's data and documentation are complete. These checks validate the mock
-records; they are not M4 feature-test or CI results. Checkout-help logic,
-frontend behavior, and their automated tests remain work for later issues.
+Issue 1's data and documentation are complete. Those checks validate the mock
+records; they are not M4 feature-test or CI results. See the Issue 4 section
+below for the service tests added after Issue 2's logic implementation.
 
 ## Prepared Cases
 
@@ -40,8 +45,8 @@ frontend behavior, and their automated tests remain work for later issues.
 | M0-M4-F01: Unable to determine | An identified cereal item, but missing package-size rules and balance details; freshness is `unknown`. | Say that the cause cannot be determined; suggest checking with the cashier and consulting current benefit information. |
 
 Each record's `expected_help` contains the complete explanation and next step
-from the shared M0 specification. These are expected outputs for later tests,
-not results returned by implemented logic. F01 instantiates the shared
+from the shared M0 specification. These are expected outputs for tests,
+not answers copied by the implemented logic. F01 instantiates the shared
 missing-evidence fallback; additional ambiguous/conflicting variants belong in
 later tests.
 
@@ -91,25 +96,27 @@ print(json.dumps(case, indent=2))
 PY
 ```
 
-For Issue 2, decode this JSON and pass a case's `input.item` and `input.benefit`
-to the future checkout-help logic. Use the records as evidence; do not choose
+Decode this JSON and pass a case's `input.item` and `input.benefit`
+to `CheckoutHelpService.explain`. Use the records as evidence; do not choose
 the answer from `scenario_id` or return `expected_help` as the implementation.
-Later tests can compare the computed result with `expected_help`. Decode a fresh
+The service tests compare the computed result with `expected_help`. Decode a fresh
 copy for each test so mutations cannot affect another case.
 
 For Flutter tests run from `Project3`, the relative file path is
 `assets/mock/checkout_help_scenarios.json`. The file is located under assets so
-Issue 3 can register it in `pubspec.yaml` and load it for the prepared frontend
-demonstration. **It is not registered or loaded by the app in Issue 1.** These
-evidence records are not direct replacements for `AppState` basket or balance
-maps; later integration must map the selected mock item deliberately and must
-not overwrite real user data or treat an arbitrary item as one of these cases.
+the basket integration registers it in `pubspec.yaml` and loads it for the
+prepared frontend demonstration. These evidence records are not replacements
+for `AppState` basket or balance maps. The repository requires explicit synthetic
+linkage and matching identity, quantity, and classifications before using a
+scenario for a basket line. Ordinary basket items receive the fallback until a
+verified evidence provider is connected. The sample basket never adds records
+to the shopper's basket.
 
 The mock records do not have the trial-outcome fields used by M0's scoring
 script. Do not pass this file to `evaluate_checkout_trials.py`; that script
 continues to use its separate trial records.
 
-## Scope and Later Work
+## Original Issue 1 Scope and Later Work
 
 * Issue 2 implements the checkout-help rules.
 * Issue 3 implements the basket action, help dialog/panel, and close behavior.
@@ -123,3 +130,59 @@ continues to use its separate trial records.
 
 Participant testing was not conducted. Feature behavior and user usefulness
 remain unverified by this data-preparation task.
+
+## Issue 4: Local Automated Tests
+
+**Local completion verified on 2026-09-29:** all 139 M4 tests and the existing
+50-test M0 baseline pass. See [Issue 4 verification](issue4_test_results.md)
+for the acceptance checklist, fresh logs, commands, and CI scope distinction.
+
+**Latest frontend results:** [Issue 3 frontend and demo guide](issue3_frontend.md).
+The earlier [implementation and validation](implementation_results.md)
+records fixes for all six M4 failures found by the earlier
+[adversarial review](checkout_help_test_review.md). All nine review checks now
+pass, along with the original service tests and new integration checks.
+The earlier review is preserved as a record of the findings before these fixes.
+
+The service portion is implemented in
+[checkout_help_service_test.dart](../../Project3/test/services/checkout_help_service_test.dart).
+Run it from `Project3` with:
+
+```bash
+flutter test --no-pub test/services/checkout_help_service_test.dart --concurrency=1 --reporter expanded
+```
+
+Use `flutter pub get` first if dependencies have not already been installed.
+The service tests read the JSON file directly, so app asset registration is not
+required for this suite.
+
+Local validation on 2026-09-27: **102 service tests passed**, expanded from the
+initial 62 tests. The **50-test M0 baseline also passed without regression**.
+See [Issue 4 local test results](issue4_test_results.md) for commands, raw logs,
+failures found and resolved, and completed widget/state coverage. The service suite covers:
+
+* All three shared causes and the fallback, comparing all three result fields
+  against the fixture's complete expected messages.
+* Unchanged inputs, including nested read-only maps and repeated calls.
+* Other categories, sizes, matching measurement units, and benefit amounts;
+  original category retention for a `PAID` line; and independence from IDs and
+  expected-answer fields.
+* Equal/sufficient balances, competing causes, explicit versus unknown
+  freshness, missing fields, conflicting categories, incompatible size units,
+  malformed values, and unsupported allocation/replacement evidence.
+* Smaller-than-permitted packages, text normalization, numeric strings and
+  booleans, whole-number doubles, negative floating-point zero, very large
+  finite numbers, and independence between consecutive calls.
+
+The size-mismatch fixture now uses the approved general wording, “lists a
+permitted package size of 18 oz,” instead of “lists an 18 oz package.” Its
+meaning and next step remain consistent with the shared M0/M4 specification.
+The test compares this expected text directly, without rewriting it at runtime.
+
+The original 102 tests cover the service. The added
+[widget and state tests](../../Project3/test/screens/checkout_help_screen_test.dart)
+now verify opening and closing help for all four scenarios, selected-item
+identity, unchanged basket and benefit state, and protection against stale or
+mismatched evidence. See the latest report for commands and limitations.
+Real-data integration, participant usefulness, and CI success are not established
+by these local tests. Issue 5 still owns CI verification.

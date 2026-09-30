@@ -191,7 +191,6 @@ class AppState extends ChangeNotifier {
     return true; // uncapped
   }
 
-
   /// Checks if the last update was in a previous month/year compared to now.
   bool _isNewMonth(Timestamp? lastUpdate) {
     if (lastUpdate == null) return false; // No history, assume fresh
@@ -210,7 +209,6 @@ class AppState extends ChangeNotifier {
     _persist();
     notifyListeners();
   }
-
 
   // ---------- Firestore I/O ----------
 
@@ -262,19 +260,33 @@ class AppState extends ChangeNotifier {
                 'upc': (m['upc'] ?? '').toString(),
                 'name': (m['name'] ?? '').toString(),
                 'category': cat,
+                // Keep the original category separate from the PAID label.
+                // Old paid records without it remain unknown; do not invent it.
+                if (m['original_benefit_category'] is String)
+                  'original_benefit_category': _canon(
+                    m['original_benefit_category'] as String,
+                  )
+                else if (cat != 'PAID')
+                  'original_benefit_category': cat,
+                if (m['checkout_help_source'] == 'synthetic' &&
+                    m['checkout_help_scenario_id'] is String) ...{
+                  'checkout_help_source': 'synthetic',
+                  'checkout_help_scenario_id': m['checkout_help_scenario_id'],
+                },
                 'qty': (m['qty'] is int) ? m['qty'] as int : 1,
-                'nutrition': m['nutrition'] as Map<String, dynamic>? ??
-                  const {
-                    'calories': 0.0,
-                    'totalFat': 0.0,
-                    'saturatedFat': 0.0,
-                    'transFat': 0.0,
-                    'sodium': 0.0,
-                    'sugar': 0.0,
-                    'addedSugar': 0.0,
-                    'protein': 0.0,
-                    'fiber': 0.0,
-                  },
+                'nutrition':
+                    m['nutrition'] as Map<String, dynamic>? ??
+                    const {
+                      'calories': 0.0,
+                      'totalFat': 0.0,
+                      'saturatedFat': 0.0,
+                      'transFat': 0.0,
+                      'sodium': 0.0,
+                      'sugar': 0.0,
+                      'addedSugar': 0.0,
+                      'protein': 0.0,
+                      'fiber': 0.0,
+                    },
               };
             }),
           );
@@ -285,7 +297,6 @@ class AppState extends ChangeNotifier {
           print("📅 New month detected! Resetting balances...");
           _resetMonthlyUsage();
         }
-
       }
     } finally {
       _balancesLoaded = true;
@@ -375,24 +386,26 @@ class AppState extends ChangeNotifier {
     }
 
     // Generate nutritional data if not provided
-    final nutritionData = nutrition ??
-    const {
-        'calories': 0.0,
-        'totalFat': 0.0,
-        'saturatedFat': 0.0,
-        'transFat': 0.0,
-        'sodium': 0.0,
-        'sugar': 0.0,
-        'addedSugar': 0.0,
-        'protein': 0.0,
-        'fiber': 0.0,
-    };
+    final nutritionData =
+        nutrition ??
+        const {
+          'calories': 0.0,
+          'totalFat': 0.0,
+          'saturatedFat': 0.0,
+          'transFat': 0.0,
+          'sodium': 0.0,
+          'sugar': 0.0,
+          'addedSugar': 0.0,
+          'protein': 0.0,
+          'fiber': 0.0,
+        };
 
     basket.add({
       'upc': upc,
       'name': name,
       'category': cat,
       'qty': 1,
+      'original_benefit_category': cat,
       'nutrition': nutritionData,
     });
     balances[cat]!['used'] = (balances[cat]!['used'] ?? 0) + 1;
@@ -477,6 +490,8 @@ class AppState extends ChangeNotifier {
             'name': wicItem['name'],
             'category': paidCategory,
             'qty': 1,
+            'original_benefit_category':
+                wicItem['original_benefit_category'] ?? originalCat,
             'nutrition': wicItem['nutrition'], // Shared nutrition data
           });
           balances[paidCategory]!['used'] =
@@ -580,5 +595,4 @@ class AppState extends ChangeNotifier {
     _persist();
     notifyListeners();
   }
-
 }
