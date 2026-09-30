@@ -11,6 +11,8 @@ on:
     paths:
       - "Project2_Work/M0/**"
       - ".github/workflows/m0-scoring.yml"
+  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read

@@ -1,0 +1,75 @@
+name: M4 Checkout Help Verification
+
+# Run the complete M4 acceptance selection on the same commit, including M0.
+on:
+  push:
+    paths:
+      - "Project3/**"
+      - "Project2_Work/M0/**"
+      - "Project2_Work/M4/**"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "Project3/**"
+      - "Project2_Work/M0/**"
+      - "Project2_Work/M4/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m4-tests:
+    name: M4 ${{ matrix.suite }} tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: unit
+            files: >-
+              test/services/checkout_help_service_test.dart
+              test/services/checkout_help_precision_test.dart
+              test/services/checkout_help_repository_test.dart
+              test/m4_review/checkout_help_adversarial_test.dart
+          - suite: widget
+            files: >-
+              test/screens/checkout_help_screen_test.dart
+              test/m4_review/checkout_help_basket_acceptance_test.dart
+    defaults:
+      run:
+        working-directory: Project3
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.47.2"
+      - name: Install locked dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Prepare test reports
+        run: mkdir -p build/m4-results
+      - name: Run M4 ${{ matrix.suite }} tests
+        run: >-
+          flutter test ${{ matrix.files }}
+          --no-pub --concurrency=1 --timeout 30s --reporter expanded
+          --file-reporter expanded:build/m4-results/${{ matrix.suite }}.txt
+      - name: Upload M4 ${{ matrix.suite }} results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m4-${{ matrix.suite }}-results
+          path: Project3/build/m4-results/*.txt
+          if-no-files-found: warn
+
+  m0-baseline:
+    name: M0 checkout baseline
+    uses: ./.github/workflows/m0-checkout-baseline.yml
+
+  m0-scoring:
+    name: M0 scoring checks
+    uses: ./.github/workflows/m0-scoring.yml
