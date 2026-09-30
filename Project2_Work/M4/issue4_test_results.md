@@ -1,5 +1,9 @@
 # M4 Issue 4: Local Automated Testing Verification
 
+> Follow-up: [Issue 5](issue5_verification_results.md) now records successful CI
+> and the final walkthrough. The local verification below is preserved as the
+> Issue 4 record; its statements about pending CI describe that earlier stage.
+
 Verified on **2026-09-29** against the current working tree on
 `M4_implementation_CHeckout_help`, based on commit `35c3ece` and including
 uncommitted implementation and test files. Flutter 3.47.2 stable, Dart 3.13.2,

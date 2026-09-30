@@ -1,0 +1,19 @@
+Dataset: Known failing synthetic example
+Data source: SYNTHETIC
+
+Baseline: 3/5 successful (60.0%)
+M4: 3/5 successful (60.0%)
+Improvement: 0.0 percentage points
+
+80% success requirement: FAIL
+20-percentage-point improvement requirement: FAIL
+Overall result: FAIL
+
+Unsuccessful trials:
+- failing-baseline-04: expected next step was not identified
+- failing-baseline-05: elapsed time was 64 seconds (limit: 60)
+- failing-m4-04: expected next step was not identified
+- failing-m4-05: elapsed time was 61 seconds (limit: 60)
+
+Note: These records are synthetic examples, not participant results.
+They do not establish actual usefulness to real users.

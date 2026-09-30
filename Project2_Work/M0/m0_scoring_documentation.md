@@ -91,4 +91,4 @@ The 13 tests check the known examples, the inclusive 60-second boundary, incorre
 
 ## Limitations
 
-Participant testing was not conducted. M4 has not been implemented, and actual usefulness to real users remains unverified. The synthetic examples only demonstrate that the scoring instrument calculates known passing and failing results correctly.
+Participant testing was not conducted. M4 is implemented and its automated checks pass; see [M4 Issue 5](../M4/issue5_verification_results.md) for the latest combined CI run, including the scorer. Actual usefulness to real users remains unverified. The synthetic examples only demonstrate that the scoring instrument calculates known passing and failing results correctly.

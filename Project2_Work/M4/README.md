@@ -2,8 +2,10 @@
 
 **Current implementation:** see the [Issue 3 frontend and demo guide](issue3_frontend.md).
 The basket provides per-item help and a separate read-only sample basket using
-the same action and dialog. All 139 M4 tests pass locally. Real evidence-provider integration and CI verification
-remain outstanding.
+the same action and dialog. All 139 M4 tests pass locally and their CI jobs pass on the tested commit.
+See [Issue 5 final verification](issue5_verification_results.md) for the M4/M0
+CI results and four-scenario walkthrough. Real evidence-provider integration
+remains outside the completed synthetic-data scope.
 
 Issue 1 prepared **mock data and expected messages only**. The four records are in
 [checkout_help_scenarios.json](../../Project3/assets/mock/checkout_help_scenarios.json)
@@ -184,5 +186,6 @@ The original 102 tests cover the service. The added
 now verify opening and closing help for all four scenarios, selected-item
 identity, unchanged basket and benefit state, and protection against stale or
 mismatched evidence. See the latest report for commands and limitations.
-Real-data integration, participant usefulness, and CI success are not established
-by these local tests. Issue 5 still owns CI verification.
+Those local tests do not establish real-data integration or participant usefulness.
+[Issue 5](issue5_verification_results.md) now records successful M4/M0 CI on the
+tested commit and the developer walkthrough. Participant testing was not conducted.
