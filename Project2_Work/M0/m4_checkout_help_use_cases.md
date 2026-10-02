@@ -1,6 +1,6 @@
 # M0/M4 Shared Checkout-Help Use Cases
 
-**Status:** Scenarios accepted by Abigail, owner of M0 and M4. Shared specification ready for M4 implementation; feature behavior and user usefulness remain unverified.
+**Status:** Scenarios accepted by Abigail, owner of M0 and M4. The feature acceptance checks below pass locally and in CI; see [M4 Issue 5](../M4/issue5_verification_results.md). Participant testing was not conducted, and actual user usefulness remains unverified.
 
 **Related findings:** [M0 Checkout-Help Findings](m0_checkout_help_findings.md)
 
@@ -139,16 +139,16 @@ WolfBite does not guess a cause. The shopper can return to the basket with all i
 
 ## Acceptance Criteria for M4 Feature Tests
 
-These are requirements for future tests, not reported test results. The example wording may be adjusted for clarity as long as its meaning, uncertainty, and expected next step remain consistent with M0.
+These requirements have been verified by the local/CI tests and developer walkthrough recorded in [M4 Issue 5](../M4/issue5_verification_results.md). The example wording may be adjusted for clarity as long as its meaning, uncertainty, and expected next step remain consistent with M0.
 
-* [ ] The checkout-help action opens help for the selected basket item.
-* [ ] M0-M4-01 shows the package-size difference and the size-related next step.
-* [ ] M0-M4-02 shows the required and available category amounts and the balance-related next step.
-* [ ] M0-M4-03 identifies outdated information and recommends verification without asserting a definite rejection cause.
-* [ ] M0-M4-F01 returns “Unable to determine” when evidence cannot support a known explanation.
-* [ ] Every explanation is identified as a possible cause or an inability to determine one, never an official checkout decision or guarantee of acceptance.
-* [ ] Each scenario and the fallback are tested through the complete basket-item → help → return-to-basket flow.
-* [ ] Basket contents, quantities, payment classifications, and benefit usage are unchanged after opening and closing help in every case.
+* [x] The checkout-help action opens help for the selected basket item.
+* [x] M0-M4-01 shows the package-size difference and the size-related next step.
+* [x] M0-M4-02 shows the required and available category amounts and the balance-related next step.
+* [x] M0-M4-03 identifies outdated information and recommends verification without asserting a definite rejection cause.
+* [x] M0-M4-F01 returns “Unable to determine” when evidence cannot support a known explanation.
+* [x] Every explanation is identified as a possible cause or an inability to determine one, never an official checkout decision or guarantee of acceptance.
+* [x] Each scenario and the fallback are tested through the complete basket-item → help → return-to-basket flow.
+* [x] Basket contents, quantities, payment classifications, and benefit usage are unchanged after opening and closing help in every case.
 
 ## Shared Scenario Decisions
 
@@ -161,4 +161,4 @@ These are requirements for future tests, not reported test results. The example 
 
 M0 owns the later baseline comparison and scoring checks. Their timing and scoring details are outside Task 1 and do not block implementation of these use cases.
 
-Participant testing was not conducted, and user usefulness remains unverified. This document does not establish that M4 is implemented, its tests pass, or the M0 evaluation targets have been met.
+Participant testing was not conducted, and user usefulness remains unverified. The linked Issue 5 report establishes M4 feature-test and CI results. It does not establish that the M0 participant-evaluation targets have been met.

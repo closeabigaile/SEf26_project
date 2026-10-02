@@ -1,0 +1,36 @@
+Browser walkthrough of c442dca7966543088623a4cbabcfdb68103ea829, 2026-09-29.
+Launched from the clean git archive using tool/m4_scenario_walkthrough.dart.
+Actual production BasketScreen, repository, service, button, and dialog.
+
+M0-M4-01: Mock cereal - 24 oz; quantity 1; CEREAL.
+Possible cause: package-size mismatch. 24 oz versus permitted 18 oz.
+Next step: check package label/current benefit information and look for otherwise eligible 18 oz package.
+Close returned to My Basket, with all four items and total 4.
+
+M0-M4-02: Mock cereal - no available benefit units; quantity 1; PAID.
+Possible cause: insufficient category balance. Cereal available 0 units; needs 1.
+Next step: review cereal balance and reduce quantity intended for coverage;
+same-category substitution alone does not restore coverage when zero remains.
+Close returned to My Basket, with all four items and total 4.
+
+M0-M4-03: Mock cereal - outdated benefit information; quantity 1; CEREAL.
+Possible cause: outdated information; unable to determine why checkout rejected it.
+Next step: verify current product/benefit information or ask cashier before retrying;
+no assumed refresh feature.
+Close returned to My Basket, with all four items and total 4.
+
+M0-M4-F01: Mock cereal - incomplete information; quantity 1; CEREAL.
+Unable to determine the cause; no official checkout reason available.
+Next step: ask cashier to check item and consult current benefit information before retrying.
+Close returned to My Basket, with all four items and total 4.
+
+Each dialog showed the synthetic-example notice and:
+This is guidance, not an official checkout decision.
+
+Final observed browser result:
+PASS: basket and balances unchanged. Checkout calls: 0; reload calls: 0; clear calls: 0. CEREAL used: 3; PAID used: 1.
+
+The browser check compares the entire basket and balances before/after the combined walkthrough.
+The automated screen tests separately compare in-memory and fake-Firestore state for EACH scenario,
+including the previous-month timestamp reset trap and zero checkout/reload/clear calls.
+No physical device, participant study, real checkout, or live benefit evidence was used.
