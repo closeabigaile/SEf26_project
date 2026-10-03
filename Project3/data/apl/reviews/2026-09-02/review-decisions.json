@@ -1,0 +1,457 @@
+{
+  "reviewDate": "2026-10-03",
+  "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL"
+  },
+  "scope": "All 25 rows held by the original conversion. Recommendations only; no catalog or Firebase mutations.",
+  "counts": {
+    "Pending: identifier mismatch": 10,
+    "Explained: duplicate": 2,
+    "Explained: alternate barcode": 5,
+    "Supported: leading zero": 4,
+    "Pending: leading zero": 4
+  },
+  "decisions": [
+    {
+      "sourceRow": 1222,
+      "sourceCode": "003800000120",
+      "product": "KELLOGG'S CORN FLAKES",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "Other Corn Flakes rows have different valid UPCs (rows 1223–1224). The source does not specify this row’s package size. Do not substitute another package’s code."
+    },
+    {
+      "sourceRow": 1505,
+      "sourceCode": "039400011606",
+      "product": "BUSH'S PINTO BEANS",
+      "originalIssues": [
+        "duplicate_identifier"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "NC workbook, rows 1505 and 16860",
+          "sourceRows": [
+            1505,
+            16860
+          ]
+        }
+      ],
+      "status": "Explained: duplicate",
+      "candidateCode": "039400011606",
+      "matchingSourceRows": [
+        1505,
+        16860
+      ],
+      "finding": "Both rows describe Bush’s Pinto Beans with category 06, subcategory 003 and unit CTR. Consolidate into one product using the more detailed September description at row 16860, retaining both original rows and descriptions in provenance."
+    },
+    {
+      "sourceRow": 2111,
+      "sourceCode": "074164302330",
+      "product": "LOWES LARGE LIMA BEANS",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "No corroborated replacement found for the supplied Lowes Large Lima Beans identifier. Verify the package barcode or request NC APL clarification."
+    },
+    {
+      "sourceRow": 2723,
+      "sourceCode": "01568707",
+      "product": "GERBER NATURAL SQUASH PEAR PINEAPPLE  4 OZ",
+      "originalIssues": [
+        "eight_digit_format_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "GS1 UPC-E zero-suppression rules",
+          "url": "https://ref.gs1.org/standards/genspecs/"
+        },
+        {
+          "title": "NC workbook, row 2698",
+          "sourceRow": 2698
+        }
+      ],
+      "status": "Explained: alternate barcode",
+      "candidateCode": "015000006877",
+      "matchingSourceRows": [
+        2698
+      ],
+      "finding": "Valid UPC-E expansion matches the existing product at Excel row 2698, including category, subcategory and unit codes. Retain the original short code as an alias to the existing product; do not create a second product. Scanner alias handling still needs implementation."
+    },
+    {
+      "sourceRow": 2725,
+      "sourceCode": "01568202",
+      "product": "GERBER NATURAL SWEET POTATO BANANA ORANGE  4 OZ",
+      "originalIssues": [
+        "eight_digit_format_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "GS1 UPC-E zero-suppression rules",
+          "url": "https://ref.gs1.org/standards/genspecs/"
+        },
+        {
+          "title": "NC workbook, row 2722",
+          "sourceRow": 2722
+        }
+      ],
+      "status": "Explained: alternate barcode",
+      "candidateCode": "015000006822",
+      "matchingSourceRows": [
+        2722
+      ],
+      "finding": "Valid UPC-E expansion matches the existing product at Excel row 2722, including category, subcategory and unit codes. Retain the original short code as an alias to the existing product; do not create a second product. Scanner alias handling still needs implementation."
+    },
+    {
+      "sourceRow": 2728,
+      "sourceCode": "01529203",
+      "product": "GERBER ORGANIC  SWEET POTATO APPLE CARROT  CINNE.",
+      "originalIssues": [
+        "eight_digit_format_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "GS1 UPC-E zero-suppression rules",
+          "url": "https://ref.gs1.org/standards/genspecs/"
+        },
+        {
+          "title": "NC workbook, row 2758",
+          "sourceRow": 2758
+        }
+      ],
+      "status": "Explained: alternate barcode",
+      "candidateCode": "015000002923",
+      "matchingSourceRows": [
+        2758
+      ],
+      "finding": "Valid UPC-E expansion matches the existing product at Excel row 2758, including category, subcategory and unit codes. Retain the original short code as an alias to the existing product; do not create a second product. Scanner alias handling still needs implementation."
+    },
+    {
+      "sourceRow": 2735,
+      "sourceCode": "01526905",
+      "product": "GERBER ORGANIC APPLE PRUNE 4 OZ",
+      "originalIssues": [
+        "eight_digit_format_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "GS1 UPC-E zero-suppression rules",
+          "url": "https://ref.gs1.org/standards/genspecs/"
+        },
+        {
+          "title": "NC workbook, row 2734",
+          "sourceRow": 2734
+        }
+      ],
+      "status": "Explained: alternate barcode",
+      "candidateCode": "015000002695",
+      "matchingSourceRows": [
+        2734
+      ],
+      "finding": "Valid UPC-E expansion matches the existing product at Excel row 2734, including category, subcategory and unit codes. Retain the original short code as an alias to the existing product; do not create a second product. Scanner alias handling still needs implementation."
+    },
+    {
+      "sourceRow": 2754,
+      "sourceCode": "01529902",
+      "product": "GERBER ORGANIC PEAR PURPLE CARROT RASPBERRY 4 OZ",
+      "originalIssues": [
+        "eight_digit_format_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "GS1 UPC-E zero-suppression rules",
+          "url": "https://ref.gs1.org/standards/genspecs/"
+        },
+        {
+          "title": "NC workbook, row 2753",
+          "sourceRow": 2753
+        }
+      ],
+      "status": "Explained: alternate barcode",
+      "candidateCode": "015000002992",
+      "matchingSourceRows": [
+        2753
+      ],
+      "finding": "Valid UPC-E expansion matches the existing product at Excel row 2753, including category, subcategory and unit codes. Retain the original short code as an alias to the existing product; do not create a second product. Scanner alias handling still needs implementation."
+    },
+    {
+      "sourceRow": 6218,
+      "sourceCode": "7821500276548",
+      "product": "BERRYES GOLD BLACKBERRIES",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "No corroborated replacement found for Berryes Gold Blackberries. Verify the package barcode or request NC APL clarification."
+    },
+    {
+      "sourceRow": 8819,
+      "sourceCode": "37842037680",
+      "product": "FRIEDAS RICKING RAMBUTAN",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "State WIC product identity corroboration",
+          "url": "https://www.azdhs.gov/documents/prevention/azwic/vendors/arizona-wic-foods-database.pdf"
+        }
+      ],
+      "candidateCode": "037842037680",
+      "checksumPasses": true,
+      "status": "Supported: leading zero",
+      "finding": "Restoring one leading zero produces a valid UPC. A published state WIC product list matches this code to Frieda’s rambutan. This supports an identifier normalization, not current NC eligibility or package-size enrichment. Preserve the numeric source code in provenance."
+    },
+    {
+      "sourceRow": 9179,
+      "sourceCode": "0413311029872",
+      "product": "GOYA PACAYA IN BRINE",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "NY WIC canned fruit and vegetable list, September 2025",
+          "url": "https://nyswicvendors.com/wp-content/uploads/2025/09/Canned-Vegetables-and-Fruits-SEP-18-2025.pdf"
+        }
+      ],
+      "status": "Pending: identifier mismatch",
+      "finding": "Another WIC list identifies Goya Pacaya 32 oz as 041331029872. This is a possible match, but the NC row does not give a size and has an extra internal digit. Confirm the package before replacing it.",
+      "candidateCode": "041331029872"
+    },
+    {
+      "sourceRow": 9270,
+      "sourceCode": "040000777506",
+      "product": "GRAPEFRUIT",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "The generic description GRAPEFRUIT does not identify a brand or package. This may be a store-assigned code. Confirm its intended identifier type rather than changing the check digit."
+    },
+    {
+      "sourceRow": 9995,
+      "sourceCode": "72036686541",
+      "product": "HARRIS TEETER ORGANICS BABY BELLA MUSHROOMS",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [],
+      "candidateCode": "072036686541",
+      "checksumPasses": true,
+      "status": "Pending: leading zero",
+      "finding": "A leading zero produces a valid UPC, but an independent product match was not found. The checksum alone cannot confirm identity. Verify the candidate against the actual package or NC APL before changing the document ID."
+    },
+    {
+      "sourceRow": 10009,
+      "sourceCode": "72036720856",
+      "product": "HARRIS TEETER ORGANICS FRENCH STYLE GREEN BEANS",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [],
+      "candidateCode": "072036720856",
+      "checksumPasses": true,
+      "status": "Pending: leading zero",
+      "finding": "A leading zero produces a valid UPC, but an independent product match was not found. The checksum alone cannot confirm identity. Verify the candidate against the actual package or NC APL before changing the document ID."
+    },
+    {
+      "sourceRow": 10323,
+      "sourceCode": "005070024378",
+      "product": "HY-TOP CUT GREEN BEANS",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "No corroborated replacement found for Hy-Top Cut Green Beans. Brand and name alone do not distinguish package sizes."
+    },
+    {
+      "sourceRow": 10447,
+      "sourceCode": "41270008921",
+      "product": "IGA WINTER MIX",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "State WIC product identity corroboration",
+          "url": "https://www.mass.gov/files/documents/2017/11/08/ma-wic-upc-database.pdf"
+        }
+      ],
+      "candidateCode": "041270008921",
+      "checksumPasses": true,
+      "status": "Supported: leading zero",
+      "finding": "Restoring one leading zero produces a valid UPC. A published state WIC product list matches this code to IGA winter mix. This supports an identifier normalization, not current NC eligibility or package-size enrichment. Preserve the numeric source code in provenance."
+    },
+    {
+      "sourceRow": 10598,
+      "sourceCode": "11110819147",
+      "product": "KROGER CUT GREEN BEANS",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "State WIC product identity corroboration",
+          "url": "https://www.azdhs.gov/documents/prevention/azwic/vendors/arizona-wic-foods-database.pdf"
+        }
+      ],
+      "candidateCode": "011110819147",
+      "checksumPasses": true,
+      "status": "Supported: leading zero",
+      "finding": "Restoring one leading zero produces a valid UPC. A published state WIC product list matches this code to Kroger cut green beans. This supports an identifier normalization, not current NC eligibility or package-size enrichment. Preserve the numeric source code in provenance."
+    },
+    {
+      "sourceRow": 11282,
+      "sourceCode": "741643003737",
+      "product": "LOWES FOODS NAS CROWDER PEAS",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "Row 11283 already has the same description under valid UPC 741643006737. This could be a typo or another package. Do not merge on the name alone."
+    },
+    {
+      "sourceRow": 11738,
+      "sourceCode": "8412345000001",
+      "product": "MEGABERRYES BLACKBERRIES",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "No corroborated replacement found for Megaberryes Blackberries. Verify the package barcode or request NC APL clarification."
+    },
+    {
+      "sourceRow": 11960,
+      "sourceCode": "69905880254",
+      "product": "MUCCI SUN BLESS TOMATOES",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [],
+      "candidateCode": "069905880254",
+      "checksumPasses": true,
+      "status": "Pending: leading zero",
+      "finding": "A leading zero produces a valid UPC, but an independent product match was not found. The checksum alone cannot confirm identity. Verify the candidate against the actual package or NC APL before changing the document ID."
+    },
+    {
+      "sourceRow": 13870,
+      "sourceCode": "11110691033",
+      "product": "SIMPLE TRUTH ORGANIC GRANNY SMITH APPLES",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "State WIC product identity corroboration",
+          "url": "https://www.azdhs.gov/documents/prevention/azwic/vendors/az-wic-foods-database.pdf?v=20210815"
+        }
+      ],
+      "candidateCode": "011110691033",
+      "checksumPasses": true,
+      "status": "Supported: leading zero",
+      "finding": "Restoring one leading zero produces a valid UPC. A published state WIC product list matches this code to Simple Truth Organic Granny Smith apples. This supports an identifier normalization, not current NC eligibility or package-size enrichment. Preserve the numeric source code in provenance."
+    },
+    {
+      "sourceRow": 13974,
+      "sourceCode": "38259123621",
+      "product": "SLICED PIMIENTOS 4OZ",
+      "originalIssues": [
+        "barcode_length_needs_review"
+      ],
+      "applied": false,
+      "evidence": [],
+      "candidateCode": "038259123621",
+      "checksumPasses": true,
+      "status": "Pending: leading zero",
+      "finding": "A leading zero produces a valid UPC, but an independent product match was not found. The checksum alone cannot confirm identity. Verify the candidate against the actual package or NC APL before changing the document ID."
+    },
+    {
+      "sourceRow": 15570,
+      "sourceCode": "043900335886",
+      "product": "BOOST KID ESSENTIALS 1.5 CHOCOLATE RTF 8 OZ",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "Arizona historical special-formula package listing",
+          "url": "https://www.azdhs.gov/documents/prevention/azwic/formula/upcs-for-special-formulas.pdf"
+        }
+      ],
+      "status": "Pending: identifier mismatch",
+      "finding": "Arizona’s historical special-formula list identifies this exact code as a 27-unit case. NC row 15571 has 043900335889 for the same description. Do not change the check digit or merge case and unit records; confirm the packaging identifier with NC or the manufacturer."
+    },
+    {
+      "sourceRow": 16847,
+      "sourceCode": "004180020256",
+      "product": "WELCH'S 100% SUPER BERRY JUICE",
+      "originalIssues": [
+        "check_digit_mismatch"
+      ],
+      "applied": false,
+      "evidence": [],
+      "status": "Pending: identifier mismatch",
+      "finding": "No corroborated replacement found for Welch’s 100% Super Berry Juice. Confirm the package barcode; do not calculate a replacement last digit."
+    },
+    {
+      "sourceRow": 16860,
+      "sourceCode": "039400011606",
+      "product": "BUSHS PINTO BEANS 15.5 OZ",
+      "originalIssues": [
+        "duplicate_identifier"
+      ],
+      "applied": false,
+      "evidence": [
+        {
+          "title": "NC workbook, rows 1505 and 16860",
+          "sourceRows": [
+            1505,
+            16860
+          ]
+        }
+      ],
+      "status": "Explained: duplicate",
+      "candidateCode": "039400011606",
+      "matchingSourceRows": [
+        1505,
+        16860
+      ],
+      "finding": "Both rows describe Bush’s Pinto Beans with category 06, subcategory 003 and unit CTR. Consolidate into one product using the more detailed September description at row 16860, retaining both original rows and descriptions in provenance."
+    }
+  ]
+}

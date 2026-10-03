@@ -121,5 +121,11 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 
-# Firebase config
-**/firebase_options.dart
+# Firebase client configuration is tracked; admin credentials are not.
+**/serviceAccountKey.json
+**/service-account*.json
+**/*firebase-adminsdk*.json
+
+# Local APL conversion artifacts; regenerate from the official source workbook.
+/data/apl/generated/
+/scripts/.venv-apl/
