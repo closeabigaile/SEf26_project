@@ -44,8 +44,9 @@ class CheckoutHelpExample {
 
 /// Keeps demonstration evidence separate from a shopper's real basket data.
 ///
-/// A real evidence provider is not connected yet. Ordinary basket items receive
-/// no invented size rules or balances; the service will return its fallback.
+/// Official benefit evidence is not connected yet. Ordinary basket items receive
+/// no invented size rules or balances here. The dialog separately explains PAID
+/// allocation using the app's saved demo allowance. Product suggestions belong to M2.
 /// A prepared basket line may explicitly opt into a synthetic scenario. Its
 /// identity, quantity, and classifications must match that scenario exactly.
 class CheckoutHelpRepository {

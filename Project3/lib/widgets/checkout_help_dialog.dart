@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../services/checkout_help_repository.dart';
 import '../services/checkout_help_service.dart';
+import '../services/basket_checkout_help.dart';
 import '../state/app_state.dart';
 
 /// Opens information for this exact basket line, never for a saved list index.
@@ -25,51 +26,87 @@ Future<void> showCheckoutHelpForItem(
   final openedState = snapshot();
   final evidence = repository.forBasketItem(Map<String, dynamic>.from(line));
   final service = CheckoutHelpService();
+  final liveBasket =
+      state != null && line['checkout_help_source'] != 'synthetic';
+  final livePaid =
+      state != null &&
+      line['checkout_help_source'] != 'synthetic' &&
+      classification is String &&
+      classification.trim().toUpperCase() == 'PAID';
+  final originalCategory = livePaid
+      ? BasketCheckoutHelp.originalCategory(line, state.basket)
+      : null;
+  final categoryEvidence = livePaid
+      ? BasketCheckoutHelp.resolveOriginalCategory(
+          state.productCatalog,
+          Map.of(line),
+          originalCategory,
+        )
+      : null;
 
   await showDialog<void>(
     context: context,
-    builder: (context) => ListenableBuilder(
-      // Immutable samples have no state changes to observe. The live basket
-      // listens to its existing AppState; no second application state is made.
-      listenable: state ?? const AlwaysStoppedAnimation<bool>(true),
-      builder: (context, child) {
-        // A quantity, allocation, removal, reload, or balance change invalidates
-        // the open view. A fresh opening reads current evidence again.
-        final stillCurrent =
-            state == null ||
-            (state.basket.any((entry) => identical(entry, line)) &&
-                snapshot() == openedState);
-        return FutureBuilder<CheckoutHelpExample?>(
-          future: evidence,
-          builder: (context, loaded) {
-            final example = stillCurrent ? loaded.data : null;
-            final loading =
-                stillCurrent && loaded.connectionState != ConnectionState.done;
-            final result = loading
-                ? null
-                : service.explain(
-                    item: example?.item ?? const {},
-                    benefit: example?.benefit ?? const {},
-                  );
-            final notice = !stillCurrent
-                ? 'Your basket or benefit information changed. Close help and reopen it for the current item.'
-                : loaded.hasError
-                ? 'Help information could not be loaded. You can close this view and try again.'
-                : example != null
-                ? 'Synthetic example: sizes and balances below are sample information, not your live benefits.'
-                : loading
-                ? 'Loading help information…'
-                : 'Verified product and benefit evidence is not available for this item.';
-            return CheckoutHelpDialog(
-              itemName: name,
-              itemDetails:
-                  'Quantity: $quantity · Payment category: $classification',
-              notice: notice,
-              result: result,
-            );
-          },
-        );
-      },
+    builder: (context) => FutureBuilder<String?>(
+      future: categoryEvidence,
+      builder: (context, categoryLoaded) => ListenableBuilder(
+        // Immutable samples have no state changes to observe. The live basket
+        // listens to its existing AppState; no second application state is made.
+        listenable: state ?? const AlwaysStoppedAnimation<bool>(true),
+        builder: (context, child) {
+          // A quantity, allocation, removal, reload, or balance change invalidates
+          // the open view. A fresh opening reads current evidence again.
+          final stillCurrent =
+              state == null ||
+              (state.basket.any((entry) => identical(entry, line)) &&
+                  snapshot() == openedState);
+          return FutureBuilder<CheckoutHelpExample?>(
+            future: evidence,
+            builder: (context, loaded) {
+              final example = stillCurrent ? loaded.data : null;
+              final loading =
+                  stillCurrent &&
+                  loaded.connectionState != ConnectionState.done;
+              final showAllocation = stillCurrent && livePaid;
+              final simpleHelp = stillCurrent && liveBasket;
+              final result = showAllocation
+                  ? BasketCheckoutHelp.explain(
+                      originalCategory: originalCategory ?? categoryLoaded.data,
+                      balances: state.balances,
+                    )
+                  : simpleHelp
+                  ? BasketCheckoutHelp.explainIncluded(
+                      line: line,
+                      basket: state.basket,
+                      balances: state.balances,
+                    )
+                  : loading
+                  ? null
+                  : service.explain(
+                      item: example?.item ?? const {},
+                      benefit: example?.benefit ?? const {},
+                    );
+              final notice = !stillCurrent
+                  ? 'Your basket or benefit information changed. Close help and reopen it for the current item.'
+                  : simpleHelp
+                  ? 'Demo allowance only. Check your official WIC balance before checkout.'
+                  : loaded.hasError
+                  ? 'Help information could not be loaded. You can close this view and try again.'
+                  : example != null
+                  ? 'Synthetic example: sizes and balances below are sample information, not your live benefits.'
+                  : loading
+                  ? 'Loading help information…'
+                  : 'Verified product and benefit evidence is not available for this item.';
+              return CheckoutHelpDialog(
+                itemName: name,
+                itemDetails: 'Quantity: $quantity · Category: $classification',
+                notice: notice,
+                result: result,
+                simple: simpleHelp,
+              );
+            },
+          );
+        },
+      ),
     ),
   );
 }
@@ -83,17 +120,23 @@ class CheckoutHelpDialog extends StatelessWidget {
     required this.itemDetails,
     required this.notice,
     required this.result,
+    this.simple = false,
   });
 
   final String itemName;
   final String itemDetails;
   final String notice;
   final CheckoutHelpResult? result;
+  final bool simple;
 
   @override
   Widget build(BuildContext context) {
     final answer = result;
     final cause = switch (answer?.possibleCause) {
+      'app_category_limit' => 'Why this item is marked PAID',
+      'app_paid_item' => 'This item is marked for you to pay',
+      'app_included' => 'Fits your app allowance',
+      'app_balance_unknown' => 'Check your balance',
       'package_size_mismatch' => 'Possible cause: package-size mismatch',
       'insufficient_category_balance' =>
         'Possible cause: insufficient category balance',
@@ -115,10 +158,14 @@ class CheckoutHelpDialog extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(itemDetails),
-            const SizedBox(height: 12),
-            Text(notice),
-            const SizedBox(height: 8),
-            const Text('This is guidance, not an official checkout decision.'),
+            if (!simple) ...[
+              const SizedBox(height: 12),
+              Text(notice),
+              const SizedBox(height: 8),
+              const Text(
+                'This is guidance, not an official checkout decision.',
+              ),
+            ],
             const SizedBox(height: 16),
             if (answer == null)
               const Center(child: CircularProgressIndicator())
@@ -127,12 +174,17 @@ class CheckoutHelpDialog extends StatelessWidget {
               const SizedBox(height: 8),
               Text(answer.explanation),
               const SizedBox(height: 16),
-              Text(
-                'Suggested next step',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
+              if (!simple)
+                Text(
+                  'Suggested next step',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               const SizedBox(height: 8),
               Text(answer.suggestedNextStep),
+            ],
+            if (simple) ...[
+              const SizedBox(height: 16),
+              Text(notice, style: Theme.of(context).textTheme.bodySmall),
             ],
           ],
         ),
