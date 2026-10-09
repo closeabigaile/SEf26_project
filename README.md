@@ -13,13 +13,11 @@
         <img src="https://img.shields.io/github/stars/closeabigaile/SEf26_project?style=social"
              alt="GitHub Stars">
     </a>
-
-    <!-- UPDATE IF TOOLCHAIN CHANGES: Match the Flutter CI configuration. -->
+    <!-- UPDATE IF TOOLCHAIN CHANGES: Match the Flutter CI configuration.-->
     <a href=".github/workflows/flutter-ci.yml">
         <img src="https://img.shields.io/badge/Flutter%20%28CI%29-3.47.2-02569B?logo=flutter&amp;logoColor=white"
              alt="Flutter configured for CI: 3.47.2">
     </a>
-
     <!-- Combined workflow status: web build, tests, Dart lint/static analysis,
          formatting, and documentation deployment. Not a coverage percentage. -->
     <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Amain">
@@ -174,6 +172,8 @@ the walkthrough clearly distinguishes working features from demo behavior.
 
 ## 🚀 Quick Start
 
+For step-by-step setup and troubleshooting, see [INSTALL.md](INSTALL.md).
+
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
@@ -182,8 +182,8 @@ Before you begin, ensure you have the following installed:
   Matches the project's CI configuration. Specific versions are
   available in the [SDK archive](https://docs.flutter.dev/install/archive).
 - **[Dart SDK](https://dart.dev/get-dart)** Included with Flutter; no separate installation required.
-- **[Git](https://git-scm.com/downloads/):** 
-- **[Google Chrome](https://www.google.com/chrome/):** 
+- **[Git](https://git-scm.com/downloads/)** 
+- **[Google Chrome](https://www.google.com/chrome/)** 
 - **Code editor (optional):** Android Studio, IntelliJ IDEA or [Visual Studio Code](https://code.visualstudio.com/) recommended.
 
 Firebase client configuration is included in the repository.
@@ -311,10 +311,11 @@ Python, JavaScript, formatting, analysis, and build checks.
 - **User Guide — Coming Soon:** Instructions for using WolfBite’s features.
 (https://suyeshjadhav.github.io/CSC510_G19/) - Comprehensive user documentation from the previous team, though is not complete.
 
+- [Installation Guide](INSTALL.md) — Local setup, launch instructions, and troubleshooting.
 - [Firebase Setup](Project3/FIREBASE_SETUP.md) — Application configuration.
 - [APL Import Guide](Project3/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
-- [Contributing Guidelines](Project3/CONTRIBUTING.md) — Team 7 setup, coding standards, testing, and review process.
-- [Code of Conduct](Project3/CODE_OF_CONDUCT.md) — Community behavior, private reporting, and moderation guidelines.
+- [Contributing Guidelines](Project3/CONTRIBUTING.md) — Development and contribution process.
+- [Code of Conduct](Project3/CODE_OF_CONDUCT.md) — Community guidelines.
 
 ---
 
@@ -326,16 +327,12 @@ See our [Contributing Guidelines](Project3/CONTRIBUTING.md) for details on:
 
 - Setting up the development environment
 - Code style and standards
-- Extending features safely and documenting AI assistance
 - Submitting pull requests
 - Reporting issues
 
 ### Development Workflow
 
-All contributors are expected to follow our
-[Code of Conduct](Project3/CODE_OF_CONDUCT.md).
-
-1. Clone the repository, or fork and clone it if you do not have write access.
+1. Fork the repository
 2. Create a descriptively named branch (`git checkout -b your-branch-name`).
 3. Make your changes and run the relevant tests and checks.
 4. Stage and commit your changes.
@@ -381,7 +378,6 @@ authors’ copyright notice.
 
 
 ## 📞 Support
-
 
 - **Issues**: [GitHub Issues](https://github.com/closeabigaile/SEf26_project/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/closeabigaile/SEf26_project/discussions)
