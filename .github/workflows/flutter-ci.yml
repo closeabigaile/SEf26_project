@@ -1,85 +1,181 @@
 name: Flutter CI
 
-# Run this on every push and pull request to 'main'
+# Check changes pushed to main and pull requests targeting main.
+# workflow_dispatch also allows a manual run from GitHub Actions.
 on:
   push:
-    branches: [ "main" ] # Your file was correct, it should be lowercase 'main'
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+  workflow_dispatch:
 
-# Grant permissions for the new job to write to GitHub Pages
+# Test jobs only need repository read access. Pages permissions are granted
+# separately to the documentation deployment job below.
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+# Match the Flutter version used by the existing M0/M4 workflows.
+env:
+  FLUTTER_VERSION: "3.47.2"
 
 jobs:
-  # ---- JOB 1: YOUR EXISTING TEST JOB ----
+  # These checks run in order. A failed check stops later checks in this job,
+  # except the report upload. The Python and JavaScript jobs run independently.
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
-    
-    # Your file had 'Project2', which can fail on case-sensitive systems
+    timeout-minutes: 30
     defaults:
       run:
-        working-directory: ./Project2 
+        working-directory: Project3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Install locked dependencies
+        run: flutter pub get --enforce-lockfile
 
+      # Check maintained Dart source without rewriting files or build output.
       - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: dart format --output=none --set-exit-if-changed lib test tool
 
+      # analysis_options.yaml enables flutter_lints. This checks Dart style,
+      # syntax, and static analysis; it does not check other languages.
       - name: Analyze code
-        run: flutter analyze
+        run: flutter analyze --no-pub --fatal-infos --fatal-warnings
 
-      - name: Run tests
-        run: flutter test
+      # Compile the web app. This does not launch it or verify native builds.
+      - name: Build web application
+        run: flutter build web --release --no-pub
 
+      - name: Prepare test reports
+        run: mkdir -p build/test-results
+
+      # Discover the full test/ directory, including inherited and team tests.
+      # LCOV records Dart coverage, not Python/JavaScript or participant results.
+      - name: Run Flutter tests with coverage
+        run: >-
+          flutter test
+          --no-pub --coverage --concurrency=1 --reporter expanded
+          --file-reporter expanded:build/test-results/flutter-tests.txt
+
+      - name: Verify coverage report exists and is nonempty
+        run: test -s coverage/lcov.info
+
+      # Retain available evidence after a failure without masking that failure.
+      # Action paths are relative to the repository root, unlike run commands.
+      - name: Upload test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-results-${{ github.sha }}
+          path: |
+            Project3/build/test-results/
+            Project3/coverage/lcov.info
+          if-no-files-found: warn
+          retention-days: 30
+
+  # These tests validate the scorer and APL tooling with local fixtures.
+  python-tests:
+    name: M0 and APL Python tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install APL test dependency
+        run: python -m pip install -r Project3/scripts/requirements-apl.txt
+
+      - name: Test M0 scoring
+        working-directory: Project2_Work/M0
+        run: python -m unittest discover -s . -p 'test_*.py' -v
+
+      - name: Test APL conversion and review
+        working-directory: Project3
+        run: python -m unittest discover -s scripts -p 'test_*.py' -v
+
+      # Compare local configuration files; do not contact the live database.
+      - name: Verify Firebase configuration consistency
+        working-directory: Project3
+        run: python scripts/verify_firebase_config.py
+
+  javascript-tests:
+    name: APL importer tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # The current tests use Node's built-in test runner and simulated data.
+      # No Firebase login, catalog upload, or npm installation is needed.
+      - name: Test importer
+        working-directory: Project3
+        run: node --test scripts/test_*.cjs
+
+  # Preserve the inherited API documentation deployment after checks pass.
+  # The repository's GitHub Pages source must be configured as GitHub Actions.
   deploy-docs:
     name: Deploy Documentation
-    
-    # This job only runs if 'build-and-test' succeeds
-    needs: build-and-test 
-    
-    # This job only runs when you push to 'main' (not on Pull Requests)
-    if: github.ref == 'refs/heads/main' 
-    
+    needs: [build-and-test, python-tests, javascript-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        working-directory: Project3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-          
-      - name: Install dependencies
-        run: flutter pub get
-        working-directory: ./Project2 # Run in your project folder
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      - name: Generate docs
+      - name: Install locked dependencies
+        run: flutter pub get --enforce-lockfile
+
+      - name: Generate API documentation
         run: dart doc .
-        working-directory: ./Project2 # Run in your project folder
-        
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # dart doc generates files in 'doc/api'
-          path: ./Project2/doc/api 
+          path: Project3/doc/api
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
+# UPDATE BEFORE FINAL SUBMISSION:
+# Need to confirm all M0-M4 tests are run.
+# A public coverage-percentage badge still needs a published coverage output.
+# Verify the documentation deployment!
