@@ -9,10 +9,6 @@
         <img src="https://img.shields.io/github/issues/closeabigaile/SEf26_project"
              alt="GitHub Issues">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/stargazers">
-        <img src="https://img.shields.io/github/stars/closeabigaile/SEf26_project?style=social"
-             alt="GitHub Stars">
-    </a>
     <!-- UPDATE IF TOOLCHAIN CHANGES: Match the Flutter CI configuration.-->
     <a href=".github/workflows/flutter-ci.yml">
         <img src="https://img.shields.io/badge/Flutter%20%28CI%29-3.47.2-02569B?logo=flutter&amp;logoColor=white"
@@ -23,6 +19,10 @@
     <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Amain">
         <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=main&amp;event=push"
              alt="Flutter CI">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/stargazers">
+        <img src="https://img.shields.io/github/stars/closeabigaile/SEf26_project?style=social"
+             alt="GitHub Stars">
     </a>
 </p>
 
@@ -100,17 +100,15 @@ Keep catalog eligibility, demo allowances, and checkout guidance distinct.
 
 ---
 
-## 📄 Demo
-
 ## 🎬 Demo Videos
 
-### Project 2 Teaser — Coming Soon
+### Project 2 Teaser - Coming Soon
 
 A 12–30-second introduction to Team 7’s WolfBite updates is in preparation.
 
 <!-- BEFORE SUBMISSION: Add the teaser near the top of this README. -->
 
-### Project 2 Feature Walkthrough — Coming Soon
+### Project 2 Feature Walkthrough - Coming Soon
 
 A 2–5-minute walkthrough of the completed Project 2 functionality
 is in preparation.
@@ -120,7 +118,7 @@ Add the final video link, verify access and duration, and ensure
 the walkthrough clearly distinguishes working features from demo behavior.
 -->
 
-### Previous-Team Demo
+### Previous - Team Demo
 
 [View previous-team demo materials](https://drive.google.com/drive/folders/1f9GWDyXS6KWoICaTHnpUJQOfn6ZkmLgA?usp=sharing)
 
@@ -129,7 +127,7 @@ the walkthrough clearly distinguishes working features from demo behavior.
 
 ## ✨ Features
 
-### Team 7 — Project 2 Updates
+### Team 7 - Project 2 Updates
 
 - **North Carolina APL Integration:** Look up products in the imported
   NC WIC catalog; catalog listing does not confirm remaining benefits.
@@ -158,7 +156,7 @@ the walkthrough clearly distinguishes working features from demo behavior.
 - Ensure every description matches the submitted version.
 -->
 
-## Inherited Features
+### Inherited Features
 
 - **Barcode and Manual Lookup:** Scan a barcode or enter a product code to search the catalog.
 - **User Authentication:** Sign up and log in with Firebase Authentication.
@@ -288,10 +286,10 @@ versions. Refer to the linked package pages for full license text and notices.
 Run the test suite to ensure code quality:
 
 ```bash
-# Run all tests
+# Run all Flutter tests
 flutter test
 
-# Run tests with coverage
+# Run all Flutter tests with coverage
 flutter test --coverage
 
 # Run specific test file
