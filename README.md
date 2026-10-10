@@ -24,6 +24,8 @@
         <img src="https://img.shields.io/github/stars/closeabigaile/SEf26_project?style=social"
              alt="GitHub Stars">
     </a>
+    <!-- REMEMBER: Once all milestones are complete, publish the submission
+    release on GitHub. Then add the DOI badge! -->
 </p>
 
 <!-- UPDATE BEFORE FINAL SUBMISSION:
@@ -277,6 +279,9 @@ the configured SDK version. Transitive dependencies are listed in the lockfile.
 **Licenses:** Entries summarize the package license files for the recorded
 versions. Refer to the linked package pages for full license text and notices.
 
+See [Third-Party Libraries](THIRD_PARTY_LIBRARIES.md)
+for the complete dependency and license inventory.
+
 > **Note:** Run `flutter pub get` from `Project3` to resolve and download
 > dependencies. Flutter SDK packages are supplied by the installed SDK.
 
@@ -314,6 +319,7 @@ Python, JavaScript, formatting, analysis, and build checks.
 - [APL Import Guide](Project3/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
 - [Contributing Guidelines](Project3/CONTRIBUTING.md) — Development and contribution process.
 - [Code of Conduct](Project3/CODE_OF_CONDUCT.md) — Community guidelines.
+- [AI Usage and Human Review](AI_USAGE.md) — Recorded AI assistance and human review status.
 
 ---
 
