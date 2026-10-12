@@ -137,3 +137,107 @@ class NutritionalBadgesCompact extends StatelessWidget {
     );
   }
 }
+/// Expanded nutrition facts panel showing values, units, serving basis,
+/// and short plain-language explanations for each nutrient.
+///
+/// Unknown values display as "Unknown" instead of being treated as zero.
+class NutritionFactsPanel extends StatelessWidget {
+  const NutritionFactsPanel({required this.nutrition, super.key});
+
+  final Map<String, dynamic> nutrition;
+
+  @override
+  Widget build(BuildContext context) {
+    final basis =
+        nutrition['servingBasis'] as String? ??
+        NutritionalUtils.defaultServingBasis;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Text(
+              'Nutrition Facts',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Spacer(),
+            Flexible(
+              child: Text(
+                basis,
+                textAlign: TextAlign.end,
+                style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+              ),
+            ),
+          ],
+        ),
+        const Divider(height: 18),
+        _row('Calories', 'calories', bold: true),
+        const SizedBox(height: 8),
+        _row('Total Fat', 'totalFat'),
+        _row('Saturated Fat', 'saturatedFat', indent: true),
+        const SizedBox(height: 8),
+        _row('Sodium', 'sodium'),
+        const SizedBox(height: 8),
+        _row('Total Sugars', 'sugar'),
+        const SizedBox(height: 8),
+        _row('Protein', 'protein'),
+        const SizedBox(height: 8),
+        _row('Fiber', 'fiber'),
+      ],
+    );
+  }
+
+  Widget _row(String label, String key, {bool bold = false, bool indent = false}) {
+    final value = nutrition[key] as num?;
+    final unit = NutritionalUtils.nutrientUnits[key] ?? '';
+    final explanation = NutritionalUtils.nutrientExplanations[key];
+    final known = value != null;
+
+    return Padding(
+      padding: EdgeInsets.only(left: indent ? 12 : 0, bottom: 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: indent ? 13 : 14,
+                    fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+                    color: indent ? Colors.grey.shade700 : Colors.black87,
+                  ),
+                ),
+                if (explanation != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      explanation,
+                      style: TextStyle(
+                        fontSize: 11,
+                        height: 1.3,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(
+            NutritionalUtils.formatNutrient(value, unit),
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: bold ? FontWeight.bold : FontWeight.w600,
+              fontStyle: known ? FontStyle.normal : FontStyle.italic,
+              color: known ? Colors.black87 : Colors.grey.shade500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

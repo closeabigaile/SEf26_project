@@ -348,19 +348,9 @@ class _BasketItemState extends State<_BasketItem> {
     final canAdd = appState.canAdd(category);
 
     // Generate nutritional data if not present
-    final nutrition =
+         final nutrition =
         widget.item['nutrition'] as Map<String, dynamic>? ??
-        const {
-          'calories': 0.0,
-          'totalFat': 0.0,
-          'saturatedFat': 0.0,
-          'transFat': 0.0,
-          'sodium': 0.0,
-          'sugar': 0.0,
-          'addedSugar': 0.0,
-          'protein': 0.0,
-          'fiber': 0.0,
-        };
+        NutritionalUtils.unknownNutrition;
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -451,7 +441,7 @@ class _BasketItemState extends State<_BasketItem> {
               ),
             ),
           ),
-          if (_expanded)
+        if (_expanded)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -459,6 +449,8 @@ class _BasketItemState extends State<_BasketItem> {
                 color: Colors.grey.shade50,
                 border: Border(top: BorderSide(color: Colors.grey.shade200)),
               ),
+              child: NutritionFactsPanel(nutrition: nutrition),
+            ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
