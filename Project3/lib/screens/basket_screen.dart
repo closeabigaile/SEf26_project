@@ -301,9 +301,12 @@ class BasketScreen extends StatelessWidget {
 
                 SizedBox(width: 10),
 
-                Text(
-                  'Basket Summary',
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                Flexible(
+                  child: Text(
+                    'Basket Summary',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
