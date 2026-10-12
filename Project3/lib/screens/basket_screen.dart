@@ -6,6 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'qr_checkout_screen.dart';
 import '../widgets/nutritional_badges.dart';
 import '../utils/nutritional_utils.dart';
+import '../services/checkout_help_repository.dart';
+import '../widgets/checkout_help_button.dart';
+import 'checkout_help_samples_screen.dart';
 
 /// Screen displaying the user's current shopping basket with item management.
 ///
@@ -24,8 +27,12 @@ import '../utils/nutritional_utils.dart';
 /// Usage: Navigated to via `/basket` route or the basket summary card
 /// in [ScanScreen].
 class BasketScreen extends StatelessWidget {
-  const BasketScreen({super.key});
+  const BasketScreen({
+    super.key,
+    this.checkoutHelpRepository = const CheckoutHelpRepository(),
+  });
 
+  final CheckoutHelpRepository checkoutHelpRepository;
 
   void _showQRDialog(BuildContext context, AppState app) {
     showDialog(
@@ -49,8 +56,8 @@ class BasketScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(
-                Icons.qr_code_2, 
-                size: 200, 
+                Icons.qr_code_2,
+                size: 200,
                 color: Colors.black,
               ),
             ),
@@ -62,7 +69,7 @@ class BasketScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
           ),
-          
+
           // Finish Button (Commits the transaction)
           FilledButton(
             onPressed: () async {
@@ -71,7 +78,7 @@ class BasketScreen extends StatelessWidget {
 
               // 2. Close the dialog
               if (ctx.mounted) {
-                Navigator.pop(ctx); 
+                Navigator.pop(ctx);
               }
 
               // 3. Show success and navigate away
@@ -110,6 +117,17 @@ class BasketScreen extends StatelessWidget {
         title: const Text('My Basket'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.science_outlined),
+            tooltip: 'Try sample checkout help',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (context) => CheckoutHelpSamplesScreen(
+                  repository: checkoutHelpRepository,
+                ),
+              ),
+            ),
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Log out',
             onPressed: () async {
@@ -129,7 +147,12 @@ class BasketScreen extends StatelessWidget {
                     itemCount: basket.length,
                     itemBuilder: (context, index) {
                       final item = basket[index];
-                      return _BasketItem(item: item, index: index);
+                      return _BasketItem(
+                        key: ObjectKey(item),
+                        item: item,
+                        index: index,
+                        checkoutHelpRepository: checkoutHelpRepository,
+                      );
                     },
                   ),
                 ),
@@ -294,7 +317,14 @@ class BasketScreen extends StatelessWidget {
 /// and [AppState.decrementItem] respectively. Buttons are styled with
 /// visual feedback and disabled states based on category limits.
 class _BasketItem extends StatefulWidget {
-  const _BasketItem({required this.item, required this.index});
+  const _BasketItem({
+    super.key,
+    required this.item,
+    required this.index,
+    required this.checkoutHelpRepository,
+  });
+
+  final CheckoutHelpRepository checkoutHelpRepository;
 
   /// The basket item data map containing 'upc', 'name', 'category', and 'qty'.
   final Map<String, dynamic> item;
@@ -384,6 +414,14 @@ class _BasketItemState extends State<_BasketItem> {
               ],
             ),
           ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: CheckoutHelpButton(
+              state: appState,
+              line: widget.item,
+              repository: widget.checkoutHelpRepository,
+            ),
+          ),
           // Expandable nutritional info section
           InkWell(
             onTap: () => setState(() => _expanded = !_expanded),
@@ -397,14 +435,16 @@ class _BasketItemState extends State<_BasketItem> {
                     color: const Color(0xFFD1001C),
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    _expanded
-                        ? 'Hide Nutritional Info'
-                        : 'Show Nutritional Info',
-                    style: const TextStyle(
-                      color: Color(0xFFD1001C),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 13,
+                  Flexible(
+                    child: Text(
+                      _expanded
+                          ? 'Hide Nutritional Info'
+                          : 'Show Nutritional Info',
+                      style: const TextStyle(
+                        color: Color(0xFFD1001C),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ],

@@ -1,0 +1,24 @@
+00:00 +0: loading /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart
+00:00 +0: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-01 opens selected-item help and closes without state or database changes
+00:00 +1: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-02 opens selected-item help and closes without state or database changes
+00:00 +2: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-03 opens selected-item help and closes without state or database changes
+00:00 +3: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-F01 opens selected-item help and closes without state or database changes
+00:00 +4: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: repeated openings on different items do not leak explanations
+00:00 +5: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: a real item sharing a sample UPC receives fallback without explicit sample linkage
+00:01 +6: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: a paid line sharing a UPC cannot inherit another lines sample evidence
+00:01 +7: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: balance changes invalidate an open explanation without undoing the change
+00:01 +8: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: removing the selected line does not switch help to the next item
+00:01 +9: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: a changed quantity cannot reuse the original prepared evidence after reopening
+00:01 +10: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: a delayed load cannot show evidence for an item changed while loading
+00:01 +11: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: load failure offers uncertainty and can still be closed
+00:01 +12: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: back and outside-tap dismissals preserve state
+00:01 +13: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: ambiguous causes display closable fallback through the basket
+00:01 +14: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: conflicting categories display closable fallback through the basket
+00:01 +15: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: sample basket opens per-item help for all scenarios without changing either basket
+00:01 +16: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: rapid repeated help taps open only one dialog
+00:01 +17: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: help remains scrollable and closable on a narrow screen
+00:01 +18: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: sample basket help works with large text on a narrow screen
+00:01 +19: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/checkout_help_screen_test.dart: original category survives creating and reloading a paid line
+00:01 +20: loading /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart
+00:02 +20: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:02 +21: All tests passed!
