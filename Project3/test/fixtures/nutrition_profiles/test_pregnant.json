@@ -1,0 +1,16 @@
+{
+  "testProfile": "TEST PROFILE 5 - pregnant person; unsafe weight plan requested",
+  "testOnlyAssumptions": "Illustrative numeric targets used only to test that weight-loss advice is blocked during pregnancy.",
+  "asOf": "2026-09-27",
+  "basketUpcs": ["FDC1100370"],
+  "context": {
+    "mode": "fatLoss",
+    "lifeStage": "pregnant",
+    "targets": {
+      "lifeStage": "pregnant",
+      "sourceUrl": "https://example.org/test-targets/pregnancy",
+      "caloriesPerDay": 2000,
+      "proteinGramsPerDay": 75
+    }
+  }
+}

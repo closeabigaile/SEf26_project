@@ -123,3 +123,6 @@ app.*.symbols
 
 # Firebase config
 **/firebase_options.dart
+/scripts/node_modules/
+/scripts/serviceAccountKey.json
+/scripts/apl.csv
