@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
+
 import '../state/app_state.dart';
 import '../services/apl_service.dart';
 import 'receipt_scanner_screen.dart';
@@ -22,6 +23,7 @@ import '../utils/nutritional_utils.dart';
 /// Falls back to text input on web/desktop platforms.
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key, this.aplService, this.auth});
+
   final AplService? aplService;
   final FirebaseAuth? auth;
 
@@ -30,6 +32,8 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
+  static const Color _primaryRed = Color(0xFFD1001C);
+
   final _input = TextEditingController();
   final MobileScannerController _scannerController = MobileScannerController();
   late final AplService _apl;
@@ -69,23 +73,53 @@ class _ScanScreenState extends State<ScanScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Scan QR/Barcode'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+          contentPadding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+          title: const Row(
+            children: [
+              Icon(Icons.qr_code_scanner, color: _primaryRed),
+              SizedBox(width: 10),
+              Text('Scan Barcode'),
+            ],
+          ),
           content: SizedBox(
-            width: 300,
-            height: 300,
-            child: MobileScanner(
-              // Using a minimal callback that navigates away immediately upon detection
-              onDetect: (capture) {
-                final barcode = capture.barcodes.firstOrNull;
-                if (barcode?.rawValue != null) {
-                  // Pass the scanned value back to the main screen
-                  _checkEligibility(barcode!.rawValue!);
-                  // Close the dialog immediately
-                  Navigator.of(context).pop();
-                  // Update the text field for visual confirmation
-                  _input.text = barcode.rawValue!;
-                }
-              },
+            width: 340,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Center the product barcode inside the camera view.',
+                  style: TextStyle(color: Colors.grey.shade700),
+                ),
+                const SizedBox(height: 16),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: MobileScanner(
+                      // Using a minimal callback that navigates away immediately upon detection
+                      onDetect: (capture) {
+                        final barcode = capture.barcodes.firstOrNull;
+
+                        if (barcode?.rawValue != null) {
+                          // Pass the scanned value back to the main screen
+                          _checkEligibility(barcode!.rawValue!);
+
+                          // Close the dialog immediately
+                          Navigator.of(context).pop();
+
+                          // Update the text field for visual confirmation
+                          _input.text = barcode.rawValue!;
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           actions: [
@@ -129,19 +163,24 @@ class _ScanScreenState extends State<ScanScreen> {
   /// Sets [_busy] to prevent concurrent scans.
   Future<void> _checkEligibility(String code) async {
     final upc = code.trim();
+
     if (upc.isEmpty || _busy) return;
 
     _busy = true;
+
     try {
       final info = await _apl.findByUpc(upc);
+
       if (!mounted) return;
 
       if (info == null) {
         _snack('UPC $upc not found in APL');
+
         setState(() {
           _lastScanned = upc;
           _lastInfo = null;
         });
+
         return;
       }
 
@@ -149,10 +188,12 @@ class _ScanScreenState extends State<ScanScreen> {
         _lastScanned = upc;
         _lastInfo = info;
       });
+
       _loadHealthierOptions();
 
       final name = info['name'] ?? 'Unknown';
       final cat = info['category'] ?? '?';
+
       //_snack('$name ($cat) - Eligible!');
     } catch (e) {
       _snack('Error: $e');
@@ -175,14 +216,16 @@ class _ScanScreenState extends State<ScanScreen> {
     }
 
     final appState = context.read<AppState>();
+
     String category = _lastInfo!['category'] ?? 'Unknown';
+
     final nutrition = NutritionalUtils.buildNutritionFromFoodNutrients(
       _lastInfo!,
     );
 
     // Check if item can be added
     if (!appState.canAdd(category)) {
-      category = "Paid";
+      category = 'Paid';
     }
 
     appState.addItem(
@@ -218,6 +261,7 @@ class _ScanScreenState extends State<ScanScreen> {
     if (_lastInfo == null) return;
 
     final category = (_lastInfo!['category'] ?? '') as String;
+
     if (category.isEmpty) return;
 
     setState(() {
@@ -231,6 +275,7 @@ class _ScanScreenState extends State<ScanScreen> {
         baseProduct: _lastInfo!,
         max: 5,
       );
+
       if (!mounted) return;
 
       if (options.isEmpty) {
@@ -242,6 +287,7 @@ class _ScanScreenState extends State<ScanScreen> {
       });
     } catch (e) {
       if (!mounted) return;
+
       _snack('Error loading healthier options: $e');
     } finally {
       if (mounted) {
@@ -272,123 +318,166 @@ class _ScanScreenState extends State<ScanScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Healthier Alternatives',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: const Color(0xFFD1001C),
-                      fontWeight: FontWeight.bold,
+                  Center(
+                    child: Container(
+                      width: 44,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(999),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Health score is based on penalties (sugar, fat, and sodium) and bonuses (fiber and protein).\nLower scores indicate healthier choices.',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(color: Colors.grey[700]),
+
+                  const SizedBox(height: 18),
+
+                  const Row(
+                    children: [
+                      Icon(Icons.eco, color: Colors.green),
+                      SizedBox(width: 10),
+                      Text(
+                        'Healthier Alternatives',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: _primaryRed,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
+
+                  const SizedBox(height: 8),
+
+                  Text(
+                    'Health score is based on penalties (sugar, fat, and sodium) '
+                    'and bonuses (fiber and protein).\nLower scores indicate '
+                    'healthier choices.',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[700],
+                      height: 1.4,
+                    ),
+                  ),
+
+                  const SizedBox(height: 18),
+
                   ..._healthierOptions!.map((item) {
                     final name = item['name'] ?? 'Unknown';
                     final cat = item['category'] ?? '';
                     final upc = item['upc'] ?? '';
+
                     final score = (item['healthScore'] is num)
-                        ? item['healthScore'].toStringAsFixed(1)
+                        ? (item['healthScore'] as num).toStringAsFixed(1)
                         : '-';
 
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Card(
-                        elevation: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 12,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      name,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Category: $cat',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Text(
-                                      'UPC: $upc',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      'Health Score: $score',
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(color: Colors.grey.shade200),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                color: Colors.green.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.green.withValues(alpha: 0.1),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.add_circle_outline,
-                                    color: Colors.green,
+                              child: const Icon(
+                                Icons.eco_outlined,
+                                color: Colors.green,
+                              ),
+                            ),
+
+                            const SizedBox(width: 14),
+
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    name,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(),
-                                  onPressed: () {
-                                    appState.addItem(
-                                      upc: upc,
-                                      name: name,
-                                      category: cat,
-                                      nutrition:
-                                          NutritionalUtils.buildNutritionFromFoodNutrients(
-                                            item,
-                                          ),
-                                    );
-                                    Navigator.of(ctx).pop();
-                                    _snack('Added healthier item: $name');
-                                  },
-                                  tooltip: 'Add to basket',
-                                ),
+
+                                  const SizedBox(height: 4),
+
+                                  Text(
+                                    'Category: $cat',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey.shade700,
+                                    ),
+                                  ),
+
+                                  Text(
+                                    'UPC: $upc',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 4),
+
+                                  Text(
+                                    'Health Score: $score',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+
+                            const SizedBox(width: 12),
+
+                            FilledButton(
+                              onPressed: () {
+                                appState.addItem(
+                                  upc: upc,
+                                  name: name,
+                                  category: cat,
+                                  nutrition:
+                                      NutritionalUtils.buildNutritionFromFoodNutrients(
+                                        item,
+                                      ),
+                                );
+
+                                Navigator.of(ctx).pop();
+
+                                _snack('Added healthier item: $name');
+                              },
+                              style: FilledButton.styleFrom(
+                                backgroundColor: _primaryRed,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text('Add'),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -408,7 +497,9 @@ class _ScanScreenState extends State<ScanScreen> {
   /// Prevents multiple concurrent scans via [_busy] flag.
   void _onDetect(BarcodeCapture capture) {
     if (_busy) return;
+
     final barcode = capture.barcodes.firstOrNull;
+
     if (barcode?.rawValue != null) {
       _checkEligibility(barcode!.rawValue!);
     }
@@ -431,16 +522,22 @@ class _ScanScreenState extends State<ScanScreen> {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
-    final isMobile = MediaQuery.of(context).size.width < 600;
+
+    final isMobile = MediaQuery.of(context).size.width < 700;
+
     final canAdd =
         _lastInfo != null && appState.canAdd(_lastInfo!['category'] ?? '');
 
     return Scaffold(
+      // Project 2 M3 UI update:
+      // Use a soft neutral background so the shopping controls stand out.
+      backgroundColor: const Color(0xFFF7F7F8),
+
       appBar: AppBar(
         title: const Text('Scan Product'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.receipt),
+            icon: const Icon(Icons.receipt_long_outlined),
             tooltip: 'Scan Receipt',
             onPressed: () async {
               // 1. Stop the barcode scanner so it releases the camera
@@ -450,7 +547,9 @@ class _ScanScreenState extends State<ScanScreen> {
 
               // 2. Go to the receipt screen
               // await Navigator.of(context).push(
-              //   MaterialPageRoute(builder: (_) => const ReceiptScannerScreen()),
+              //   MaterialPageRoute(
+              //     builder: (_) => const ReceiptScannerScreen(),
+              //   ),
               // );
               context.go('/receipt');
 
@@ -458,428 +557,619 @@ class _ScanScreenState extends State<ScanScreen> {
               _scannerController.start();
             },
           ),
+
           IconButton(
             icon: const Icon(Icons.logout),
+            tooltip: 'Log out',
             onPressed: () async {
               // await FirebaseAuth.instance.signOut();
               await _auth.signOut();
-              if (context.mounted) context.go('/login');
+
+              if (context.mounted) {
+                context.go('/login');
+              }
             },
           ),
+
+          const SizedBox(width: 4),
         ],
       ),
-      body: isMobile
-          ? SafeArea(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Place barcode inside the square',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFD1001C),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: 280,
-                      height: 280,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFD1001C),
-                              width: 3,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: MobileScanner(
-                            controller: _scannerController,
-                            onDetect: _onDetect,
-                          ),
+
+      body: SafeArea(
+        child: isMobile
+            ? _buildMobileLayout(appState, canAdd)
+            : _buildDesktopLayout(appState, canAdd),
+      ),
+    );
+  }
+
+  /// Builds the updated desktop/web layout.
+  ///
+  /// The original UPC entry, camera scan, nutrition, healthier-alternative,
+  /// and add-to-basket features are preserved and presented in two cards.
+  Widget _buildDesktopLayout(AppState appState, bool canAdd) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(24, 28, 24, 40),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1040),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildPageIntro(),
+
+              const SizedBox(height: 24),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: _buildLookupCard(showCameraButton: true),
+                  ),
+
+                  const SizedBox(width: 24),
+
+                  Expanded(
+                    flex: 4,
+                    child: _lastInfo != null
+                        ? _buildProductResult(appState, canAdd)
+                        : _buildShoppingTips(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Builds the updated mobile layout.
+  ///
+  /// Mobile users keep the live barcode scanner first, with manual UPC entry
+  /// and product results stacked below it.
+  Widget _buildMobileLayout(AppState appState, bool canAdd) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildPageIntro(),
+
+          const SizedBox(height: 20),
+
+          _buildScannerCard(),
+
+          const SizedBox(height: 16),
+
+          _buildLookupCard(showCameraButton: false),
+
+          if (_lastInfo != null) ...[
+            const SizedBox(height: 16),
+
+            _buildProductResult(appState, canAdd),
+          ],
+        ],
+      ),
+    );
+  }
+
+  /// Builds the short introduction above the scan controls.
+  Widget _buildPageIntro() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Check a product',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF222222),
+          ),
+        ),
+
+        const SizedBox(height: 6),
+
+        Text(
+          'Scan a barcode or enter the UPC to check WIC eligibility, '
+          'review nutrition details, and add the item to your basket.',
+          style: TextStyle(
+            fontSize: 15,
+            height: 1.45,
+            color: Colors.grey.shade700,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Builds the manual UPC entry section.
+  ///
+  /// Desktop users also receive the existing camera-scanning action.
+  Widget _buildLookupCard({required bool showCameraButton}) {
+    return Card(
+      elevation: 0,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 46,
+                  height: 46,
+                  decoration: BoxDecoration(
+                    color: _primaryRed.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(Icons.numbers, color: _primaryRed),
+                ),
+
+                const SizedBox(width: 14),
+
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Enter UPC code',
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: FilledButton(
-                              onPressed: (_lastInfo != null)
-                                  ? () => _checkEligibility(_lastScanned ?? '')
-                                  : null,
-                              child: const Text('Re-check'),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: FilledButton(
-                              onPressed: canAdd ? _addToBasket : null,
-                              style: FilledButton.styleFrom(
-                                backgroundColor: canAdd
-                                    ? const Color(0xFFD1001C)
-                                    : Colors.grey.shade300,
-                              ),
-                              child: const Text('Add to Basket'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (_lastInfo != null) ...[
-                      const SizedBox(height: 16),
-                      Card(
-                        margin: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      _lastInfo!['name'] ?? 'Unknown',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                        color: Color(0xFFD1001C),
-                                      ),
-                                    ),
-                                  ),
-                                  if (_loadingHealthier)
-                                    const SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
-                                    )
-                                  else if (_healthierOptions != null &&
-                                      _healthierOptions!.isNotEmpty)
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green.withValues(
-                                          alpha: 0.1,
-                                        ),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: IconButton(
-                                        icon: const Icon(
-                                          Icons.eco,
-                                          color: Colors.green,
-                                          size: 24,
-                                        ),
-                                        iconSize: 24,
-                                        padding: EdgeInsets.zero,
-                                        constraints: const BoxConstraints(),
-                                        onPressed: _showHealthierOptions,
-                                        tooltip:
-                                            'View healthier alternatives (${_healthierOptions!.length})',
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              NutritionalBadgesCompact(
-                                nutrition:
-                                    NutritionalUtils.buildNutritionFromFoodNutrients(
-                                      _lastInfo!,
-                                    ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Category: ${_lastInfo!['category']}',
-                                style: TextStyle(color: Colors.grey.shade700),
-                              ),
-                              Text(
-                                'UPC: $_lastScanned',
-                                style: TextStyle(
-                                  color: Colors.grey.shade600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              if (!canAdd) ...[
-                                const SizedBox(height: 8),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.orange.shade100,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.warning_amber_rounded,
-                                        size: 16,
-                                        color: Colors.orange.shade700,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        'Category limit reached',
-                                        style: TextStyle(
-                                          color: Colors.orange.shade700,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
-                        ),
+
+                      SizedBox(height: 2),
+
+                      Text(
+                        'Use the number printed beneath the barcode.',
+                        style: TextStyle(fontSize: 13, color: Colors.grey),
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 22),
+
+            TextField(
+              controller: _input,
+              decoration: InputDecoration(
+                labelText: 'UPC Code',
+                hintText: '000000000000',
+                prefixIcon: const Icon(Icons.qr_code_2),
+                filled: true,
+                fillColor: const Color(0xFFF8F8F9),
+
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(color: _primaryRed, width: 2),
+                ),
+              ),
+              keyboardType: TextInputType.number,
+              onSubmitted: (value) {
+                if (value.isNotEmpty) {
+                  _checkEligibility(value);
+                }
+              },
+            ),
+
+            const SizedBox(height: 16),
+
+            FilledButton.icon(
+              onPressed: () {
+                final upc = _input.text.trim();
+
+                if (upc.isNotEmpty) {
+                  _checkEligibility(upc);
+                }
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: _primaryRed,
+                foregroundColor: Colors.white,
+                minimumSize: const Size.fromHeight(52),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              icon: const Icon(Icons.search),
+              label: const Text('Check Eligibility'),
+            ),
+
+            if (showCameraButton) ...[
+              const SizedBox(height: 10),
+
+              OutlinedButton.icon(
+                onPressed: _showScanDialog,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: _primaryRed,
+                  side: const BorderSide(color: _primaryRed),
+                  minimumSize: const Size.fromHeight(48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                icon: const Icon(Icons.camera_alt_outlined),
+                label: const Text('Scan with Camera'),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds the existing live mobile scanner inside the updated card layout.
+  Widget _buildScannerCard() {
+    return Card(
+      elevation: 0,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.qr_code_scanner, color: _primaryRed),
+
+                SizedBox(width: 8),
+
+                Text(
+                  'Scan barcode',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 14),
+
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    MobileScanner(
+                      controller: _scannerController,
+                      onDetect: _onDetect,
+                    ),
+
+                    // Visual scan guide only; barcode detection remains unchanged.
+                    IgnorePointer(
+                      child: Container(
+                        margin: const EdgeInsets.all(26),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: _primaryRed, width: 3),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            )
-          : SafeArea(
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(24),
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                      constraints: const BoxConstraints(maxWidth: 500),
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.qr_code_scanner,
-                            size: 64,
-                            color: const Color(0xFFD1001C),
-                          ),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'Enter UPC Code',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFD1001C),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Type the barcode number manually',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                          const SizedBox(height: 32),
-                          TextField(
-                            controller: _input,
-                            decoration: InputDecoration(
-                              labelText: 'UPC Code',
-                              hintText: '000000000000',
-                              prefixIcon: const Icon(
-                                Icons.numbers,
-                                color: Color(0xFFD1001C),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFD1001C),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFD1001C),
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onSubmitted: (value) {
-                              if (value.isNotEmpty) {
-                                _checkEligibility(value);
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 24),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: FilledButton.icon(
-                                  onPressed: () {
-                                    final upc = _input.text.trim();
-                                    if (upc.isNotEmpty) {
-                                      _checkEligibility(upc);
-                                    }
-                                  },
-                                  icon: const Icon(Icons.search),
-                                  label: const Text('Check'),
-                                ),
-                              ),
-                              // --- START NEW BUTTON ---
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: OutlinedButton.icon(
-                                  // Used OutlinedButton for contrast
-                                  onPressed: _showScanDialog,
-                                  icon: const Icon(Icons.camera_alt),
-                                  label: const Text('Scan with Camera'),
-                                ),
-                              ),
+            ),
 
-                              // --- END NEW BUTTON ---
-                              if (_lastInfo != null) ...[
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: FilledButton.icon(
-                                    onPressed: canAdd ? _addToBasket : null,
-                                    style: FilledButton.styleFrom(
-                                      backgroundColor: canAdd
-                                          ? const Color(0xFFD1001C)
-                                          : Colors.grey.shade300,
-                                    ),
-                                    icon: const Icon(Icons.add_shopping_cart),
-                                    label: const Text('Add'),
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
-                          if (_lastInfo != null) ...[
-                            const SizedBox(height: 24),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xFFD1001C,
-                                ).withValues(alpha: 0.05),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: const Color(
-                                    0xFFD1001C,
-                                  ).withValues(alpha: 0.2),
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          _lastInfo!['name'] ?? 'Unknown',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            color: Color(0xFFD1001C),
-                                          ),
-                                        ),
-                                      ),
-                                      if (_loadingHealthier)
-                                        const SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                          ),
-                                        )
-                                      else if (_healthierOptions != null &&
-                                          _healthierOptions!.isNotEmpty)
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.green.withValues(
-                                              alpha: 0.1,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: IconButton(
-                                            icon: const Icon(
-                                              Icons.eco,
-                                              color: Colors.green,
-                                              size: 24,
-                                            ),
-                                            iconSize: 24,
-                                            padding: EdgeInsets.zero,
-                                            constraints: const BoxConstraints(),
-                                            onPressed: _showHealthierOptions,
-                                            tooltip:
-                                                'View healthier alternatives (${_healthierOptions!.length})',
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                  NutritionalBadgesCompact(
-                                    nutrition:
-                                        NutritionalUtils.buildNutritionFromFoodNutrients(
-                                          _lastInfo!,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    'Category: ${_lastInfo!['category']}',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade700,
-                                    ),
-                                  ),
-                                  Text(
-                                    'UPC: $_lastScanned',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  if (!canAdd) ...[
-                                    const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.warning_amber_rounded,
-                                          size: 16,
-                                          color: Colors.orange.shade700,
-                                        ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          'Category limit reached',
-                                          style: TextStyle(
-                                            color: Colors.orange.shade700,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+            const SizedBox(height: 12),
+
+            Text(
+              'Center the barcode inside the red frame.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Displays guidance before the user has checked a product.
+  ///
+  /// This is a presentation-only addition for the Project 2 shopping UI.
+  Widget _buildShoppingTips() {
+    return Card(
+      elevation: 0,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.shopping_basket_outlined,
+              size: 34,
+              color: _primaryRed,
+            ),
+
+            const SizedBox(height: 16),
+
+            const Text(
+              'Shop with confidence',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(
+              'After a product is found, you will see its category, '
+              'nutrition details, benefit status, and healthier alternatives '
+              'when available.',
+              style: TextStyle(
+                fontSize: 14,
+                height: 1.5,
+                color: Colors.grey.shade700,
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            _tipRow(
+              Icons.verified_outlined,
+              'Check whether the product is in the approved list.',
+            ),
+
+            const SizedBox(height: 12),
+
+            _tipRow(
+              Icons.restaurant_menu_outlined,
+              'Review nutrition information before adding it.',
+            ),
+
+            const SizedBox(height: 12),
+
+            _tipRow(
+              Icons.eco_outlined,
+              'Compare healthier alternatives when they are available.',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Helper row for the informational shopping tips.
+  Widget _tipRow(IconData icon, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 20, color: _primaryRed),
+
+        const SizedBox(width: 10),
+
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 13,
+              height: 1.4,
+              color: Colors.grey.shade700,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Builds the product result using the existing lookup and basket data.
+  ///
+  /// Nutritional badges, category limits, healthier alternatives, and
+  /// add-to-basket behavior all continue to use the original logic above.
+  Widget _buildProductResult(AppState appState, bool canAdd) {
+    final nutrition = NutritionalUtils.buildNutritionFromFoodNutrients(
+      _lastInfo!,
+    );
+
+    final name = _lastInfo!['name'] ?? 'Unknown';
+
+    final category = _lastInfo!['category'] ?? 'Unknown';
+
+    return Card(
+      elevation: 0,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: _primaryRed.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(
+                    Icons.check_circle_outline,
+                    color: _primaryRed,
+                  ),
+                ),
+
+                const SizedBox(width: 14),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Product found',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: _primaryRed,
+                        ),
+                      ),
+
+                      const SizedBox(height: 4),
+
+                      Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          height: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 18),
+
+            NutritionalBadgesCompact(nutrition: nutrition),
+
+            const SizedBox(height: 18),
+
+            _infoRow('Category', category),
+
+            const SizedBox(height: 8),
+
+            _infoRow('UPC', _lastScanned ?? '-'),
+
+            if (!canAdd) ...[
+              const SizedBox(height: 16),
+
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.orange.shade200),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: Colors.orange.shade800,
+                    ),
+
+                    const SizedBox(width: 10),
+
+                    Expanded(
+                      child: Text(
+                        'Category limit reached',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.orange.shade900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
+            if (_loadingHealthier) ...[
+              const SizedBox(height: 18),
+
+              const LinearProgressIndicator(),
+
+              const SizedBox(height: 8),
+
+              Text(
+                'Checking for healthier alternatives...',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              ),
+            ] else if (_healthierOptions != null &&
+                _healthierOptions!.isNotEmpty) ...[
+              const SizedBox(height: 18),
+
+              // Same existing healthier-alternative action, made more visible.
+              OutlinedButton.icon(
+                onPressed: _showHealthierOptions,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.green.shade700,
+                  side: BorderSide(color: Colors.green.shade300),
+                  minimumSize: const Size.fromHeight(46),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                icon: const Icon(Icons.eco_outlined),
+                label: Text(
+                  'View ${_healthierOptions!.length} healthier alternative'
+                  '${_healthierOptions!.length == 1 ? '' : 's'}',
+                ),
+              ),
+            ],
+
+            const SizedBox(height: 18),
+
+            FilledButton.icon(
+              onPressed: canAdd ? _addToBasket : null,
+              style: FilledButton.styleFrom(
+                backgroundColor: canAdd ? _primaryRed : Colors.grey.shade300,
+                foregroundColor: Colors.white,
+                minimumSize: const Size.fromHeight(52),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              icon: const Icon(Icons.add_shopping_cart),
+              label: const Text('Add to Basket'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Helper row for product metadata in the result card.
+  Widget _infoRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 76,
+          child: Text(
+            label,
+            style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+          ),
+        ),
+
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ],
     );
   }
 }
