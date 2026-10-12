@@ -711,18 +711,19 @@ class _BasketItemState extends State<_BasketItem> {
 
                         const SizedBox(width: 8),
 
-                        Text(
-                          _expanded
-                              ? 'Hide nutrition details'
-                              : 'View nutrition details',
-                          style: const TextStyle(
-                            color: _primaryRed,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13,
+                        Expanded(
+                          child: Text(
+                            _expanded
+                                ? 'Hide nutrition details'
+                                : 'View nutrition details',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: _primaryRed,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
-
-                        const Spacer(),
 
                         Icon(
                           _expanded
