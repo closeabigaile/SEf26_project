@@ -455,17 +455,20 @@ class _ScanScreenState extends State<ScanScreen> {
 
                             const SizedBox(width: 12),
 
-                            FilledButton(
+                            FilledButton.icon(
                               onPressed: () {
-                                appState.addItem(
+                                final added = appState.addItem(
                                   upc: upc,
                                   name: name,
                                   category: cat,
-                                  nutrition:
-                                      NutritionalUtils.buildNutritionFromFoodNutrients(
-                                        item,
-                                      ),
+                                  nutrition: NutritionalUtils.buildNutritionFromFoodNutrients(
+                                    item,
+                                  ),
                                 );
+
+                                if (!added) {
+                                  return;
+                                }
 
                                 Navigator.of(ctx).pop();
 
@@ -475,7 +478,8 @@ class _ScanScreenState extends State<ScanScreen> {
                                 backgroundColor: _primaryRed,
                                 foregroundColor: Colors.white,
                               ),
-                              child: const Text('Add'),
+                              icon: const Icon(Icons.add_circle_outline),
+                              label: const Text('Add'),
                             ),
                           ],
                         ),
@@ -643,6 +647,22 @@ class _ScanScreenState extends State<ScanScreen> {
 
           const SizedBox(height: 16),
 
+          FilledButton(
+            onPressed: _lastScanned != null
+                ? () => _checkEligibility(_lastScanned!)
+                : null,
+            child: const Text('Re-check'),
+          ),
+
+          const SizedBox(height: 10),
+
+          FilledButton(
+            onPressed: _lastInfo != null && canAdd ? _addToBasket : null,
+            child: const Text('Add to Basket'),
+          ),
+
+          const SizedBox(height: 16),
+
           _buildLookupCard(showCameraButton: false),
 
           if (_lastInfo != null) ...[
@@ -719,7 +739,7 @@ class _ScanScreenState extends State<ScanScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Enter UPC code',
+                        'Enter UPC Code',
                         style: TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.bold,
@@ -791,7 +811,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
               ),
               icon: const Icon(Icons.search),
-              label: const Text('Check Eligibility'),
+              label: const Text('Check'),
             ),
 
             if (showCameraButton) ...[
@@ -875,7 +895,7 @@ class _ScanScreenState extends State<ScanScreen> {
             const SizedBox(height: 12),
 
             Text(
-              'Center the barcode inside the red frame.',
+              'Place barcode inside the square',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
             ),
@@ -1054,9 +1074,21 @@ class _ScanScreenState extends State<ScanScreen> {
 
             const SizedBox(height: 18),
 
-            _infoRow('Category', category),
+            Text(
+              'Category: $category',
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
 
             const SizedBox(height: 8),
+
+            Text(
+              'UPC: ${_lastScanned ?? '-'}',
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
 
             _infoRow('UPC', _lastScanned ?? '-'),
 
@@ -1121,7 +1153,7 @@ class _ScanScreenState extends State<ScanScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                icon: const Icon(Icons.eco_outlined),
+                icon: const Icon(Icons.eco),
                 label: Text(
                   'View ${_healthierOptions!.length} healthier alternative'
                   '${_healthierOptions!.length == 1 ? '' : 's'}',
@@ -1142,7 +1174,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
               ),
               icon: const Icon(Icons.add_shopping_cart),
-              label: const Text('Add to Basket'),
+              label: const Text('Add'),
             ),
           ],
         ),

@@ -141,6 +141,10 @@ class AplService {
     required Map<String, dynamic> baseProduct,
     int max = 5,
   }) async {
+    if (category.trim().isEmpty) {
+      return [];
+    }
+    
     final baseScore = _computeHealthScore(baseProduct);
     final snap = await _db
         .collection('apl')

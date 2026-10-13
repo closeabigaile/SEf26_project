@@ -73,6 +73,11 @@ class _SignupPageState extends State<SignupPage> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.message ?? 'Sign up failed')));
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Sign up failed')));
     } finally {
       if (mounted) setState(() => _loading = false);
     }

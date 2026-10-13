@@ -36,10 +36,20 @@ class BalancesScreen extends StatelessWidget {
   /// - Calls [FirebaseAuth.instance.signOut]
   /// - Navigates to `/login` via [GoRouter]
   Future<void> _signOut(BuildContext context) async {
-    await (auth ?? FirebaseAuth.instance).signOut();
+    try {
+      await (auth ?? FirebaseAuth.instance).signOut();
 
-    if (context.mounted) {
-      context.go('/login');
+      if (context.mounted) {
+        context.go('/login');
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error signing out: $e'),
+        ),
+      );
     }
   }
 
@@ -441,8 +451,8 @@ class _BalanceCard extends StatelessWidget {
 
                       Text(
                         isUnlimited
-                            ? '$used items used'
-                            : '$used of $allowed items used',
+                            ? 'Used: $used items'
+                            : 'Used: $used of $allowed items',
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey.shade600,
