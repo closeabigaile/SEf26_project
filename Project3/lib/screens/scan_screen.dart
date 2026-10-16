@@ -189,6 +189,7 @@ class _ScanScreenState extends State<ScanScreen> {
       upc: _lastScanned ?? '',
       name: _lastInfo!['name'] ?? 'Unknown',
       category: category,
+      originalBenefitCategory: _lastInfo!['category'] ?? 'Unknown',
       nutrition: nutrition,
     );
 
@@ -372,7 +373,11 @@ class _ScanScreenState extends State<ScanScreen> {
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(),
                                   onPressed: () {
-                                    appState.addItem(
+                                    int quantity() => appState.basket
+                                        .where((line) => line['upc'] == upc)
+                                        .fold<int>(0, (total, line) => total + (line['qty'] as int? ?? 0));
+                                    final before = quantity();
+                                    final created = appState.addItem(
                                       upc: upc,
                                       name: name,
                                       category: cat,
@@ -381,6 +386,12 @@ class _ScanScreenState extends State<ScanScreen> {
                                             item,
                                           ),
                                     );
+                                    // addItem also returns false for a successful
+                                    // increment, so check the actual quantity.
+                                    if (!created && quantity() <= before) {
+                                      _snack('Could not add $name. Check your allowance and try again.');
+                                      return;
+                                    }
                                     Navigator.of(ctx).pop();
                                     _snack('Added healthier item: $name');
                                   },

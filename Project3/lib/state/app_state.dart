@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../utils/nutritional_utils.dart';
+import '../services/apl_service.dart';
 
 /// Central application state manager that handles user-scoped WIC benefits
 /// balances and shopping basket data.
@@ -20,6 +21,9 @@ class AppState extends ChangeNotifier {
   final FirebaseFirestore _db;
 
   AppState({FirebaseFirestore? db}) : _db = db ?? FirebaseFirestore.instance;
+
+  /// Read-only catalog access using this state's configured database.
+  AplService get productCatalog => AplService(db: _db);
 
   // ---------- Reactive data ----------
 
@@ -359,6 +363,7 @@ class AppState extends ChangeNotifier {
     required String upc,
     required String name,
     required String category,
+    String? originalBenefitCategory,
     Map<String, dynamic>? nutrition,
   }) {
     if (_uid == null) return false;
@@ -370,7 +375,7 @@ class AppState extends ChangeNotifier {
     final idx = basket.indexWhere((e) => e['upc'] == upc && upc.isNotEmpty);
     if (idx >= 0) {
       // existing line -> increment path
-      incrementItem(upc, category);
+      incrementItem(upc, originalBenefitCategory ?? category);
       return false;
     }
 
@@ -405,7 +410,7 @@ class AppState extends ChangeNotifier {
       'name': name,
       'category': cat,
       'qty': 1,
-      'original_benefit_category': cat,
+      'original_benefit_category': _canon(originalBenefitCategory ?? cat),
       'nutrition': nutritionData,
     });
     balances[cat]!['used'] = (balances[cat]!['used'] ?? 0) + 1;

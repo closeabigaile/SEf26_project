@@ -196,6 +196,143 @@ void main() {
     expect(state.clearCalls, 0);
   }
 
+  testWidgets(
+    'included juice has concise positive help with no rejection or suggestions',
+    (tester) async {
+      await loadState([
+        {
+          'upc': 'juice',
+          'name': 'Included juice',
+          'category': 'JUICE 64',
+          'qty': 1,
+        },
+      ]);
+      state.balances['JUICE 64'] = {'allowed': 1, 'used': 1};
+      final before = snapshot();
+      final storedBefore = await saved();
+      await pumpBasket(tester);
+      await openHelp(tester, 'Included juice');
+      expect(find.text('Fits your app allowance'), findsOneWidget);
+      expect(find.textContaining('including this item'), findsOneWidget);
+      expect(
+        find.text('You can keep this item in your basket.'),
+        findsOneWidget,
+      );
+      expect(find.text('Unable to determine the cause'), findsNothing);
+      expect(find.text('Similar items to consider'), findsNothing);
+      expect(snapshot(), before);
+      expect(await saved(), storedBefore);
+      expectNoStateOperations();
+      state.balances['JUICE 64']!['used'] = 2;
+      state.changed();
+      await tester.pumpAndSettle();
+      expect(find.text('Fits your app allowance'), findsNothing);
+      expect(
+        find.textContaining('Your basket or benefit information changed'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    'paid help never suggests products, even when allowance room becomes available',
+    (tester) async {
+      await loadState([
+        {
+          'upc': '070038322207',
+          'name': 'Apple juice',
+          'category': 'JUICE 64',
+          'qty': 1,
+        },
+        {
+          'upc': '070038322207',
+          'name': 'Extra apple juice',
+          'category': 'PAID',
+          'qty': 1,
+        },
+      ]);
+      state.balances['JUICE 64'] = {'allowed': 1, 'used': 1};
+      await database.collection('apl').doc('070038322207').set({
+        'name': 'ALWAYS SAVE APPLE JUICE',
+        'category': 'JUICE 64',
+        'eligible': true,
+      });
+      await database.collection('apl').doc('002').set({
+        'name': 'ANOTHER APPLE JUICE',
+        'category': 'JUICE 64',
+        'eligible': true,
+      });
+      final before = snapshot();
+      final storedBefore = await saved();
+      await pumpBasket(tester);
+      await openHelp(tester, 'Extra apple juice');
+      expect(find.text('Why this item is marked PAID'), findsOneWidget);
+      expect(find.textContaining('1 of 1 items'), findsOneWidget);
+      expect(find.textContaining('Demo allowance only'), findsOneWidget);
+      expect(find.text('ANOTHER APPLE JUICE'), findsNothing);
+      expect(find.text('Similar items to consider'), findsNothing);
+      expect(
+        find.textContaining('Changing brands will not increase the allowance'),
+        findsOneWidget,
+      );
+      expect(snapshot(), before);
+      expect(await saved(), storedBefore);
+      expectNoStateOperations();
+
+      state.balances['JUICE 64']!['used'] = 0;
+      state.changed();
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('Your basket or benefit information changed'),
+        findsOneWidget,
+      );
+      expect(find.text('ANOTHER APPLE JUICE'), findsNothing);
+      expect(find.text('Why this item is marked PAID'), findsNothing);
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
+      await openHelp(tester, 'Extra apple juice');
+      expect(find.text('ANOTHER APPLE JUICE'), findsNothing);
+      expect(find.text('Similar items to consider'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'legacy paid-only line uses exact APL category; unknown products do not invent a limit',
+    (tester) async {
+      await loadState([
+        {
+          'upc': 'juice',
+          'name': 'Legacy paid juice',
+          'category': 'PAID',
+          'qty': 1,
+        },
+        {
+          'upc': 'missing',
+          'name': 'Unknown paid item',
+          'category': 'PAID',
+          'qty': 1,
+        },
+      ]);
+      state.balances['JUICE 64'] = {'allowed': 1, 'used': 1};
+      await database.collection('apl').doc('juice').set({
+        'name': 'APPLE JUICE',
+        'category': 'JUICE 64',
+        'eligible': true,
+      });
+      await pumpBasket(tester);
+      await openHelp(tester, 'Legacy paid juice');
+      expect(find.textContaining('1 of 1 items'), findsOneWidget);
+      expect(find.text('Similar items to consider'), findsNothing);
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
+      await openHelp(tester, 'Unknown paid item');
+      expect(find.text('This item is marked for you to pay'), findsOneWidget);
+      expect(find.textContaining('1 of 1 items'), findsNothing);
+      expect(find.text('Similar items to consider'), findsNothing);
+      expectNoStateOperations();
+    },
+  );
+
   for (final id in ['M0-M4-01', 'M0-M4-02', 'M0-M4-03', 'M0-M4-F01']) {
     testWidgets(
       '$id opens selected-item help and closes without state or database changes',
@@ -253,13 +390,13 @@ void main() {
   });
 
   testWidgets(
-    'a real item sharing a sample UPC receives fallback without explicit sample linkage',
+    'a real item sharing a sample UPC uses its basket allocation, not sample evidence',
     (tester) async {
       final line = _sampleLine('M0-M4-01')..remove('checkout_help_source');
       await loadState([line]);
       await pumpBasket(tester);
       await openHelp(tester, line['name'] as String);
-      expectAnswer('M0-M4-F01');
+      expect(find.text('Fits your app allowance'), findsOneWidget);
       expect(find.textContaining('Synthetic example:'), findsNothing);
     },
   );

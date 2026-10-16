@@ -73,6 +73,11 @@ class _SignupPageState extends State<SignupPage> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.message ?? 'Sign up failed')));
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? 'Could not save your profile.')),
+      );
     } finally {
       if (mounted) setState(() => _loading = false);
     }
