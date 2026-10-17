@@ -7,9 +7,8 @@
 //   node scripts/seed_nutrition.cjs --switch collection --confirm wolfbyte-proj1   (turn on)
 //   node scripts/seed_nutrition.cjs --switch apl --confirm wolfbyte-proj1          (revert)
 //
-// The app only reads nutrition/ when config/nutrition has source "collection"
-// (see AplService). --switch writes just that one field; seeding never flips
-// it, so data can be loaded and checked before the app uses it.
+// The app reads nutrition/ unless config/nutrition has source "apl" (see
+// AplService). --switch writes just that one field; seeding never flips it.
 //
 // Never touches apl/ or users/. Only creates documents (precondition
 // exists:false); an existing nutrition doc with different data stops the run.
@@ -120,7 +119,7 @@ async function main() {
   const apl = await batchGet(client, docs.map((d) => `${DOCS}/apl/${d.upc}`));
   const existing = await batchGet(client, docs.map((d) => `${DOCS}/nutrition/${d.upc}`));
   const config = await batchGet(client, [`${DOCS}/config/nutrition`]);
-  const appSource = config.get(`${DOCS}/config/nutrition`)?.source ?? '(not set: app uses APL only)';
+  const appSource = config.get(`${DOCS}/config/nutrition`)?.source ?? '(not set: app uses nutrition/, the default)';
 
   const creates = [], unchanged = [], notEligible = [], conflicts = [];
   for (const d of docs) {

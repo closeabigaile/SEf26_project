@@ -13,10 +13,10 @@ import '../utils/wic_categories.dart';
 /// `nutrition/{upc}` collection (see scripts/enrich_nutrition_off.cjs), which
 /// is merged in here so the APL import itself stays unchanged.
 ///
-/// That collection is used only when the `config/nutrition` document has
-/// `source: "collection"`. Otherwise (missing, unreadable, or `"apl"`) only
-/// nutrition stored on APL records is used, as before. Switching back needs
-/// no deletion; the app reads the switch once per start.
+/// That collection is used by default. Setting the `config/nutrition`
+/// document to `source: "apl"` switches it off, so only nutrition stored on
+/// APL records is used, as before. Switching needs no deletion; the app reads
+/// the switch once per start.
 class AplService {
   // final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseFirestore _db;
@@ -51,9 +51,11 @@ class AplService {
   Future<bool> _readSwitch() async {
     try {
       final doc = await _db.collection('config').doc('nutrition').get();
-      return doc.data()?['source'] == 'collection';
+      return doc.data()?['source'] != 'apl';
     } on FirebaseException {
-      return false;
+      // Unreadable switch: keep the default. Nutrition reads that the rules
+      // deny are caught too and simply leave nutrition unknown.
+      return true;
     }
   }
 

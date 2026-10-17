@@ -159,12 +159,13 @@ void main() {
   });
 
   group('config/nutrition switch', () {
-    test('missing switch keeps the previous APL-only behavior', () async {
+    test('a missing switch uses the nutrition collection (default)', () async {
       final service = AplService(db: await _seed(source: null));
-      final product = (await service.findByUpc(_vanillaYogurt))!;
-      expect(product['foodNutrients'], isNull);
-      expect(await service.balanceCandidates('YOGURT'), isEmpty);
-      expect(await service.usesNutritionCollection(), isFalse);
+      expect(await service.usesNutritionCollection(), isTrue);
+      expect(
+        _nutrient((await service.findByUpc(_vanillaYogurt))!, 'Sodium, Na'),
+        169,
+      );
     });
 
     test('source "apl" switches the nutrition collection off', () async {
@@ -217,7 +218,7 @@ void main() {
     );
 
     test('an explicit override beats the switch', () async {
-      final db = await _seed(source: null);
+      final db = await _seed(source: 'apl');
       final service = AplService(db: db, useNutritionCollection: true);
       expect(
         _nutrient((await service.findByUpc(_vanillaYogurt))!, 'Sodium, Na'),
