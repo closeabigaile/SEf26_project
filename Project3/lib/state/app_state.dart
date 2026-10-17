@@ -278,19 +278,10 @@ class AppState extends ChangeNotifier {
                   'checkout_help_scenario_id': m['checkout_help_scenario_id'],
                 },
                 'qty': (m['qty'] is int) ? m['qty'] as int : 1,
-                'nutrition':
-                    m['nutrition'] as Map<String, dynamic>? ??
-                    const {
-                      'calories': 0.0,
-                      'totalFat': 0.0,
-                      'saturatedFat': 0.0,
-                      'transFat': 0.0,
-                      'sodium': 0.0,
-                      'sugar': 0.0,
-                      'addedSugar': 0.0,
-                      'protein': 0.0,
-                      'fiber': 0.0,
-                    },
+                // Items saved without nutrition stay unknown, never zero (M1).
+                'nutrition': m['nutrition'] is Map
+                    ? Map<String, dynamic>.from(m['nutrition'] as Map)
+                    : NutritionalUtils.unknownNutrition,
               };
             }),
           );
@@ -390,20 +381,8 @@ class AppState extends ChangeNotifier {
       return false;
     }
 
-    // Generate nutritional data if not provided
-    final nutritionData =
-        nutrition ??
-        const {
-          'calories': 0.0,
-          'totalFat': 0.0,
-          'saturatedFat': 0.0,
-          'transFat': 0.0,
-          'sodium': 0.0,
-          'sugar': 0.0,
-          'addedSugar': 0.0,
-          'protein': 0.0,
-          'fiber': 0.0,
-        };
+    // Missing nutrition is unknown, not zero (M1).
+    final nutritionData = nutrition ?? NutritionalUtils.unknownNutrition;
 
     basket.add({
       'upc': upc,
@@ -571,6 +550,50 @@ class AppState extends ChangeNotifier {
     // ignore: discarded_futures
     _persist();
     notifyListeners();
+  }
+
+  /// Replaces one benefit line with a same-category product (M2 swap).
+  ///
+  /// Keeps the line's quantity and category, so [balances] do not change. If
+  /// [toUpc] is already in the basket under [category], the quantities merge.
+  /// PAID lines are not swapped. Returns false when nothing changed.
+  bool swapItem({
+    required String fromUpc,
+    required String category,
+    required String toUpc,
+    required String toName,
+    Map<String, dynamic>? toNutrition,
+  }) {
+    if (_uid == null || fromUpc == toUpc || toUpc.isEmpty) return false;
+    final cat = _canon(category);
+    if (cat == 'PAID') return false;
+
+    final from = basket.indexWhere(
+      (e) => e['upc'] == fromUpc && _canon(e['category'] as String) == cat,
+    );
+    if (from < 0) return false;
+
+    final existing = basket.indexWhere(
+      (e) => e['upc'] == toUpc && _canon(e['category'] as String) == cat,
+    );
+    if (existing >= 0) {
+      basket[existing]['qty'] =
+          (basket[existing]['qty'] as int? ?? 0) +
+          (basket[from]['qty'] as int? ?? 0);
+      basket.removeAt(from);
+    } else {
+      basket[from] = {
+        ...basket[from],
+        'upc': toUpc,
+        'name': toName,
+        'nutrition': toNutrition ?? NutritionalUtils.unknownNutrition,
+      };
+    }
+
+    // ignore: discarded_futures
+    _persist();
+    notifyListeners();
+    return true;
   }
 
   Future<void> checkout() async {

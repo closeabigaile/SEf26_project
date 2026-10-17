@@ -81,9 +81,9 @@ void main() {
       },
     );
 
-    test('test_uc11_product_without_nutrition_uses_zero_defaults', () {
-      // UC11 extension 1a: a recognized product lacking nutrition values
-      // receives zero-valued defaults rather than failing to add.
+    test('test_uc11_product_without_nutrition_is_unknown', () {
+      // UC11 extension 1a: a recognized product lacking nutrition values is
+      // still added. M1 stores the values as unknown (null), not zero.
       final added = state.addItem(
         upc: '555',
         name: 'Receipt Juice',
@@ -92,8 +92,8 @@ void main() {
       expect(added, isTrue);
       final nutrition =
           state.basket.single['nutrition'] as Map<String, dynamic>;
-      expect(nutrition['calories'], 0.0);
-      expect(nutrition['protein'], 0.0);
+      expect(nutrition['calories'], isNull);
+      expect(nutrition['protein'], isNull);
     });
   });
 
@@ -225,24 +225,25 @@ void main() {
       await tester.pumpAndSettle();
       // ASSERT: nutrition facts are visible with the stored values.
       expect(find.text('Nutrition Facts'), findsOneWidget);
-      expect(find.text('150.0 cal'), findsOneWidget);
-      expect(find.text('8.0g'), findsWidgets);
-      expect(find.text('120.0mg'), findsOneWidget);
+      // M1 format: value with its unit, whole numbers without decimals.
+      expect(find.text('150cal'), findsOneWidget);
+      expect(find.text('8g'), findsWidgets);
+      expect(find.text('120mg'), findsOneWidget);
     });
 
     testWidgets(
-      'test_uc13_missing_nutrition_map_shows_zero_defaults',
+      'test_uc13_missing_nutrition_map_shows_unknown',
       (WidgetTester tester) async {
         // UC13 extension 2a: a basket product with no stored nutrition
-        // information displays zero defaults instead of failing.
+        // information still opens; M1 shows "Unknown" instead of zero.
         when(state.basket).thenReturn([
           {'upc': '2', 'name': 'Mystery Item', 'category': 'CEREAL', 'qty': 1},
         ]);
         await pumpBasket(tester);
         await tester.tap(find.text('Show Nutritional Info'));
         await tester.pumpAndSettle();
-        expect(find.text('0.0 cal'), findsOneWidget);
-        expect(find.text('0.0mg'), findsWidgets);
+        expect(find.text('Unknown'), findsWidgets);
+        expect(find.text('0cal'), findsNothing);
       },
     );
 

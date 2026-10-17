@@ -94,17 +94,18 @@ void main() {
       expect(nutrition['wicEligible'], isTrue);
     });
 
-    test('UC6-T2 missing or nonnumeric nutrients -> zero defaults', () {
+    test('UC6-T2 missing or nonnumeric nutrients -> unknown (null)', () {
+      // M1 changed this from zero defaults: unknown is never shown as zero.
       final nutrition = NutritionalUtils.buildNutritionFromFoodNutrients({
         'foodNutrients': [
           {'name': 'Energy', 'amount': 'unknown'},
         ],
       });
 
-      expect(nutrition['calories'], 0.0);
-      expect(nutrition['totalFat'], 0.0);
-      expect(nutrition['sodium'], 0.0);
-      expect(nutrition['protein'], 0.0);
+      expect(nutrition['calories'], isNull);
+      expect(nutrition['totalFat'], isNull);
+      expect(nutrition['sodium'], isNull);
+      expect(nutrition['protein'], isNull);
     });
 
     test('UC6-T3 exact thresholds -> all inclusive qualities apply', () {

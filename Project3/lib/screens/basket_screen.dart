@@ -7,6 +7,7 @@ import 'qr_checkout_screen.dart';
 import '../widgets/nutritional_badges.dart';
 import '../utils/nutritional_utils.dart';
 import '../services/checkout_help_repository.dart';
+import '../widgets/basket_balance_sheet.dart';
 import '../widgets/checkout_help_button.dart';
 import 'checkout_help_samples_screen.dart';
 
@@ -401,6 +402,23 @@ class BasketScreen extends StatelessWidget {
               ),
               icon: const Icon(Icons.delete_outline),
               label: const Text('Clear Cart'),
+            ),
+
+            const SizedBox(height: 6),
+
+            // M2: basket-wide balance check with one-swap previews.
+            OutlinedButton.icon(
+              onPressed: () => showBasketBalanceSheet(context),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: _primaryRed,
+                side: BorderSide(color: _primaryRed.withValues(alpha: 0.4)),
+                minimumSize: const Size.fromHeight(44),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              icon: const Icon(Icons.balance),
+              label: const Text('Check basket balance'),
             ),
           ],
         ),

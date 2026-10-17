@@ -577,9 +577,10 @@ void main() {
       },
     );
 
-    test('test_uc04_missing_nutrition_uses_zero_values', () async {
-      // The saved product intentionally has no nutrition map. Assertions below
-      // verify the numeric defaults required by UC4 extension 3b.
+    test('test_uc04_missing_nutrition_stays_unknown', () async {
+      // The saved product intentionally has no nutrition map. UC4 extension
+      // 3b originally required zero defaults; M1 changed this to unknown
+      // (null) so missing data is never shown as zero.
       store.setData({
         'basket': [
           {'upc': '002', 'name': 'Cereal', 'category': 'CEREAL', 'qty': 1},
@@ -591,11 +592,11 @@ void main() {
       await _waitForLoaded(state);
       final nutrition =
           state.basket.single['nutrition'] as Map<String, dynamic>;
-      expect(nutrition['calories'], 0.0);
-      expect(nutrition['totalFat'], 0.0);
-      expect(nutrition['sodium'], 0.0);
-      expect(nutrition['sugar'], 0.0);
-      expect(nutrition['protein'], 0.0);
+      expect(nutrition['calories'], isNull);
+      expect(nutrition['totalFat'], isNull);
+      expect(nutrition['sodium'], isNull);
+      expect(nutrition['sugar'], isNull);
+      expect(nutrition['protein'], isNull);
     });
 
     test(

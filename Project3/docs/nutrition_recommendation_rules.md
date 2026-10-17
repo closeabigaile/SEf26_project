@@ -174,3 +174,30 @@ current prices required here. These are required before app integration.
 
 The expanded 100-food USDA evaluation and five labeled test profiles are
 documented in [nutrition_profile_review.md](nutrition_profile_review.md).
+
+## In-app basket balance (M2, integrated 2026-10-16)
+
+The milestone scope in `Project1b_Work/analysis/design_decisions.md` is
+basket-aware one-swap previews. That part is integrated in the app,
+separately from the CLI meal engine above:
+
+- `lib/services/basket_balance_service.dart`: pure engine. Quantity-weighted
+  per-serving averages for sodium, added sugar, and fiber against FDA label
+  thresholds (illustrative, not personal targets); picks the largest gap;
+  ranks same-category, eligible swaps by their effect on the whole basket;
+  at most three suggestions with before/after values and tradeoffs. Unknown
+  values are excluded and flagged; under 50% coverage it abstains. PAID lines
+  and categories whose saved allowance disagrees with the basket are skipped.
+- `AppState.swapItem`: the shopper-confirmed swap. Keeps quantity and
+  category (balances unchanged); merges into an existing line of the same
+  product. Missing nutrition now loads as unknown, never zero (M1).
+- `AplService.balanceCandidates` + `lib/widgets/basket_balance_sheet.dart`:
+  the "Check basket balance" button on the basket summary.
+- Tests: `test/services/basket_balance_service_test.dart` (one group per
+  completion criterion) and `test/e2e/m2_basket_balance_e2e_test.dart`.
+
+Data: the live NC APL documents carry no `foodNutrients`, so with real scanned
+items the sheet abstains. `scripts/m2_catalog.json` holds 11 labelled example
+products (`catalogStatus: m2_demo`, UPCs `2999...`, values illustrative) for
+`node scripts/seed_m2.js --project wolfbyte-proj1 --input scripts/m2_catalog.json`
+(dry run; add `--write` with a service-account key to seed).

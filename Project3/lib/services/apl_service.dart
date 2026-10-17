@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../utils/nutritional_utils.dart';
+
 /// Service for querying the Approved Product List (APL) from [FirebaseFirestore].
 ///
 /// The APL collection contains WIC-eligible products with their UPC codes,
@@ -65,7 +67,7 @@ class AplService {
   ///
   /// Analyzes key nutrients from USDA FDC data (energy, sugars, sodium, fats,
   /// fiber, protein) to generate a numeric score. Lower scores indicate healthier
-  /// products. 
+  /// products.
   ///
   /// Penalties (higher = worse):
   /// - Energy (kcal), total/added sugars, sodium, saturated/trans fats
@@ -83,7 +85,7 @@ class AplService {
     final nutrients = (data['foodNutrients'] as List<dynamic>? ?? [])
         .whereType<Map<String, dynamic>>()
         .toList();
-    
+
     // Helper function to return numerical amount of given nutrient
     double getAmt(String name) {
       final n = nutrients.firstWhere(
@@ -103,13 +105,14 @@ class AplService {
     final fiber = getAmt('Fiber, total dietary');
     final protein = getAmt('Protein');
 
-    final penalties = energy * 0.01 +
+    final penalties =
+        energy * 0.01 +
         sugar * 0.5 +
         addedSugar * 0.7 +
         sodium * 0.01 +
         satFat * 1.0 +
         transFat * 2.0;
-    
+
     final bonuses = fiber * 1.5 + protein * 0.3;
 
     return penalties - bonuses;
@@ -149,14 +152,14 @@ class AplService {
         .where('eligible', isEqualTo: true)
         .limit(50)
         .get();
-    
+
     final results = <Map<String, dynamic>>[];
 
     for (final doc in snap.docs) {
       final data = doc.data();
       if (data['fdcId'] == baseProduct['fdcId'] ||
           doc.id == (baseProduct['upc'] ?? '')) {
-            continue;
+        continue;
       }
 
       final score = _computeHealthScore(data);
@@ -179,5 +182,34 @@ class AplService {
       return results.sublist(0, max);
     }
     return results;
+  }
+
+  /// Eligible same-category products for the M2 basket balance check.
+  ///
+  /// Each result is `{upc, name, category, eligible, nutrition}` with the M1
+  /// nutrition map, so missing nutrients stay null.
+  Future<List<Map<String, dynamic>>> balanceCandidates(
+    String category, {
+    int max = 25,
+  }) async {
+    if (category.trim().isEmpty) return [];
+    final snap = await _db
+        .collection('apl')
+        .where('category', isEqualTo: category)
+        .where('eligible', isEqualTo: true)
+        .limit(max)
+        .get();
+    return [
+      for (final doc in snap.docs)
+        {
+          'upc': doc.id,
+          'name': doc.data()['name'] ?? doc.id,
+          'category': doc.data()['category'] ?? category,
+          'eligible': doc.data()['eligible'] == true,
+          'nutrition': NutritionalUtils.buildNutritionFromFoodNutrients(
+            doc.data(),
+          ),
+        },
+    ];
   }
 }
