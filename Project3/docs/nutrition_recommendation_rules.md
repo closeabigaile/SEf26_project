@@ -214,7 +214,14 @@ a separate `nutrition/{upc}` collection so Abigail's APL import stays as-is:
   the APL record has none; `balanceCandidates` and `healthierSubstitutes` use
   `nutrition/` checked against APL eligibility. Unreadable or missing
   nutrition stays unknown, so M2 abstains instead of guessing.
-- `firestore.rules` (not deployed) adds signed-in read for `nutrition/`.
+- The app reads `nutrition/` only when `config/nutrition` has
+  `source: "collection"`; missing, unreadable or `"apl"` keeps the previous
+  APL-only behavior (APL's own `foodNutrients` always win). Turn on / revert
+  with `node scripts/seed_nutrition.cjs --switch collection|apl --confirm
+  wolfbyte-proj1`; nothing is deleted either way, and the app reads the switch
+  once per start. Builds can force it with `--dart-define=NUTRITION_SOURCE=`.
+- `firestore.rules` (not deployed) adds signed-in read for `nutrition/` and
+  `config/`.
 - `WicCategories` maps the APL's category spelling variants to one name per
   `categoryCode`, so allowances and swap pools no longer split. Old all-zero
   nutrition placeholders load as unknown.

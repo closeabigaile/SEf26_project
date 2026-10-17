@@ -1,6 +1,7 @@
 rules_version = '2';
 
-// Deployed rules as of 2026-09-01, plus read access to nutrition/ (M2).
+// Deployed rules as of 2026-09-01, plus read access to nutrition/ and
+// config/ (M2).
 // The expired 30-day catch-all (request.time < 2026-10-01) is dropped: it no
 // longer matches anything, so effective access to apl/ and users/ is unchanged.
 //
@@ -17,6 +18,12 @@ service cloud.firestore {
 
     // Nutrition per UPC (scripts/seed_nutrition.cjs): signed-in read only.
     match /nutrition/{upc} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // App switches, e.g. config/nutrition {source: "collection" | "apl"}.
+    match /config/{name} {
       allow read: if request.auth != null;
       allow write: if false;
     }

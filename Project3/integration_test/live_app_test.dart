@@ -36,7 +36,10 @@ Map<String, String> _credentials() {
     throw StateError('Missing credentials file $path ({"email", "password"})');
   }
   final json = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-  return {'email': json['email'] as String, 'password': json['password'] as String};
+  return {
+    'email': json['email'] as String,
+    'password': json['password'] as String,
+  };
 }
 
 void main() {
@@ -73,95 +76,101 @@ void main() {
     throw TestFailure('Timed out waiting for $finder');
   }
 
-  testWidgets('live: sign in, scan, basket, nutrition, M2 balance, help, benefits', (
-    tester,
-  ) async {
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    final auth = FirebaseAuth.instance;
-    final db = FirebaseFirestore.instance;
-    final creds = _credentials();
+  testWidgets(
+    'live: sign in, scan, basket, nutrition, M2 balance, help, benefits',
+    (tester) async {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      final auth = FirebaseAuth.instance;
+      final db = FirebaseFirestore.instance;
+      final creds = _credentials();
 
-    // Back up users/{uid} before AppState can touch it (monthly reset etc.).
-    final signedIn = await auth.signInWithEmailAndPassword(
-      email: creds['email']!,
-      password: creds['password']!,
-    );
-    final userDoc = db.collection('users').doc(signedIn.user!.uid);
-    final backup = (await userDoc.get()).data();
-    addTearDown(() async {
-      if (auth.currentUser == null) {
-        await auth.signInWithEmailAndPassword(
-          email: creds['email']!,
-          password: creds['password']!,
-        );
-      }
-      if (backup == null) {
-        await userDoc.delete();
-      } else {
-        await userDoc.set(backup);
-      }
+      // Back up users/{uid} before AppState can touch it (monthly reset etc.).
+      final signedIn = await auth.signInWithEmailAndPassword(
+        email: creds['email']!,
+        password: creds['password']!,
+      );
+      final userDoc = db.collection('users').doc(signedIn.user!.uid);
+      final backup = (await userDoc.get()).data();
+      addTearDown(() async {
+        if (auth.currentUser == null) {
+          await auth.signInWithEmailAndPassword(
+            email: creds['email']!,
+            password: creds['password']!,
+          );
+        }
+        if (backup == null) {
+          await userDoc.delete();
+        } else {
+          await userDoc.set(backup);
+        }
+        await auth.signOut();
+      });
       await auth.signOut();
-    });
-    await auth.signOut();
 
-    await tester.pumpWidget(const MyApp());
-    await waitFor(tester, find.text('Sign In'));
-    await shot(tester, 'login');
+      await tester.pumpWidget(const MyApp());
+      await waitFor(tester, find.text('Sign In'));
+      await shot(tester, 'login');
 
-    await tester.enterText(find.widgetWithText(TextField, 'Email'), creds['email']!);
-    await tester.enterText(
-      find.widgetWithText(TextField, 'Password'),
-      creds['password']!,
-    );
-    await tester.tap(find.text('Sign In'));
-    await waitFor(tester, find.widgetWithText(TextField, 'UPC Code'));
-    await shot(tester, 'scan');
+      await tester.enterText(
+        find.widgetWithText(TextField, 'Email'),
+        creds['email']!,
+      );
+      await tester.enterText(
+        find.widgetWithText(TextField, 'Password'),
+        creds['password']!,
+      );
+      await tester.tap(find.text('Sign In'));
+      await waitFor(tester, find.widgetWithText(TextField, 'UPC Code'));
+      await shot(tester, 'scan');
 
-    await tester.enterText(find.widgetWithText(TextField, 'UPC Code'), _upc);
-    await tester.tap(find.text('Check'));
-    final add = find.widgetWithText(FilledButton, 'Add');
-    await waitFor(tester, add);
-    await shot(tester, 'lookup');
+      await tester.enterText(find.widgetWithText(TextField, 'UPC Code'), _upc);
+      await tester.tap(find.text('Check'));
+      final add = find.widgetWithText(FilledButton, 'Add');
+      await waitFor(tester, add);
+      await shot(tester, 'lookup');
 
-    await tester.ensureVisible(add);
-    await tester.tap(add);
-    await tester.pump(const Duration(seconds: 1));
-    await shot(tester, 'added');
+      await tester.ensureVisible(add);
+      await tester.tap(add);
+      await tester.pump(const Duration(seconds: 1));
+      await shot(tester, 'added');
 
-    await tester.tap(find.text('Cart'));
-    await waitFor(tester, find.text('Check basket balance'));
-    await shot(tester, 'basket');
+      await tester.tap(find.text('Cart'));
+      await waitFor(tester, find.text('Check basket balance'));
+      await shot(tester, 'basket');
 
-    final toggle = find.text('Show Nutritional Info').first;
-    await tester.ensureVisible(toggle);
-    await tester.tap(toggle);
-    await shot(tester, 'nutrition');
+      final toggle = find.text('Show Nutritional Info').first;
+      await tester.ensureVisible(toggle);
+      await tester.tap(toggle);
+      await shot(tester, 'nutrition');
 
-    final balance = find.text('Check basket balance');
-    await tester.ensureVisible(balance);
-    await tester.tap(balance);
-    await waitFor(tester, find.text('Basket balance'));
-    await tester.pump(const Duration(seconds: 3));
-    await shot(tester, 'basket_balance');
-    // Dismiss the sheet by tapping above it.
-    await tester.tapAt(const Offset(20, 20));
-    await tester.pumpAndSettle();
-
-    final help = find.text('Get checkout help');
-    if (help.evaluate().isNotEmpty) {
-      await tester.ensureVisible(help.first);
-      await tester.tap(help.first);
+      final balance = find.text('Check basket balance');
+      await tester.ensureVisible(balance);
+      await tester.tap(balance);
+      await waitFor(tester, find.text('Basket balance'));
+      await tester.pump(const Duration(seconds: 3));
+      await shot(tester, 'basket_balance');
+      // Dismiss the sheet by tapping above it.
+      await tester.tapAt(const Offset(20, 20));
       await tester.pumpAndSettle();
-      await shot(tester, 'checkout_help');
-      final close = find.text('Close');
-      if (close.evaluate().isNotEmpty) {
-        await tester.tap(close.first);
-        await tester.pumpAndSettle();
-      }
-    }
 
-    await tester.tap(find.text('Benefits'));
-    await tester.pump(const Duration(seconds: 2));
-    await shot(tester, 'benefits');
-  });
+      final help = find.text('Get checkout help');
+      if (help.evaluate().isNotEmpty) {
+        await tester.ensureVisible(help.first);
+        await tester.tap(help.first);
+        await tester.pumpAndSettle();
+        await shot(tester, 'checkout_help');
+        final close = find.text('Close');
+        if (close.evaluate().isNotEmpty) {
+          await tester.tap(close.first);
+          await tester.pumpAndSettle();
+        }
+      }
+
+      await tester.tap(find.text('Benefits'));
+      await tester.pump(const Duration(seconds: 2));
+      await shot(tester, 'benefits');
+    },
+  );
 }

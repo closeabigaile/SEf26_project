@@ -9,14 +9,57 @@ import '../utils/wic_categories.dart';
 /// names, categories, and eligibility status. This service provides methods
 /// to look up products and find substitutes within the same category.
 ///
-/// The NC APL carries no nutrition data. Nutrition comes from the separate
+/// The NC APL carries no nutrition data. Nutrition can come from the separate
 /// `nutrition/{upc}` collection (see scripts/enrich_nutrition_off.cjs), which
 /// is merged in here so the APL import itself stays unchanged.
+///
+/// That collection is used only when the `config/nutrition` document has
+/// `source: "collection"`. Otherwise (missing, unreadable, or `"apl"`) only
+/// nutrition stored on APL records is used, as before. Switching back needs
+/// no deletion; the app reads the switch once per start.
 class AplService {
   // final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseFirestore _db;
 
-  AplService({FirebaseFirestore? db}) : _db = db ?? FirebaseFirestore.instance;
+  /// Forces the nutrition source, ignoring `config/nutrition` (tests, or a
+  /// `--dart-define=NUTRITION_SOURCE=collection|apl` build).
+  final bool? _useNutritionCollection;
+
+  AplService({FirebaseFirestore? db, bool? useNutritionCollection})
+    : _db = db ?? FirebaseFirestore.instance,
+      _useNutritionCollection =
+          useNutritionCollection ?? _sourceFromEnvironment();
+
+  static const _environmentSource = String.fromEnvironment('NUTRITION_SOURCE');
+
+  static bool? _sourceFromEnvironment() => switch (_environmentSource) {
+    'collection' => true,
+    'apl' => false,
+    _ => null,
+  };
+
+  /// The `config/nutrition` switch, read once per database per app run.
+  static final Expando<Future<bool>> _switchCache = Expando();
+
+  /// Whether to read nutrition from `nutrition/`.
+  Future<bool> usesNutritionCollection() {
+    final forced = _useNutritionCollection;
+    if (forced != null) return Future.value(forced);
+    return _switchCache[_db] ??= _readSwitch();
+  }
+
+  Future<bool> _readSwitch() async {
+    try {
+      final doc = await _db.collection('config').doc('nutrition').get();
+      return doc.data()?['source'] == 'collection';
+    } on FirebaseException {
+      return false;
+    }
+  }
+
+  /// Forgets the cached switch so the next lookup re-reads it (tests).
+  static void resetNutritionSwitchCache(FirebaseFirestore db) =>
+      _switchCache[db] = null;
 
   /// Looks up a product by its Universal Product Code (UPC).
   ///
@@ -38,7 +81,8 @@ class AplService {
   ///
   /// The returned `category` is canonical ([WicCategories]); the APL's own
   /// text is kept in `sourceCategory`. When the APL record has no
-  /// `foodNutrients`, they are filled from `nutrition/{upc}` if present.
+  /// `foodNutrients`, they are filled from `nutrition/{upc}` if present and
+  /// the nutrition collection is switched on.
   Future<Map<String, dynamic>?> findByUpc(String upc) async {
     final doc = await _db.collection('apl').doc(upc).get();
     if (!doc.exists) return null;
@@ -67,8 +111,9 @@ class AplService {
       data['foodNutrients'] is List &&
       (data['foodNutrients'] as List).isNotEmpty;
 
-  /// `nutrition/{upc}`, or null when absent or not readable.
+  /// `nutrition/{upc}`, or null when absent, not readable, or switched off.
   Future<Map<String, dynamic>?> _nutritionDoc(String upc) async {
+    if (!await usesNutritionCollection()) return null;
     try {
       final doc = await _db.collection('nutrition').doc(upc).get();
       return doc.exists ? doc.data() : null;
@@ -85,6 +130,7 @@ class AplService {
     Object? categoryCode,
     int max = 30,
   }) async {
+    if (!await usesNutritionCollection()) return [];
     var code = (categoryCode ?? '').toString().trim();
     final canonical = WicCategories.canonical(category, code: code);
     if (code.isEmpty) {

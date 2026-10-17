@@ -16,7 +16,10 @@ const _greekYogurt = '894700010199'; // 0 g added sugar
 const _activia = '036632029393';
 const _cornFlakes = '003800000120'; // real APL record, no nutrition anywhere
 
-Future<FakeFirebaseFirestore> _seed({bool nutrition = true}) async {
+Future<FakeFirebaseFirestore> _seed({
+  bool nutrition = true,
+  String? source = 'collection',
+}) async {
   final db = FakeFirebaseFirestore();
   for (final doc in (_fixture['apl'] as List).cast<Map<String, dynamic>>()) {
     await db.collection('apl').doc(doc['upc'] as String).set(doc);
@@ -25,6 +28,10 @@ Future<FakeFirebaseFirestore> _seed({bool nutrition = true}) async {
     for (final doc
         in (_fixture['nutrition'] as List).cast<Map<String, dynamic>>()) {
       await db.collection('nutrition').doc(doc['upc'] as String).set(doc);
+    }
+    // Switch the app over to nutrition/ (see AplService).
+    if (source != null) {
+      await db.collection('config').doc('nutrition').set({'source': source});
     }
   }
   return db;
@@ -149,5 +156,73 @@ void main() {
         );
       },
     );
+  });
+
+  group('config/nutrition switch', () {
+    test('missing switch keeps the previous APL-only behavior', () async {
+      final service = AplService(db: await _seed(source: null));
+      final product = (await service.findByUpc(_vanillaYogurt))!;
+      expect(product['foodNutrients'], isNull);
+      expect(await service.balanceCandidates('YOGURT'), isEmpty);
+      expect(await service.usesNutritionCollection(), isFalse);
+    });
+
+    test('source "apl" switches the nutrition collection off', () async {
+      final service = AplService(db: await _seed(source: 'apl'));
+      expect(
+        (await service.findByUpc(_vanillaYogurt))!['foodNutrients'],
+        isNull,
+      );
+      expect(await service.balanceCandidates('YOGURT'), isEmpty);
+    });
+
+    test('source "collection" switches it on', () async {
+      final service = AplService(db: await _seed());
+      expect(await service.usesNutritionCollection(), isTrue);
+      expect(
+        _nutrient((await service.findByUpc(_vanillaYogurt))!, 'Sodium, Na'),
+        169,
+      );
+    });
+
+    test(
+      'APL nutrition is still preferred when a record has its own',
+      () async {
+        final db = await _seed();
+        await db.collection('apl').doc(_vanillaYogurt).update({
+          'foodNutrients': [
+            {'name': 'Sodium, Na', 'amount': 1},
+          ],
+        });
+        final product = (await AplService(db: db).findByUpc(_vanillaYogurt))!;
+        expect(_nutrient(product, 'Sodium, Na'), 1);
+        expect(product['nutritionSource'], isNull);
+      },
+    );
+
+    test(
+      'flipping back to "apl" reverts after a restart, nothing deleted',
+      () async {
+        final db = await _seed();
+        expect(await AplService(db: db).usesNutritionCollection(), isTrue);
+        await db.collection('config').doc('nutrition').set({'source': 'apl'});
+        AplService.resetNutritionSwitchCache(db); // what an app restart does
+        final service = AplService(db: db);
+        expect(
+          (await service.findByUpc(_vanillaYogurt))!['foodNutrients'],
+          isNull,
+        );
+        expect((await db.collection('nutrition').get()).docs, hasLength(13));
+      },
+    );
+
+    test('an explicit override beats the switch', () async {
+      final db = await _seed(source: null);
+      final service = AplService(db: db, useNutritionCollection: true);
+      expect(
+        _nutrient((await service.findByUpc(_vanillaYogurt))!, 'Sodium, Na'),
+        169,
+      );
+    });
   });
 }

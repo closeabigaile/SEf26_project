@@ -4,6 +4,12 @@
 //   npx firebase-tools login                                  (once)
 //   node scripts/seed_nutrition.cjs --input nutrition.json             (dry run)
 //   node scripts/seed_nutrition.cjs --input nutrition.json --write --confirm wolfbyte-proj1
+//   node scripts/seed_nutrition.cjs --switch collection --confirm wolfbyte-proj1   (turn on)
+//   node scripts/seed_nutrition.cjs --switch apl --confirm wolfbyte-proj1          (revert)
+//
+// The app only reads nutrition/ when config/nutrition has source "collection"
+// (see AplService). --switch writes just that one field; seeding never flips
+// it, so data can be loaded and checked before the app uses it.
 //
 // Never touches apl/ or users/. Only creates documents (precondition
 // exists:false); an existing nutrition doc with different data stops the run.
@@ -91,8 +97,20 @@ async function main() {
       write: { type: 'boolean', default: false },
       confirm: { type: 'string' },
       'cli-root': { type: 'string' },
+      switch: { type: 'string' },
     },
   });
+  if (values.switch !== undefined) {
+    if (!['collection', 'apl'].includes(values.switch)) throw new Error('--switch must be collection or apl');
+    if (values.confirm !== PROJECT) throw new Error(`--switch requires --confirm ${PROJECT}`);
+    const client = await connect(values['cli-root']);
+    await client.patch(`${DOCS}/config/nutrition`, { fields: encodeFields({ source: values.switch }) }, {
+      queryParams: { 'updateMask.fieldPaths': 'source' },
+    });
+    const now = await batchGet(client, [`${DOCS}/config/nutrition`]);
+    console.log(`config/nutrition is now ${JSON.stringify(now.get(`${DOCS}/config/nutrition`))}`);
+    return;
+  }
   if (!values.input) throw new Error('Specify --input nutrition.json');
   if (values.write && values.confirm !== PROJECT) throw new Error(`--write requires --confirm ${PROJECT}`);
   const docs = JSON.parse(fs.readFileSync(values.input, 'utf8'));
@@ -101,6 +119,8 @@ async function main() {
   const client = await connect(values['cli-root']);
   const apl = await batchGet(client, docs.map((d) => `${DOCS}/apl/${d.upc}`));
   const existing = await batchGet(client, docs.map((d) => `${DOCS}/nutrition/${d.upc}`));
+  const config = await batchGet(client, [`${DOCS}/config/nutrition`]);
+  const appSource = config.get(`${DOCS}/config/nutrition`)?.source ?? '(not set: app uses APL only)';
 
   const creates = [], unchanged = [], notEligible = [], conflicts = [];
   for (const d of docs) {
@@ -113,7 +133,7 @@ async function main() {
   }
   console.log(JSON.stringify({
     project: PROJECT, input: docs.length, create: creates.length, unchanged: unchanged.length,
-    skippedNotEligible: notEligible, conflicts,
+    skippedNotEligible: notEligible, conflicts, appNutritionSource: appSource,
   }, null, 1));
   if (conflicts.length) throw new Error('Existing nutrition docs differ; refusing to overwrite');
   if (!values.write) { console.log('Dry run: nothing written.'); return; }

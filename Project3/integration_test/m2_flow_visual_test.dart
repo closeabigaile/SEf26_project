@@ -40,7 +40,9 @@ void main() {
   Future<void> shot(WidgetTester tester, String name) async {
     await tester.pumpAndSettle();
     final view = binding.renderViews.first;
-    final image = await (view.debugLayer! as OffsetLayer).toImage(view.paintBounds);
+    final image = await (view.debugLayer! as OffsetLayer).toImage(
+      view.paintBounds,
+    );
     final png = await image.toByteData(format: ui.ImageByteFormat.png);
     shotIndex++;
     File(
@@ -48,7 +50,9 @@ void main() {
     ).writeAsBytesSync(png!.buffer.asUint8List());
   }
 
-  testWidgets('M2 visual: scan two real products, balance, swap', (tester) async {
+  testWidgets('M2 visual: scan two real products, balance, swap', (
+    tester,
+  ) async {
     final fixture =
         jsonDecode(File('test/fixtures/m2_real_sample.json').readAsStringSync())
             as Map<String, dynamic>;
@@ -56,9 +60,13 @@ void main() {
     for (final d in (fixture['apl'] as List).cast<Map<String, dynamic>>()) {
       await db.collection('apl').doc(d['upc'] as String).set(d);
     }
-    for (final d in (fixture['nutrition'] as List).cast<Map<String, dynamic>>()) {
+    for (final d
+        in (fixture['nutrition'] as List).cast<Map<String, dynamic>>()) {
       await db.collection('nutrition').doc(d['upc'] as String).set(d);
     }
+    await db.collection('config').doc('nutrition').set({
+      'source': 'collection',
+    });
     await db.collection('users').doc('visual-shopper').set({
       'basket': [],
       'balances': {},
@@ -97,7 +105,9 @@ void main() {
       for (var i = 0; i < 100 && finder.evaluate().isEmpty; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
-      if (finder.evaluate().isEmpty) await shot(tester, 'FAILED_waiting');
+      if (finder.evaluate().isEmpty) {
+        await shot(tester, 'FAILED_waiting');
+      }
       expect(finder, findsWidgets);
     }
 
@@ -107,7 +117,9 @@ void main() {
       await tester.pumpAndSettle();
       await tester.enterText(field, upc);
       await tester.pumpAndSettle();
-      if (find.text(upc).evaluate().isEmpty) await shot(tester, 'FAILED_typing');
+      if (find.text(upc).evaluate().isEmpty) {
+        await shot(tester, 'FAILED_typing');
+      }
       expect(find.text(upc), findsWidgets);
       await tester.tap(find.text('Check'));
       await waitFor(find.text(name));

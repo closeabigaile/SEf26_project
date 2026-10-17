@@ -63,6 +63,9 @@ void main() {
         in (_fixture['nutrition'] as List).cast<Map<String, dynamic>>()) {
       await db.collection('nutrition').doc(d['upc'] as String).set(d);
     }
+    await db.collection('config').doc('nutrition').set({
+      'source': 'collection',
+    });
   });
 
   Future<void> signIn({

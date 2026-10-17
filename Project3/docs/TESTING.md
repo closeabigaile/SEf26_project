@@ -64,7 +64,7 @@ poll for results (`test/e2e/e2e_helpers.dart`) because lookups take real time.
 
 ## Current numbers (2026-10-17)
 
-- `flutter test`: 371 passed, 0 failed.
+- `flutter test`: 377 passed, 0 failed.
 - On device (Windows): 11 of 11 journeys passed; M2 visual flow passed.
 - Node script tests: 13 passed. Python APL tests and M0 scoring tests pass.
 - Line coverage: 90.8% overall. M2: `basket_balance_service.dart` 100%,
