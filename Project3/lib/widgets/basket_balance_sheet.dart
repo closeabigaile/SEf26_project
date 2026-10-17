@@ -39,6 +39,9 @@ class _BasketBalanceSheetState extends State<BasketBalanceSheet> {
 
   Future<Map<String, List<Map<String, dynamic>>>>? _candidates;
 
+  /// Swaps the shopper dismissed with "Not now" while the sheet is open.
+  final Set<String> _rejected = {};
+
   @override
   void initState() {
     super.initState();
@@ -115,6 +118,7 @@ class _BasketBalanceSheetState extends State<BasketBalanceSheet> {
               basket: app.basket,
               balances: app.balances,
               candidatesByCategory: snapshot.data ?? const {},
+              rejected: _rejected,
             );
             return _buildReport(context, report);
           },
@@ -243,14 +247,27 @@ class _BasketBalanceSheetState extends State<BasketBalanceSheet> {
                 'Tradeoff: $note',
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade800),
               ),
-            const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FilledButton(
-                onPressed: () => _confirm(s),
-                style: FilledButton.styleFrom(backgroundColor: _primaryRed),
-                child: const Text('Confirm swap'),
+            if (s.source?['provider'] is String)
+              Text(
+                'Nutrition data: ${s.source!['provider']}'
+                '${s.source!['url'] is String ? ' (${s.source!['url']})' : ''}',
+                style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
               ),
+            const SizedBox(height: 8),
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 8,
+              children: [
+                TextButton(
+                  onPressed: () => setState(() => _rejected.add(s.key)),
+                  child: const Text('Not now'),
+                ),
+                FilledButton(
+                  onPressed: () => _confirm(s),
+                  style: FilledButton.styleFrom(backgroundColor: _primaryRed),
+                  child: const Text('Confirm swap'),
+                ),
+              ],
             ),
           ],
         ),

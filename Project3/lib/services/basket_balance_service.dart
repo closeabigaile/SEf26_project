@@ -9,6 +9,8 @@
 /// examples, not personal nutrition goals.
 library;
 
+import '../utils/wic_categories.dart';
+
 /// An illustrative per-serving target for one nutrient.
 class BalanceTarget {
   const BalanceTarget({
@@ -106,6 +108,7 @@ class SwapSuggestion {
     required this.after,
     required this.improvement,
     required this.tradeoffs,
+    this.source,
   });
 
   final String fromUpc;
@@ -123,11 +126,18 @@ class SwapSuggestion {
   final double before;
   final double after;
 
-  /// Reduction in the basket's [focus] gap.
+  /// How far the basket's [focus] average moves in the better direction,
+  /// as a fraction of the target.
   final double improvement;
 
   /// Plain-language notes on nutrients that get worse or become unknown.
   final List<String> tradeoffs;
+
+  /// Provenance of [toNutrition] (e.g. Open Food Facts URL), when known.
+  final Map<String, dynamic>? source;
+
+  /// Identifies this swap for "Not now" within a session.
+  String get key => '$fromUpc>$toUpc';
 }
 
 class BasketBalanceReport {
@@ -158,11 +168,7 @@ class BasketBalanceService {
   static const int maxSuggestions = 3;
   static const double _epsilon = 1e-9;
 
-  static String canon(Object? raw) => (raw ?? '')
-      .toString()
-      .trim()
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .toUpperCase();
+  static String canon(Object? raw) => WicCategories.canonical(raw);
 
   static double gapFor(BalanceTarget target, double average) {
     if (target.lowerIsBetter) {
@@ -242,11 +248,14 @@ class BasketBalanceService {
   /// Analyzes [basket] and previews up to [maxSuggestions] swaps.
   ///
   /// [candidatesByCategory] maps a canonical category to eligible products
-  /// shaped `{upc, name, category, eligible, nutrition}`. Nothing is mutated.
+  /// shaped `{upc, name, category, eligible, nutrition}`. Swaps whose
+  /// [SwapSuggestion.key] is in [rejected] are not offered again. Nothing is
+  /// mutated.
   BasketBalanceReport analyze({
     required List<Map<String, dynamic>> basket,
     required Map<String, Map<String, dynamic>> balances,
     required Map<String, List<Map<String, dynamic>>> candidatesByCategory,
+    Set<String> rejected = const {},
   }) {
     final summaries = [for (final t in targets) _summarize(t, basket)];
     if (basket.isEmpty || summaries.first.totalQty == 0) {
@@ -313,6 +322,7 @@ class BasketBalanceService {
         // Hard constraints exclude a candidate rather than lowering its rank.
         if (toUpc.isEmpty ||
             toUpc == fromUpc ||
+            rejected.contains('$fromUpc>$toUpc') ||
             candidate['eligible'] != true ||
             canon(candidate['category']) != category ||
             _value(toNutrition, focus.key) == null) {
@@ -325,7 +335,13 @@ class BasketBalanceService {
           swapIndex: i,
           swapNutrition: toNutrition,
         );
-        final improvement = focusSummary.gap - after.gap;
+        // Movement of the basket average in the better direction, relative
+        // to the target. Unlike the gap, this keeps ranking a bigger change
+        // higher after both options reach the target.
+        final change =
+            (after.averagePerServing! - focusSummary.averagePerServing!) /
+            focus.perServing;
+        final improvement = focus.lowerIsBetter ? -change : change;
         if (improvement <= _epsilon) continue;
 
         final tradeoffs = <String>[];
@@ -367,6 +383,9 @@ class BasketBalanceService {
           after: after.averagePerServing!,
           improvement: improvement,
           tradeoffs: tradeoffs,
+          source: candidate['source'] is Map
+              ? Map<String, dynamic>.from(candidate['source'] as Map)
+              : null,
         );
         if (best == null ||
             improvement > best.improvement + _epsilon ||

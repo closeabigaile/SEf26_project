@@ -1,12 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../utils/nutritional_utils.dart';
+import '../utils/wic_categories.dart';
 
 /// Service for querying the Approved Product List (APL) from [FirebaseFirestore].
 ///
 /// The APL collection contains WIC-eligible products with their UPC codes,
 /// names, categories, and eligibility status. This service provides methods
 /// to look up products and find substitutes within the same category.
+///
+/// The NC APL carries no nutrition data. Nutrition comes from the separate
+/// `nutrition/{upc}` collection (see scripts/enrich_nutrition_off.cjs), which
+/// is merged in here so the APL import itself stays unchanged.
 class AplService {
   // final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseFirestore _db;
@@ -30,10 +35,95 @@ class AplService {
   ///   'eligible': true
   /// }
   /// ```
+  ///
+  /// The returned `category` is canonical ([WicCategories]); the APL's own
+  /// text is kept in `sourceCategory`. When the APL record has no
+  /// `foodNutrients`, they are filled from `nutrition/{upc}` if present.
   Future<Map<String, dynamic>?> findByUpc(String upc) async {
     final doc = await _db.collection('apl').doc(upc).get();
     if (!doc.exists) return null;
-    return doc.data();
+    final data = Map<String, dynamic>.from(doc.data() ?? const {});
+    if (data['category'] != null || data['categoryCode'] != null) {
+      data['sourceCategory'] = data['category'];
+      data['category'] = WicCategories.canonical(
+        data['category'],
+        code: data['categoryCode'],
+      );
+    }
+    if (!_hasNutrients(data)) {
+      final nutrition = await _nutritionDoc(upc);
+      if (nutrition != null) {
+        data['foodNutrients'] = nutrition['foodNutrients'];
+        if (nutrition['servingBasis'] is String) {
+          data['servingBasis'] = nutrition['servingBasis'];
+        }
+        data['nutritionSource'] = nutrition['source'];
+      }
+    }
+    return data;
+  }
+
+  static bool _hasNutrients(Map<String, dynamic> data) =>
+      data['foodNutrients'] is List &&
+      (data['foodNutrients'] as List).isNotEmpty;
+
+  /// `nutrition/{upc}`, or null when absent or not readable.
+  Future<Map<String, dynamic>?> _nutritionDoc(String upc) async {
+    try {
+      final doc = await _db.collection('nutrition').doc(upc).get();
+      return doc.exists ? doc.data() : null;
+    } on FirebaseException {
+      // Rules may not allow nutrition reads yet: nutrition stays unknown.
+      return null;
+    }
+  }
+
+  /// Products in `nutrition/` for this category whose APL record exists and
+  /// is eligible, shaped like an APL document with `foodNutrients`.
+  Future<List<Map<String, dynamic>>> _nutritionCandidates(
+    String category, {
+    Object? categoryCode,
+    int max = 30,
+  }) async {
+    var code = (categoryCode ?? '').toString().trim();
+    final canonical = WicCategories.canonical(category, code: code);
+    if (code.isEmpty) {
+      code =
+          WicCategories.nameByCode.entries
+              .where((e) => e.value == canonical)
+              .map((e) => e.key)
+              .firstOrNull ??
+          '';
+    }
+    final List<QueryDocumentSnapshot<Map<String, dynamic>>> docs;
+    try {
+      final collection = _db.collection('nutrition');
+      final query = code.isNotEmpty
+          ? collection.where('categoryCode', isEqualTo: code)
+          : collection.where('category', isEqualTo: canonical);
+      docs = (await query.limit(max).get()).docs;
+    } on FirebaseException {
+      return [];
+    }
+    final results = <Map<String, dynamic>>[];
+    for (final doc in docs) {
+      final apl = await _db.collection('apl').doc(doc.id).get();
+      final aplData = apl.data();
+      if (aplData == null || aplData['eligible'] != true) continue;
+      results.add({
+        ...aplData,
+        'upc': doc.id,
+        'category': WicCategories.canonical(
+          aplData['category'],
+          code: aplData['categoryCode'],
+        ),
+        'foodNutrients': doc.data()['foodNutrients'],
+        if (doc.data()['servingBasis'] is String)
+          'servingBasis': doc.data()['servingBasis'],
+        'nutritionSource': doc.data()['source'],
+      });
+    }
+    return results;
   }
 
   /// Finds WIC-eligible substitute products in the same category.
@@ -145,27 +235,40 @@ class AplService {
     int max = 5,
   }) async {
     if (category.trim().isEmpty) return [];
+    // Without nutrition for the scanned item there is nothing to compare.
+    if (!_hasNutrients(baseProduct)) return [];
     final baseScore = _computeHealthScore(baseProduct);
     final snap = await _db
         .collection('apl')
-        .where('category', isEqualTo: category)
+        .where('category', isEqualTo: baseProduct['sourceCategory'] ?? category)
         .where('eligible', isEqualTo: true)
         .limit(50)
         .get();
 
+    final candidates = <String, Map<String, dynamic>>{
+      for (final doc in snap.docs) doc.id: {...doc.data(), 'upc': doc.id},
+    };
+    for (final c in await _nutritionCandidates(
+      category,
+      categoryCode: baseProduct['categoryCode'],
+    )) {
+      // The enriched record replaces the bare APL one for the same UPC.
+      candidates[c['upc'] as String] = c;
+    }
+
     final results = <Map<String, dynamic>>[];
 
-    for (final doc in snap.docs) {
-      final data = doc.data();
-      if (data['fdcId'] == baseProduct['fdcId'] ||
-          doc.id == (baseProduct['upc'] ?? '')) {
+    for (final data in candidates.values) {
+      if ((data['fdcId'] != null && data['fdcId'] == baseProduct['fdcId']) ||
+          data['upc'] == (baseProduct['upc'] ?? '')) {
         continue;
       }
+      // An item with no nutrition data must not look "healthier" (score 0).
+      if (!_hasNutrients(data)) continue;
 
       final score = _computeHealthScore(data);
       if (score < baseScore) {
         data['healthScore'] = score;
-        data['upc'] = doc.id;
         results.add(data);
       }
     }
@@ -188,27 +291,43 @@ class AplService {
   ///
   /// Each result is `{upc, name, category, eligible, nutrition}` with the M1
   /// nutrition map, so missing nutrients stay null.
+  ///
+  /// Candidates come from `nutrition/` (checked against the APL for
+  /// eligibility) plus any APL records that carry `foodNutrients` themselves.
   Future<List<Map<String, dynamic>>> balanceCandidates(
     String category, {
     int max = 25,
   }) async {
     if (category.trim().isEmpty) return [];
+    final canonical = WicCategories.canonical(category);
+    final byUpc = <String, Map<String, dynamic>>{};
+    for (final c in await _nutritionCandidates(canonical, max: max)) {
+      byUpc[c['upc'] as String] = c;
+    }
     final snap = await _db
         .collection('apl')
-        .where('category', isEqualTo: category)
+        .where('category', isEqualTo: canonical)
         .where('eligible', isEqualTo: true)
         .limit(max)
         .get();
+    for (final doc in snap.docs) {
+      if (_hasNutrients(doc.data())) {
+        byUpc.putIfAbsent(doc.id, () => {...doc.data(), 'upc': doc.id});
+      }
+    }
     return [
-      for (final doc in snap.docs)
+      for (final data in byUpc.values)
         {
-          'upc': doc.id,
-          'name': doc.data()['name'] ?? doc.id,
-          'category': doc.data()['category'] ?? category,
-          'eligible': doc.data()['eligible'] == true,
-          'nutrition': NutritionalUtils.buildNutritionFromFoodNutrients(
-            doc.data(),
+          'upc': data['upc'],
+          'name': data['name'] ?? data['upc'],
+          'category': WicCategories.canonical(
+            data['category'] ?? canonical,
+            code: data['categoryCode'],
           ),
+          'eligible': data['eligible'] == true,
+          'nutrition': NutritionalUtils.buildNutritionFromFoodNutrients(data),
+          if (data['nutritionSource'] != null)
+            'source': data['nutritionSource'],
         },
     ];
   }

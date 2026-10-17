@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../utils/nutritional_utils.dart';
+import '../utils/wic_categories.dart';
 import '../services/apl_service.dart';
 
 /// Central application state manager that handles user-scoped WIC benefits
@@ -104,12 +105,12 @@ class AppState extends ChangeNotifier {
 
   /// Canonicalizes a category string for consistent storage and comparison.
   ///
-  /// Trims whitespace, collapses multiple spaces to single spaces, and
-  /// converts to uppercase.
+  /// Trims whitespace, collapses multiple spaces to single spaces, converts
+  /// to uppercase, and maps APL spelling variants to one name (see
+  /// [WicCategories]).
   ///
-  /// Example: `"  Milk Products  "` becomes `"MILK PRODUCTS"`
-  String _canon(String raw) =>
-      raw.trim().replaceAll(RegExp(r'\s+'), ' ').toUpperCase();
+  /// Example: `"  Milk-Whole "` becomes `"MILK - WHOLE"`
+  String _canon(String raw) => WicCategories.canonical(raw);
 
   /// Derives a default allowed quantity for a newly encountered category.
   ///
@@ -244,13 +245,21 @@ class AppState extends ChangeNotifier {
       } else {
         // balances
         final b = (data['balances'] as Map?) ?? {};
-        balances = b.map((k, v) {
+        balances = {};
+        b.forEach((k, v) {
           final key = _canon(k.toString());
           final allowed = (v is Map && v['allowed'] is int)
               ? v['allowed'] as int
               : null;
           final used = (v is Map && v['used'] is int) ? v['used'] as int : 0;
-          return MapEntry(key, {'allowed': allowed, 'used': used});
+          final existing = balances[key];
+          // Spelling variants of one category merge into a single balance.
+          balances[key] = existing == null
+              ? {'allowed': allowed, 'used': used}
+              : {
+                  'allowed': existing['allowed'] ?? allowed,
+                  'used': (existing['used'] as int) + used,
+                };
         });
 
         // basket
@@ -278,8 +287,13 @@ class AppState extends ChangeNotifier {
                   'checkout_help_scenario_id': m['checkout_help_scenario_id'],
                 },
                 'qty': (m['qty'] is int) ? m['qty'] as int : 1,
-                // Items saved without nutrition stay unknown, never zero (M1).
-                'nutrition': m['nutrition'] is Map
+                // Items saved without nutrition, or with the old all-zero
+                // placeholder, stay unknown, never zero (M1).
+                'nutrition':
+                    m['nutrition'] is Map &&
+                        !NutritionalUtils.isZeroPlaceholder(
+                          m['nutrition'] as Map,
+                        )
                     ? Map<String, dynamic>.from(m['nutrition'] as Map)
                     : NutritionalUtils.unknownNutrition,
               };

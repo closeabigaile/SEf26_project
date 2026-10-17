@@ -64,6 +64,23 @@ class NutritionalUtils {
     'servingBasis': null,
   };
 
+  static const List<String> _nutrientKeys = [
+    'calories',
+    'totalFat',
+    'saturatedFat',
+    'transFat',
+    'sodium',
+    'sugar',
+    'addedSugar',
+    'protein',
+    'fiber',
+  ];
+
+  /// True for the all-zero map older app versions saved when a product had
+  /// no nutrition data. Such a map means "unknown", not measured zeros.
+  static bool isZeroPlaceholder(Map nutrition) =>
+      _nutrientKeys.every((k) => nutrition[k] == 0);
+
   /// Formats a nutrient value with its unit, or "Unknown" if null.
   static String formatNutrient(num? value, String unit) {
     if (value == null) return 'Unknown';
@@ -131,7 +148,9 @@ class NutritionalUtils {
       'protein': getAmt('Protein'),
       'fiber': getAmt('Fiber, total dietary'),
       'wicEligible': data['eligible'],
-      'servingBasis': defaultServingBasis,
+      'servingBasis': data['servingBasis'] is String
+          ? data['servingBasis']
+          : defaultServingBasis,
     };
   }
 

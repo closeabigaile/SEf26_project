@@ -196,8 +196,34 @@ separately from the CLI meal engine above:
 - Tests: `test/services/basket_balance_service_test.dart` (one group per
   completion criterion) and `test/e2e/m2_basket_balance_e2e_test.dart`.
 
-Data: the live NC APL documents carry no `foodNutrients`, so with real scanned
-items the sheet abstains. `scripts/m2_catalog.json` holds 11 labelled example
-products (`catalogStatus: m2_demo`, UPCs `2999...`, values illustrative) for
-`node scripts/seed_m2.js --project wolfbyte-proj1 --input scripts/m2_catalog.json`
-(dry run; add `--write` with a service-account key to seed).
+### Nutrition data (2026-10-17)
+
+The live NC APL (16,861 eligible products) has no nutrition. Nutrition lives in
+a separate `nutrition/{upc}` collection so Abigail's APL import stays as-is:
+
+- `scripts/enrich_nutrition_off.cjs` builds those documents from Open Food
+  Facts (ODbL) for a list of APL records. Per-serving values only; a nutrient
+  Open Food Facts lacks stays unknown. Crowdsourced records are rejected when
+  per-serving and per-100 g values disagree, nutrients outweigh the serving,
+  or cheese reports near-zero sodium (all seen in real records). Each doc keeps
+  its source URL and license. Tests: `scripts/test_enrich_nutrition_off.cjs`.
+- `scripts/seed_nutrition.cjs` writes them (firebase-tools login; dry run by
+  default, `--write --confirm wolfbyte-proj1` to write; create-only, APL
+  eligibility checked, read-back verified). Never touches `apl/` or `users/`.
+- `AplService.findByUpc` fills `foodNutrients` from `nutrition/{upc}` when
+  the APL record has none; `balanceCandidates` and `healthierSubstitutes` use
+  `nutrition/` checked against APL eligibility. Unreadable or missing
+  nutrition stays unknown, so M2 abstains instead of guessing.
+- `firestore.rules` (not deployed) adds signed-in read for `nutrition/`.
+- `WicCategories` maps the APL's category spelling variants to one name per
+  `categoryCode`, so allowances and swap pools no longer split. Old all-zero
+  nutrition placeholders load as unknown.
+
+Ranking uses how far the basket average moves toward the target (normalized by
+the target), so a bigger improvement wins even after both options pass it.
+
+Tests with real data: `test/fixtures/m2_real_sample.json` (real APL records +
+validated Open Food Facts nutrition) drives `test/services/apl_service_nutrition_test.dart`
+and `test/e2e/m2_scan_to_swap_test.dart` (real ScanScreen and BasketScreen:
+scan, nutrition panel, balance, "Not now", confirmed swap, persistence).
+`scripts/m2_catalog.json` remains a synthetic, test-only catalog.

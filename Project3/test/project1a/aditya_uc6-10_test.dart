@@ -331,7 +331,7 @@ void main() {
     );
 
     test(
-      'UC7-T4 candidate missing nutrition -> zero-score candidate can qualify',
+      'UC7-T4 candidate missing nutrition -> not offered as healthier',
       () async {
         final base = _nutritionProduct(
           name: 'Base',
@@ -351,8 +351,9 @@ void main() {
           baseProduct: base,
         );
 
-        expect(results.single['upc'], 'missing');
-        expect(results.single['healthScore'], 0.0);
+        // Before M2 an item with no data scored 0 and looked "healthier"
+        // than anything measured; unknown is never treated as better.
+        expect(results, isEmpty);
       },
     );
 
