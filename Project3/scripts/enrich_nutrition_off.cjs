@@ -61,10 +61,19 @@ function rejectReason(apl, product) {
     .map((k) => (typeof n[k] === 'number' ? n[k] : 0))
     .reduce((a, b) => a + b, 0);
   if (grams > amount * 1.05) return 'nutrients weigh more than the serving';
-  // Cheese always carries real sodium; a few mg per 100 g is a unit error.
-  if (apl.categoryCode === '02' && typeof n.sodium_100g === 'number' && n.sodium_100g < 0.05) {
-    return 'implausibly low sodium for cheese';
+  // Dairy always carries real sodium (milk ~40 mg/100 g, cheese far more);
+  // values of a few mg per 100 g are g/mg unit errors in the source.
+  const sodium100 = typeof n.sodium_100g === 'number'
+    ? n.sodium_100g
+    : typeof n.sodium_serving === 'number' ? (n.sodium_serving * 100) / amount : null;
+  const dairyFloor = { '02': 0.05, '50': 0.01, '51': 0.01, '52': 0.01 }[apl.categoryCode];
+  if (dairyFloor !== undefined && sodium100 !== null && sodium100 < dairyFloor) {
+    return apl.categoryCode === '02'
+      ? 'implausibly low sodium for cheese'
+      : 'implausibly low sodium for dairy';
   }
+  // Over 2 g sodium per 100 g (5 g salt) is not plausible for any APL food.
+  if (sodium100 !== null && sodium100 > 2) return 'implausibly high sodium';
   return null;
 }
 

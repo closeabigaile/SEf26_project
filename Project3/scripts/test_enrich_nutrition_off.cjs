@@ -78,3 +78,23 @@ test('records without energy or sodium per serving are not used', () => {
   delete p.nutriments.sodium_100g;
   assert.equal(toNutritionDoc(apl, p, 'd'), null);
 });
+
+test('near-zero sodium in milk or yogurt is rejected (unit error)', () => {
+  // Real records: whole milk listing 0.05 mg sodium per 240 g.
+  const milk = { ...apl, categoryCode: '51' };
+  const p = { serving_size: '240g', nutriments: { sodium_100g: 0.0000208, sodium_serving: 0.00005 } };
+  assert.match(rejectReason(milk, p), /dairy/);
+});
+
+test('sodium above 2 g per 100 g is rejected', () => {
+  // Real records: grapefruit juice listing 30 g sodium per 240 ml.
+  const juice = { ...apl, categoryCode: '54' };
+  const p = { serving_size: '8 OZA (240 ml)', nutriments: { sodium_100g: 12.5, sodium_serving: 30 } };
+  assert.match(rejectReason(juice, p), /high sodium/);
+});
+
+test('salty but real products still pass (tomato juice, 600 mg)', () => {
+  const juice = { ...apl, categoryCode: '54' };
+  const p = { serving_size: '8 OZA (240 ml)', nutriments: { sodium_100g: 0.25, sodium_serving: 0.6 } };
+  assert.equal(rejectReason(juice, p), null);
+});
