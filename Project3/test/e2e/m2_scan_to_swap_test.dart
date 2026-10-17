@@ -22,6 +22,7 @@ import 'package:wolfbite/services/apl_service.dart';
 import 'package:wolfbite/state/app_state.dart';
 
 import '../mocks/mocks.mocks.dart';
+import 'e2e_helpers.dart';
 
 const _uid = 'scan-shopper';
 
@@ -100,13 +101,9 @@ void main() {
 
   /// Types [upc] into the manual entry field, checks it, and adds it.
   Future<void> scanAndAdd(WidgetTester tester, String upc, String name) async {
-    await tester.enterText(find.widgetWithText(TextField, 'UPC Code'), upc);
+    await enterUpc(tester, upc);
     await tester.tap(find.text('Check'));
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text(name), findsWidgets);
+    await waitFor(tester, find.text(name));
     final add = find.widgetWithText(FilledButton, 'Add');
     await tester.ensureVisible(add);
     await tester.tap(add);
@@ -166,10 +163,7 @@ void main() {
       final balance = find.text('Check basket balance');
       await tester.ensureVisible(balance);
       await tester.tap(balance);
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 50)),
-      );
-      await tester.pumpAndSettle();
+      await waitFor(tester, find.text('Basket balance'));
       expect(
         find.text('Added sugar: 17 g per serving (largest gap)'),
         findsOneWidget,
@@ -236,10 +230,7 @@ void main() {
       router.go('/basket');
       await tester.pumpAndSettle();
       await tester.tap(find.text('Check basket balance'));
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 50)),
-      );
-      await tester.pumpAndSettle();
+      await waitFor(tester, find.text('Basket balance'));
 
       final first = find.textContaining(
         'for CHOBANI LOW-FAT PLAIN GREEK YOGURT',
@@ -286,10 +277,7 @@ void main() {
       router.go('/basket');
       await tester.pumpAndSettle();
       await tester.tap(find.text('Check basket balance'));
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 50)),
-      );
-      await tester.pumpAndSettle();
+      await waitFor(tester, find.text('Basket balance'));
       expect(
         find.textContaining('Not enough nutrition information'),
         findsOneWidget,

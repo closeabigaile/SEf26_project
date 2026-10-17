@@ -35,8 +35,9 @@ const _desktop = Size(1280, 900);
 
 Map<String, dynamic> _scenario(String id) =>
     (jsonDecode(
-              File('assets/mock/checkout_help_scenarios.json')
-                  .readAsStringSync(),
+              File(
+                'assets/mock/checkout_help_scenarios.json',
+              ).readAsStringSync(),
             )['scenarios']
             as List)
         .cast<Map<String, dynamic>>()
@@ -130,7 +131,11 @@ void main() {
   Future<Map<String, dynamic>> saved() async =>
       (await db.collection('users').doc(_uid).get()).data()!;
 
-  Future<void> pumpBasket(WidgetTester tester, AppState state, Size size) async {
+  Future<void> pumpBasket(
+    WidgetTester tester,
+    AppState state,
+    Size size,
+  ) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -295,31 +300,28 @@ void main() {
     },
   );
 
-  test(
-    'E2E-3 basket items saved before M1 (no nutrition map) reload as '
-    'Unknown, not zero',
-    () async {
-      final state = await signIn(
-        basket: [
-          {'upc': 'OLD1', 'name': 'Legacy item', 'category': 'CEREAL', 'qty': 1},
-        ],
-        balances: {
-          'CEREAL': {'allowed': 2, 'used': 1},
-        },
-      );
-      addTearDown(state.dispose);
+  test('E2E-3 basket items saved before M1 (no nutrition map) reload as '
+      'Unknown, not zero', () async {
+    final state = await signIn(
+      basket: [
+        {'upc': 'OLD1', 'name': 'Legacy item', 'category': 'CEREAL', 'qty': 1},
+      ],
+      balances: {
+        'CEREAL': {'allowed': 2, 'used': 1},
+      },
+    );
+    addTearDown(state.dispose);
 
-      final nutrition = state.basket.single['nutrition'] as Map<String, dynamic>;
-      expect(
-        nutrition['calories'],
-        isNull,
-        reason:
-            'AppState.loadUserState still fills missing nutrition with 0.0, '
-            "bypassing M1's unknownNutrition handling",
-      );
-      expect(NutritionalUtils.getBadges(nutrition), isEmpty);
-    },
-  );
+    final nutrition = state.basket.single['nutrition'] as Map<String, dynamic>;
+    expect(
+      nutrition['calories'],
+      isNull,
+      reason:
+          'AppState.loadUserState still fills missing nutrition with 0.0, '
+          "bypassing M1's unknownNutrition handling",
+    );
+    expect(NutritionalUtils.getBadges(nutrition), isEmpty);
+  });
 
   test(
     'E2E-4 M2 recommender works from the real basket and leaves it intact',
