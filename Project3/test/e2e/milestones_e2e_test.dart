@@ -196,7 +196,7 @@ void main() {
         expect(find.text('Mock cereal - 24 oz'), findsOneWidget);
 
         // M1: units + explanations inside M3's nutrition section.
-        await tapIn(tester, 'Carrots', 'View nutrition details');
+        await tapIn(tester, 'Carrots', 'Show Nutritional Info');
         expect(tester.takeException(), isNull);
         expect(find.text('35cal'), findsOneWidget);
         expect(find.text('50mg'), findsOneWidget);
@@ -288,7 +288,7 @@ void main() {
       );
 
       await pumpBasket(tester, reloaded, _phone);
-      await tapIn(tester, 'Mystery bar', 'View nutrition details');
+      await tapIn(tester, 'Mystery bar', 'Show Nutritional Info');
       expect(tester.takeException(), isNull);
       expect(find.text('210cal'), findsOneWidget);
       expect(find.text('Unknown'), findsNWidgets(6));

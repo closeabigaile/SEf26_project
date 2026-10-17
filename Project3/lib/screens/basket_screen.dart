@@ -297,15 +297,21 @@ class BasketScreen extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Icon(Icons.shopping_cart_checkout, color: _primaryRed),
+                Icon(
+                  Icons.shopping_cart_checkout,
+                  color: _primaryRed,
+                ),
 
                 SizedBox(width: 10),
 
-                Flexible(
+                Expanded(
                   child: Text(
                     'Basket Summary',
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -317,7 +323,7 @@ class BasketScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Total items',
+                  'Total Items:',
                   style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
                 ),
 
@@ -355,7 +361,7 @@ class BasketScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
 
             // Existing checkout navigation.
             FilledButton.icon(
@@ -369,7 +375,7 @@ class BasketScreen extends StatelessWidget {
               style: FilledButton.styleFrom(
                 backgroundColor: _primaryRed,
                 foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(52),
+                minimumSize: const Size.fromHeight(46),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
@@ -378,7 +384,7 @@ class BasketScreen extends StatelessWidget {
               label: const Text('Ready to Checkout'),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
 
             // Existing clear basket action.
             OutlinedButton.icon(
@@ -388,13 +394,13 @@ class BasketScreen extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 foregroundColor: _primaryRed,
                 side: BorderSide(color: _primaryRed.withValues(alpha: 0.4)),
-                minimumSize: const Size.fromHeight(48),
+                minimumSize: const Size.fromHeight(44),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
               icon: const Icon(Icons.delete_outline),
-              label: const Text('Clear Basket'),
+              label: const Text('Clear Cart'),
             ),
           ],
         ),
@@ -495,8 +501,7 @@ class BasketScreen extends StatelessWidget {
                     const SizedBox(height: 8),
 
                     Text(
-                      'Scan a product to check its WIC eligibility '
-                      'and add it to your basket.',
+                      'Scan products to add them here',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
@@ -714,8 +719,8 @@ class _BasketItemState extends State<_BasketItem> {
                         Expanded(
                           child: Text(
                             _expanded
-                                ? 'Hide nutrition details'
-                                : 'View nutrition details',
+                                ? 'Hide Nutritional Info'
+                                : 'Show Nutritional Info',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: _primaryRed,
@@ -764,7 +769,7 @@ class _BasketItemState extends State<_BasketItem> {
         children: [
           // Decrement button
           IconButton(
-            icon: const Icon(Icons.remove, size: 18),
+            icon: const Icon(Icons.remove_circle_outline, size: 18),
             color: _primaryRed,
             onPressed: () => appState.decrementItem(upc, category),
             tooltip: 'Remove one',
@@ -785,7 +790,7 @@ class _BasketItemState extends State<_BasketItem> {
 
           // Increment button
           IconButton(
-            icon: const Icon(Icons.add, size: 18),
+            icon: const Icon(Icons.add_circle_outline, size: 18),
             color: _primaryRed,
             onPressed: () => appState.incrementItem(upc, category),
             tooltip: canAdd ? 'Add one' : 'Will add as paid',

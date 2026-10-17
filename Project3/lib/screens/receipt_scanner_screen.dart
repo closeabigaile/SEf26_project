@@ -80,7 +80,6 @@ class _ReceiptScannerScreenState extends State<ReceiptScannerScreen> {
       if (picked == null) {
         setState(() {
           _scanning = false;
-          _status = "Tap button to upload receipt";
         });
         return;
       }
@@ -434,7 +433,7 @@ class _ReceiptScannerScreenState extends State<ReceiptScannerScreen> {
               ),
               label: Text(
                 _foundItems.isEmpty
-                    ? 'Select Receipt Image'
+                    ? 'Select Image'
                     : 'Scan Another Receipt',
               ),
             ),
