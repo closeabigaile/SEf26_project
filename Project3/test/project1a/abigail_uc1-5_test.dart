@@ -209,9 +209,7 @@ void main() {
         await tester.tap(find.text('Sign Up'));
         await tester.pump();
 
-        // The inherited screen does not catch this exception. Flutter reports
-        // that uncaught error as a failure; the remaining assertions preserve
-        // UC1's predetermined expectation that an error message should appear.
+        // A profile-write failure must be displayed without reporting success.
         verify(
           auth.createUserWithEmailAndPassword(
             email: 'abigail.test@example.com',
@@ -220,6 +218,8 @@ void main() {
         ).called(1);
         verify(profile.set(any)).called(1);
         expect(find.byType(SnackBar), findsOneWidget);
+        expect(find.text('Profile save failed'), findsOneWidget);
+        expect(tester.takeException(), isNull);
         verifyNever(auth.signOut());
         verifyNever(router.go('/login'));
       },
@@ -468,9 +468,7 @@ void main() {
     testWidgets('test_uc03_sign_out_failure_leaves_shopper_signed_in', (
       WidgetTester tester,
     ) async {
-      // The inherited implementation does not catch this Future error. The
-      // framework therefore records the test as a genuine failure while the
-      // navigation assertion confirms it did not falsely reach login.
+      // A failed sign-out must show feedback and keep the current screen.
       when(auth.signOut()).thenThrow(
         FirebaseAuthException(code: 'network-error', message: 'Offline'),
       );
@@ -478,6 +476,8 @@ void main() {
       await tester.tap(find.byIcon(Icons.logout));
       await tester.pump();
       expect(find.text('WIC Benefits'), findsOneWidget);
+      expect(find.text('Could not sign out. Please try again.'), findsOneWidget);
+      expect(tester.takeException(), isNull);
       verifyNever(router.go('/login'));
     });
 

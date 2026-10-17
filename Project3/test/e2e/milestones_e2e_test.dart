@@ -398,14 +398,16 @@ void main() {
       expect(tester.takeException(), isNull);
       expect(find.text('Get checkout help'), findsNWidgets(2));
 
-      // Non-synthetic line: help must not invent a cause.
+      // PAID overflow line: help explains the full allowance from the
+      // line's original_benefit_category (BasketCheckoutHelp.explain).
       final buttons = find.text('Get checkout help');
       await tester.ensureVisible(buttons.last);
       await tester.pump();
       await tester.tap(buttons.last);
       await tester.pumpAndSettle();
       expect(find.byType(AlertDialog), findsOneWidget);
-      expect(find.text('Unable to determine the cause'), findsOneWidget);
+      expect(find.text('Why this item is marked PAID'), findsOneWidget);
+      expect(find.textContaining('CEREAL allowance is full'), findsOneWidget);
     },
   );
 }

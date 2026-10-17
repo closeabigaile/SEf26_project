@@ -505,7 +505,12 @@ void main() {
     Future<void> pumpAlternative(
       WidgetTester tester, {
       required bool addResult,
+      bool incrementExisting = false,
     }) async {
+      final basket = <Map<String, dynamic>>[
+        if (incrementExisting) {'upc': '666666666666', 'qty': 1},
+      ];
+      when(appState.basket).thenReturn(basket);
       tester.view.physicalSize = const Size(1200, 800);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
@@ -540,7 +545,10 @@ void main() {
           category: anyNamed('category'),
           nutrition: anyNamed('nutrition'),
         ),
-      ).thenReturn(addResult);
+      ).thenAnswer((_) {
+        if (incrementExisting) basket.single['qty'] = 2;
+        return addResult;
+      });
 
       await tester.pumpWidget(
         ChangeNotifierProvider<AppState>.value(
@@ -589,6 +597,15 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Added healthier item: Better cereal'), findsNothing);
+      expect(find.textContaining('Could not add Better cereal'), findsOneWidget);
+    });
+
+    testWidgets('an existing alternative increment reports success even when no new line is created', (tester) async {
+      await pumpAlternative(tester, addResult: false, incrementExisting: true);
+      await tester.tap(find.byIcon(Icons.add_circle_outline));
+      await tester.pumpAndSettle();
+      expect(appState.basket.single['qty'], 2);
+      expect(find.text('Added healthier item: Better cereal'), findsOneWidget);
     });
   });
 

@@ -44,6 +44,7 @@ void main() {
     setUp(() {
       mockAplService = MockAplService();
       mockAppState = MockAppState();
+      when(mockAppState.basket).thenReturn([]);
       mockAuth = MockFirebaseAuth();
       mockGoRouter = MockGoRouter();
     });
@@ -126,6 +127,7 @@ void main() {
           upc: anyNamed('upc'),
           name: anyNamed('name'),
           category: anyNamed('category'),
+          originalBenefitCategory: anyNamed('originalBenefitCategory'),
           nutrition: anyNamed('nutrition'),
         ),
       ).thenReturn(true);
@@ -145,6 +147,7 @@ void main() {
           upc: '12345',
           name: 'Test Product',
           category: 'Test Category',
+          originalBenefitCategory: 'Test Category',
           nutrition: anyNamed('nutrition'),
         ),
       ).called(1);
@@ -162,6 +165,7 @@ void main() {
           upc: anyNamed('upc'),
           name: anyNamed('name'),
           category: anyNamed('category'),
+          originalBenefitCategory: anyNamed('originalBenefitCategory'),
           nutrition: anyNamed('nutrition'),
         ),
       ).thenReturn(true);
@@ -189,6 +193,7 @@ void main() {
           upc: anyNamed('upc'),
           name: anyNamed('name'),
           category: anyNamed('category'),
+          originalBenefitCategory: anyNamed('originalBenefitCategory'),
           nutrition: anyNamed('nutrition'),
         ),
       );
@@ -205,6 +210,7 @@ void main() {
           upc: anyNamed('upc'),
           name: anyNamed('name'),
           category: anyNamed('category'),
+          originalBenefitCategory: anyNamed('originalBenefitCategory'),
           nutrition: anyNamed('nutrition'),
         ),
       ).thenReturn(true);
@@ -612,6 +618,7 @@ void main() {
           upc: anyNamed('upc'),
           name: anyNamed('name'),
           category: anyNamed('category'),
+          originalBenefitCategory: anyNamed('originalBenefitCategory'),
           nutrition: anyNamed('nutrition'),
         ),
       ).thenReturn(true);

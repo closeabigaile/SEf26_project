@@ -38,17 +38,11 @@ class BalancesScreen extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
     try {
       await (auth ?? FirebaseAuth.instance).signOut();
-
-      if (context.mounted) {
-        context.go('/login');
-      }
-    } catch (e) {
+      if (context.mounted) context.go('/login');
+    } catch (_) {
       if (!context.mounted) return;
-
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error signing out: $e'),
-        ),
+        const SnackBar(content: Text('Could not sign out. Please try again.')),
       );
     }
   }
