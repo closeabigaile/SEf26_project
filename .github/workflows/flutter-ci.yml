@@ -1,12 +1,11 @@
 name: Flutter CI
 
-# Check changes pushed to main and pull requests targeting main.
+# Check every push to any branch and every pull request, whatever its target.
+# Documentation still deploys only from main (see deploy-docs below).
 # workflow_dispatch also allows a manual run from GitHub Actions.
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 # Test jobs only need repository read access. Pages permissions are granted
