@@ -303,7 +303,7 @@ class AppState extends ChangeNotifier {
         // Check if we need a monthly reset
         final lastUpdate = data['updatedAt'] as Timestamp?;
         if (_isNewMonth(lastUpdate)) {
-          print("📅 New month detected! Resetting balances...");
+          debugPrint("📅 New month detected! Resetting balances...");
           _resetMonthlyUsage();
         }
       }

@@ -133,9 +133,9 @@ final GoRouter router = GoRouter(
 
         GoRoute(
           path: '/receipt',
-          pageBuilder:  (context, state) =>
+          pageBuilder: (context, state) =>
               const NoTransitionPage(child: ReceiptScannerScreen()),
-        )
+        ),
       ],
     ),
   ],

@@ -44,7 +44,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(QrImageView), findsOneWidget);
-
     });
   });
 }

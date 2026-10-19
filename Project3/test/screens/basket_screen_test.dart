@@ -176,9 +176,19 @@ void main() {
     testWidgets('renders items and total badge', (tester) async {
       final app = TestAppState();
       // Two items: MILK x2, BREAD x1 => total 3
-      app.addItem(upc: '111', name: 'Whole Milk Gallon', category: 'Milk', nutrition: app.nutrition);
+      app.addItem(
+        upc: '111',
+        name: 'Whole Milk Gallon',
+        category: 'Milk',
+        nutrition: app.nutrition,
+      );
       app.incrementItem('111', 'Milk');
-      app.addItem(upc: '222', name: 'Brown Bread', category: 'Bread', nutrition: app.nutrition);
+      app.addItem(
+        upc: '222',
+        name: 'Brown Bread',
+        category: 'Bread',
+        nutrition: app.nutrition,
+      );
 
       await tester.pumpWidget(_appWithRouter(app: app));
       await tester.pumpAndSettle();
@@ -196,7 +206,12 @@ void main() {
       tester,
     ) async {
       final app = TestAppState();
-      app.addItem(upc: '333', name: 'Yogurt Cups', category: 'Dairy', nutrition: app.nutrition); // qty=1
+      app.addItem(
+        upc: '333',
+        name: 'Yogurt Cups',
+        category: 'Dairy',
+        nutrition: app.nutrition,
+      ); // qty=1
       await tester.pumpWidget(_appWithRouter(app: app));
       await tester.pumpAndSettle();
 
@@ -253,7 +268,7 @@ void main() {
         upc: '555',
         name: 'Oat Cereal',
         category: 'Cereal',
-        nutrition: app.nutrition
+        nutrition: app.nutrition,
       ); // default allowed >= 2
       await tester.pumpWidget(_appWithRouter(app: app));
       await tester.pumpAndSettle();
@@ -284,7 +299,12 @@ void main() {
       final app = TestAppState();
       const longName =
           'Very Very Very Long Product Name That Still Should Not Overflow The Tile';
-      app.addItem(upc: '666', name: longName, category: 'Snacks', nutrition: app.nutrition);
+      app.addItem(
+        upc: '666',
+        name: longName,
+        category: 'Snacks',
+        nutrition: app.nutrition,
+      );
       await tester.pumpWidget(_appWithRouter(app: app));
       await tester.pumpAndSettle();
 

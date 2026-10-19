@@ -54,6 +54,9 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
+  # Imported directly by test/project1a/aditya_uc6-10_test.dart.
+  firebase_core_platform_interface: ^8.1.0
+  image_picker_platform_interface: ^2.11.1
   mockito: ^5.4.4
   fake_cloud_firestore: 4.2.0
   #fake_cloud_firestore: ^4.0.0

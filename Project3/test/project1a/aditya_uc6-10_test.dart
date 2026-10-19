@@ -1,3 +1,6 @@
+// Project 1a file names (use-case ranges) are referenced by the Project 1a
+// report, so they keep their hyphens.
+// ignore_for_file: file_names
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -599,16 +602,29 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Added healthier item: Better cereal'), findsNothing);
-      expect(find.textContaining('Could not add Better cereal'), findsOneWidget);
+      expect(
+        find.textContaining('Could not add Better cereal'),
+        findsOneWidget,
+      );
     });
 
-    testWidgets('an existing alternative increment reports success even when no new line is created', (tester) async {
-      await pumpAlternative(tester, addResult: false, incrementExisting: true);
-      await tester.tap(find.byIcon(Icons.add_circle_outline));
-      await tester.pumpAndSettle();
-      expect(appState.basket.single['qty'], 2);
-      expect(find.text('Added healthier item: Better cereal'), findsOneWidget);
-    });
+    testWidgets(
+      'an existing alternative increment reports success even when no new line is created',
+      (tester) async {
+        await pumpAlternative(
+          tester,
+          addResult: false,
+          incrementExisting: true,
+        );
+        await tester.tap(find.byIcon(Icons.add_circle_outline));
+        await tester.pumpAndSettle();
+        expect(appState.basket.single['qty'], 2);
+        expect(
+          find.text('Added healthier item: Better cereal'),
+          findsOneWidget,
+        );
+      },
+    );
   });
 
   group('UC10 - Scan receipt', () {

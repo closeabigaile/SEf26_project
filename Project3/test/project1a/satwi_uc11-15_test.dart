@@ -1,6 +1,7 @@
-import 'dart:async';
+// Project 1a file names (use-case ranges) are referenced by the Project 1a
+// report, so they keep their hyphens.
+// ignore_for_file: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -231,21 +232,20 @@ void main() {
       expect(find.text('120mg'), findsOneWidget);
     });
 
-    testWidgets(
-      'test_uc13_missing_nutrition_map_shows_unknown',
-      (WidgetTester tester) async {
-        // UC13 extension 2a: a basket product with no stored nutrition
-        // information still opens; M1 shows "Unknown" instead of zero.
-        when(state.basket).thenReturn([
-          {'upc': '2', 'name': 'Mystery Item', 'category': 'CEREAL', 'qty': 1},
-        ]);
-        await pumpBasket(tester);
-        await tester.tap(find.text('Show Nutritional Info'));
-        await tester.pumpAndSettle();
-        expect(find.text('Unknown'), findsWidgets);
-        expect(find.text('0cal'), findsNothing);
-      },
-    );
+    testWidgets('test_uc13_missing_nutrition_map_shows_unknown', (
+      WidgetTester tester,
+    ) async {
+      // UC13 extension 2a: a basket product with no stored nutrition
+      // information still opens; M1 shows "Unknown" instead of zero.
+      when(state.basket).thenReturn([
+        {'upc': '2', 'name': 'Mystery Item', 'category': 'CEREAL', 'qty': 1},
+      ]);
+      await pumpBasket(tester);
+      await tester.tap(find.text('Show Nutritional Info'));
+      await tester.pumpAndSettle();
+      expect(find.text('Unknown'), findsWidgets);
+      expect(find.text('0cal'), findsNothing);
+    });
 
     testWidgets('test_uc13_collapsing_hides_nutrition_facts', (
       WidgetTester tester,
@@ -296,19 +296,18 @@ void main() {
       );
     }
 
-    testWidgets(
-      'test_uc14_increase_button_calls_increment_when_under_cap',
-      (WidgetTester tester) async {
-        // ARRANGE: the category has unused allowance.
-        when(state.canAdd('MILK')).thenReturn(true);
-        await pumpBasket(tester);
-        // ACT: shopper presses the "+" control on the basket line.
-        await tester.tap(find.byIcon(Icons.add_circle_outline));
-        await tester.pump();
-        // ASSERT: the real state method is invoked with the correct product.
-        verify(state.incrementItem('1', 'MILK')).called(1);
-      },
-    );
+    testWidgets('test_uc14_increase_button_calls_increment_when_under_cap', (
+      WidgetTester tester,
+    ) async {
+      // ARRANGE: the category has unused allowance.
+      when(state.canAdd('MILK')).thenReturn(true);
+      await pumpBasket(tester);
+      // ACT: shopper presses the "+" control on the basket line.
+      await tester.tap(find.byIcon(Icons.add_circle_outline));
+      await tester.pump();
+      // ASSERT: the real state method is invoked with the correct product.
+      verify(state.incrementItem('1', 'MILK')).called(1);
+    });
 
     testWidgets(
       'test_uc14_increase_button_still_active_at_cap_and_reports_paid_intent',
@@ -322,10 +321,7 @@ void main() {
         final addButton = find.byIcon(Icons.add_circle_outline);
         expect(addButton, findsOneWidget);
         final tooltipWidget = tester.widget<Tooltip>(
-          find.ancestor(
-            of: addButton,
-            matching: find.byType(Tooltip),
-          ),
+          find.ancestor(of: addButton, matching: find.byType(Tooltip)),
         );
         expect(tooltipWidget.message, 'Will add as paid');
         await tester.tap(addButton);
@@ -369,19 +365,16 @@ void main() {
       expect(state.balances['PAID']?['used'], 1);
     });
 
-    test(
-      'test_uc15_second_paid_request_increments_existing_paid_line',
-      () {
-        // UC15 extension 2a: a second shopper-paid request for the same
-        // product increases the existing paid line instead of duplicating it.
-        state.incrementItem('777', 'MILK');
-        state.incrementItem('777', 'MILK');
-        final paidLines = state.basket.where((e) => e['category'] == 'PAID');
-        expect(paidLines, hasLength(1));
-        expect(paidLines.single['qty'], 2);
-        expect(state.balances['PAID']?['used'], 2);
-      },
-    );
+    test('test_uc15_second_paid_request_increments_existing_paid_line', () {
+      // UC15 extension 2a: a second shopper-paid request for the same
+      // product increases the existing paid line instead of duplicating it.
+      state.incrementItem('777', 'MILK');
+      state.incrementItem('777', 'MILK');
+      final paidLines = state.basket.where((e) => e['category'] == 'PAID');
+      expect(paidLines, hasLength(1));
+      expect(paidLines.single['qty'], 2);
+      expect(state.balances['PAID']?['used'], 2);
+    });
 
     test(
       'test_uc15_paid_category_has_no_allowance_cap_confirming_unlimited_display',
@@ -404,6 +397,9 @@ Future<void> _waitForLoaded(AppState state) async {
   expect(state.balancesLoaded, isTrue);
 }
 
+// Mockito stub for a Firestore snapshot in test code only; DocumentSnapshot
+// is sealed for implementers outside the plugin, which tests can ignore.
+// ignore: subtype_of_sealed_class
 class _SatwiMockDocumentSnapshot extends Mock
     implements DocumentSnapshot<Map<String, dynamic>> {}
 

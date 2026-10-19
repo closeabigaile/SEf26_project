@@ -74,47 +74,53 @@ void main() {
       expect(saved['balances']['MILK']['used'], 1);
     });
 
-    test('UC14 quantity increase persists quantity and covered usage', () async {
-      state.balances['MILK'] = {'allowed': 3, 'used': 1};
-      state.basket.add({
-        'upc': 'milk-1',
-        'name': 'Milk',
-        'category': 'MILK',
-        'qty': 1,
-      });
+    test(
+      'UC14 quantity increase persists quantity and covered usage',
+      () async {
+        state.balances['MILK'] = {'allowed': 3, 'used': 1};
+        state.basket.add({
+          'upc': 'milk-1',
+          'name': 'Milk',
+          'category': 'MILK',
+          'qty': 1,
+        });
 
-      state.incrementItem('milk-1', 'MILK');
+        state.incrementItem('milk-1', 'MILK');
 
-      final saved = await _waitForSavedDocument(
-        firestore,
-        'mutations',
-        (data) =>
-            (data['basket'] as List).isNotEmpty &&
-            data['basket'][0]['qty'] == 2,
-      );
-      expect(saved['balances']['MILK']['used'], 2);
-    });
+        final saved = await _waitForSavedDocument(
+          firestore,
+          'mutations',
+          (data) =>
+              (data['basket'] as List).isNotEmpty &&
+              data['basket'][0]['qty'] == 2,
+        );
+        expect(saved['balances']['MILK']['used'], 2);
+      },
+    );
 
-    test('UC16 quantity decrease persists quantity and released usage', () async {
-      state.balances['MILK'] = {'allowed': 3, 'used': 2};
-      state.basket.add({
-        'upc': 'milk-1',
-        'name': 'Milk',
-        'category': 'MILK',
-        'qty': 2,
-      });
+    test(
+      'UC16 quantity decrease persists quantity and released usage',
+      () async {
+        state.balances['MILK'] = {'allowed': 3, 'used': 2};
+        state.basket.add({
+          'upc': 'milk-1',
+          'name': 'Milk',
+          'category': 'MILK',
+          'qty': 2,
+        });
 
-      state.decrementItem('milk-1', 'MILK');
+        state.decrementItem('milk-1', 'MILK');
 
-      final saved = await _waitForSavedDocument(
-        firestore,
-        'mutations',
-        (data) =>
-            (data['basket'] as List).isNotEmpty &&
-            data['basket'][0]['qty'] == 1,
-      );
-      expect(saved['balances']['MILK']['used'], 1);
-    });
+        final saved = await _waitForSavedDocument(
+          firestore,
+          'mutations',
+          (data) =>
+              (data['basket'] as List).isNotEmpty &&
+              data['basket'][0]['qty'] == 1,
+        );
+        expect(saved['balances']['MILK']['used'], 1);
+      },
+    );
 
     test('UC17 clear persists empty basket and reversed usage', () async {
       state.balances['MILK'] = {'allowed': 3, 'used': 2};
@@ -204,29 +210,32 @@ void main() {
 
       await state.checkout();
 
-      final saved =
-          (await firestore.collection('users').doc('checkout').get()).data()!;
+      final saved = (await firestore.collection('users').doc('checkout').get())
+          .data()!;
       expect(saved['basket'], isEmpty);
       expect(saved['balances']['MILK']['used'], 2);
     });
 
-    test('save failure leaves the local basket cleared and reports failure', () async {
-      final harness = _FailingPersistenceHarness();
-      final state = await harness.loadedState();
-      state.balances['MILK'] = {'allowed': 3, 'used': 1};
-      state.basket.add({
-        'upc': '11111',
-        'name': 'Milk',
-        'category': 'MILK',
-        'qty': 1,
-      });
-      harness.failWrites();
+    test(
+      'save failure leaves the local basket cleared and reports failure',
+      () async {
+        final harness = _FailingPersistenceHarness();
+        final state = await harness.loadedState();
+        state.balances['MILK'] = {'allowed': 3, 'used': 1};
+        state.basket.add({
+          'upc': '11111',
+          'name': 'Milk',
+          'category': 'MILK',
+          'qty': 1,
+        });
+        harness.failWrites();
 
-      await expectLater(state.checkout(), throwsA(isA<FirebaseException>()));
+        await expectLater(state.checkout(), throwsA(isA<FirebaseException>()));
 
-      expect(state.basket, isEmpty);
-      expect(state.balances['MILK']?['used'], 1);
-    });
+        expect(state.basket, isEmpty);
+        expect(state.balances['MILK']?['used'], 1);
+      },
+    );
   });
 }
 
@@ -262,6 +271,9 @@ Future<Map<String, dynamic>> _waitForSavedDocument(
   fail('Timed out waiting for persisted state');
 }
 
+// Mockito stub for a Firestore snapshot in test code only; DocumentSnapshot
+// is sealed for implementers outside the plugin, which tests can ignore.
+// ignore: subtype_of_sealed_class
 class _MockDocumentSnapshot extends Mock
     implements DocumentSnapshot<Map<String, dynamic>> {}
 

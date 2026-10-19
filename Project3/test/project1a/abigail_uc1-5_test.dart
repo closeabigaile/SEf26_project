@@ -1,3 +1,6 @@
+// Project 1a file names (use-case ranges) are referenced by the Project 1a
+// report, so they keep their hyphens.
+// ignore_for_file: file_names
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -476,7 +479,10 @@ void main() {
       await tester.tap(find.byIcon(Icons.logout));
       await tester.pump();
       expect(find.text('WIC Benefits'), findsOneWidget);
-      expect(find.text('Could not sign out. Please try again.'), findsOneWidget);
+      expect(
+        find.text('Could not sign out. Please try again.'),
+        findsOneWidget,
+      );
       expect(tester.takeException(), isNull);
       verifyNever(router.go('/login'));
     });
@@ -801,6 +807,9 @@ Future<void> _waitForLoaded(AppState state) async {
 // package version is incompatible with the currently resolved Firestore SDK.
 // It implements only the collection/document operations AppState actually
 // uses, and it exists solely inside Abigail's new test file.
+// Mockito stub for a Firestore snapshot in test code only; DocumentSnapshot
+// is sealed for implementers outside the plugin, which tests can ignore.
+// ignore: subtype_of_sealed_class
 class _MockDocumentSnapshot extends Mock
     implements DocumentSnapshot<Map<String, dynamic>> {}
 

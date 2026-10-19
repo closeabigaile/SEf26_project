@@ -432,9 +432,7 @@ class _ReceiptScannerScreenState extends State<ReceiptScannerScreen> {
                 _foundItems.isEmpty ? Icons.upload_file : Icons.refresh,
               ),
               label: Text(
-                _foundItems.isEmpty
-                    ? 'Select Image'
-                    : 'Scan Another Receipt',
+                _foundItems.isEmpty ? 'Select Image' : 'Scan Another Receipt',
               ),
             ),
 

@@ -36,77 +36,6 @@ class BasketScreen extends StatelessWidget {
   final CheckoutHelpRepository checkoutHelpRepository;
   static const Color _primaryRed = Color(0xFFD1001C);
 
-  void _showQRDialog(BuildContext context, AppState app) {
-    showDialog(
-      context: context,
-      barrierDismissible: false, // User must click a button to exit
-      builder: (ctx) => AlertDialog(
-        title: const Center(child: Text('Cashier Handoff')),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'Present this code to the cashier',
-              style: TextStyle(color: Colors.grey),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Dummy QR Image (using a large Icon as a placeholder)
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(
-                Icons.qr_code_2,
-                size: 200,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          // Cancel Button (Aborts checkout)
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
-          ),
-
-          // Finish Button (Commits the transaction)
-          FilledButton(
-            onPressed: () async {
-              // 1. Perform the actual DB checkout
-              await app.checkout();
-
-              // 2. Close the dialog
-              if (ctx.mounted) {
-                Navigator.pop(ctx);
-              }
-
-              // 3. Show success and navigate away
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Transaction Complete! Balances updated.'),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-
-                context.go('/scan');
-              }
-            },
-            style: FilledButton.styleFrom(
-              backgroundColor: _primaryRed, // Match your app theme
-            ),
-            child: const Text('Finish Transaction'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // Get the AppState and watch for changes
@@ -298,10 +227,7 @@ class BasketScreen extends StatelessWidget {
           children: [
             const Row(
               children: [
-                Icon(
-                  Icons.shopping_cart_checkout,
-                  color: _primaryRed,
-                ),
+                Icon(Icons.shopping_cart_checkout, color: _primaryRed),
 
                 SizedBox(width: 10),
 
@@ -309,10 +235,7 @@ class BasketScreen extends StatelessWidget {
                   child: Text(
                     'Basket Summary',
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -603,7 +526,7 @@ class _BasketItemState extends State<_BasketItem> {
     final canAdd = appState.canAdd(category);
 
     // Generate nutritional data if not present
-         final nutrition =
+    final nutrition =
         widget.item['nutrition'] as Map<String, dynamic>? ??
         NutritionalUtils.unknownNutrition;
 

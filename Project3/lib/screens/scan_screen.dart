@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../state/app_state.dart';
 import '../services/apl_service.dart';
-import 'receipt_scanner_screen.dart';
 import '../widgets/nutritional_badges.dart';
 import '../utils/nutritional_utils.dart';
 
@@ -190,11 +189,6 @@ class _ScanScreenState extends State<ScanScreen> {
       });
 
       _loadHealthierOptions();
-
-      final name = info['name'] ?? 'Unknown';
-      final cat = info['category'] ?? '?';
-
-      //_snack('$name ($cat) - Eligible!');
     } catch (e) {
       _snack('Error: $e');
     } finally {
@@ -460,20 +454,27 @@ class _ScanScreenState extends State<ScanScreen> {
                               onPressed: () {
                                 int quantity() => appState.basket
                                     .where((line) => line['upc'] == upc)
-                                    .fold<int>(0, (total, line) => total + (line['qty'] as int? ?? 0));
+                                    .fold<int>(
+                                      0,
+                                      (total, line) =>
+                                          total + (line['qty'] as int? ?? 0),
+                                    );
                                 final before = quantity();
                                 final created = appState.addItem(
                                   upc: upc,
                                   name: name,
                                   category: cat,
-                                  nutrition: NutritionalUtils.buildNutritionFromFoodNutrients(
-                                    item,
-                                  ),
+                                  nutrition:
+                                      NutritionalUtils.buildNutritionFromFoodNutrients(
+                                        item,
+                                      ),
                                 );
                                 // addItem also returns false for a successful
                                 // increment, so check the actual quantity.
                                 if (!created && quantity() <= before) {
-                                  _snack('Could not add $name. Check your allowance and try again.');
+                                  _snack(
+                                    'Could not add $name. Check your allowance and try again.',
+                                  );
                                   return;
                                 }
 
@@ -1081,20 +1082,13 @@ class _ScanScreenState extends State<ScanScreen> {
 
             const SizedBox(height: 18),
 
-            Text(
-              'Category: $category',
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-            ),
+            Text('Category: $category', style: const TextStyle(fontSize: 14)),
 
             const SizedBox(height: 8),
 
             Text(
               'UPC: ${_lastScanned ?? '-'}',
-              style: const TextStyle(
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontSize: 14),
             ),
 
             _infoRow('UPC', _lastScanned ?? '-'),

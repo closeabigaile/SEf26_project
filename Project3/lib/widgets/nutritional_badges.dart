@@ -51,10 +51,10 @@ class NutritionalBadges extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: badge.color.withOpacity(0.1),
+                color: badge.color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(
-                  color: badge.color.withOpacity(0.3),
+                  color: badge.color.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -71,10 +71,10 @@ class NutritionalBadges extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: badge.color.withOpacity(0.1),
+                color: badge.color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(
-                  color: badge.color.withOpacity(0.3),
+                  color: badge.color.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -137,6 +137,7 @@ class NutritionalBadgesCompact extends StatelessWidget {
     );
   }
 }
+
 /// Expanded nutrition facts panel showing values, units, serving basis,
 /// and short plain-language explanations for each nutrient.
 ///
@@ -188,7 +189,12 @@ class NutritionFactsPanel extends StatelessWidget {
     );
   }
 
-  Widget _row(String label, String key, {bool bold = false, bool indent = false}) {
+  Widget _row(
+    String label,
+    String key, {
+    bool bold = false,
+    bool indent = false,
+  }) {
     final value = nutrition[key] as num?;
     final unit = NutritionalUtils.nutrientUnits[key] ?? '';
     final explanation = NutritionalUtils.nutrientExplanations[key];

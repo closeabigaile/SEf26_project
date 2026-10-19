@@ -88,7 +88,10 @@ void main() {
 
     test('higher protein is reported as better when higher is better', () {
       final r = NutritionalUtils.compareTradeoff(
-        'Protein', 4, 9, 'g',
+        'Protein',
+        4,
+        9,
+        'g',
         lowerIsBetter: false,
       );
       expect(r, contains('Higher'));
