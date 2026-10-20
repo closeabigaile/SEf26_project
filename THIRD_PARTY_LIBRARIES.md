@@ -1,14 +1,15 @@
 # Third-Party Libraries
 
-WolfBite — Team 7, CSC 510 Project 2. Inventory reviewed on **2026-10-10**.
+WolfBite — Team 7, CSC 510 Project 2. Inventory reviewed on **2026-10-10**;
+dependency additions and classifications updated on **2026-10-19**.
 
 ## Scope and evidence
 
-This inventory lists all **115 packages in [pubspec.lock](Project3/pubspec.lock)**:
-15 direct application dependencies, 5 direct development dependencies, and
-95 transitive dependencies. Four of the 115 are supplied by the Flutter SDK.
-It also records the Python dependencies and explicitly referenced Firebase and
-Android tooling described below.
+This inventory lists all **122 packages in [pubspec.lock](Project3/pubspec.lock)**:
+15 direct application dependencies, 8 direct development dependencies, and
+99 transitive dependencies. Seven of the 122 are supplied by the Flutter SDK.
+It also records the Python dependencies, Firebase tooling, Node packages imported
+by tracked scripts, and explicitly referenced Android tooling described below.
 
 Inclusion means a dependency is declared or resolved by the project; it does
 not mean every package is imported directly or used in every build. In particular,
@@ -18,19 +19,24 @@ README's shorter table omits them.
 
 - **Dart versions and categories:** [pubspec.yaml](Project3/pubspec.yaml) and
   [pubspec.lock](Project3/pubspec.lock).
-- **Hosted Dart licenses:** inspected `LICENSE` files from the matching package
-  versions in the local Pub cache; `archive` also includes `LICENSE-other.md`.
-  The tables link to each exact version's published license page.
+- **Hosted Dart licenses:** the original inventory used `LICENSE` files from
+  matching package versions in the local Pub cache; `archive` also includes
+  `LICENSE-other.md`. The additions use the published license pages for
+  `platform` 3.2.0, `process` 5.0.6, and `webdriver` 3.2.0, plus the cached
+  `sync_http` 0.3.1 license. The tables link to each exact version's license page.
 - **SDK packages:** inspected the configured Flutter 3.47.2 SDK's license files.
   The lockfile's `0.0.0` SDK entries are placeholders, not separate release versions.
 - **Python and other tooling:** declarations, package metadata, and upstream
   license sources are linked in their sections.
 
-This is complete for the committed Dart lockfile and the identified declarations.
+The Dart tables cover the complete committed Dart lockfile. The other sections
+cover the specific dependencies and tooling supported by the evidence shown.
 It is **not a resolved inventory of every native binary or external tool's own
 transitive packages**: no committed CocoaPods, Gradle dependency, or Firebase CLI
-npm lockfile establishes those full trees. Platform-specific dependencies may
-vary with the target. Record those resolved inventories if native releases or
+npm lockfile establishes those full trees. The Node scripts also have no committed
+npm lockfile, so their resolved versions and transitive dependencies are not asserted.
+Platform-specific dependencies may vary with the target. Record those resolved
+inventories if native releases or
 the external tooling are distributed; do not infer them from a Dart wrapper's license.
 
 ## Direct application dependencies
@@ -63,14 +69,27 @@ Declared under `dev_dependencies` in `Project3/pubspec.yaml`.
 | --- | --- | --- | --- |
 | `build_runner` | 2.15.1 | BSD-3-Clause | [License](https://pub.dev/packages/build_runner/versions/2.15.1/license) |
 | `fake_cloud_firestore` | 4.2.0 | BSD-2-Clause | [License](https://pub.dev/packages/fake_cloud_firestore/versions/4.2.0/license) |
+| `firebase_core_platform_interface` | 8.1.0 | BSD-3-Clause | [License](https://pub.dev/packages/firebase_core_platform_interface/versions/8.1.0/license) |
 | `flutter_lints` | 5.0.0 | BSD-3-Clause | [License](https://pub.dev/packages/flutter_lints/versions/5.0.0/license) |
 | `flutter_test` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
+| `image_picker_platform_interface` | 2.11.1 | BSD-3-Clause | [License](https://pub.dev/packages/image_picker_platform_interface/versions/2.11.1/license) |
+| `integration_test` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
 | `mockito` | 5.6.4 | Apache-2.0 | [License](https://pub.dev/packages/mockito/versions/5.6.4/license) |
+
+Usage evidence: [device journeys](Project3/integration_test/journeys_device_test.dart)
+imports `integration_test`. The
+[UC6–10 tests](Project3/test/project1a/aditya_uc6-10_test.dart) import
+`firebase_core_platform_interface` and `image_picker_platform_interface`;
+both are now classified as direct development dependencies in the lockfile.
 
 ## Transitive dependencies
 
 Resolved through other packages and recorded as `transitive` in the lockfile.
 This includes platform implementations and development/test support packages.
+The integration-test dependency tree includes `flutter_driver`,
+`fuchsia_remote_debug_protocol`, `platform`, `process`, `sync_http`, and
+`webdriver`. Their presence in the lockfile does not imply that WolfBite supports
+Fuchsia or that browser-driver tests have been run.
 
 | Package | Locked version / SDK | License summary | License source |
 | --- | --- | --- | --- |
@@ -108,11 +127,12 @@ This includes platform implementations and development/test support packages.
 | `file_selector_windows` | 0.9.3+5 | BSD-3-Clause | [License](https://pub.dev/packages/file_selector_windows/versions/0.9.3%2B5/license) |
 | `firebase_auth_platform_interface` | 9.0.6 | BSD-3-Clause | [License](https://pub.dev/packages/firebase_auth_platform_interface/versions/9.0.6/license) |
 | `firebase_auth_web` | 6.2.6 | BSD-3-Clause | [License](https://pub.dev/packages/firebase_auth_web/versions/6.2.6/license) |
-| `firebase_core_platform_interface` | 8.1.0 | BSD-3-Clause | [License](https://pub.dev/packages/firebase_core_platform_interface/versions/8.1.0/license) |
 | `firebase_core_web` | 3.10.0 | BSD-3-Clause | [License](https://pub.dev/packages/firebase_core_web/versions/3.10.0/license) |
 | `fixnum` | 1.1.1 | BSD-3-Clause | [License](https://pub.dev/packages/fixnum/versions/1.1.1/license) |
+| `flutter_driver` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
 | `flutter_plugin_android_lifecycle` | 2.0.34 | BSD-3-Clause | [License](https://pub.dev/packages/flutter_plugin_android_lifecycle/versions/2.0.34/license) |
 | `flutter_web_plugins` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
+| `fuchsia_remote_debug_protocol` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
 | `glob` | 2.1.3 | BSD-3-Clause | [License](https://pub.dev/packages/glob/versions/2.1.3/license) |
 | `graphs` | 2.3.2 | BSD-3-Clause | [License](https://pub.dev/packages/graphs/versions/2.3.2/license) |
 | `http_multi_server` | 3.2.2 | BSD-3-Clause | [License](https://pub.dev/packages/http_multi_server/versions/3.2.2/license) |
@@ -122,7 +142,6 @@ This includes platform implementations and development/test support packages.
 | `image_picker_ios` | 0.8.13+3 | BSD-3-Clause; bundled Apache-2.0 notice | [License](https://pub.dev/packages/image_picker_ios/versions/0.8.13%2B3/license) |
 | `image_picker_linux` | 0.2.2 | BSD-3-Clause | [License](https://pub.dev/packages/image_picker_linux/versions/0.2.2/license) |
 | `image_picker_macos` | 0.2.2+1 | BSD-3-Clause | [License](https://pub.dev/packages/image_picker_macos/versions/0.2.2%2B1/license) |
-| `image_picker_platform_interface` | 2.11.1 | BSD-3-Clause | [License](https://pub.dev/packages/image_picker_platform_interface/versions/2.11.1/license) |
 | `image_picker_windows` | 0.2.2 | BSD-3-Clause | [License](https://pub.dev/packages/image_picker_windows/versions/0.2.2/license) |
 | `io` | 1.0.5 | BSD-3-Clause | [License](https://pub.dev/packages/io/versions/1.0.5/license) |
 | `json_annotation` | 4.12.0 | BSD-3-Clause | [License](https://pub.dev/packages/json_annotation/versions/4.12.0/license) |
@@ -142,8 +161,10 @@ This includes platform implementations and development/test support packages.
 | `package_config` | 2.2.0 | BSD-3-Clause | [License](https://pub.dev/packages/package_config/versions/2.2.0/license) |
 | `path` | 1.9.1 | BSD-3-Clause | [License](https://pub.dev/packages/path/versions/1.9.1/license) |
 | `petitparser` | 7.0.2 | MIT | [License](https://pub.dev/packages/petitparser/versions/7.0.2/license) |
+| `platform` | 3.2.0 | BSD-3-Clause | [License](https://pub.dev/packages/platform/versions/3.2.0/license) |
 | `plugin_platform_interface` | 2.1.8 | BSD-3-Clause | [License](https://pub.dev/packages/plugin_platform_interface/versions/2.1.8/license) |
 | `pool` | 1.5.2 | BSD-3-Clause | [License](https://pub.dev/packages/pool/versions/1.5.2/license) |
+| `process` | 5.0.6 | BSD-3-Clause | [License](https://pub.dev/packages/process/versions/5.0.6/license) |
 | `pub_semver` | 2.2.0 | BSD-3-Clause | [License](https://pub.dev/packages/pub_semver/versions/2.2.0/license) |
 | `pubspec_parse` | 1.5.0 | BSD-3-Clause | [License](https://pub.dev/packages/pubspec_parse/versions/1.5.0/license) |
 | `qr` | 3.0.2 | BSD-3-Clause | [License](https://pub.dev/packages/qr/versions/3.0.2/license) |
@@ -158,6 +179,7 @@ This includes platform implementations and development/test support packages.
 | `stream_channel` | 2.1.4 | BSD-3-Clause | [License](https://pub.dev/packages/stream_channel/versions/2.1.4/license) |
 | `stream_transform` | 2.1.1 | BSD-3-Clause | [License](https://pub.dev/packages/stream_transform/versions/2.1.1/license) |
 | `string_scanner` | 1.4.1 | BSD-3-Clause | [License](https://pub.dev/packages/string_scanner/versions/1.4.1/license) |
+| `sync_http` | 0.3.1 | BSD-3-Clause | [License](https://pub.dev/packages/sync_http/versions/0.3.1/license) |
 | `term_glyph` | 1.2.2 | BSD-3-Clause | [License](https://pub.dev/packages/term_glyph/versions/1.2.2/license) |
 | `test_api` | 0.7.12 | BSD-3-Clause | [License](https://pub.dev/packages/test_api/versions/0.7.12/license) |
 | `typed_data` | 1.4.0 | BSD-3-Clause | [License](https://pub.dev/packages/typed_data/versions/1.4.0/license) |
@@ -167,6 +189,7 @@ This includes platform implementations and development/test support packages.
 | `web` | 1.1.1 | BSD-3-Clause | [License](https://pub.dev/packages/web/versions/1.1.1/license) |
 | `web_socket` | 1.0.1 | BSD-3-Clause | [License](https://pub.dev/packages/web_socket/versions/1.0.1/license) |
 | `web_socket_channel` | 3.0.3 | BSD-3-Clause | [License](https://pub.dev/packages/web_socket_channel/versions/3.0.3/license) |
+| `webdriver` | 3.2.0 | Apache-2.0 | [License](https://pub.dev/packages/webdriver/versions/3.2.0/license) |
 | `xml` | 6.6.1 | MIT | [License](https://pub.dev/packages/xml/versions/6.6.1/license) |
 | `yaml` | 3.1.3 | MIT | [License](https://pub.dev/packages/yaml/versions/3.1.3/license) |
 
@@ -217,6 +240,22 @@ This CLI is not a Flutter application package. Its external npm installation
 has no committed lockfile here, so its transitive package versions are not asserted.
 Node's `node:*` imports are built-in modules, not separate npm dependencies.
 
+## Node catalog-seeding dependency
+
+The table below records a package both declared in
+[scripts/package.json](Project3/scripts/package.json) and imported by
+[seed_m2.js](Project3/scripts/seed_m2.js).
+
+| Package | Version evidence | Purpose | License | Source |
+| --- | --- | --- | --- | --- |
+| `firebase-admin` | `^13.0.0`, declared range; exact installed version not recorded | Firebase Admin app initialization and Firestore access in the M2 seed script | Apache-2.0, verified in published 13.0.0 metadata | [Published version metadata](https://registry.npmjs.org/firebase-admin/13.0.0) |
+
+`seed_m2.js` imports `firebase-admin/app` and `firebase-admin/firestore`.
+These imports establish use in the script, not that it has been executed against
+the shared database. The metadata link documents version 13.0.0; the declared
+range permits other 13.x versions. No exact local resolution or transitive npm
+inventory is claimed without a committed lockfile.
+
 ## Explicit Android dependencies and build tools
 
 These entries are present in the Android configuration. Their inclusion does
@@ -240,7 +279,8 @@ no exact CocoaPods resolution is claimed here.
 ## Keeping this inventory current
 
 When dependencies change, compare this document with `pubspec.yaml`,
-`pubspec.lock`, the Python requirements, and the native/tooling declarations.
+`pubspec.lock`, the Python requirements, `Project3/scripts/package.json`, script
+imports, and the native/tooling declarations.
 Update versions and verify the corresponding license files, including bundled
 notices. Remove entries only when the underlying dependency is removed from
 the project's declarations/resolution. Recheck unpinned dependencies against

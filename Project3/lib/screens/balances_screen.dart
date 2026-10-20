@@ -4,33 +4,34 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import '../state/app_state.dart';
 
-/// Screen displaying WIC benefit balances and account management.
+/// Displays application-managed demo allowances and account controls.
 ///
-/// Shows the user's current benefit usage for each WIC category, with
+/// Shows saved app usage for each WIC category, not official benefit balances, with
 /// visual progress indicators. Each category displays:
 /// - Items used vs. allowed limit
 /// - Progress bar with color-coded status (green/orange/red)
 /// - "Unlimited" badge for uncapped categories (CVB, produce)
 ///
 /// Also provides account management features:
-/// - Sign out button that clears state and returns to [LoginScreen]
+/// - Sign out button that clears state and returns to `LoginScreen`
 /// - Loading state while [AppState.loadUserState] completes
 ///
 /// This screen watches [AppState.balancesLoaded] to determine when to
 /// show data vs. loading spinner.
 ///
-/// Usage: Navigated to via `/benefits` route in bottom navigation.
+/// Usage: Navigated to via `/balances` route in bottom navigation.
 class BalancesScreen extends StatelessWidget {
   const BalancesScreen({super.key, this.auth});
 
   static const Color _primaryRed = Color(0xFFD1001C);
 
+  /// Optional authentication service; defaults to [FirebaseAuth.instance].
   final FirebaseAuth? auth;
 
   /// Signs the user out of [FirebaseAuth] and navigates to login screen.
   ///
   /// Clears all local state in [AppState] automatically via the auth
-  /// listener wired in [main.dart].
+  /// listener wired in `main.dart`.
   ///
   /// Side effects:
   /// - Calls [FirebaseAuth.instance.signOut]

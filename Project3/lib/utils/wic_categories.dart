@@ -7,6 +7,7 @@
 class WicCategories {
   const WicCategories._();
 
+  /// Two-digit NC APL category codes mapped to the shared canonical display names.
   static const Map<String, String> nameByCode = {
     '02': 'CHEESE',
     '03': 'EGGS',

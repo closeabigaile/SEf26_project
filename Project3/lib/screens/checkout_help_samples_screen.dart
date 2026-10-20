@@ -10,6 +10,8 @@ class CheckoutHelpSamplesScreen extends StatefulWidget {
     super.key,
     this.repository = const CheckoutHelpRepository(),
   });
+
+  /// Asset-backed source for labeled synthetic scenarios displayed by this screen.
   final CheckoutHelpRepository repository;
 
   @override

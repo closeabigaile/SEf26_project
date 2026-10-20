@@ -2,10 +2,16 @@ import 'dart:io';
 
 import 'package:wolfbite/services/nutrition_recommender.dart';
 
+/// Throws [StateError] with [message] when a fixture check fails.
 void check(bool condition, String message) {
   if (!condition) throw StateError(message);
 }
 
+/// Checks the synthetic nutrition CSV fixture and selected recommendation gates.
+///
+/// Run from Project3. Reads local fixtures, uses fixed example dates/targets,
+/// and prints a success message or throws on a failed check. No Firebase access
+/// or participant evaluation occurs.
 void main() {
   final lines = File('test/fixtures/nutrition_catalog.csv').readAsLinesSync();
   final headers = lines.first.split(',');

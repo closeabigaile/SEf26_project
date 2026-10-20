@@ -123,10 +123,19 @@ class CheckoutHelpDialog extends StatelessWidget {
     this.simple = false,
   });
 
+  /// Name of the selected product displayed in the dialog.
   final String itemName;
+
+  /// Prepared quantity/category description for the selected line.
   final String itemDetails;
+
+  /// Scope, loading, error, or stale-state notice accompanying the explanation.
   final String notice;
+
+  /// Explanation to render, or null while evidence is unavailable/loading.
   final CheckoutHelpResult? result;
+
+  /// Whether to use the concise app-allocation presentation instead of scenario details.
   final bool simple;
 
   @override

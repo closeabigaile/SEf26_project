@@ -5,11 +5,19 @@ import 'package:flutter/services.dart';
 /// A prepared example contains evidence only. Expected test answers are never
 /// passed to the decision service or used to choose the explanation.
 class CheckoutHelpExample {
+  /// Scenario identifier matched against a synthetic basket line.
   final String id;
+
+  /// Display label for the prepared example.
   final String title;
+
+  /// Item evidence from the fixture; nested string-keyed maps are frozen.
   final Map<String, dynamic> item;
+
+  /// Synthetic benefit evidence passed separately to the decision service.
   final Map<String, dynamic> benefit;
 
+  /// Copies and freezes item and benefit maps for a prepared synthetic example.
   CheckoutHelpExample({
     required this.id,
     required this.title,
@@ -50,10 +58,17 @@ class CheckoutHelpExample {
 /// A prepared basket line may explicitly opt into a synthetic scenario. Its
 /// identity, quantity, and classifications must match that scenario exactly.
 class CheckoutHelpRepository {
+  /// Loads examples from [bundle], or the application root bundle when omitted.
   const CheckoutHelpRepository({this.bundle});
 
+  /// Optional asset source for tests or alternate fixture bundles.
   final AssetBundle? bundle;
 
+  /// Loads the version-1 synthetic checkout-help asset into a fixed-length list.
+  ///
+  /// Throws [FormatException] for invalid JSON or unsupported synthetic/schema
+  /// markers. Asset-loading and malformed-field type errors propagate to the
+  /// caller. Each call reads the asset; results are not cached here.
   Future<List<CheckoutHelpExample>> loadExamples() async {
     final text = await (bundle ?? rootBundle).loadString(
       'assets/mock/checkout_help_scenarios.json',
@@ -81,6 +96,11 @@ class CheckoutHelpRepository {
         .toList(growable: false);
   }
 
+  /// Returns the prepared example matching a deliberately synthetic [line].
+  ///
+  /// Requires matching scenario ID, UPC, quantity, category, and original benefit
+  /// category. Returns null for ordinary lines or mismatches. Fixture-loading
+  /// errors propagate; no evidence is invented for a shopper's real item.
   Future<CheckoutHelpExample?> forBasketItem(Map<String, dynamic> line) async {
     if (line['checkout_help_source'] != 'synthetic' ||
         line['checkout_help_scenario_id'] is! String) {

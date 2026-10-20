@@ -15,14 +15,18 @@ class CheckoutHelpButton extends StatefulWidget {
   }) : _state = state;
 
   /// Samples are immutable, separate basket lines with no shopper state.
-  /// They still use the same evidence lookup, service, and dialog as real items.
+  /// They use the synthetic evidence service and shared dialog; ordinary
+  /// basket lines receive separate app-allowance explanations.
   const CheckoutHelpButton.sample({
     super.key,
     required this.line,
     this.repository = const CheckoutHelpRepository(),
   }) : _state = null;
 
+  /// Exact basket-line map used to detect stale help and identify the selected product.
   final Map<String, dynamic> line;
+
+  /// Repository used only to retrieve explicitly opted-in synthetic evidence.
   final CheckoutHelpRepository repository;
   final AppState? _state;
 

@@ -13,6 +13,7 @@ import '../utils/wic_categories.dart';
 
 /// An illustrative per-serving target for one nutrient.
 class BalanceTarget {
+  /// Creates a comparison target; [perServing] must be positive and finite.
   const BalanceTarget({
     required this.key,
     required this.label,
@@ -22,11 +23,19 @@ class BalanceTarget {
     required this.basis,
   });
 
-  /// Key in the M1 nutrition map (see [NutritionalUtils]).
+  /// Key in the M1 nutrition map, such as `sodium`, `addedSugar`, or `fiber`.
   final String key;
+
+  /// Nutrient name displayed in summaries and swap explanations.
   final String label;
+
+  /// Unit shared by the target and nutrient values, such as `mg` or `g`.
   final String unit;
+
+  /// Illustrative target per serving; not a personal daily requirement.
   final double perServing;
+
+  /// Whether exceeding the target is unfavorable; otherwise falling below it is.
   final bool lowerIsBetter;
 
   /// Where the number comes from, shown next to it in the UI.
@@ -64,6 +73,7 @@ const demoBalanceTargets = <BalanceTarget>[
 
 /// The basket's quantity-weighted average for one nutrient.
 class NutrientSummary {
+  /// Stores an average over measured quantities and the total quantity considered.
   const NutrientSummary({
     required this.target,
     required this.averagePerServing,
@@ -71,11 +81,16 @@ class NutrientSummary {
     required this.totalQty,
   });
 
+  /// Target and units associated with this nutrient summary.
   final BalanceTarget target;
 
   /// Null when no basket item has this nutrient.
   final double? averagePerServing;
+
+  /// Sum of positive item quantities with a finite, nonnegative nutrient value.
   final int measuredQty;
+
+  /// Sum of all positive item quantities, including those with unknown nutrition.
   final int totalQty;
 
   /// Some basket items have no value for this nutrient.
@@ -95,6 +110,7 @@ class NutrientSummary {
 
 /// One previewed swap. Applying it is a separate, shopper-confirmed step.
 class SwapSuggestion {
+  /// Records a preview replacing the entire source line while preserving its quantity.
   const SwapSuggestion({
     required this.fromUpc,
     required this.fromName,
@@ -111,19 +127,34 @@ class SwapSuggestion {
     this.source,
   });
 
+  /// Identifier of the basket product proposed for replacement.
   final String fromUpc;
+
+  /// Display name of the source basket product.
   final String fromName;
+
+  /// Canonical benefit category shared by both products.
   final String category;
+
+  /// Number of source-line items replaced by the preview.
   final int qty;
+
+  /// Identifier of the proposed replacement product.
   final String toUpc;
+
+  /// Display name of the proposed replacement product.
   final String toName;
+
+  /// Replacement nutrient map; unknown values remain null.
   final Map<String, dynamic> toNutrition;
 
   /// The nutrient this swap was ranked on.
   final BalanceTarget focus;
 
-  /// Basket averages for [focus] before and after the swap.
+  /// Quantity-weighted basket average for [focus] before the swap.
   final double before;
+
+  /// Quantity-weighted basket average for [focus] after the previewed replacement.
   final double after;
 
   /// How far the basket's [focus] average moves in the better direction,
@@ -140,7 +171,12 @@ class SwapSuggestion {
   String get key => '$fromUpc>$toUpc';
 }
 
+/// Nutrient summaries and optional swap previews for the current basket.
+///
+/// An empty suggestion list can mean targets are met, data is insufficient,
+/// allowances are inconsistent, or no improving candidate exists; see [message].
 class BasketBalanceReport {
+  /// Collects summaries, ranked previews, and an optional explanation.
   const BasketBalanceReport({
     required this.summaries,
     required this.suggestions,
@@ -148,7 +184,10 @@ class BasketBalanceReport {
     this.message,
   });
 
+  /// One summary for each configured target, in target order.
   final List<NutrientSummary> summaries;
+
+  /// Best preview per eligible source line, ranked and limited by the service.
   final List<SwapSuggestion> suggestions;
 
   /// The nutrient with the largest gap, if any.
@@ -158,18 +197,34 @@ class BasketBalanceReport {
   final String? message;
 }
 
+/// Pure basket analysis using quantity-weighted nutrient averages and demo targets.
+///
+/// The largest rankable target gap selects the focus nutrient. Swaps preserve
+/// category and quantity, skip PAID lines, and require consistent app allowances.
+/// Results are previews; this service performs no database writes or basket edits.
 class BasketBalanceService {
+  /// Uses [targets], defaulting to the illustrative [demoBalanceTargets].
+  ///
+  /// Supply a nonempty list with positive, finite per-serving target values.
   const BasketBalanceService({this.targets = demoBalanceTargets});
 
+  /// Ordered comparison targets; order resolves ties for the focus nutrient.
   final List<BalanceTarget> targets;
 
-  /// Share of basket items that must have a value before ranking on it.
+  /// Minimum fraction of total item quantity with measured values for ranking.
   static const double minCoverage = 0.5;
+
+  /// Maximum number of ranked previews returned by [analyze].
   static const int maxSuggestions = 3;
   static const double _epsilon = 1e-9;
 
+  /// Normalizes a category through [WicCategories.canonical].
   static String canon(Object? raw) => WicCategories.canonical(raw);
 
+  /// Returns the unfavorable distance from [target], divided by its per-serving value.
+  ///
+  /// Returns zero when [average] meets the target direction. The target value
+  /// must be positive and finite; inputs are not validated by this helper.
   static double gapFor(BalanceTarget target, double average) {
     if (target.lowerIsBetter) {
       return average <= target.perServing
@@ -251,6 +306,15 @@ class BasketBalanceService {
   /// shaped `{upc, name, category, eligible, nutrition}`. Swaps whose
   /// [SwapSuggestion.key] is in [rejected] are not offered again. Nothing is
   /// mutated.
+  ///
+  /// Basket lines carry `upc`, `name`, `category`, positive integer `qty`, and
+  /// an optional `nutrition` map. [balances] maps canonical categories to
+  /// integer `used` counts and integer or null `allowed` limits. Missing or
+  /// invalid nutrient values do not count as zero. Summaries include PAID
+  /// lines, but those lines are not swap candidates.
+  ///
+  /// Requires nonempty [targets]. The report explains why no suggestions
+  /// were produced, including insufficient data or inconsistent allowances.
   BasketBalanceReport analyze({
     required List<Map<String, dynamic>> basket,
     required Map<String, Map<String, dynamic>> balances,
@@ -422,6 +486,10 @@ class BasketBalanceService {
     );
   }
 
+  /// Formats [value] with [unit] for display.
+  ///
+  /// Values at least 100 round to an integer; smaller values use up to one
+  /// decimal place. This formatting does not affect ranking calculations.
   static String formatAmount(double value, String unit) {
     final rounded = value >= 100
         ? value.round().toString()

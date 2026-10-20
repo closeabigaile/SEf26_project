@@ -1,17 +1,28 @@
-/// Deterministic meal suggestions. Values are per stated serving, never per
-/// package or inferred from a missing nutrient.
+/// Ranking modes for the offline meal-suggestion prototype.
+///
+/// Privacy mode requires no personal target and ignores purchase history.
+/// Other modes apply the gates described by [NutritionRecommender.recommend].
 enum NutritionMode { balanced, bodybuilding, fatLoss, moneySaving, privacy }
 
+/// Life-stage labels used to match supplied targets and gate recommendation modes.
 enum LifeStage { adult, child, pregnant, breastfeeding, infant, unknown }
 
+/// A source title, URL, and claim attached to a recommendation rationale.
 class NutritionEvidence {
+  /// Records a source and the claim it supports; URLs are not fetched or validated.
   const NutritionEvidence(this.title, this.url, this.claim);
 
+  /// Human-readable title of the evidence source.
   final String title;
+
+  /// Source URL included in CLI output for the reader to inspect.
   final String url;
+
+  /// Limited claim associated with the source, not proof of a recommendation.
   final String claim;
 }
 
+/// Evidence registry keyed by the claim IDs returned in meal and history results.
 const nutritionEvidence = <String, NutritionEvidence>{
   'balanced_pattern': NutritionEvidence(
     'WHO: Healthy diet',
@@ -50,7 +61,13 @@ const nutritionEvidence = <String, NutritionEvidence>{
   ),
 };
 
+/// A catalog product with nutrient amounts for its stated portion.
+///
+/// Missing amounts remain null. Construction alone does not validate the data;
+/// [hasComparableNutrition] checks presence and [NutritionRecommender.recommend]
+/// applies additional filters. This model belongs to the offline meal prototype.
 class NutritionProduct {
+  /// Stores product data and provenance without inventing missing nutrient values.
   const NutritionProduct({
     required this.upc,
     required this.name,
@@ -77,30 +94,80 @@ class NutritionProduct {
     this.mealStyle = 'neutral',
   });
 
+  /// Product identifier used for catalog matching, exclusions, and deterministic ties.
   final String upc;
+
+  /// Product name shown in suggested meals.
   final String name;
+
+  /// Meal role: `vegetable`, `fruit`, `protein`, or `grain` for current assembly rules.
   final String foodGroup;
+
+  /// Catalog category label; this is not a participant benefit allocation.
   final String category;
+
+  /// Whether the supplied catalog marks the product eligible for consideration.
   final bool eligible;
+
+  /// Grams in the stated portion, or null when unknown.
   final double? servingGrams;
+
+  /// Energy in kilocalories for the stated portion, or null when unknown.
   final double? calories;
+
+  /// Grams of protein in the stated portion, or null when unknown.
   final double? proteinGrams;
+
+  /// Grams of fiber in the stated portion, or null when unknown.
   final double? fiberGrams;
+
+  /// Milligrams of sodium in the stated portion, or null when unknown.
   final double? sodiumMg;
+
+  /// Grams of saturated fat in the stated portion, or null when unknown.
   final double? saturatedFatGrams;
+
+  /// Grams of added sugar in the stated portion, or null when unknown.
   final double? addedSugarGrams;
+
+  /// Price for the stated portion; must use the same currency as the meal budget.
   final double? pricePerServing;
+
+  /// Observation date used to reject future prices and prices older than 30 days.
   final DateTime? priceObservedAt;
+
+  /// Price provenance; budget-mode candidates require an HTTPS URL.
   final String? priceSourceUrl;
+
+  /// Explanation of how the observed price was mapped to this portion.
   final String? priceMappingNote;
+
+  /// Source of the product nutrition; a nonempty value is required for comparison.
   final String sourceUrl;
+
+  /// Separate source for added sugar when the main record does not provide it.
   final String? addedSugarSourceUrl;
+
+  /// Description of the portion represented by the nutrient values.
   final String? portionBasis;
+
+  /// Whether amounts are identified as label-based for label-specific rationales.
   final bool labelBased;
+
+  /// Whether this product is enabled for meal assembly in the prototype catalog.
   final bool mealCandidate;
+
+  /// Catalog review note explaining inclusion or exclusion as a meal candidate.
   final String? candidateNote;
+
+  /// Compatibility label; current rules reject savory protein with a sweet grain.
   final String mealStyle;
 
+  /// Returns a copy with portion mass, nutrients, and known price scaled by [servings].
+  ///
+  /// All nutrient fields and [servingGrams] must be non-null; otherwise the null
+  /// assertions throw. The caller must supply an appropriate positive factor.
+  /// Identity and provenance are retained, and the original product is unchanged.
   NutritionProduct scaledBy(double servings) => NutritionProduct(
     upc: upc,
     name: name,
@@ -129,6 +196,10 @@ class NutritionProduct {
     mealStyle: mealStyle,
   );
 
+  /// Whether identity, source, positive portion mass, and all nutrient values exist.
+  ///
+  /// This presence check does not establish source accuracy or validate every
+  /// nutrient value; recommendation filtering performs further checks.
   bool get hasComparableNutrition =>
       servingGrams != null &&
       servingGrams! > 0 &&
@@ -142,6 +213,12 @@ class NutritionProduct {
       upc.isNotEmpty &&
       name.isNotEmpty;
 
+  /// Parses a JSON/CSV-style [row] without replacing missing amounts with zero.
+  ///
+  /// Numeric fields accept numbers or parseable numeric strings. Invalid numeric
+  /// strings and dates become null; absent identity fields become empty strings.
+  /// Boolean flags accept the corresponding boolean or lowercase text value.
+  /// Parsing does not establish suitability for recommendation.
   factory NutritionProduct.fromMap(Map<String, dynamic> row) {
     double? amount(String key) {
       final value = row[key];
@@ -186,6 +263,7 @@ class NutritionProduct {
 /// Targets are supplied by a life-stage reference or a qualified professional.
 /// The source URL is required so a number is never presented without origin.
 class NutritionTargets {
+  /// Stores caller-supplied daily targets; the recommender checks applicability.
   const NutritionTargets({
     required this.sourceUrl,
     required this.lifeStage,
@@ -194,14 +272,28 @@ class NutritionTargets {
     this.sodiumMgMaxPerDay,
   });
 
+  /// Source URL identifying the origin of the supplied daily targets.
   final String sourceUrl;
+
+  /// Life stage to which these targets apply.
   final LifeStage lifeStage;
+
+  /// Daily energy target in kilocalories, or null if not supplied.
   final double? caloriesPerDay;
+
+  /// Daily protein target in grams, or null if not supplied.
   final double? proteinGramsPerDay;
+
+  /// Daily sodium maximum in milligrams, or null if not supplied.
   final double? sodiumMgMaxPerDay;
 }
 
+/// Caller-supplied preferences and constraints for one offline recommendation.
+///
+/// Flags describe supplied inputs; this object does not authenticate clinical
+/// review, derive personal targets, or query official benefits.
 class NutritionContext {
+  /// Creates a request context with optional history use disabled by default.
   const NutritionContext({
     required this.mode,
     required this.lifeStage,
@@ -214,25 +306,54 @@ class NutritionContext {
     this.excludedUpcs = const {},
   });
 
+  /// Ranking mode and associated eligibility gates for this request.
   final NutritionMode mode;
+
+  /// Life stage used to check the supplied targets and mode restrictions.
   final LifeStage lifeStage;
+
+  /// Daily reference targets; required outside privacy mode.
   final NutritionTargets? targets;
+
+  /// Maximum meal price in the catalog currency; required in money-saving mode.
   final double? budgetPerMeal;
+
+  /// Positive divisor for converting daily targets into illustrative meal targets.
   final int mealsPerDay;
+
+  /// Whether the request supplies the training flag required by bodybuilding mode.
   final bool training;
+
+  /// Caller assertion of a clinician plan used by non-adult weight/training gates.
   final bool clinicianWeightPlan;
+
+  /// Whether adult, non-privacy requests may examine supplied purchase history.
   final bool useHistory;
+
+  /// Product identifiers to omit; this does not implement complete allergy screening.
   final Set<String> excludedUpcs;
 }
 
+/// A dated list of purchased products supplied to the optional history review.
+///
+/// A purchase record is not evidence of consumption. This model performs no storage.
 class PurchaseRecord {
+  /// Stores a checkout date and its supplied product records.
   const PurchaseRecord(this.date, this.products);
 
+  /// Purchase date used by the inclusive 90-day history window.
   final DateTime date;
+
+  /// Products recorded for this purchase; quantities are represented by the input list.
   final List<NutritionProduct> products;
 }
 
+/// A ranked combination of produce, protein, and grain portions.
+///
+/// Instances created by the recommender contain measured nutrient values.
+/// The scoring weights are prototype heuristics, not clinical validation.
 class MealSuggestion {
+  /// Stores selected portions, ranking score, evidence IDs, and any proposed replacement.
   const MealSuggestion(
     this.products,
     this.score,
@@ -240,37 +361,81 @@ class MealSuggestion {
     this.replacedBasketUpcs,
   );
 
+  /// Products with portion-scaled nutrient amounts for this meal.
   final List<NutritionProduct> products;
+
+  /// Prototype ranking score; higher values sort first within a request.
   final double score;
+
+  /// Keys into [nutritionEvidence] for the meal rationale.
   final List<String> claimIds;
+
+  /// Basket product IDs proposed for replacement; the suggestion does not mutate a basket.
   final List<String> replacedBasketUpcs;
 
+  /// Total kilocalories across portions; requires non-null product energy values.
   double get calories => products.fold(0, (sum, p) => sum + p.calories!);
+
+  /// Total protein in grams; requires non-null product protein values.
   double get proteinGrams =>
       products.fold(0, (sum, p) => sum + p.proteinGrams!);
+
+  /// Total sodium in milligrams; requires non-null product sodium values.
   double get sodiumMg => products.fold(0, (sum, p) => sum + p.sodiumMg!);
+
+  /// Sum of portion prices, treating unknown prices as zero for this calculation.
+  ///
+  /// Check that every price is known before presenting this as a complete meal
+  /// cost. The CLI suppresses it when any price is unknown.
   double get pricePerServing =>
       products.fold(0, (sum, p) => sum + (p.pricePerServing ?? 0));
 }
 
+/// Meal ideas, optional history notices, and a reason when suggestions are blocked.
 class NutritionResult {
+  /// Collects a recommendation outcome without changing catalog or basket data.
   const NutritionResult(this.meals, this.historyMessages, this.blockedReason);
 
+  /// Up to three suggestions, ordered by score and then product identifiers.
   final List<MealSuggestion> meals;
+
+  /// Notices from eligible, opted-in purchase-history review; otherwise empty.
   final List<HistoryNotice> historyMessages;
+
+  /// Explanation when request validation or candidate filtering yields no meals.
   final String? blockedReason;
 }
 
+/// A purchase-history observation with supporting evidence identifiers.
 class HistoryNotice {
+  /// Pairs a human-readable observation with source-registry keys.
   const HistoryNotice(this.message, this.claimIds);
 
+  /// Observation about recorded purchases, not a diagnosis or consumption estimate.
   final String message;
+
+  /// Keys into [nutritionEvidence] supporting the observation.
   final List<String> claimIds;
 }
 
+/// Offline meal-prototype engine using supplied catalog, target, and history data.
+///
+/// This is separate from the app's basket-balance swap service. It does not
+/// query Firebase, derive clinical targets, verify benefits, or apply swaps.
 class NutritionRecommender {
+  /// Creates a stateless engine; all inputs are supplied to [recommend].
   const NutritionRecommender();
 
+  /// Builds up to three meal ideas subject to [context] and available catalog data.
+  ///
+  /// [catalog] supplies product portions and provenance; [basketUpcs] anchors the
+  /// meal or identifies a single unsuitable item proposed for replacement.
+  /// Unsupported requests and insufficient data return a [NutritionResult] with
+  /// a blocked reason. Inputs are not mutated.
+  ///
+  /// [history] is considered only when opted in, outside privacy mode, for adults.
+  /// [now] makes price freshness and history windows reproducible; otherwise
+  /// the current time is used. Scores are heuristic and ties use product IDs.
   NutritionResult recommend({
     required List<NutritionProduct> catalog,
     required Set<String> basketUpcs,

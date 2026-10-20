@@ -28,6 +28,7 @@ class BasketBalanceSheet extends StatefulWidget {
     this.service = const BasketBalanceService(),
   });
 
+  /// Analysis engine for previews; confirmed swaps are applied through AppState.
   final BasketBalanceService service;
 
   @override

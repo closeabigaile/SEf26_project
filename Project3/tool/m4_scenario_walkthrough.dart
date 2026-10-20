@@ -8,10 +8,18 @@ import 'package:wolfbite/screens/basket_screen.dart';
 import 'package:wolfbite/services/checkout_help_repository.dart';
 import 'package:wolfbite/state/app_state.dart';
 
+/// Fake-backed application state recording forbidden mutations during help demos.
 class WalkthroughState extends AppState {
+  /// Creates isolated state with an in-memory Firestore implementation.
   WalkthroughState() : super(db: FakeFirebaseFirestore());
+
+  /// Number of checkout calls observed during the walkthrough.
   int checkoutCalls = 0;
+
+  /// Number of state-load calls observed during the walkthrough.
   int loadCalls = 0;
+
+  /// Number of basket-clear calls observed during the walkthrough.
   int clearCalls = 0;
   @override
   Future<void> checkout() {
@@ -32,6 +40,10 @@ class WalkthroughState extends AppState {
   }
 }
 
+/// Launches the synthetic M4 walkthrough with isolated state and prepared examples.
+///
+/// Run through Flutter using this file as the target. The walkthrough provides
+/// UI evidence for sample scenarios, not real checkout or participant outcomes.
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(

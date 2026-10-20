@@ -4,21 +4,29 @@ import 'package:flutter/material.dart';
 ///
 /// Defines thresholds for various nutritional categories and provides methods
 /// to calculate which badges a product should display based on its nutritional data.
+/// Values are compared as supplied, without serving-size conversion. Badges
+/// are prototype labels, not personalized health or benefit determinations.
 class NutritionalUtils {
-  // Nutritional thresholds (per serving)
+  // Thresholds compare supplied nutrient amounts; serving basis is not converted.
+  /// Maximum total-fat grams for the prototype Low Fat badge.
   static const int lowFatThreshold = 3; // grams
+  /// Maximum sodium milligrams for the prototype Low Sodium badge.
   static const int lowSodiumThreshold = 140; // mg
+  /// Maximum total-sugar grams for the prototype Low Sugar badge.
   static const int lowSugarThreshold = 5; // grams
+  /// Minimum protein grams for the prototype High Protein badge.
   static const int highProteinThreshold = 10; // grams
+  /// Maximum energy value for the prototype Low Calorie badge.
   static const int lowCalorieThreshold = 120; // calories
+  /// Maximum saturated-fat grams for the prototype Heart Healthy badge.
   static const int heartHealthyMaxSaturatedFat = 1; // grams
+  /// Maximum sodium milligrams for the prototype Heart Healthy badge.
   static const int heartHealthyMaxSodium = 140; // mg
 
   /// Measurement basis shown with nutrition values.
   ///
-  /// The source data does not state whether amounts are per serving or per
-  /// 100 g, so this stays neutral until verified against the APL records.
-  /// If verified, change this one line (e.g. to 'per 100 g').
+  /// Fallback when a record supplies no serving-basis text. Records with
+  /// verified source-specific bases retain their own labels.
   static const String defaultServingBasis = 'Serving basis not specified';
 
   /// Units shown next to each nutrient's value.
@@ -157,7 +165,8 @@ class NutritionalUtils {
   /// Determines which nutritional badges should be displayed for a product.
   ///
   /// A null (unknown) nutrient never qualifies a product for a favorable
-  /// badge.
+  /// badge. Numeric values must already use the expected units; this method
+  /// performs no portion conversion or validation of the source.
   static List<NutritionalBadge> getBadges(Map<String, dynamic> nutrition) {
     final badges = <NutritionalBadge>[];
 

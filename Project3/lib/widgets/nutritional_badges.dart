@@ -145,6 +145,7 @@ class NutritionalBadgesCompact extends StatelessWidget {
 class NutritionFactsPanel extends StatelessWidget {
   const NutritionFactsPanel({required this.nutrition, super.key});
 
+  /// Normalized nutrient values plus optional `servingBasis`; null amounts display as unknown.
   final Map<String, dynamic> nutrition;
 
   @override

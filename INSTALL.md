@@ -114,8 +114,18 @@ emulator. Native builds and device behavior have not yet been verified for this
 version. Linux desktop is not configured in the current Firebase options;
 this does not prevent using the web app in Chrome on Linux.
 
-<!-- BEFORE FINAL SUBMISSION:
-Repeat these steps from a fresh clone of the submission version and record
-the tested operating system, Flutter version, commit, and observed results.
-Add platform-specific installation instructions only after verification.
--->
+## Installation verification evidence
+
+A [fresh-clone check on October 19, 2026](Project2_Work/installation/2026-10-19/README.md)
+verified commit `3f1379ec15be9b7b093e5a291c6e05a9c50bf603` on macOS 26.6.2
+(Apple Silicon), using Flutter 3.47.2, Dart 3.13.2, and Chrome 155.0.8059.85.
+Dependency installation succeeded without changing the lockfile, all 377 Flutter
+tests passed, the release web build succeeded, and the app launched in Chrome.
+Abigail Close also confirmed that the live sign-in, product-lookup, and
+add-to-basket checks succeeded. The linked record includes command output
+and the scope of that human verification.
+
+This evidence covers the committed base of the documentation branch. Before
+submission, repeat the check against the final merged commit and record its
+hash, platform, tool versions, observed results, and human reviewer. Native
+platform instructions should be added only after those platforms are verified.
