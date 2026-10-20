@@ -10,6 +10,12 @@ import 'package:wolfbite/utils/nutritional_utils.dart';
 import '../state/app_state.dart';
 import '../services/apl_service.dart';
 
+/// Imports catalog matches from UPC candidates found in a receipt image.
+///
+/// Lets the shopper select or capture an image, sends it to OCR.space, and
+/// looks up extracted codes through [AplService]. Adding selected matches
+/// changes the provided [AppState]; OCR alone does not establish eligibility
+/// or verify a purchase. The network OCR service can fail or misread text.
 class ReceiptScannerScreen extends StatefulWidget {
   const ReceiptScannerScreen({super.key});
 

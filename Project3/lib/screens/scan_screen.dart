@@ -9,21 +9,25 @@ import '../services/apl_service.dart';
 import '../widgets/nutritional_badges.dart';
 import '../utils/nutritional_utils.dart';
 
-/// Barcode scanning screen for WIC eligibility checking.
+/// Product lookup screen for imported catalog eligibility and demo basket allocation.
 ///
 /// Features:
 /// - Live camera barcode scanning on mobile devices
-/// - Manual UPC entry via text field on desktop
-/// - WIC eligibility verification via [AplService]
+/// - Manual UPC entry in desktop and mobile layouts
+/// - Imported catalog lookup via [AplService]; official benefits are not verified
 /// - Add eligible items to shopping basket
 /// - Diagnostic test for Firestore connectivity
 ///
 /// Uses [MobileScanner] widget for camera-based scanning.
-/// Falls back to text input on web/desktop platforms.
+/// Manual entry is available alongside camera actions; camera availability
+/// depends on platform support and permissions.
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key, this.aplService, this.auth});
 
+  /// Optional catalog service, allowing tests to avoid live product lookups.
   final AplService? aplService;
+
+  /// Optional authentication service; defaults to [FirebaseAuth.instance].
   final FirebaseAuth? auth;
 
   @override

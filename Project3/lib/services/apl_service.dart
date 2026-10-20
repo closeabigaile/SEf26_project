@@ -25,6 +25,11 @@ class AplService {
   /// `--dart-define=NUTRITION_SOURCE=collection|apl` build).
   final bool? _useNutritionCollection;
 
+  /// Uses [db] or the default Firestore instance for read-only catalog queries.
+  ///
+  /// [useNutritionCollection] overrides the build-time source setting and remote
+  /// switch. When omitted, `NUTRITION_SOURCE` and then `config/nutrition` determine
+  /// whether the separate nutrition collection is consulted.
   AplService({FirebaseFirestore? db, bool? useNutritionCollection})
     : _db = db ?? FirebaseFirestore.instance,
       _useNutritionCollection =
@@ -66,7 +71,9 @@ class AplService {
   /// Looks up a product by its Universal Product Code (UPC).
   ///
   /// Queries the `apl` collection in [FirebaseFirestore] using the [upc]
-  /// as the document ID.
+  /// as the document ID. The caller supplies the exact catalog key; this
+  /// method does not pad, trim, or otherwise normalize a UPC. APL read errors
+  /// propagate, while unavailable optional nutrition leaves values unknown.
   ///
   /// Returns a [Map] with product data (name, category, eligible, etc.)
   /// if found, or null if the product doesn't exist in the APL.
@@ -179,14 +186,17 @@ class AplService {
   /// Queries the `apl` collection for products matching the given [category]
   /// where `eligible` is true. Results are limited to [max] items (default 3).
   ///
-  /// This is useful when a user's preferred product would exceed their
-  /// category limit, allowing the app to suggest alternatives.
+  /// This is a catalog lookup only. A same-category substitute does not
+  /// increase a shopper's remaining category allowance.
   ///
   /// Parameters:
   /// - [category]: The product category to search within
   /// - [max]: Maximum number of substitutes to return (default: 3)
   ///
-  /// Returns a [List] of product [Map]s with the same structure as [findByUpc].
+  /// Returns raw APL document maps. Unlike [findByUpc], this method does not
+  /// normalize categories or merge the separate nutrition collection. It does
+  /// not add document IDs to the maps. Firestore query errors propagate.
+  /// [max] must be positive, as required by the Firestore query limit.
   Future<List<Map<String, dynamic>>> substitutes(
     String category, {
     int max = 3,
@@ -264,19 +274,24 @@ class AplService {
   ///
   /// Each candidate is scored using `_computeHealthScore` based on foodNutrients.
   /// Results are sorted by health score (ascending) with `healthScore` and `upc`
-  /// fields added to the returned maps.
+  /// fields added to the returned maps. Optional nutrition-collection
+  /// candidates are merged with up to 50 matching APL records. A blank
+  /// category or a base product without nutrients yields an empty list;
+  /// candidates without nutrients are excluded. APL read errors propagate.
   ///
   /// This powers the "healthier alternatives" UI feature - when clicked, users
-  /// can swap their scanned item for a nutritionally superior option in the same
-  /// WIC category.
+  /// can inspect a lower-scoring option in the same WIC category. The score
+  /// is a prototype heuristic, not a clinically validated health judgment;
+  /// this lookup neither changes the basket nor verifies benefit balances.
   ///
   /// Parameters:
   /// - [category]: Exact category match for substitutes
   /// - [baseProduct]: Currently scanned product for score comparison
   /// - [max]: Maximum number of healthier substitutes to return (default: 5)
   ///
-  /// Returns a [List] of product [Map]s (sorted by health score) that are nutritionally
-  /// superior to the base product. Empty list if no better options found.
+  /// Returns product maps with strictly lower heuristic scores, sorted by
+  /// score. An empty list means no qualifying comparison was found. [max]
+  /// must be nonnegative.
   Future<List<Map<String, dynamic>>> healthierSubstitutes({
     required String category,
     required Map<String, dynamic> baseProduct,
@@ -342,6 +357,9 @@ class AplService {
   ///
   /// Candidates come from `nutrition/` (checked against the APL for
   /// eligibility) plus any APL records that carry `foodNutrients` themselves.
+  /// [max] limits each source query, not the final merged list; duplicate UPCs
+  /// are combined. [max] must be positive. Blank categories yield no results,
+  /// and APL read errors propagate. This method performs no basket mutations.
   Future<List<Map<String, dynamic>>> balanceCandidates(
     String category, {
     int max = 25,

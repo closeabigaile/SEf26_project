@@ -4,17 +4,66 @@ This file records AI assistance used in Team 7's WolfBite work and the human
 review of that assistance. Add entries as work is completed. Mark human review
 as pending until a reviewer records what they checked and any corrections.
 
-## Dependency and license inventory - October 10, 2026
+## Fresh-clone installation evidence - October 19, 2026
+
+- **Contributor:** Abigail Close.
+- **AI tool:** OpenAI Codex.
+- **Files:** [INSTALL.md](INSTALL.md) and the
+  [installation record and logs](Project2_Work/installation/2026-10-19/README.md).
+- **Task and assistance:** Verify installation from a fresh GitHub clone at
+  commit `3f1379ec15be9b7b093e5a291c6e05a9c50bf603`; record the environment,
+  commands, observed results, and limits of the check.
+- **AI verification:** Checked Flutter/Chrome availability, installed dependencies
+  without changing the lockfile, ran 377 passing Flutter tests, built the release
+  web app, and launched the fresh checkout in Chrome. Saved command output,
+  checked local evidence links, and verified documentation whitespace.
+- **Limitations:** The machine already had an SDK and package cache. This is not
+  the final submission commit; native platforms were not tested. The specific
+  product/UPC used in the live check was not recorded.
+- **Human verification:** Abigail Close completed the requested live sign-in,
+  product-lookup, and add-to-basket check and reported that everything looked
+  good. No errors or corrections were reported. This records her live check,
+  not a claim that she independently reviewed every saved automated log.
+
+## Dart API documentation - October 19, 2026
+
+- **Contributor:** Abigail Close.
+- **AI tool:** OpenAI Codex.
+- **Files:** Documentation comments in `Project3/lib`,
+  `Project3/scripts/nutrition_cli.dart`, `Project3/scripts/verify_nutrition.dart`,
+  `Project3/tool/m4_scenario_walkthrough.dart`, and this disclosure.
+- **Task:** Use AI to help document what WolfBite's classes, functions, and
+  components do so another team can understand and maintain the project.
+- **AI assistance:** Inspected the implementation, added Dart documentation
+  comments for public APIs, and corrected outdated descriptions. Documented
+  inputs, outputs, side effects, data units, fallback behavior, and limitations
+  where relevant, including the distinction between the offline nutrition
+  prototype and the application's basket-balance service.
+- **AI verification:** Compared executable Dart tokens before and after the
+  edits across all 27 changed Dart files; only comments and whitespace changed.
+  The formatting check passed. Generated documentation for 27 public libraries
+  with `dart doc --validate-links`, with zero warnings and zero errors, and
+  inspected rendered API pages locally. Application tests were not rerun because
+  executable code was unchanged. Generated HTML was kept outside the repository;
+  this update does not publish the documentation site.
+- **Human review:** Abigail Close
+
+## Dependency and license inventory - October 10-19, 2026
 
 - **AI tool:** OpenAI Codex.
-- **Files:** THIRD_PARTY_LIBRARIES.md and the README dependency link.
-- **Task:** Document only dependencies supported by repository evidence,
-  verify their licenses, and link the inventory from the README.
-- **AI assistance:** Drafted the inventory using dependency declarations,
-  the Dart lockfile, installed license files, and upstream metadata.
-- **AI verification:** Compared all 115 Dart/Flutter entries with the
-  lockfile and checked relative links and Markdown rendering.
-- **Human reviewer:** Abigail Close
+- **Files:** [THIRD_PARTY_LIBRARIES.md](THIRD_PARTY_LIBRARIES.md) and this disclosure.
+- **Task:** Add only dependencies supported by repository evidence, preserve
+  existing entries, and update counts and wording as needed.
+- **AI assistance:** Added seven Dart/Flutter packages confirmed in the lockfile
+  and `firebase-admin`, imported by `Project3/scripts/seed_m2.js`. Reclassified two
+  existing packages as direct development dependencies and verified the added
+  license summaries using SDK/cache license files and published package sources.
+  Left `csv-parser` out because no usage was found in tracked code.
+- **AI verification:** Checked all 122 Dart/Flutter entries against the lockfile
+  for versions and categories; confirmed every existing dependency row was
+  preserved, local links resolved, and `git diff --check` passed. Application
+  tests were not rerun for this documentation-only update.
+- **Human review:** Abigail Close
 
 ## M0 checkout-help baseline and evaluation - September 19-29, 2026
 
@@ -65,4 +114,3 @@ as pending until a reviewer records what they checked and any corrections.
 | September 27, 2026 | [Historical service results](Project2_Work/M4/issue4_service_results_2026-09-27.md) and [checkout-help review findings](Project2_Work/M4/checkout_help_test_review.md) | [Service tests](Project2_Work/M4/test_results/service_final_2026-09-27.txt), [adversarial review tests](Project2_Work/M4/test_results/review_2026-09-27/adversarial_tests.txt) |
 | September 27, 2026 | [Implementation corrections and validation](Project2_Work/M4/implementation_results.md) and [frontend/demo guide](Project2_Work/M4/issue3_frontend.md) | [M4 implementation tests](Project2_Work/M4/test_results/implementation_2026-09-27/m4_final.txt), [full-application results with four failures](Project2_Work/M4/test_results/issue3_2026-09-27/full_suite_final.txt) |
 | September 29, 2026 | [Issue 4 test conclusions](Project2_Work/M4/issue4_test_results.md) and [Issue 5 integration/CI conclusions](Project2_Work/M4/issue5_verification_results.md) | [Unit tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_unit.txt), [widget/state tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_widget.txt), [walkthrough](Project2_Work/M4/test_results/issue5_2026-09-29/walkthrough.txt), [saved CI job results](Project2_Work/M4/test_results/issue5_2026-09-29/github_jobs.json) |
-

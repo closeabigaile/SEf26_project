@@ -3,6 +3,12 @@ import 'checkout_help_service.dart';
 
 /// Explains the app's allocation, never an official WIC benefit decision.
 class BasketCheckoutHelp {
+  /// Explains whether [line] fits the app allowance represented by [balances].
+  ///
+  /// Checks positive quantity, category consistency, and allocation totals in
+  /// [basket]. Returns `app_included` when those checks support inclusion, or
+  /// `app_balance_unknown` when information is insufficient or inconsistent.
+  /// Reads the supplied maps without changing them; no official benefits are queried.
   static CheckoutHelpResult explainIncluded({
     required Map<String, dynamic> line,
     required List<Map<String, dynamic>> basket,
@@ -54,6 +60,10 @@ class BasketCheckoutHelp {
     );
   }
 
+  /// Returns a trimmed, whitespace-normalized, uppercase category from [value].
+  ///
+  /// Returns null for non-string, blank, or `PAID` values. This helper does not
+  /// map APL spelling variants; PAID is a payment label, not a benefit category.
   static String? category(Object? value) {
     if (value is! String) return null;
     final normalized = value
@@ -63,6 +73,11 @@ class BasketCheckoutHelp {
     return normalized.isEmpty || normalized == 'PAID' ? null : normalized;
   }
 
+  /// Finds [line]'s original benefit category without a catalog lookup.
+  ///
+  /// Uses its saved `original_benefit_category` first. Otherwise, searches
+  /// [basket] for the same nonempty UPC and returns its sole distinct non-PAID
+  /// category. Returns null when no unambiguous category can be established.
   static String? originalCategory(
     Map<String, dynamic> line,
     List<Map<String, dynamic>> basket,
@@ -83,6 +98,11 @@ class BasketCheckoutHelp {
     return matches.length == 1 ? matches.single : null;
   }
 
+  /// Explains a PAID line using its [originalCategory] and saved [balances].
+  ///
+  /// A nonnegative integer allowance reached by an integer used count produces
+  /// `app_category_limit`. Otherwise returns `app_paid_item` without asserting
+  /// why the allocation occurred. Does not change balances or perform payment.
   static CheckoutHelpResult explain({
     required String? originalCategory,
     required Map<String, Map<String, dynamic>> balances,
@@ -111,8 +131,12 @@ class BasketCheckoutHelp {
     );
   }
 
-  /// Recover a legacy PAID row's original category by its exact UPC only.
-  /// Product recommendations and swaps belong to M2, not checkout help.
+  /// Recovers a legacy PAID row's category through an exact UPC catalog lookup.
+  ///
+  /// Returns [savedCategory] immediately when supplied. Otherwise, [line]
+  /// must contain a nonempty string UPC, and [catalog] must return an eligible
+  /// product. Returns null for unavailable data, errors, or an eight-second
+  /// timeout. No basket state is written and no substitute is selected.
   static Future<String?> resolveOriginalCategory(
     AplService catalog,
     Map<String, dynamic> line,

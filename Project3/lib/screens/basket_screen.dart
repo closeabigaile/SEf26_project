@@ -13,26 +13,27 @@ import 'checkout_help_samples_screen.dart';
 
 /// Screen displaying the user's current shopping basket with item management.
 ///
-/// Shows all products added via [ScanScreen] with their quantities and
+/// Shows all products added via `ScanScreen` with their quantities and
 /// provides controls to:
 /// - Increment quantity ([AppState.incrementItem])
 /// - Decrement quantity ([AppState.decrementItem])
 /// - View total item count
 ///
-/// Items are grouped by product (UPC) with quantity controls. When quantity
+/// Lines retain their product UPC and category, including separate PAID overflow. When quantity
 /// reaches zero, the item is automatically removed from [AppState.basket].
 ///
 /// This screen watches [AppState] for real-time updates when items are
 /// modified from other screens or when barcode scanning adds new products.
 ///
 /// Usage: Navigated to via `/basket` route or the basket summary card
-/// in [ScanScreen].
+/// in `ScanScreen`.
 class BasketScreen extends StatelessWidget {
   const BasketScreen({
     super.key,
     this.checkoutHelpRepository = const CheckoutHelpRepository(),
   });
 
+  /// Source of explicitly synthetic help examples; ordinary lines use app allowance guidance.
   final CheckoutHelpRepository checkoutHelpRepository;
   static const Color _primaryRed = Color(0xFFD1001C);
 
@@ -390,7 +391,7 @@ class BasketScreen extends StatelessWidget {
   /// Builds the UI shown when the basket is empty.
   ///
   /// Displays a centered message with an icon encouraging the user to
-  /// scan products. Provides a button to navigate back to [ScanScreen].
+  /// scan products. Provides a button to navigate back to `ScanScreen`.
   Widget _buildEmptyState(BuildContext context) {
     return SafeArea(
       child: Center(

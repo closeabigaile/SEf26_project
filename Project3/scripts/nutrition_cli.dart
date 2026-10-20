@@ -3,8 +3,11 @@ import 'dart:io';
 
 import 'package:wolfbite/services/nutrition_recommender.dart';
 
-/// Run from Project3: dart scripts/nutrition_cli.dart --catalog file.csv
-/// --request request.json. This command reads local files and never contacts Firebase.
+/// Writes offline meal suggestions as JSON using a CSV catalog and JSON request.
+///
+/// Run from Project3 with `--catalog file.csv --request request.json`.
+/// Reads local files and never contacts Firebase. Invalid arguments, malformed
+/// inputs, and file errors are printed to stderr with exit code 1.
 void main(List<String> args) {
   try {
     String option(String name) {
@@ -132,6 +135,11 @@ void main(List<String> args) {
   }
 }
 
+/// Reads a header-based CSV [file] into products for the offline recommender.
+///
+/// Supports quoted fields and escaped quotes. Throws [FormatException] for
+/// missing data rows, inconsistent columns, unclosed quotes, or empty/duplicate
+/// UPCs. File errors propagate. Parsing does not verify nutrition provenance.
 List<NutritionProduct> readCatalog(File file) {
   final rows = _parseCsv(file.readAsStringSync());
   if (rows.length < 2) {

@@ -1,0 +1,450 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 93.0.0 (109.0.0 available)
+  _flutterfire_internals 1.3.76 (1.3.78 available)
+  analyzer 10.0.1 (14.5.0 available)
+  archive 3.6.1 (4.5.2 available)
+  build 4.0.7 (5.0.0 available)
+  build_config 1.3.2 (1.4.0 available)
+  build_daemon 4.1.2 (4.1.7 available)
+  build_runner 2.15.1 (2.17.1 available)
+  built_collection 5.1.1 (5.1.2 available)
+  built_value 8.12.7 (8.13.0 available)
+  cel 0.5.4+1 (0.6.0 available)
+  clock 1.1.2 (1.1.3 available)
+  cloud_firestore 6.7.1 (7.0.0 available)
+  cloud_firestore_platform_interface 8.0.6 (8.0.8 available)
+  cloud_firestore_web 5.7.2 (5.7.4 available)
+  code_builder 4.11.1 (4.13.0 available)
+  cross_file 0.3.5+2 (0.4.0 available)
+  cupertino_icons 1.0.9 (2.0.0 available)
+  dart_style 3.1.5 (3.1.14 available)
+  equatable 2.1.0 (3.0.0 available)
+  fake_cloud_firestore 4.2.0 (4.3.0 available)
+  fake_firebase_security_rules 0.5.4 (0.6.0 available)
+  file_selector_linux 0.9.4 (0.9.4+1 available)
+  file_selector_macos 0.9.5 (0.9.5+2 available)
+  file_selector_windows 0.9.3+5 (0.9.3+6 available)
+  firebase_auth 6.5.7 (7.0.0 available)
+  firebase_auth_platform_interface 9.0.6 (9.1.1 available)
+  firebase_auth_web 6.2.6 (6.3.1 available)
+  firebase_core 4.13.0 (5.0.0 available)
+  firebase_core_platform_interface 8.1.0 (8.1.1 available)
+  firebase_core_web 3.10.0 (4.0.0 available)
+  flutter_lints 5.0.0 (6.0.0 available)
+  flutter_plugin_android_lifecycle 2.0.34 (2.0.35 available)
+  glob 2.1.3 (2.2.0 available)
+  go_router 16.3.0 (18.1.0 available)
+  google_mlkit_commons 0.11.1 (0.13.0 available)
+  google_mlkit_text_recognition 0.15.1 (0.17.1 available)
+  image_picker 1.2.2 (1.2.4 available)
+  image_picker_android 0.8.13+17 (0.8.13+25 available)
+  image_picker_ios 0.8.13+3 (0.8.13+12 available)
+  image_picker_platform_interface 2.11.1 (2.11.2 available)
+  io 1.0.5 (1.1.0 available)
+  lints 5.1.1 (6.1.0 available)
+  logger 2.7.0 (2.8.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  mime 2.0.0 (2.1.0 available)
+  mobile_scanner 7.4.0 (7.4.2 available)
+  mockito 5.6.4 (5.8.1 available)
+  package_config 2.2.0 (3.0.0 available)
+  petitparser 7.0.2 (7.1.0 available)
+  pool 1.5.2 (1.5.3 available)
+  pub_semver 2.2.0 (2.2.1 available)
+  pubspec_parse 1.5.0 (1.6.0 available)
+  qr 3.0.2 (4.0.0 available)
+  shelf 1.4.2 (1.4.3 available)
+  source_gen 4.2.4 (4.3.1 available)
+  stack_trace 1.12.1 (1.12.2 available)
+  stream_transform 2.1.1 (2.1.2 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.2 (2.4.3 available)
+  vm_service 15.3.0 (15.4.0 available)
+  xml 6.6.1 (7.1.0 available)
+  yaml 3.1.3 (3.1.4 available)
+Got dependencies!
+63 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading <fresh-clone>/Project3/test/utils/wic_categories_test.dart
+00:00 +0: <fresh-clone>/Project3/test/utils/wic_categories_test.dart: WicCategories.canonical category code wins over the text
+00:00 +1: <fresh-clone>/Project3/test/utils/wic_categories_test.dart: WicCategories.canonical every spelling seen in the live APL maps to one name per code
+00:00 +2: <fresh-clone>/Project3/test/utils/wic_categories_test.dart: WicCategories.canonical normalizes case and whitespace and keeps unknown names
+00:00 +3: <fresh-clone>/Project3/test/utils/wic_categories_test.dart: WicCategories.canonical an ambiguous word is only mapped through its code
+00:01 +4: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A01 equivalent decimal package sizes should not invent a mismatch
+00:01 +5: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A02 decimal rounding alone should not invent a balance shortfall
+00:01 +6: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A03 a genuinely tiny positive balance still has a shortfall
+00:01 +7: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A04 a real small size difference must not be rounded away
+00:01 +8: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A05 two unknown unit labels do not establish comparable sizes
+00:01 +9: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A06 PAID is a payment classification, not an original benefit category
+00:01 +10: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A07 matching UNKNOWN categories do not classify an item
+00:01 +11: <fresh-clone>/Project3/test/m4_review/checkout_help_adversarial_test.dart: A08 multiple permitted sizes require an explicit rule, not a guess
+00:01 +12: <fresh-clone>/Project3/test/state/app_state_m2_test.dart: the old all-zero nutrition placeholder loads as unknown
+00:01 +13: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +14: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +15: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +16: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +17: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +18: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +19: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +20: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +21: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +22: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +23: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +24: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +25: <fresh-clone>/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:01 +26: <fresh-clone>/Project3/test/screens/basket_screen_test.dart: BasketScreen empty state + navigation to /scan
+00:01 +27: <fresh-clone>/Project3/test/screens/basket_screen_test.dart: BasketScreen empty state + navigation to /scan
+00:01 +28: <fresh-clone>/Project3/test/screens/scan_screen_test.dart: ScanScreen renders initial UI
+00:01 +29: <fresh-clone>/Project3/test/screens/scan_screen_test.dart: ScanScreen renders initial UI
+00:01 +30: <fresh-clone>/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:01 +31: <fresh-clone>/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:02 +32: <fresh-clone>/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:02 +33: <fresh-clone>/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:02 +34: <fresh-clone>/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:02 +35: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +36: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +37: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +38: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +39: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +40: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +41: <fresh-clone>/Project3/test/screens/signup_page_test.dart: SignupPage UI and Validation displays all required UI elements
+00:02 +42: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +43: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +44: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +45: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +46: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +47: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +48: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +49: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +50: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +51: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +52: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +53: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +54: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +55: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +56: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +57: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +58: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +59: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +60: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +61: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +62: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +63: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +64: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +65: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +66: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +67: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +68: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +69: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +70: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +71: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +72: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +73: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +74: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +75: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +76: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +77: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +78: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +79: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +80: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +81: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +82: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: included juice has concise positive help with no rejection or suggestions
+00:02 +83: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:02 +84: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:02 +85: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:02 +86: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:02 +87: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:02 +88: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC12 — Review basket test_uc12_basket_displays_items_quantities_and_categories
+00:03 +89: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +90: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +91: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +92: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +93: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +94: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +95: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +96: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +97: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +98: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +99: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +100: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_valid_registration_creates_account_and_profile
+00:03 +101: <fresh-clone>/Project3/test/project1a/satwi_uc11-15_test.dart: UC13 — Review basket-product nutrition test_uc13_collapsing_hides_nutrition_facts
+00:03 +102: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success
+00:03 +103: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative UC9-T2 rejected alternative -> must not report success
+00:03 +104: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-02 opens selected-item help and closes without state or database changes
+00:03 +105: <fresh-clone>/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-02 opens selected-item help and closes without state or database changes
+00:03 +106: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:03 +107: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:03 +108: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:03 +109: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:03 +110: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC16 - Decrease product quantity test_uc16_decrease_covered_quantity_updates_quantity_and_usage
+00:03 +111: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +112: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +113: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +114: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +115: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +116: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +117: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +118: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +119: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +120: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +121: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +122: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +123: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +124: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +125: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +126: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +127: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +128: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +129: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +130: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +131: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +132: <fresh-clone>/Project3/test/project1a/aditya_uc6-10_test.dart: UC9 - Choose healthier alternative an existing alternative increment reports success even when no new line is created
+00:03 +133: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC1 — Create account test_uc01_invalid_email_prevents_submission
+00:03 +134: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +135: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +136: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +137: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +138: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +139: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +140: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +141: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +142: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +143: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +144: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +145: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +146: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +147: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +148: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +149: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +150: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +151: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +152: <fresh-clone>/Project3/test/project1a/supreme_uc16-20_test.dart: UC18 — Review benefit balances test_uc18_paid_category_is_displayed_as_unlimited
+00:03 +153: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:03 +154: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +155: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +156: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +157: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +158: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +159: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +160: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +161: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +162: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +163: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +164: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +165: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +166: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +167: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +168: <fresh-clone>/Project3/test/active/project1a_coverage_gaps_test.dart: UC17 clear confirmation cancelling clear leaves the basket unchanged
+00:04 +169: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +170: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +171: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +172: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +173: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +174: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +175: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +176: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +177: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +178: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +179: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +180: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +181: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +181: <fresh-clone>/Project3/test/project1a/abigail_uc1-5_test.dart: UC4 — Resume shopping session test_uc04_previous_month_session_resets_basket_and_used_benefits
+📅 New month detected! Resetting balances...
+00:04 +182: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +183: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +184: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +185: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +186: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +187: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +188: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +189: <fresh-clone>/Project3/test/e2e/milestones_e2e_test.dart: E2E-1 [phone] scan -> basket (M3) -> nutrition (M1) -> checkout help (M4) -> checkout persists
+00:04 +190: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +191: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +192: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +193: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +194: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +195: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +196: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +197: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:04 +198: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +199: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +200: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +201: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +202: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +203: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +204: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +205: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +206: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +207: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +208: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +209: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +210: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +211: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +212: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +213: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +214: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +215: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +216: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +217: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +218: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +219: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +220: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +221: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +222: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +223: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +224: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +225: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +226: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +227: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +228: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +229: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +230: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +231: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +232: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +233: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +234: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +235: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +236: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +237: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +238: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +239: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +240: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +241: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +242: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +243: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +244: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +245: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +246: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +247: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +248: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +249: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +250: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +251: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +252: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +253: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +254: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +255: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +256: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +257: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +258: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +259: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +260: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +261: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +262: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +263: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +264: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +265: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +266: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +267: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +268: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +269: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +270: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +271: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +272: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +273: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +274: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +275: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +276: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +277: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +278: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +279: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +280: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +281: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +282: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +283: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +284: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +285: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +286: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +287: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +288: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +289: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +290: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +291: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +292: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +293: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +294: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +295: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +296: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +297: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +298: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +299: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +300: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +301: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +302: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +303: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +304: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +305: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +306: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +307: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +308: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +309: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +310: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +311: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +312: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +313: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +314: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +315: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +316: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +317: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +318: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +319: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +320: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +321: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +322: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +323: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +324: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +325: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +326: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J1 full category: scan blocks a new product, "+" overflows to PAID, help explains it, Benefits shows the cap
+00:05 +327: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +328: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +329: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +330: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +331: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +332: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +333: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +334: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +335: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +336: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +337: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +338: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +339: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +340: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +341: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +342: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +343: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +344: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +345: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +346: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +347: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +348: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-1 scan real UPCs -> nutrition from nutrition/ -> balance -> swap
+00:05 +349: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +350: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +351: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +352: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +353: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +354: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +355: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +356: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +357: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J2 scan screen healthier alternative (real data) is added to the basket
+00:05 +358: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:05 +359: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +360: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +361: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +362: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +363: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +364: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +365: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +366: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +367: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +368: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +369: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +370: <fresh-clone>/Project3/test/e2e/m2_scan_to_swap_test.dart: M2-INT-2 "Not now" hides a suggestion for the rest of the session
+00:06 +371: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J4 checkout: basket -> QR handoff -> finish clears basket, keeps usage
+00:06 +372: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J4 checkout: basket -> QR handoff -> finish clears basket, keeps usage
+00:06 +373: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J5 clear cart: cancel keeps everything, confirm releases usage
+00:06 +374: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J6 quantity controls keep basket, balances and storage consistent
+00:06 +375: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J7 a session from last month resets usage and clears the basket
+📅 New month detected! Resetting balances...
+00:06 +376: <fresh-clone>/Project3/test/e2e/shopping_journeys_e2e_test.dart: J8 resume: a saved basket reloads with real nutrition and M2 works
+00:07 +377: All tests passed!

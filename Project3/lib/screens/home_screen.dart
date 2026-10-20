@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart'; // make sure this path is correct
 
+/// Legacy welcome screen with a Firebase sign-out action.
+///
+/// Not registered in the current main router. Sign-out replaces the navigator
+/// stack with the login screen; this widget does not manage basket state.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
