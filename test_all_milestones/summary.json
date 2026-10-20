@@ -1,0 +1,32 @@
+{
+  "commit": "f2a44aa13c2f24ba7c0aaf2e12b0d0bd5ef60fbe",
+  "branch": "test_all_milestones",
+  "run": "https://github.com/closeabigaile/SEf26_project/actions/runs/39361454233",
+  "run_id": 39361454233,
+  "attempt": 1,
+  "generated": "2026-10-20T02:57:33.317480+00:00",
+  "tests": {
+    "passed": 377,
+    "failed": 0,
+    "skipped": 0,
+    "complete": true,
+    "success": true
+  },
+  "coverage": {
+    "covered": 2388,
+    "total": 2596,
+    "percent": 92.0
+  },
+  "notes": [],
+  "badges": {
+    "build": "success",
+    "style": "success",
+    "formatter": "success",
+    "syntax": "success",
+    "python": "success",
+    "javascript": "success",
+    "firebase": "success",
+    "tests": "377/377 passing",
+    "coverage": "92.0%"
+  }
+}
