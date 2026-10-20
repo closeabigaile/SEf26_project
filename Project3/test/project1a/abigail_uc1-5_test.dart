@@ -1,3 +1,6 @@
+// Project 1a file names (use-case ranges) are referenced by the Project 1a
+// report, so they keep their hyphens.
+// ignore_for_file: file_names
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -209,9 +212,7 @@ void main() {
         await tester.tap(find.text('Sign Up'));
         await tester.pump();
 
-        // The inherited screen does not catch this exception. Flutter reports
-        // that uncaught error as a failure; the remaining assertions preserve
-        // UC1's predetermined expectation that an error message should appear.
+        // A profile-write failure must be displayed without reporting success.
         verify(
           auth.createUserWithEmailAndPassword(
             email: 'abigail.test@example.com',
@@ -220,6 +221,8 @@ void main() {
         ).called(1);
         verify(profile.set(any)).called(1);
         expect(find.byType(SnackBar), findsOneWidget);
+        expect(find.text('Profile save failed'), findsOneWidget);
+        expect(tester.takeException(), isNull);
         verifyNever(auth.signOut());
         verifyNever(router.go('/login'));
       },
@@ -468,9 +471,7 @@ void main() {
     testWidgets('test_uc03_sign_out_failure_leaves_shopper_signed_in', (
       WidgetTester tester,
     ) async {
-      // The inherited implementation does not catch this Future error. The
-      // framework therefore records the test as a genuine failure while the
-      // navigation assertion confirms it did not falsely reach login.
+      // A failed sign-out must show feedback and keep the current screen.
       when(auth.signOut()).thenThrow(
         FirebaseAuthException(code: 'network-error', message: 'Offline'),
       );
@@ -478,6 +479,11 @@ void main() {
       await tester.tap(find.byIcon(Icons.logout));
       await tester.pump();
       expect(find.text('WIC Benefits'), findsOneWidget);
+      expect(
+        find.text('Could not sign out. Please try again.'),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
       verifyNever(router.go('/login'));
     });
 
@@ -577,9 +583,10 @@ void main() {
       },
     );
 
-    test('test_uc04_missing_nutrition_uses_zero_values', () async {
-      // The saved product intentionally has no nutrition map. Assertions below
-      // verify the numeric defaults required by UC4 extension 3b.
+    test('test_uc04_missing_nutrition_stays_unknown', () async {
+      // The saved product intentionally has no nutrition map. UC4 extension
+      // 3b originally required zero defaults; M1 changed this to unknown
+      // (null) so missing data is never shown as zero.
       store.setData({
         'basket': [
           {'upc': '002', 'name': 'Cereal', 'category': 'CEREAL', 'qty': 1},
@@ -591,11 +598,11 @@ void main() {
       await _waitForLoaded(state);
       final nutrition =
           state.basket.single['nutrition'] as Map<String, dynamic>;
-      expect(nutrition['calories'], 0.0);
-      expect(nutrition['totalFat'], 0.0);
-      expect(nutrition['sodium'], 0.0);
-      expect(nutrition['sugar'], 0.0);
-      expect(nutrition['protein'], 0.0);
+      expect(nutrition['calories'], isNull);
+      expect(nutrition['totalFat'], isNull);
+      expect(nutrition['sodium'], isNull);
+      expect(nutrition['sugar'], isNull);
+      expect(nutrition['protein'], isNull);
     });
 
     test(
@@ -800,6 +807,9 @@ Future<void> _waitForLoaded(AppState state) async {
 // package version is incompatible with the currently resolved Firestore SDK.
 // It implements only the collection/document operations AppState actually
 // uses, and it exists solely inside Abigail's new test file.
+// Mockito stub for a Firestore snapshot in test code only; DocumentSnapshot
+// is sealed for implementers outside the plugin, which tests can ignore.
+// ignore: subtype_of_sealed_class
 class _MockDocumentSnapshot extends Mock
     implements DocumentSnapshot<Map<String, dynamic>> {}
 

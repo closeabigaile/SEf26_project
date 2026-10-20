@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'package:wolfbite/screens/scan_screen.dart';
 
+/// Standalone auth-stream gate that displays scanning or login.
+///
+/// The main app currently uses the guarded router instead; this widget does
+/// not define the app's route table or create its state providers.
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
 

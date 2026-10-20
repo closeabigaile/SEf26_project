@@ -1,0 +1,87 @@
+{
+  "dataset_name": "Known passing synthetic example",
+  "synthetic": true,
+  "description": "Simulated records used only to verify the M0 scoring instrument. These are not participant results.",
+  "records": [
+    {
+      "trial_id": "passing-baseline-01",
+      "condition": "baseline",
+      "scenario_id": "M0-M4-01",
+      "identified_expected_step": true,
+      "elapsed_seconds": 48.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-baseline-02",
+      "condition": "baseline",
+      "scenario_id": "M0-M4-02",
+      "identified_expected_step": true,
+      "elapsed_seconds": 58.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-baseline-03",
+      "condition": "baseline",
+      "scenario_id": "M0-M4-03",
+      "identified_expected_step": true,
+      "elapsed_seconds": 60.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-baseline-04",
+      "condition": "baseline",
+      "scenario_id": "M0-M4-01",
+      "identified_expected_step": true,
+      "elapsed_seconds": 72.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-baseline-05",
+      "condition": "baseline",
+      "scenario_id": "M0-M4-02",
+      "identified_expected_step": false,
+      "elapsed_seconds": 35.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-m4-01",
+      "condition": "m4",
+      "scenario_id": "M0-M4-01",
+      "identified_expected_step": true,
+      "elapsed_seconds": 28.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-m4-02",
+      "condition": "m4",
+      "scenario_id": "M0-M4-02",
+      "identified_expected_step": true,
+      "elapsed_seconds": 40.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-m4-03",
+      "condition": "m4",
+      "scenario_id": "M0-M4-03",
+      "identified_expected_step": true,
+      "elapsed_seconds": 55.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-m4-04",
+      "condition": "m4",
+      "scenario_id": "M0-M4-01",
+      "identified_expected_step": true,
+      "elapsed_seconds": 60.0,
+      "used_outside_assistance": false
+    },
+    {
+      "trial_id": "passing-m4-05",
+      "condition": "m4",
+      "scenario_id": "M0-M4-02",
+      "identified_expected_step": true,
+      "elapsed_seconds": 44.0,
+      "used_outside_assistance": true
+    }
+  ]
+}

@@ -1,4 +1,8 @@
-# Contributor Covenant 3.0 Code of Conduct
+# WolfBite Code of Conduct
+
+This Code of Conduct applies to Team 7's WolfBite project for CSC 510 at
+NC State University. It adapts Contributor Covenant 3.0 and retains the
+behavioral standards inherited from the previous teams.
 
 ## Our Pledge
 
@@ -39,29 +43,42 @@ We agree to restrict the following behaviors in our community. Instances, threat
 3. **Promotional materials**. Sharing marketing or other commercial content in a way that is outside the norms of the community.
 4. **Irresponsible communication.** Failing to responsibly present content which includes, links or describes any other restricted behaviors.
 
-## Reporting an Issue
+## Reporting a Conduct Concern
 
 Tensions can occur between community members even when they are trying their best to collaborate. Not every conflict represents a code of conduct violation, and this Code of Conduct reinforces encouraged behaviors and norms that can help avoid conflicts and minimize harm.
 
-When an incident does occur, it is important to report it promptly. To report a possible violation, please contact use via **GitHub Issues**
+Report conduct concerns privately to **Abigail Close** at
+[closeabigaile@gmail.com](mailto:closeabigaile@gmail.com).
 
-Community Moderators take reports of violations seriously and will make every effort to respond in a timely manner. They will investigate all reports of code of conduct violations, reviewing messages, logs, and recordings, or interviewing witnesses and other participants. Community Moderators will keep investigation and enforcement actions as transparent as possible while prioritizing safety and confidentiality. In order to honor these values, enforcement actions are carried out in private with the involved parties, but communicating to the whole community may be part of a mutually agreed upon resolution.
+If a concern involves the reporting contact, seek private assistance from
+CSC 510 course staff using the contact details provided by the course.
+
+Do not post personal conduct reports, identifying details, or private evidence
+in public GitHub Issues, pull requests, or Discussions. GitHub Issues remains
+the place for ordinary bug reports and feature requests.
+
+Include a description of what happened, relevant dates and links, and how you
+would prefer to be contacted.
+Share only information needed to explain the concern.
+
+For this project, **Community Moderators** means the project maintainers
+responsible for moderating WolfBite's repository and project-managed spaces.
+They should review reports fairly, consider the available evidence, and explain
+any resulting action to the affected people. A person involved in a report
+must not review or decide that report.
+
+Reports should be handled privately, with information shared only with people
+who need it to assess or respond to the concern. Absolute confidentiality
+cannot be guaranteed. Any necessary disclosure should be limited to the
+information needed to address the incident.
 
 ## Addressing and Repairing Harm
 
-**Enforcement**
+### Enforcement
 
-Reports of violations will be reviewed promptly by the Code of Conduct response team.
-Actions may include:
-– Informal or formal warnings
-– Temporary restrictions or bans
-– Permanent removal from community spaces
-
-The team will choose responses that best repair harm and protect the community. All actions will be handled confidentially and respectfully.
-
-**Appeals**
-
-Individuals subject to enforcement may appeal by contacting via **GitHub Issues** within 14 days. The response team will review and make a final determination
+Moderation actions apply only to spaces and access controlled by the project
+maintainers. This document does not give maintainers authority over university
+discipline, grades, or services outside their control.
 
 If an investigation by the Community Moderators finds that this Code of Conduct has been violated, the following enforcement ladder may be used to determine how best to repair harm, based on the incident's impact on the individuals involved and the community as a whole. Depending on the severity of a violation, lower rungs on the ladder may be skipped.
 
@@ -79,19 +96,42 @@ If an investigation by the Community Moderators finds that this Code of Conduct 
    3. Repair: Examples of repair include respecting the spirit of the suspension, meeting the specified conditions for return, and being thoughtful about how to reintegrate with the community when the suspension is lifted.
 4. Permanent Ban
    1. Event: A pattern of repeated code of conduct violations that other steps on the ladder have failed to resolve, or a violation so serious that the Community Moderators determine there is no way to keep the community safe with this person as a member.
-   2. Consequence: Access to all community spaces, tools, and communication channels is removed. In general, permanent bans should be rarely used, should have strong reasoning behind them, and should only be resorted to if working through other remedies has failed to change the behavior.
+   2. Consequence: Access to project-managed community spaces, tools, and communication channels is removed. In general, permanent bans should be rarely used, should have strong reasoning behind them, and should only be resorted to if working through other remedies has failed to change the behavior.
    3. Repair: There is no possible repair in cases of this severity.
 
-This enforcement ladder is intended as a guideline. It does not limit the ability of Community Managers to use their discretion and judgment, in keeping with the best interests of our community.
+This enforcement ladder is intended as a guideline. Community Moderators may
+use their judgment within the project's authority, based on the severity and
+context of the conduct.
+
+### Appeals
+
+A person subject to an enforcement action may request a review within 14 days
+of receiving the decision, using the private reporting method listed above.
+The request should explain why the decision should be reconsidered and include
+any relevant new information. A reviewer who was not involved in the incident
+or original decision should handle the appeal and communicate the outcome
+privately. If the reporting contact was involved in the original decision,
+seek private assistance from CSC 510 course staff using course-provided
+contact details.
 
 ## Scope
 
-This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public or other spaces. Examples of representing our community include using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.
+This Code of Conduct applies to WolfBite's repository, issues, pull requests,
+project-managed discussions and meetings, and other project collaboration
+spaces. It also applies when someone officially represents the project in
+public or at an event. It does not cover unrelated personal activity merely
+because a person contributes to WolfBite.
 
 ## Attribution
 
 This Code of Conduct is adapted from the Contributor Covenant, version 3.0, permanently available at [https://www.contributor-covenant.org/version/3/0/](https://www.contributor-covenant.org/version/3/0/).
 
-Contributor Covenant is stewarded by the Organization for Ethical Source and licensed under CC BY-SA 4.0. To view a copy of this license, visit [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)
+Team 7 adapted the introduction, reporting, enforcement responsibilities,
+appeals, and scope for this repository.
+
+Contributor Covenant is stewarded by the Organization for Ethical Source.
+This adapted Code of Conduct is licensed under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The application's MIT license is documented separately in [LICENSE.md](LICENSE.md).
 
 For answers to common questions about Contributor Covenant, see the FAQ at [https://www.contributor-covenant.org/faq](https://www.contributor-covenant.org/faq). Translations are provided at [https://www.contributor-covenant.org/translations](https://www.contributor-covenant.org/translations). Additional enforcement and community guideline resources can be found at [https://www.contributor-covenant.org/resources](https://www.contributor-covenant.org/resources). The enforcement ladder was inspired by the work of [Mozilla’s code of conduct team](https://github.com/mozilla/inclusion).

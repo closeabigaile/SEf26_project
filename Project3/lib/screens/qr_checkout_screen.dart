@@ -5,6 +5,11 @@ import 'package:provider/provider.dart';
 import '../state/app_state.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+/// Displays the current basket as JSON encoded in a QR image.
+///
+/// Requires an [AppState] provider. Finishing calls [AppState.checkout], then
+/// closes this screen and navigates to scanning. The QR is a basket summary,
+/// not a payment authorization or verified retailer integration.
 class QRCheckoutScreen extends StatelessWidget {
   const QRCheckoutScreen({super.key});
 

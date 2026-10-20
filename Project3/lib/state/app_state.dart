@@ -3,33 +3,42 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../utils/nutritional_utils.dart';
+import '../utils/wic_categories.dart';
+import '../services/apl_service.dart';
 
-/// Central application state manager that handles user-scoped WIC benefits
-/// balances and shopping basket data.
+/// User-scoped shopping basket and application-managed demo allowance state.
+///
+/// Allowances are not connected to an official WIC benefit account.
 ///
 /// This [ChangeNotifier] persists data to [FirebaseFirestore] and derives
-/// sensible default caps for each WIC category when first encountered.
+/// hardcoded demonstration caps for each category when first encountered.
 /// APL (Approved Product List) documents do NOT carry caps - they are
 /// managed entirely within this state.
 ///
 /// Usage: Wire this into your app via [ChangeNotifierProxyProvider] in
-/// [main.dart] to automatically sync with [FirebaseAuth] state changes.
+/// `main.dart` to automatically sync with [FirebaseAuth] state changes.
 class AppState extends ChangeNotifier {
   // final _db = FirebaseFirestore.instance;
 
   final FirebaseFirestore _db;
 
+  /// Creates user state backed by [db], or the default Firestore instance.
   AppState({FirebaseFirestore? db}) : _db = db ?? FirebaseFirestore.instance;
+
+  /// Read-only catalog access using this state's configured database.
+  AplService get productCatalog => AplService(db: _db);
 
   // ---------- Reactive data ----------
 
-  /// User-specific WIC benefit balances by category.
+  /// User-specific demo allowance limits and accumulated usage by category.
   ///
   /// Maps canonical category names (uppercase, normalized) to balance objects
   /// containing:
   /// - `'allowed'`: [int]? - Maximum items allowed (null = uncapped, e.g., CVB)
-  /// - `'used'`: [int] - Number of items currently in basket
+  /// - `'used'`: [int] - Usage including current allocations and completed checkouts
   ///
+  /// Checkout retains usage; removing basket items releases their allocation.
+  /// Loading a record from a different month resets usage and clears the basket.
   /// Example: `{ 'MILK': { 'allowed': 3, 'used': 1 } }`
   Map<String, Map<String, dynamic>> balances = {};
 
@@ -40,6 +49,12 @@ class AppState extends ChangeNotifier {
   /// - `'name'`: [String] - Product display name
   /// - `'category'`: [String] - Canonical category (uppercase)
   /// - `'qty'`: [int] - Quantity of this item
+  /// - `'original_benefit_category'`: Original category retained on PAID overflow
+  /// - `'nutrition'`: Nutrient map; unknown amounts remain null
+  /// - Optional `'checkout_help_source'` and `'checkout_help_scenario_id'`:
+  ///   explicit synthetic-scenario metadata
+  ///
+  /// The same UPC can have both a benefit-category line and a PAID line.
   final List<Map<String, dynamic>> basket = [];
 
   // ---------- Auth/user ----------
@@ -49,21 +64,22 @@ class AppState extends ChangeNotifier {
   /// Null when no user is logged in.
   String? _uid;
 
-  /// Whether user-specific [balances] data has been loaded from [FirebaseFirestore].
+  /// Whether the latest signed-in state-load attempt has finished.
   ///
-  /// Screens can check this before displaying balance information.
+  /// Screens use this for loading indicators; it is not a success flag.
   bool _balancesLoaded = false;
 
-  /// Public getter for [_balancesLoaded].
+  /// Whether the latest signed-in load attempt has finished.
   ///
-  /// Returns true after [loadUserState] completes successfully.
+  /// Set in a `finally` block, so true does not establish successful loading.
+  /// Reset when switching users or clearing signed-out state.
   bool get balancesLoaded => _balancesLoaded;
 
   // ---------- Public: wire auth state into AppState ----------
 
   /// Updates the internal user reference and triggers state reload.
   ///
-  /// This is called by the [ChangeNotifierProxyProvider] in [main.dart]
+  /// This is called by the [ChangeNotifierProxyProvider] in `main.dart`
   /// whenever the [FirebaseAuth] state changes. If [user] is null,
   /// all data is cleared. Otherwise, [loadUserState] is called in the
   /// background to fetch persisted data.
@@ -100,12 +116,12 @@ class AppState extends ChangeNotifier {
 
   /// Canonicalizes a category string for consistent storage and comparison.
   ///
-  /// Trims whitespace, collapses multiple spaces to single spaces, and
-  /// converts to uppercase.
+  /// Trims whitespace, collapses multiple spaces to single spaces, converts
+  /// to uppercase, and maps APL spelling variants to one name (see
+  /// [WicCategories]).
   ///
-  /// Example: `"  Milk Products  "` becomes `"MILK PRODUCTS"`
-  String _canon(String raw) =>
-      raw.trim().replaceAll(RegExp(r'\s+'), ' ').toUpperCase();
+  /// Example: `"  Milk-Whole "` becomes `"MILK - WHOLE"`
+  String _canon(String raw) => WicCategories.canonical(raw);
 
   /// Derives a default allowed quantity for a newly encountered category.
   ///
@@ -191,7 +207,6 @@ class AppState extends ChangeNotifier {
     return true; // uncapped
   }
 
-
   /// Checks if the last update was in a previous month/year compared to now.
   bool _isNewMonth(Timestamp? lastUpdate) {
     if (lastUpdate == null) return false; // No history, assume fresh
@@ -211,14 +226,16 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-
   // ---------- Firestore I/O ----------
 
   /// Loads user-specific [balances] and [basket] from [FirebaseFirestore].
   ///
   /// Fetches the document at `users/{uid}` and populates local state.
   /// If the document doesn't exist, creates an empty scaffold via [_persist].
-  /// All category names are canonicalized via [_canon].
+  /// All category names are canonicalized via [_canon]. Legacy missing/zero
+  /// nutrition becomes unknown. Records from a different month reset usage
+  /// and basket contents. Read/type errors propagate; the completion flag is
+  /// still set and listeners notified in `finally`.
   ///
   /// Side effects:
   /// - Sets [_balancesLoaded] to true on completion
@@ -242,13 +259,21 @@ class AppState extends ChangeNotifier {
       } else {
         // balances
         final b = (data['balances'] as Map?) ?? {};
-        balances = b.map((k, v) {
+        balances = {};
+        b.forEach((k, v) {
           final key = _canon(k.toString());
           final allowed = (v is Map && v['allowed'] is int)
               ? v['allowed'] as int
               : null;
           final used = (v is Map && v['used'] is int) ? v['used'] as int : 0;
-          return MapEntry(key, {'allowed': allowed, 'used': used});
+          final existing = balances[key];
+          // Spelling variants of one category merge into a single balance.
+          balances[key] = existing == null
+              ? {'allowed': allowed, 'used': used}
+              : {
+                  'allowed': existing['allowed'] ?? allowed,
+                  'used': (existing['used'] as int) + used,
+                };
         });
 
         // basket
@@ -262,19 +287,29 @@ class AppState extends ChangeNotifier {
                 'upc': (m['upc'] ?? '').toString(),
                 'name': (m['name'] ?? '').toString(),
                 'category': cat,
+                // Keep the original category separate from the PAID label.
+                // Old paid records without it remain unknown; do not invent it.
+                if (m['original_benefit_category'] is String)
+                  'original_benefit_category': _canon(
+                    m['original_benefit_category'] as String,
+                  )
+                else if (cat != 'PAID')
+                  'original_benefit_category': cat,
+                if (m['checkout_help_source'] == 'synthetic' &&
+                    m['checkout_help_scenario_id'] is String) ...{
+                  'checkout_help_source': 'synthetic',
+                  'checkout_help_scenario_id': m['checkout_help_scenario_id'],
+                },
                 'qty': (m['qty'] is int) ? m['qty'] as int : 1,
-                'nutrition': m['nutrition'] as Map<String, dynamic>? ??
-                  const {
-                    'calories': 0.0,
-                    'totalFat': 0.0,
-                    'saturatedFat': 0.0,
-                    'transFat': 0.0,
-                    'sodium': 0.0,
-                    'sugar': 0.0,
-                    'addedSugar': 0.0,
-                    'protein': 0.0,
-                    'fiber': 0.0,
-                  },
+                // Items saved without nutrition, or with the old all-zero
+                // placeholder, stay unknown, never zero (M1).
+                'nutrition':
+                    m['nutrition'] is Map &&
+                        !NutritionalUtils.isZeroPlaceholder(
+                          m['nutrition'] as Map,
+                        )
+                    ? Map<String, dynamic>.from(m['nutrition'] as Map)
+                    : NutritionalUtils.unknownNutrition,
               };
             }),
           );
@@ -282,10 +317,9 @@ class AppState extends ChangeNotifier {
         // Check if we need a monthly reset
         final lastUpdate = data['updatedAt'] as Timestamp?;
         if (_isNewMonth(lastUpdate)) {
-          print("📅 New month detected! Resetting balances...");
+          debugPrint("📅 New month detected! Resetting balances...");
           _resetMonthlyUsage();
         }
-
       }
     } finally {
       _balancesLoaded = true;
@@ -329,16 +363,19 @@ class AppState extends ChangeNotifier {
   /// If an item with the same [upc] already exists, increments its quantity
   /// via [incrementItem] and returns false.
   ///
-  /// Otherwise, creates a new basket line with qty=1, increments the category's
-  /// used count, and persists via [_persist].
+  /// Otherwise, creates a new basket line with qty=1 when signed in and the
+  /// category has room, increments its used count, and starts persistence.
   ///
   /// Parameters:
   /// - [upc]: Universal Product Code
   /// - [name]: Display name for the product
   /// - [category]: Raw category string (will be canonicalized)
-  /// - [nutrition]: Nutrition data (map of maps)
+  /// - [nutrition]: Nutrient values and serving-basis metadata; omitted data is unknown
+  /// - [originalBenefitCategory]: Category to retain for overflow/help behavior
   ///
-  /// Returns true if a new line was created, false if only quantity increased.
+  /// Returns true only for a new line. False can mean an existing item was
+  /// incremented, the user is signed out, or the category has no room.
+  /// Persistence is not awaited, so true does not confirm a successful write.
   ///
   /// Side effects:
   /// - Calls [_ensureCategoryInit] to set default caps
@@ -348,6 +385,7 @@ class AppState extends ChangeNotifier {
     required String upc,
     required String name,
     required String category,
+    String? originalBenefitCategory,
     Map<String, dynamic>? nutrition,
   }) {
     if (_uid == null) return false;
@@ -359,7 +397,7 @@ class AppState extends ChangeNotifier {
     final idx = basket.indexWhere((e) => e['upc'] == upc && upc.isNotEmpty);
     if (idx >= 0) {
       // existing line -> increment path
-      incrementItem(upc, category);
+      incrementItem(upc, originalBenefitCategory ?? category);
       return false;
     }
 
@@ -374,25 +412,15 @@ class AppState extends ChangeNotifier {
       return false;
     }
 
-    // Generate nutritional data if not provided
-    final nutritionData = nutrition ??
-    const {
-        'calories': 0.0,
-        'totalFat': 0.0,
-        'saturatedFat': 0.0,
-        'transFat': 0.0,
-        'sodium': 0.0,
-        'sugar': 0.0,
-        'addedSugar': 0.0,
-        'protein': 0.0,
-        'fiber': 0.0,
-    };
+    // Missing nutrition is unknown, not zero (M1).
+    final nutritionData = nutrition ?? NutritionalUtils.unknownNutrition;
 
     basket.add({
       'upc': upc,
       'name': name,
       'category': cat,
       'qty': 1,
+      'original_benefit_category': _canon(originalBenefitCategory ?? cat),
       'nutrition': nutritionData,
     });
     balances[cat]!['used'] = (balances[cat]!['used'] ?? 0) + 1;
@@ -477,6 +505,8 @@ class AppState extends ChangeNotifier {
             'name': wicItem['name'],
             'category': paidCategory,
             'qty': 1,
+            'original_benefit_category':
+                wicItem['original_benefit_category'] ?? originalCat,
             'nutrition': wicItem['nutrition'], // Shared nutrition data
           });
           balances[paidCategory]!['used'] =
@@ -553,6 +583,59 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Replaces one benefit line with a same-category product (M2 swap).
+  ///
+  /// Keeps the line's quantity and category, so [balances] do not change. If
+  /// [toUpc] is already in the basket under [category], the quantities merge.
+  /// PAID lines are not swapped. Returns false when nothing changed.
+  /// The caller supplies an eligible replacement; this method does not fetch
+  /// catalog evidence. Missing [toNutrition] becomes unknown. Persistence is
+  /// started without awaiting it, and listeners are notified after mutation.
+  bool swapItem({
+    required String fromUpc,
+    required String category,
+    required String toUpc,
+    required String toName,
+    Map<String, dynamic>? toNutrition,
+  }) {
+    if (_uid == null || fromUpc == toUpc || toUpc.isEmpty) return false;
+    final cat = _canon(category);
+    if (cat == 'PAID') return false;
+
+    final from = basket.indexWhere(
+      (e) => e['upc'] == fromUpc && _canon(e['category'] as String) == cat,
+    );
+    if (from < 0) return false;
+
+    final existing = basket.indexWhere(
+      (e) => e['upc'] == toUpc && _canon(e['category'] as String) == cat,
+    );
+    if (existing >= 0) {
+      basket[existing]['qty'] =
+          (basket[existing]['qty'] as int? ?? 0) +
+          (basket[from]['qty'] as int? ?? 0);
+      basket.removeAt(from);
+    } else {
+      basket[from] = {
+        ...basket[from],
+        'upc': toUpc,
+        'name': toName,
+        'nutrition': toNutrition ?? NutritionalUtils.unknownNutrition,
+      };
+    }
+
+    // ignore: discarded_futures
+    _persist();
+    notifyListeners();
+    return true;
+  }
+
+  /// Clears the basket after the app's checkout action while retaining used allowances.
+  ///
+  /// Does nothing when signed out. Awaits persistence and then notifies listeners.
+  /// Firestore errors propagate after the local basket has already been cleared.
+  /// This records app state only; it does not charge a payment method or confirm
+  /// retailer acceptance. Use [clearBasket] to release basket allocations instead.
   Future<void> checkout() async {
     if (_uid == null) return;
 
@@ -562,6 +645,12 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Removes all basket items and releases their quantities from saved usage.
+  ///
+  /// Does nothing when signed out. Subtracts each line quantity from its category
+  /// usage, clamping the result to 0–999, then clears the basket and notifies
+  /// listeners. Persistence starts without being awaited; return does not confirm
+  /// a successful database write. Unlike [checkout], this releases allocations.
   void clearBasket() {
     if (_uid == null) return;
 
@@ -580,5 +669,4 @@ class AppState extends ChangeNotifier {
     _persist();
     notifyListeners();
   }
-
 }

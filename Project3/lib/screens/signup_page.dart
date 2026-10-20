@@ -7,9 +7,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 
+/// Creates a Firebase Authentication account and a Firestore user profile.
+///
+/// Validates form inputs and displays account/profile errors. [auth] and
+/// [firestore] allow tests to supply isolated services; defaults use the shared
+/// Firebase configuration. Successful registration navigates to scanning.
 class SignupPage extends StatefulWidget {
   // --- (1) Add nullable auth and firestore variables ---
+  /// Optional authentication service; defaults to [FirebaseAuth.instance].
   final FirebaseAuth? auth;
+
+  /// Optional profile store; defaults to [FirebaseFirestore.instance].
   final FirebaseFirestore? firestore;
 
   // --- (2) Make the constructor const and accept the new variables ---
@@ -73,6 +81,16 @@ class _SignupPageState extends State<SignupPage> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.message ?? 'Sign up failed')));
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? 'Could not save your profile.')),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Sign up failed')));
     } finally {
       if (mounted) setState(() => _loading = false);
     }

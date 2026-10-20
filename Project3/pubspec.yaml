@@ -40,7 +40,8 @@ dependencies:
   qr_flutter: ^4.1.0
   firebase_core: ^4.2.0
   firebase_auth: ^6.1.1
-  cloud_firestore: ^6.0.2
+  cloud_firestore: 6.7.1
+  #cloud_firestore: ^6.0.2
   fake_async: ^1.3.3
   excel: ^4.0.6
   image_picker: ^1.0.4
@@ -51,8 +52,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
+  # Imported directly by test/project1a/aditya_uc6-10_test.dart.
+  firebase_core_platform_interface: ^8.1.0
+  image_picker_platform_interface: ^2.11.1
   mockito: ^5.4.4
-  fake_cloud_firestore: ^4.0.0
+  fake_cloud_firestore: 4.2.0
+  #fake_cloud_firestore: ^4.0.0
   build_runner: ^2.4.10
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -83,6 +90,7 @@ flutter:
   
   assets:
     - assets/images/wic-logo.png
+    - assets/mock/checkout_help_scenarios.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

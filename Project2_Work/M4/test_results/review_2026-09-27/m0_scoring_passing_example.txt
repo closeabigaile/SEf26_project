@@ -1,0 +1,18 @@
+Dataset: Known passing synthetic example
+Data source: SYNTHETIC
+
+Baseline: 3/5 successful (60.0%)
+M4: 4/5 successful (80.0%)
+Improvement: 20.0 percentage points
+
+80% success requirement: PASS
+20-percentage-point improvement requirement: PASS
+Overall result: PASS
+
+Unsuccessful trials:
+- passing-baseline-04: elapsed time was 72 seconds (limit: 60)
+- passing-baseline-05: expected next step was not identified
+- passing-m4-05: outside assistance was used
+
+Note: These records are synthetic examples, not participant results.
+They do not establish actual usefulness to real users.

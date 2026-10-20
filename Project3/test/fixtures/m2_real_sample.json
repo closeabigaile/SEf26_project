@@ -1,0 +1,928 @@
+{
+ "note": "Real NC APL records (2026-09-02 import) with Open Food Facts nutrition (ODbL-1.0), validated by scripts/enrich_nutrition_off.cjs. Used by M2 tests.",
+ "apl": [
+  {
+   "upc": "070253640353",
+   "name": "OUR FAMILY NONFAT YOGURT VANILLA 32 OZ",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "subcategory": "YOGURT",
+   "subcategoryCode": "003",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 15912
+   }
+  },
+  {
+   "upc": "894700010199",
+   "name": "CHOBANI LOW-FAT PLAIN GREEK YOGURT",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "subcategory": "YOGURT LOW FAT 32 OZ",
+   "subcategoryCode": "002",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 15844
+   }
+  },
+  {
+   "upc": "036632029393",
+   "name": "ACTIVIA FRUIT BOTTOM LF PINEAPLE COCO YOGURT 4-4OZ",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "subcategory": "YOGURT LOW FAT",
+   "subcategoryCode": "002",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 15828
+   }
+  },
+  {
+   "upc": "011110810106",
+   "name": "KROGER LIVING WELL WHOLE GRAIN OAT CEREAL",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "subcategory": "ADULT BREAKFAST CEREAL",
+   "subcategoryCode": "001",
+   "unitOfMeasure": "OZ",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1295
+   }
+  },
+  {
+   "upc": "016000224698",
+   "name": "GENERAL MILLS ORIGINAL CHEERIOS 24 OZ",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "subcategory": "ADULT BREAKFAST CEREAL",
+   "subcategoryCode": "001",
+   "unitOfMeasure": "OZ",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1137
+   }
+  },
+  {
+   "upc": "011110810113",
+   "name": "KROGER NUTTY NUGGETS",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "subcategory": "ADULT BREAKFAST CEREAL",
+   "subcategoryCode": "001",
+   "unitOfMeasure": "OZ",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1297
+   }
+  },
+  {
+   "upc": "011110787118",
+   "name": "KROGER BLUEBERRY FROSTED SHREDDED WHEAT",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "subcategory": "ADULT BREAKFAST CEREAL",
+   "subcategoryCode": "001",
+   "unitOfMeasure": "OZ",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1291
+   }
+  },
+  {
+   "upc": "011110717894",
+   "name": "KROGER GREAT NORTHERN BEANS",
+   "category": "LEGUMES",
+   "categoryCode": "06",
+   "subcategory": "CANNED BEAN/PEA/LENTILS",
+   "subcategoryCode": "003",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1956
+   }
+  },
+  {
+   "upc": "028800145806",
+   "name": "HANOVER CANNELLINI BEANS",
+   "category": "LEGUMES",
+   "categoryCode": "06",
+   "subcategory": "CANNED BEAN/PEA/LENTILS",
+   "subcategoryCode": "003",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1814
+   }
+  },
+  {
+   "upc": "041900077761",
+   "name": "DAIRY PURE 1% LOWFAT MILK",
+   "category": "MILK - FAT REDUCED",
+   "categoryCode": "52",
+   "subcategory": "SKIM & 1% MILK H",
+   "subcategoryCode": "050",
+   "unitOfMeasure": "GAL",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 16139
+   }
+  },
+  {
+   "upc": "011166700536",
+   "name": "FARM FRESH 2% REDUCED FAT MILK",
+   "category": "MILK - FAT REDUCED",
+   "categoryCode": "52",
+   "subcategory": "REDUCED FAT MILK 2%",
+   "subcategoryCode": "004",
+   "unitOfMeasure": "GAL",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 16165
+   }
+  },
+  {
+   "upc": "014800004724",
+   "name": "MOTT'S 100% APPLE MANGO JUICE 64 OZ.",
+   "category": "JUICE 64",
+   "categoryCode": "54",
+   "subcategory": "JUICE 64 OZ FLUID",
+   "subcategoryCode": "002",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 16734
+   }
+  },
+  {
+   "upc": "041130305665",
+   "name": "SHOPPERS VALUE ORANGE JUICE",
+   "category": "JUICE 64",
+   "categoryCode": "54",
+   "subcategory": "JUICE 64 OZ FLUID",
+   "subcategoryCode": "002",
+   "unitOfMeasure": "CTR",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 16822
+   }
+  },
+  {
+   "upc": "003800000120",
+   "name": "KELLOGG'S CORN FLAKES",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "subcategory": "ADULT BREAKFAST CEREAL",
+   "subcategoryCode": "001",
+   "unitOfMeasure": "OZ",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 1222
+   },
+   "dataQuality": {
+    "status": "included_as_supplied_pending_verification",
+    "issues": [
+     "check_digit_mismatch"
+    ],
+    "note": "Included by user decision with the source identifier unchanged. Barcode verification remains open."
+   }
+  },
+  {
+   "upc": "036632081636",
+   "name": "SILK UNSWEETENED SOYMILK 64 OZ",
+   "category": "MILK-FAT REDUCED",
+   "categoryCode": "52",
+   "subcategory": "SOY BASED BEVERAGE HGL",
+   "subcategoryCode": "011",
+   "unitOfMeasure": "GAL",
+   "eligible": true,
+   "state": "NC",
+   "identifierType": "source_barcode",
+   "source": {
+    "file": "NC WIC APL September_02_2026.xlsx",
+    "versionDate": "2026-09-02",
+    "sha256": "1d35395f7366505d72fb0d4cde41c7b8594fbc017b0cb0463cef66e915408e1a",
+    "sheet": "NC WIC APL",
+    "row": 16498
+   }
+  }
+ ],
+ "nutrition": [
+  {
+   "upc": "070253640353",
+   "name": "OUR FAMILY NONFAT YOGURT VANILLA 32 OZ",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "servingBasis": "per serving (1 cup (245 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 211
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 169
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 34
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 17
+    },
+    {
+     "name": "Protein",
+     "amount": 11
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 0
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Light Nonfat Yogurt",
+    "url": "https://world.openfoodfacts.org/product/0070253640353",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "894700010199",
+   "name": "CHOBANI LOW-FAT PLAIN GREEK YOGURT",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "servingBasis": "per serving (1 serving (170 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 110
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 3
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 2
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 60
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 6
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 0
+    },
+    {
+     "name": "Protein",
+     "amount": 15
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 0
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Greek Yogurt Lowfat Plain",
+    "url": "https://world.openfoodfacts.org/product/0894700010199",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "036632029393",
+   "name": "ACTIVIA FRUIT BOTTOM LF PINEAPLE COCO YOGURT 4-4OZ",
+   "category": "YOGURT",
+   "categoryCode": "50",
+   "servingBasis": "per serving (1 CONTAINER (113 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 90.4
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 2
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0.99
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 55.4
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 12
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 6
+    },
+    {
+     "name": "Protein",
+     "amount": 4
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Probiotic yogurt",
+    "url": "https://world.openfoodfacts.org/product/0036632029393",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "011110810106",
+   "name": "KROGER LIVING WELL WHOLE GRAIN OAT CEREAL",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "servingBasis": "per serving (0.75 cup (32 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 120
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 1
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 180
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 6
+    },
+    {
+     "name": "Protein",
+     "amount": 3
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 1.98
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Multi-grain cereal",
+    "url": "https://world.openfoodfacts.org/product/0011110810106",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "016000224698",
+   "name": "GENERAL MILLS ORIGINAL CHEERIOS 24 OZ",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "servingBasis": "per serving (1 cup (39 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 140
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 2.5
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0.5
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 190
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 2
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 1
+    },
+    {
+     "name": "Protein",
+     "amount": 5
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 4
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Cheerios",
+    "url": "https://world.openfoodfacts.org/product/0016000224698",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "011110810113",
+   "name": "KROGER NUTTY NUGGETS",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "servingBasis": "per serving (1/2 cup (58 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 200
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 1
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 280
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 5
+    },
+    {
+     "name": "Protein",
+     "amount": 6
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 7.02
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Nutty nuggets crunchy wheat & barley cereal",
+    "url": "https://world.openfoodfacts.org/product/0011110810113",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "011110787118",
+   "name": "KROGER BLUEBERRY FROSTED SHREDDED WHEAT",
+   "category": "BREAKFAST CEREAL",
+   "categoryCode": "05",
+   "servingBasis": "per serving (1 cup (55 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 190
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 1
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 9.9
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 11
+    },
+    {
+     "name": "Protein",
+     "amount": 5
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 6
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Frosted shredded wheat bite size cereal, blueberry",
+    "url": "https://world.openfoodfacts.org/product/0011110787118",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "011110717894",
+   "name": "KROGER GREAT NORTHERN BEANS",
+   "category": "LEGUMES",
+   "categoryCode": "06",
+   "servingBasis": "per serving (1 portion (130 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 100
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 410
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 1
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 0
+    },
+    {
+     "name": "Protein",
+     "amount": 6
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 6
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "GREAT NORTHERN BEANS",
+    "url": "https://world.openfoodfacts.org/product/0011110717894",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "028800145806",
+   "name": "HANOVER CANNELLINI BEANS",
+   "category": "LEGUMES",
+   "categoryCode": "06",
+   "servingBasis": "per serving (1 serving (130 g))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 130
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 360
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 1
+    },
+    {
+     "name": "Protein",
+     "amount": 9
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 10
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Cannellini Beans",
+    "url": "https://world.openfoodfacts.org/product/0028800145806",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "041900077761",
+   "name": "DAIRY PURE 1% LOWFAT MILK",
+   "category": "MILK - FAT REDUCED",
+   "categoryCode": "52",
+   "servingBasis": "per serving (1 cup (240 ml))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 110
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 2.5
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 1.49
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 130
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 12
+    },
+    {
+     "name": "Protein",
+     "amount": 7.99
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 0
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Sweet acidophilus 1% lowfat milk",
+    "url": "https://world.openfoodfacts.org/product/0041900077761",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "011166700536",
+   "name": "FARM FRESH 2% REDUCED FAT MILK",
+   "category": "MILK - FAT REDUCED",
+   "categoryCode": "52",
+   "servingBasis": "per serving (1 cup (240 ml))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 130
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 4.99
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 3
+    },
+    {
+     "name": "Fatty acids, total trans",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 125
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 12
+    },
+    {
+     "name": "Protein",
+     "amount": 7.99
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 0
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "2% reduced fat milk",
+    "url": "https://world.openfoodfacts.org/product/0011166700536",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "014800004724",
+   "name": "MOTT'S 100% APPLE MANGO JUICE 64 OZ.",
+   "category": "JUICE 64",
+   "categoryCode": "54",
+   "servingBasis": "per serving (8 OZA (240 ml))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 120
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 0
+    },
+    {
+     "name": "Fatty acids, total saturated",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 28.8
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 27
+    },
+    {
+     "name": "Sugars, added",
+     "amount": 0
+    },
+    {
+     "name": "Protein",
+     "amount": 0
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "Apple Mango 100% Juice",
+    "url": "https://world.openfoodfacts.org/product/0014800004724",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  },
+  {
+   "upc": "041130305665",
+   "name": "SHOPPERS VALUE ORANGE JUICE",
+   "category": "JUICE 64",
+   "categoryCode": "54",
+   "servingBasis": "per serving (8 OZA (240 ml))",
+   "foodNutrients": [
+    {
+     "name": "Energy",
+     "amount": 110
+    },
+    {
+     "name": "Total lipid (fat)",
+     "amount": 0
+    },
+    {
+     "name": "Sodium, Na",
+     "amount": 4.8
+    },
+    {
+     "name": "Total Sugars",
+     "amount": 22
+    },
+    {
+     "name": "Protein",
+     "amount": 1.99
+    },
+    {
+     "name": "Fiber, total dietary",
+     "amount": 0.96
+    }
+   ],
+   "source": {
+    "provider": "Open Food Facts",
+    "productName": "100% ORANGE JUICE",
+    "url": "https://world.openfoodfacts.org/product/0041130305665",
+    "license": "ODbL-1.0",
+    "retrievedAt": "2026-10-17",
+    "dataQuality": "crowdsourced; passed consistency checks"
+   }
+  }
+ ]
+}

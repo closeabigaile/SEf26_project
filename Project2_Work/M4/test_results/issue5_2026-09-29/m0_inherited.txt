@@ -1,0 +1,10 @@
+00:00 +0: loading /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/qr_checkout_screen_test.dart
+00:00 +0: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/qr_checkout_screen_test.dart: QRCheckoutScreen renders QR code using basket JSON
+00:00 +1: loading /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart
+00:00 +1: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen empty state + navigation to /scan
+00:01 +2: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen renders items and total badge
+00:01 +3: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen increment and decrement update qty; remove at zero
+00:01 +4: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen plus adds as paid when canAdd == false
+00:01 +5: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen tooltips exist for add/remove controls
+00:01 +6: /private/var/folders/x9/8q60srhd2xb338b0fnx8t1s00000gn/T/m4-issue5-t9he_j6f/Project3/test/screens/basket_screen_test.dart: BasketScreen long product names render without overflow
+00:01 +7: All tests passed!

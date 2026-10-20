@@ -15,7 +15,7 @@ import 'state/app_state.dart';
 /// - [AppState] is created once and persists across the widget tree
 /// - User authentication changes automatically sync [AppState]
 ///
-/// The app uses [MaterialApp.router] with [GoRouter] for navigation,
+/// The app uses [MaterialApp.router] with `GoRouter` for navigation,
 /// with auth guards configured in [router].
 ///
 /// Steps performed:
@@ -25,7 +25,6 @@ import 'state/app_state.dart';
 ///
 /// Side effects:
 /// - Connects to Firebase project (Auth, Firestore)
-/// - Enables platform-specific features (camera, storage)
 /// - Configures dependency injection for the entire app
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +37,8 @@ Future<void> main() async {
 /// Sets up a [MultiProvider] chain that:
 /// 1. Listens to [FirebaseAuth.authStateChanges] via `StreamProvider<User?>`
 /// 2. Wires [User] changes into [AppState] via `ChangeNotifierProxyProvider<User?, AppState>`
-/// 3. Configures Material 3 theme with teal color scheme
-/// 4. Sets up [GoRouter] for navigation with auth guards
+/// 3. Configures Material 3 with the red WolfBite color scheme
+/// 4. Sets up `GoRouter` for navigation with auth guards
 ///
 /// ## Dependency Injection Structure
 ///
@@ -51,13 +50,13 @@ Future<void> main() async {
 ///
 /// ### StreamProvider
 /// Streams [FirebaseAuth] user changes to the widget tree. Listens to
-/// [FirebaseAuth.instance.authStateChanges()] which emits:
+/// [FirebaseAuth.authStateChanges] which emits:
 /// - A [User] object when login succeeds
 /// - `null` when logout occurs
 /// - Initial state on app startup
 ///
-/// The `initialData: null` ensures the app shows login screen before
-/// Firebase completes the first auth check.
+/// The auth provider initially exposes null. The router separately checks
+/// Firebase authentication state to decide which route is available.
 ///
 /// ### ChangeNotifierProxyProvider
 /// Syncs [User] changes into [AppState] for app-wide state management.
@@ -79,7 +78,7 @@ Future<void> main() async {
 ///
 /// ## Navigation Setup
 ///
-/// Uses [MaterialApp.router] with [GoRouter] configured in [router] for:
+/// Uses [MaterialApp.router] with `GoRouter` configured in [router] for:
 /// - Deep linking support
 /// - Auth-based route guards
 /// - Declarative navigation

@@ -2213,6 +2213,7 @@ class MockAppState extends _i1.Mock implements _i19.AppState {
     required String? upc,
     required String? name,
     required String? category,
+    String? originalBenefitCategory,
     Map<String, dynamic>? nutrition,
   }) =>
       (super.noSuchMethod(
@@ -2220,6 +2221,7 @@ class MockAppState extends _i1.Mock implements _i19.AppState {
               #upc: upc,
               #name: name,
               #category: category,
+              #originalBenefitCategory: originalBenefitCategory,
               #nutrition: nutrition,
             }),
             returnValue: false,

@@ -1,0 +1,18 @@
+{
+  "testProfile": "TEST PROFILE 4 - budget shopper",
+  "testOnlyAssumptions": "Illustrative $1.50 meal budget and nutrient targets; only five foods have dated store price observations, with approximate package-to-portion mapping.",
+  "asOf": "2026-09-27",
+  "basketUpcs": ["FDC1100379"],
+  "context": {
+    "mode": "moneySaving",
+    "lifeStage": "adult",
+    "budgetPerMeal": 1.5,
+    "targets": {
+      "lifeStage": "adult",
+      "sourceUrl": "https://example.org/test-targets/budget",
+      "caloriesPerDay": 2000,
+      "proteinGramsPerDay": 60,
+      "sodiumMgMaxPerDay": 2300
+    }
+  }
+}

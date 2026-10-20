@@ -40,6 +40,31 @@ void main() {
       expect(appState.basket.first['upc'], '12345');
     });
 
+    test(
+      'scanned paid items retain the original category and repeated scans overflow',
+      () async {
+        appState.updateUser(mockUser);
+        await Future.delayed(Duration.zero);
+        appState.addItem(upc: 'juice', name: 'Juice', category: 'JUICE 64');
+        appState.addItem(
+          upc: 'juice',
+          name: 'Juice',
+          category: 'PAID',
+          originalBenefitCategory: 'JUICE 64',
+        );
+        expect(appState.basket, hasLength(2));
+        expect(appState.basket.last['category'], 'PAID');
+        expect(appState.basket.last['original_benefit_category'], 'JUICE 64');
+        appState.addItem(
+          upc: 'other',
+          name: 'Other juice',
+          category: 'PAID',
+          originalBenefitCategory: 'JUICE 64',
+        );
+        expect(appState.basket.last['original_benefit_category'], 'JUICE 64');
+      },
+    );
+
     test('addItem adds a new item to the basket', () {
       appState.updateUser(mockUser);
       appState.addItem(upc: '12345', name: 'Milk', category: 'MILK');

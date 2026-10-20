@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 ///
 /// After successful login, navigates to `/scan` (main app).
 class LoginScreen extends StatefulWidget {
+  /// Optional authentication service; defaults to [FirebaseAuth.instance].
   final FirebaseAuth? auth;
   const LoginScreen({super.key, this.auth});
   @override

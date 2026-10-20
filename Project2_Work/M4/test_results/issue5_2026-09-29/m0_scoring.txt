@@ -1,0 +1,18 @@
+test_failing_dataset_misses_both_requirements (test_evaluate_checkout_trials.KnownDatasetTests.test_failing_dataset_misses_both_requirements) ... ok
+test_passing_dataset_meets_both_requirements (test_evaluate_checkout_trials.KnownDatasetTests.test_passing_dataset_meets_both_requirements) ... ok
+test_exactly_sixty_seconds_succeeds (test_evaluate_checkout_trials.TrialRuleTests.test_exactly_sixty_seconds_succeeds) ... ok
+test_more_than_sixty_seconds_fails (test_evaluate_checkout_trials.TrialRuleTests.test_more_than_sixty_seconds_fails) ... ok
+test_outside_assistance_fails_even_when_correct_and_fast (test_evaluate_checkout_trials.TrialRuleTests.test_outside_assistance_fails_even_when_correct_and_fast) ... ok
+test_record_can_have_more_than_one_failure_reason (test_evaluate_checkout_trials.TrialRuleTests.test_record_can_have_more_than_one_failure_reason) ... ok
+test_unidentified_expected_step_fails_even_when_fast (test_evaluate_checkout_trials.TrialRuleTests.test_unidentified_expected_step_fails_even_when_fast) ... ok
+test_boolean_elapsed_time_is_rejected (test_evaluate_checkout_trials.ValidationTests.test_boolean_elapsed_time_is_rejected) ... ok
+test_dataset_requires_both_baseline_and_m4 (test_evaluate_checkout_trials.ValidationTests.test_dataset_requires_both_baseline_and_m4) ... ok
+test_duplicate_trial_id_is_rejected (test_evaluate_checkout_trials.ValidationTests.test_duplicate_trial_id_is_rejected) ... ok
+test_missing_required_field_is_rejected (test_evaluate_checkout_trials.ValidationTests.test_missing_required_field_is_rejected) ... ok
+test_negative_elapsed_time_is_rejected (test_evaluate_checkout_trials.ValidationTests.test_negative_elapsed_time_is_rejected) ... ok
+test_unknown_condition_is_rejected (test_evaluate_checkout_trials.ValidationTests.test_unknown_condition_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.001s
+
+OK

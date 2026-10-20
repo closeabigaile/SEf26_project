@@ -1,3 +1,6 @@
+// Project 1a file names (use-case ranges) are referenced by the Project 1a
+// report, so they keep their hyphens.
+// ignore_for_file: file_names
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -94,17 +97,18 @@ void main() {
       expect(nutrition['wicEligible'], isTrue);
     });
 
-    test('UC6-T2 missing or nonnumeric nutrients -> zero defaults', () {
+    test('UC6-T2 missing or nonnumeric nutrients -> unknown (null)', () {
+      // M1 changed this from zero defaults: unknown is never shown as zero.
       final nutrition = NutritionalUtils.buildNutritionFromFoodNutrients({
         'foodNutrients': [
           {'name': 'Energy', 'amount': 'unknown'},
         ],
       });
 
-      expect(nutrition['calories'], 0.0);
-      expect(nutrition['totalFat'], 0.0);
-      expect(nutrition['sodium'], 0.0);
-      expect(nutrition['protein'], 0.0);
+      expect(nutrition['calories'], isNull);
+      expect(nutrition['totalFat'], isNull);
+      expect(nutrition['sodium'], isNull);
+      expect(nutrition['protein'], isNull);
     });
 
     test('UC6-T3 exact thresholds -> all inclusive qualities apply', () {
@@ -330,7 +334,7 @@ void main() {
     );
 
     test(
-      'UC7-T4 candidate missing nutrition -> zero-score candidate can qualify',
+      'UC7-T4 candidate missing nutrition -> not offered as healthier',
       () async {
         final base = _nutritionProduct(
           name: 'Base',
@@ -350,8 +354,9 @@ void main() {
           baseProduct: base,
         );
 
-        expect(results.single['upc'], 'missing');
-        expect(results.single['healthScore'], 0.0);
+        // Before M2 an item with no data scored 0 and looked "healthier"
+        // than anything measured; unknown is never treated as better.
+        expect(results, isEmpty);
       },
     );
 
@@ -505,7 +510,12 @@ void main() {
     Future<void> pumpAlternative(
       WidgetTester tester, {
       required bool addResult,
+      bool incrementExisting = false,
     }) async {
+      final basket = <Map<String, dynamic>>[
+        if (incrementExisting) {'upc': '666666666666', 'qty': 1},
+      ];
+      when(appState.basket).thenReturn(basket);
       tester.view.physicalSize = const Size(1200, 800);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
@@ -540,7 +550,10 @@ void main() {
           category: anyNamed('category'),
           nutrition: anyNamed('nutrition'),
         ),
-      ).thenReturn(addResult);
+      ).thenAnswer((_) {
+        if (incrementExisting) basket.single['qty'] = 2;
+        return addResult;
+      });
 
       await tester.pumpWidget(
         ChangeNotifierProvider<AppState>.value(
@@ -589,7 +602,29 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Added healthier item: Better cereal'), findsNothing);
+      expect(
+        find.textContaining('Could not add Better cereal'),
+        findsOneWidget,
+      );
     });
+
+    testWidgets(
+      'an existing alternative increment reports success even when no new line is created',
+      (tester) async {
+        await pumpAlternative(
+          tester,
+          addResult: false,
+          incrementExisting: true,
+        );
+        await tester.tap(find.byIcon(Icons.add_circle_outline));
+        await tester.pumpAndSettle();
+        expect(appState.basket.single['qty'], 2);
+        expect(
+          find.text('Added healthier item: Better cereal'),
+          findsOneWidget,
+        );
+      },
+    );
   });
 
   group('UC10 - Scan receipt', () {
