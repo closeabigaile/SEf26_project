@@ -1,42 +1,43 @@
 # WolfBite 🐺
 
 <p align="center">
-    <!-- Generated from CI evidence; main is the final-submission branch.
-         These URLs become available after the first publishing run on main. -->
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/build.svg"
+    <!-- Working-branch preview. Before final submission, change all nine badge
+         image/report paths to ci-evidence/main/ and both workflow branch
+         filters to main, then verify the published main reports. -->
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/build.svg"
              alt="Web build">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/tests.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/tests.svg"
              alt="Flutter test count and results">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/coverage.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/coverage.svg"
              alt="Dart line coverage">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/style.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/style.svg"
              alt="Style: Dart analyzer result">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/formatter.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/formatter.svg"
              alt="Dart formatter">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/syntax.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/syntax.svg"
              alt="Syntax: Dart analyzer result">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/firebase.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/firebase.svg"
              alt="Firebase configuration consistency">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/python.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/python.svg"
              alt="Python checks">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/javascript.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/javascript.svg"
              alt="JavaScript tests">
     </a>
     <a href="Project3/LICENSE.md">
@@ -54,8 +55,8 @@
     </a>
     <!-- Combined workflow status: web build, tests, Dart lint/static analysis,
          formatting, and documentation deployment. Not a coverage percentage. -->
-    <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Amain">
-        <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=main&amp;event=push"
+    <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Adocs%2FReadMe_Update">
+        <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=docs%2FReadMe_Update&amp;event=push"
              alt="Flutter CI">
     </a>
     <a href="https://github.com/closeabigaile/SEf26_project">
@@ -65,8 +66,9 @@
 </p>
 
 
-CI report badges become available after the first reporting run on `main`.
-They summarize the latest published evidence for that branch. Style and syntax
+These badges show the latest published CI evidence for **`docs/ReadMe_Update`**.
+For the final submission, switch the badge URLs and workflow filters to `main`
+and verify its published reports. Style and syntax
 share the strict Dart analyzer result; tests and coverage cover the Flutter
 suite. Each generated badge links to the report, source commit, and CI run.
 See [badge reporting](.github/scripts/README.md) for scope and publication details.

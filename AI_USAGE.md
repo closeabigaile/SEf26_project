@@ -4,6 +4,24 @@ This file records AI assistance used in Team 7's WolfBite work and the human
 review of that assistance. Add entries as work is completed. Mark human review
 as pending until a reviewer records what they checked and any corrections.
 
+## Working-branch badge links - October 19, 2026
+
+- **Contributor:** Abigail Close.
+- **AI tool:** OpenAI Codex.
+- **Files:** `README.md`, `.github/scripts/README.md`, and this disclosure.
+- **Task and assistance:** Correct the broken badge images and evidence links
+  while reviewing the documentation branch on GitHub. Changed the nine badge
+  image/report paths and combined CI branch filters from `main` to
+  `docs/ReadMe_Update`. Labeled the preview branch and documented the required
+  switch back to `main` during final submission preparation.
+- **AI verification:** The first branch CI run and evidence publisher succeeded
+  for commit `e554441c0300d79bf7e3d2184f7143dadb42199f`. Its published report
+  records 377 passing Flutter tests and 2,388/2,596 covered lines (92.0%). All
+  42 external README URLs, including the nine generated images and their
+  report, returned HTTP 200 after correction. Local README file and section
+  links also resolved. These are working-branch results, not main results.
+- **Human review:** Pending review of this link correction.
+
 ## User guide and README link review - October 19, 2026
 
 - **Contributor:** Abigail Close.
