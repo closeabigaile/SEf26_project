@@ -4,6 +4,72 @@ This file records AI assistance used in Team 7's WolfBite work and the human
 review of that assistance. Add entries as work is completed. Mark human review
 as pending until a reviewer records what they checked and any corrections.
 
+## User guide and README link review - October 19, 2026
+
+- **Contributor:** Abigail Close.
+- **AI tool:** OpenAI Codex.
+- **Files:** [USER_GUIDE.md](USER_GUIDE.md), `README.md`, and this disclosure.
+- **Task and assistance:** Wrote usage instructions from the current screens,
+  application state, and shopping-journey tests. Explained demo allowances,
+  PAID items, nutrition comparisons, checkout help, receipt OCR, and the QR
+  completion behavior. Linked the guide from the README and replaced broken
+  Discussions and stargazers destinations with the existing issue tracker and
+  repository page. Preserved the previous-team documentation as a historical
+  reference.
+- **Verification scope:** Compared labels and effects with source code and
+  tests. This was not an additional live walkthrough of every feature.
+  Checked 73 local link occurrences across the README, guide, AI record,
+  dependency inventory, and badge documentation. The README's 42 external
+  URLs returned 32 HTTP 200 responses and 10 HTTP 404 responses for the
+  deliberately unpublished main badge images/report. The combined main CI
+  badge still reports "no status". All 13 non-SDK package versions in the
+  README match the lockfile, and its license summaries match the inventory.
+  Left the unconfirmed `csv-parser` declaration unchanged pending permission
+  to remove it; no dependency was added or removed in this follow-up.
+  Final feature results, both Project 2 videos, and teammates' AI/human-review
+  entries remain their responsibility. Zenodo and hosted Dart documentation
+  remain deferred until release preparation.
+- **Human review:** Abigail Close
+
+## README badges and CI evidence - October 19, 2026
+
+- **Contributor:** Abigail Close.
+- **AI tool:** OpenAI Codex.
+- **Files:** `README.md`, `.github/workflows/flutter-ci.yml`, and
+  [badge reporting scripts, tests, and documentation](.github/scripts/README.md).
+- **Task and assistance:** Add badges backed by actual check outcomes, Flutter
+  test counts, and measured Dart line coverage. AI added JSON test reporting,
+  evidence generation, and a separate publisher for the `ci-evidence` branch.
+  The existing build, formatter, analyzer, and application test commands remain
+  checks; their failures are not suppressed by reporting. Style and syntax
+  badges explicitly share the existing Dart analyzer result.
+- **AI verification:** Ten Python reporting tests and five mocked publisher
+  tests passed, including missing/failed evidence and stale-run cases. Parsed
+  the workflow YAML and checked whitespace. Ran the updated Flutter reporting
+  command locally: 377 tests passed; the generated report measured 2,388 of
+  2,596 LCOV lines covered (92.0%). This is a local verification result, not a
+  claim that GitHub CI has run the new workflow.
+- **Publication and limits:** Only the branch-push publisher requests
+  `contents: write`; it uses GitHub's built-in token and never runs for PRs.
+  Publication, repository permissions, and live badge URLs still need checking
+  after a push. README badge URLs target `main` and will become available after
+  its first publishing run. Zenodo and Dart Docs badges remain deferred.
+- **Human review:** Abigail Close
+
+### Follow-up badge review - October 19, 2026
+
+- **AI assistance:** Added a direct source-commit link to generated evidence
+  and prevented coverage publication when a completed report contains no
+  executed tests. Added a regression test for that case.
+- **AI verification:** Eleven Python reporter tests, five mocked publisher
+  tests, 13 M0 scoring tests, 13 APL conversion/review tests, and 16 Node
+  importer tests passed (58 total). APL tests used a temporary virtual
+  environment with the declared `openpyxl==3.1.5` dependency. Strict
+  `flutter analyze --no-pub --fatal-infos --fatal-warnings` and the Firebase
+  configuration check passed. The 377-test Flutter reporting result above
+  remains the application-suite check; application code was unchanged.
+- **Human review:** Pending review of these follow-up changes.
+
 ## Fresh-clone installation evidence - October 19, 2026
 
 - **Contributor:** Abigail Close.

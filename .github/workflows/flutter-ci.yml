@@ -5,6 +5,7 @@ name: Flutter CI
 # workflow_dispatch also allows a manual run from GitHub Actions.
 on:
   push:
+    branches-ignore: [ci-evidence]
   pull_request:
   workflow_dispatch:
 
@@ -43,15 +44,18 @@ jobs:
 
       # Check maintained Dart source without rewriting files or build output.
       - name: Check formatting
+        id: format
         run: dart format --output=none --set-exit-if-changed lib test tool
 
       # analysis_options.yaml enables flutter_lints. This checks Dart style,
       # syntax, and static analysis; it does not check other languages.
       - name: Analyze code
+        id: analysis
         run: flutter analyze --no-pub --fatal-infos --fatal-warnings
 
       # Compile the web app. This does not launch it or verify native builds.
       - name: Build web application
+        id: build
         run: flutter build web --release --no-pub
 
       - name: Prepare test reports
@@ -60,13 +64,23 @@ jobs:
       # Discover the full test/ directory, including inherited and team tests.
       # LCOV records Dart coverage, not Python/JavaScript or participant results.
       - name: Run Flutter tests with coverage
+        id: tests
         run: >-
           flutter test
           --no-pub --coverage --concurrency=1 --reporter expanded
           --file-reporter expanded:build/test-results/flutter-tests.txt
+          --file-reporter json:build/test-results/flutter-tests.jsonl
 
       - name: Verify coverage report exists and is nonempty
         run: test -s coverage/lcov.info
+
+      - name: Record individual check outcomes
+        if: always()
+        env:
+          CHECK_STEPS: ${{ toJSON(steps) }}
+        run: |
+          mkdir -p build/test-results
+          python3 -c 'import os,pathlib; pathlib.Path("build/test-results/steps.json").write_text(os.environ["CHECK_STEPS"])'
 
       # Retain available evidence after a failure without masking that failure.
       # Action paths are relative to the repository root, unlike run commands.
@@ -83,6 +97,8 @@ jobs:
 
   # These tests validate the scorer and APL tooling with local fixtures.
   python-tests:
+    outputs:
+      firebase: ${{ steps.firebase.outcome }}
     name: M0 and APL Python tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -98,6 +114,9 @@ jobs:
       - name: Install APL test dependency
         run: python -m pip install -r Project3/scripts/requirements-apl.txt
 
+      - name: Test badge reporting
+        run: python -m unittest discover -s .github/scripts -p 'test_*.py' -v
+
       - name: Test M0 scoring
         working-directory: Project2_Work/M0
         run: python -m unittest discover -s . -p 'test_*.py' -v
@@ -108,6 +127,7 @@ jobs:
 
       # Compare local configuration files; do not contact the live database.
       - name: Verify Firebase configuration consistency
+        id: firebase
         working-directory: Project3
         run: python scripts/verify_firebase_config.py
 
@@ -124,11 +144,53 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Test evidence publisher
+        run: node --test .github/scripts/test_publish_ci_evidence.cjs
+
       # The current tests use Node's built-in test runner and simulated data.
       # No Firebase login, catalog upload, or npm installation is needed.
       - name: Test importer
         working-directory: Project3
         run: node --test scripts/test_*.cjs
+
+  # Reporting is separate from testing; a failed check remains failed.
+  # Only branch pushes publish reports. PRs never receive a write token here.
+  publish-evidence:
+    name: Publish badge evidence
+    needs: [build-and-test, python-tests, javascript-tests]
+    if: always() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    concurrency:
+      group: publish-ci-evidence
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download available Flutter results
+        id: download
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: flutter-results-${{ github.sha }}
+          path: ci-input
+      - name: Generate badges and public evidence
+        env:
+          CI_JOBS: ${{ toJSON(needs) }}
+          REPORTS_AVAILABLE: ${{ steps.download.outcome == 'success' }}
+        run: python3 .github/scripts/ci_badges.py --input ci-input --output ci-evidence
+      - name: Publish reports to the ci-evidence branch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const publish = require('./.github/scripts/publish_ci_evidence.cjs');
+            await publish({github, context, core});
 
   # Preserve the inherited API documentation deployment after checks pass.
   # The repository's GitHub Pages source must be configured as GitHub Actions.
@@ -176,5 +238,5 @@ jobs:
 
 # UPDATE BEFORE FINAL SUBMISSION:
 # Need to confirm all M0-M4 tests are run.
-# A public coverage-percentage badge still needs a published coverage output.
+# Verify the published badge report matches the submission commit.
 # Verify the documentation deployment!

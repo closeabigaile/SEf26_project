@@ -1,6 +1,44 @@
 # WolfBite 🐺
 
 <p align="center">
+    <!-- Generated from CI evidence; main is the final-submission branch.
+         These URLs become available after the first publishing run on main. -->
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/build.svg"
+             alt="Web build">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/tests.svg"
+             alt="Flutter test count and results">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/coverage.svg"
+             alt="Dart line coverage">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/style.svg"
+             alt="Style: Dart analyzer result">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/formatter.svg"
+             alt="Dart formatter">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/syntax.svg"
+             alt="Syntax: Dart analyzer result">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/firebase.svg"
+             alt="Firebase configuration consistency">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/python.svg"
+             alt="Python checks">
+    </a>
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/javascript.svg"
+             alt="JavaScript tests">
+    </a>
     <a href="Project3/LICENSE.md">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg"
              alt="License: MIT">
@@ -20,34 +58,18 @@
         <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=main&amp;event=push"
              alt="Flutter CI">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/stargazers">
+    <a href="https://github.com/closeabigaile/SEf26_project">
         <img src="https://img.shields.io/github/stars/closeabigaile/SEf26_project?style=social"
              alt="GitHub Stars">
     </a>
-    <!-- REMEMBER: Once all milestones are complete, publish the submission
-    release on GitHub. Then add the DOI badge! -->
 </p>
 
-<!-- UPDATE BEFORE FINAL SUBMISSION:
-Badges still needed:
-- Coverage: Generate and publish a Dart coverage report, then add a badge
-  showing its measured percentage and linking to the report.
-- Documentation: Verify the published documentation is current and accessible,
-  then add a badge linking to the site.
-- Zenodo: Archive the submission release and add its verified DOI badge.
 
-After M0–M4 are complete:
-- Confirm CI includes the automated tests for all five milestones.
-- Verify Flutter CI passes on the submission commit on main.
-- Confirm the Flutter version badge matches the CI configuration.
-- Review coverage scope and exclusions; save final test and coverage reports
-  before the 30-day artifact retention period expires.
-- Confirm the documented platforms and languages match the checks performed.
-- Verify every badge displays correctly and links to supporting evidence.
-
-Note: Flutter CI shows the combined workflow status. It does not show
-individual check results or a coverage percentage.
--->
+CI report badges become available after the first reporting run on `main`.
+They summarize the latest published evidence for that branch. Style and syntax
+share the strict Dart analyzer result; tests and coverage cover the Flutter
+suite. Each generated badge links to the report, source commit, and CI run.
+See [badge reporting](.github/scripts/README.md) for scope and publication details.
 
 <p align="center">
     <strong>A WIC shopping assistant for product lookup, basket management, and checkout guidance</strong>
@@ -310,9 +332,8 @@ Python, JavaScript, formatting, analysis, and build checks.
 ## 📚 Documentation
 
 
-<!-- Will need to update the User Guide -->
-- **User Guide — Coming Soon:** Instructions for using WolfBite’s features.
-(https://suyeshjadhav.github.io/CSC510_G19/) - Comprehensive user documentation from the previous team, though is not complete.
+- [User Guide](USER_GUIDE.md) — Product lookup, basket management, nutrition comparisons, checkout help, receipt import, and troubleshooting.
+- [Previous-team documentation](https://suyeshjadhav.github.io/CSC510_G19/) — Historical reference; use the guide above for the current application.
 
 - [Installation Guide](INSTALL.md) — Local setup, launch instructions, and troubleshooting.
 - [Firebase Setup](Project3/FIREBASE_SETUP.md) — Application configuration.
@@ -383,8 +404,7 @@ authors’ copyright notice.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/closeabigaile/SEf26_project/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/closeabigaile/SEf26_project/discussions)
+- **Questions and bug reports**: [GitHub Issues](https://github.com/closeabigaile/SEf26_project/issues)
 - **Email**: Coming soon.
 
 ---
