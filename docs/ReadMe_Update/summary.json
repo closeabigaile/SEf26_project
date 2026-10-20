@@ -1,0 +1,32 @@
+{
+  "commit": "e554441c0300d79bf7e3d2184f7143dadb42199f",
+  "branch": "docs/ReadMe_Update",
+  "run": "https://github.com/closeabigaile/SEf26_project/actions/runs/39358796870",
+  "run_id": 39358796870,
+  "attempt": 1,
+  "generated": "2026-10-20T02:27:51.577429+00:00",
+  "tests": {
+    "passed": 377,
+    "failed": 0,
+    "skipped": 0,
+    "complete": true,
+    "success": true
+  },
+  "coverage": {
+    "covered": 2388,
+    "total": 2596,
+    "percent": 92.0
+  },
+  "notes": [],
+  "badges": {
+    "build": "success",
+    "style": "success",
+    "formatter": "success",
+    "syntax": "success",
+    "python": "success",
+    "javascript": "success",
+    "firebase": "success",
+    "tests": "377/377 passing",
+    "coverage": "92.0%"
+  }
+}
