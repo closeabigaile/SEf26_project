@@ -187,10 +187,10 @@ as pending until a reviewer records what they checked and any corrections.
 
 ### M2 conclusion reports and saved outputs
 
-| Date | Report / conclusion | Supporting output |
-| --- | --- | --- |
-| September 27 - October 17, 2026 | [Nutrition recommendation rules](Project2/docs/nutrition_recommendation_rules.md) and [nutrition profile review](Project2/docs/nutrition_profile_review.md) | [M2 service tests](Project2/test/services/basket_balance_service_test.dart), [M2 state tests](Project2/test/state/app_state_m2_test.dart), [scan-to-swap tests](Project2/test/e2e/m2_scan_to_swap_test.dart) |
-| October 17-20, 2026 | [Testing WolfBite](Project2/docs/TESTING.md): test layers, commands, CI results, and known gaps | [Shopper journeys](Project2/test/e2e/shopping_journeys_e2e_test.dart), [cross-milestone tests](Project2/test/e2e/milestones_e2e_test.dart), [M2 visual flow](Project2/integration_test/m2_flow_visual_test.dart) |
+| Date                            | Report / conclusion                                                                                                                                       | Supporting output                                                                                                                                                                                             |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| September 27 - October 17, 2026 | [Nutrition recommendation rules](Project2/docs/nutrition_recommendation_rules.md) and [nutrition profile review](Project2/docs/nutrition_profile_review.md) | [M2 service tests](Project2/test/services/basket_balance_service_test.dart), [M2 state tests](Project2/test/state/app_state_m2_test.dart), [scan-to-swap tests](Project2/test/e2e/m2_scan_to_swap_test.dart)     |
+| October 17-20, 2026             | [Testing WolfBite](Project2/docs/TESTING.md): test layers, commands, CI results, and known gaps                                                            | [Shopper journeys](Project2/test/e2e/shopping_journeys_e2e_test.dart), [cross-milestone tests](Project2/test/e2e/milestones_e2e_test.dart), [M2 visual flow](Project2/integration_test/m2_flow_visual_test.dart) |
 
 ## M0 checkout-help baseline and evaluation - September 19-29, 2026
 
@@ -211,11 +211,29 @@ as pending until a reviewer records what they checked and any corrections.
 
 ### M0 conclusion reports and saved outputs
 
-| Date | Report / conclusion | Supporting output |
-| --- | --- | --- |
-| September 19–20, 2026 (commit dates) | [Checkout-help findings](Project2_Work/M0/m0_checkout_help_findings.md) and [accepted shared use cases](Project2_Work/M0/m4_checkout_help_use_cases.md) | Scenario definitions and expected next steps are recorded in those documents. |
-| September 21, 2026 | [Baseline checkout results](Project2_Work/M0/m0_baseline_checkout_results.md): 50 selected tests passed | [Team tests](Project2_Work/M0/test_results/baseline_team_2026-09-21.txt), [allowance tests](Project2_Work/M0/test_results/baseline_allowance_2026-09-21.txt), [inherited tests](Project2_Work/M0/test_results/baseline_inherited_2026-09-21.txt) |
-| September 29, 2026 | [Evaluation results and limitations](Project2_Work/M0/m0_evaluation_results.md) and [scoring documentation](Project2_Work/M0/m0_scoring_documentation.md) | [13 scorer tests](Project2_Work/M4/test_results/issue5_2026-09-29/m0_scoring.txt), [passing example](Project2_Work/M4/test_results/issue5_2026-09-29/scoring_passing_example.txt), [intentionally failing example](Project2_Work/M4/test_results/issue5_2026-09-29/scoring_failing_example.txt) |
+| Date                                  | Report / conclusion                                                                                                                                     | Supporting output                                                                                                                                                                                                                                                                            |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| September 19–20, 2026 (commit dates) | [Checkout-help findings](Project2_Work/M0/m0_checkout_help_findings.md) and [accepted shared use cases](Project2_Work/M0/m4_checkout_help_use_cases.md)   | Scenario definitions and expected next steps are recorded in those documents.                                                                                                                                                                                                                |
+| September 21, 2026                    | [Baseline checkout results](Project2_Work/M0/m0_baseline_checkout_results.md): 50 selected tests passed                                                  | [Team tests](Project2_Work/M0/test_results/baseline_team_2026-09-21.txt), [allowance tests](Project2_Work/M0/test_results/baseline_allowance_2026-09-21.txt), [inherited tests](Project2_Work/M0/test_results/baseline_inherited_2026-09-21.txt)                                                |
+| September 29, 2026                    | [Evaluation results and limitations](Project2_Work/M0/m0_evaluation_results.md) and [scoring documentation](Project2_Work/M0/m0_scoring_documentation.md) | [13 scorer tests](Project2_Work/M4/test_results/issue5_2026-09-29/m0_scoring.txt), [passing example](Project2_Work/M4/test_results/issue5_2026-09-29/scoring_passing_example.txt), [intentionally failing example](Project2_Work/M4/test_results/issue5_2026-09-29/scoring_failing_example.txt) |
+
+
+## M3 shopping interface improvements and regression fixes - October 6-13, 2026
+
+- **AI tool:** OpenAI ChatGPT.
+- **Files:** `scan_screen.dart`, `basket_screen.dart`, `balances_screen.dart`, `receipt_scanner_screen.dart`, `signup_page.dart`, and `apl_service.dart`.
+- **Task:** Improve the WolfBite shopping interface while preserving existing functionality, then resolve test regressions introduced by the UI updates.
+- **AI assistance:** Assisted with reviewing and refining Flutter UI changes, diagnosing failing widget and integration tests, identifying compatibility issues with existing test expectations, debugging error-handling and healthier-alternative logic, and providing Git/GitHub workflow guidance.
+- **Conclusion and verification:** UI changes were manually reviewed and tested in the browser. Test failures were resolved by restoring required labels, icons, widget behavior, layout compatibility, and error handling while retaining the updated interface. The full Flutter test suite was run after the fixes and all 143 tests passed.
+- **Human reviewer:** Supreme Constantine.
+
+### M3 conclusion reports and saved outputs
+
+| Date             | Report / conclusion                          | Supporting output                                           |
+| ---------------- | -------------------------------------------- | ----------------------------------------------------------- |
+| October 6, 2026  | Shopping interface UI improvements completed | Updated scan, basket, balances, and receipt scanner screens |
+| October 13, 2026 | UI regression fixes completed                | Flutter widget, project use-case, and coverage tests        |
+| October 13, 2026 | Final verification completed                 | Full Flutter test suite: 143 tests passed                   |
 
 ## M4 item-level checkout help - September 26–29, 2026
 
@@ -236,8 +254,8 @@ as pending until a reviewer records what they checked and any corrections.
 
 ### M4 conclusion reports and saved outputs
 
-| Date | Report / conclusion | Supporting output |
-| --- | --- | --- |
-| September 27, 2026 | [Historical service results](Project2_Work/M4/issue4_service_results_2026-09-27.md) and [checkout-help review findings](Project2_Work/M4/checkout_help_test_review.md) | [Service tests](Project2_Work/M4/test_results/service_final_2026-09-27.txt), [adversarial review tests](Project2_Work/M4/test_results/review_2026-09-27/adversarial_tests.txt) |
-| September 27, 2026 | [Implementation corrections and validation](Project2_Work/M4/implementation_results.md) and [frontend/demo guide](Project2_Work/M4/issue3_frontend.md) | [M4 implementation tests](Project2_Work/M4/test_results/implementation_2026-09-27/m4_final.txt), [full-application results with four failures](Project2_Work/M4/test_results/issue3_2026-09-27/full_suite_final.txt) |
-| September 29, 2026 | [Issue 4 test conclusions](Project2_Work/M4/issue4_test_results.md) and [Issue 5 integration/CI conclusions](Project2_Work/M4/issue5_verification_results.md) | [Unit tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_unit.txt), [widget/state tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_widget.txt), [walkthrough](Project2_Work/M4/test_results/issue5_2026-09-29/walkthrough.txt), [saved CI job results](Project2_Work/M4/test_results/issue5_2026-09-29/github_jobs.json) |
+| Date               | Report / conclusion                                                                                                                                                  | Supporting output                                                                                                                                                                                                                                                                                                                    |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| September 27, 2026 | [Historical service results](Project2_Work/M4/issue4_service_results_2026-09-27.md) and [checkout-help review findings](Project2_Work/M4/checkout_help_test_review.md) | [Service tests](Project2_Work/M4/test_results/service_final_2026-09-27.txt), [adversarial review tests](Project2_Work/M4/test_results/review_2026-09-27/adversarial_tests.txt)                                                                                                                                                         |
+| September 27, 2026 | [Implementation corrections and validation](Project2_Work/M4/implementation_results.md) and [frontend/demo guide](Project2_Work/M4/issue3_frontend.md)                 | [M4 implementation tests](Project2_Work/M4/test_results/implementation_2026-09-27/m4_final.txt), [full-application results with four failures](Project2_Work/M4/test_results/issue3_2026-09-27/full_suite_final.txt)                                                                                                                   |
+| September 29, 2026 | [Issue 4 test conclusions](Project2_Work/M4/issue4_test_results.md) and [Issue 5 integration/CI conclusions](Project2_Work/M4/issue5_verification_results.md)          | [Unit tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_unit.txt), [widget/state tests](Project2_Work/M4/test_results/issue5_2026-09-29/m4_widget.txt), [walkthrough](Project2_Work/M4/test_results/issue5_2026-09-29/walkthrough.txt), [saved CI job results](Project2_Work/M4/test_results/issue5_2026-09-29/github_jobs.json) |
