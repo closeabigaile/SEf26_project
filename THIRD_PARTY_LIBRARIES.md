@@ -1,15 +1,15 @@
 # Third-Party Libraries
 
 WolfBite — Team 7, CSC 510 Project 2. Inventory reviewed on **2026-10-10**;
-dependency additions and classifications updated on **2026-10-19**.
+dependency additions and classifications updated through **2026-10-20**.
 
 ## Scope and evidence
 
 This inventory lists all **122 packages in [pubspec.lock](Project2/pubspec.lock)**:
 15 direct application dependencies, 8 direct development dependencies, and
 99 transitive dependencies. Seven of the 122 are supplied by the Flutter SDK.
-It also records the Python dependencies, Firebase tooling, Node packages imported
-by tracked scripts, and explicitly referenced Android tooling described below.
+It also records the Python dependencies, Firebase tooling, Node packages declared
+or imported by tracked scripts, and explicitly referenced Android tooling described below.
 
 Inclusion means a dependency is declared or resolved by the project; it does
 not mean every package is imported directly or used in every build. In particular,
@@ -240,21 +240,27 @@ This CLI is not a Flutter application package. Its external npm installation
 has no committed lockfile here, so its transitive package versions are not asserted.
 Node's `node:*` imports are built-in modules, not separate npm dependencies.
 
-## Node catalog-seeding dependency
+## Node script dependencies
 
-The table below records a package both declared in
-[scripts/package.json](Project2/scripts/package.json) and imported by
-[seed_m2.js](Project2/scripts/seed_m2.js).
+The table below records the dependencies declared in
+[scripts/package.json](Project2/scripts/package.json), distinguishing observed
+script imports from declarations without observed usage.
 
 | Package | Version evidence | Purpose | License | Source |
 | --- | --- | --- | --- | --- |
 | `firebase-admin` | `^13.0.0`, declared range; exact installed version not recorded | Firebase Admin app initialization and Firestore access in the M2 seed script | Apache-2.0, verified in published 13.0.0 metadata | [Published version metadata](https://registry.npmjs.org/firebase-admin/13.0.0) |
+| `csv-parser` | `^3.0.0`, declared range; exact installed version not verified | CSV parsing library; declared, but no usage found in tracked scripts | MIT, verified in published 3.0.0 metadata | [Published version metadata](https://registry.npmjs.org/csv-parser/3.0.0) |
 
 `seed_m2.js` imports `firebase-admin/app` and `firebase-admin/firestore`.
 These imports establish use in the script, not that it has been executed against
 the shared database. The metadata link documents version 13.0.0; the declared
 range permits other 13.x versions. No exact local resolution or transitive npm
 inventory is claimed without a committed lockfile.
+
+`csv-parser` is retained in the inventory because it is declared in the package
+manifest. Its inclusion does not establish that WolfBite uses it at runtime.
+The license source documents version 3.0.0; the declared range permits other
+3.x versions.
 
 ## Explicit Android dependencies and build tools
 
