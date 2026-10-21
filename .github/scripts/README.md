@@ -42,14 +42,11 @@ writes. Runs for an obsolete source commit or older rerun do not overwrite a
 newer report. A cancelled run or failed publisher can leave the last report
 visible, so the report identifies its commit, run, attempt, and timestamp.
 
-The working-branch README currently targets `ci-evidence/docs/ReadMe_Update`
-so its badges can be reviewed before merging. Before the final submission,
-change all nine image URLs and their report links to `ci-evidence/main`, and
-change both combined-workflow branch filters to `main`. Update the visible
-branch note in the README at the same time. **Main's image and report URLs are
-unavailable until its first report is published.** Verify that the images load
-and the linked report identifies the intended submission commit. Merging the
-README alone does not automatically change these explicit branch URLs.
+The README's nine generated badges link to `ci-evidence/main`, and its
+combined-workflow badge is filtered to pushes to `main`. Each report identifies
+the source commit and CI run that produced it. Before submission, verify that
+the published report matches the intended submission commit; a successful push
+alone does not confirm that report publication has finished.
 
 This reporting branch is separate from GitHub Pages and does not publish Dart
 documentation. The existing docs deployment remains restricted to pushes to

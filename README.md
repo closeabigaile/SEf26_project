@@ -5,44 +5,46 @@
 </p>
 
 <p align="center">
-    <!-- Working-branch preview. Before final submission, change all nine badge
-         image/report paths to ci-evidence/main/ and both workflow branch
-         filters to main, then verify the published main reports. -->
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/build.svg"
+    <!-- Badges link to the latest published CI evidence for main. -->
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/build.svg"
              alt="Web build">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/tests.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/tests.svg"
              alt="Flutter test count and results">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/coverage.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/coverage.svg"
              alt="Dart line coverage">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/style.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/style.svg"
              alt="Style: Dart analyzer result">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/formatter.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/formatter.svg"
              alt="Dart formatter">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/syntax.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/syntax.svg"
              alt="Syntax: Dart analyzer result">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/firebase.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/firebase.svg"
              alt="Firebase configuration consistency">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/python.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/python.svg"
              alt="Python checks">
     </a>
-    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/docs/ReadMe_Update/README.md">
-        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/javascript.svg"
+    <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
+        <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/javascript.svg"
              alt="JavaScript tests">
+    </a>
+    <a href="https://closeabigaile.github.io/SEf26_project/">
+        <img src="https://img.shields.io/badge/Dart_API-documentation-0175C2?logo=dart&amp;logoColor=white"
+             alt="Dart API documentation">
     </a>
     <a href="Project2/LICENSE.md">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg"
@@ -59,8 +61,8 @@
     </a>
     <!-- Combined workflow status: web build, tests, Dart lint/static analysis,
          formatting, and documentation deployment. Not a coverage percentage. -->
-    <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Adocs%2FReadMe_Update">
-        <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=docs%2FReadMe_Update&amp;event=push"
+    <a href="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml?query=branch%3Amain">
+        <img src="https://github.com/closeabigaile/SEf26_project/actions/workflows/flutter-ci.yml/badge.svg?branch=main&amp;event=push"
              alt="Flutter CI">
     </a>
     <a href="https://github.com/closeabigaile/SEf26_project">
@@ -338,6 +340,8 @@ Coverage is saved to `coverage/lcov.info`.
 See [CI checks](.github/workflows/flutter-ci.yml) for additional
 Python, JavaScript, formatting, analysis, and build checks.
 
+Badges show CI results for `main`; see [badge reporting](.github/scripts/README.md) for details.
+
 ---
 
 ## 📚 Documentation
@@ -349,7 +353,7 @@ Python, JavaScript, formatting, analysis, and build checks.
 - [Installation Guide](INSTALL.md) — Local setup, launch instructions, and troubleshooting.
 - [Testing](Project2/docs/TESTING.md) — Test commands, CI results, manual checks, and known gaps.
 - [Third-Party Libraries](THIRD_PARTY_LIBRARIES.md) — Dependency and license inventory, supporting evidence, and scope limits.
-<!-- Add the Dart API documentation link here after publication and verification. -->
+- [Dart API Documentation](https://closeabigaile.github.io/SEf26_project/) — Generated reference for application libraries, classes, and functions.
 - [Firebase Setup](Project2/FIREBASE_SETUP.md) — Application configuration.
 - [APL Import Guide](Project2/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
 - [Contributing Guidelines](Project2/CONTRIBUTING.md) — Development and contribution process.
