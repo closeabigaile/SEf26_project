@@ -131,6 +131,67 @@ as pending until a reviewer records what they checked and any corrections.
   tests were not rerun for this documentation-only update.
 - **Human review:** Abigail Close
 
+## M2 basket-aware suggestions and cross-milestone testing - October 12-17, 2026
+
+- **Contributor:** Aditya Mahajan.
+- **AI tool:** Claude Code (Claude Opus 5.5). Each assisted commit carries a
+  `Co-Authored-By: Claude Opus 5.5` trailer.
+- **Files:** `Project3/lib/services/basket_balance_service.dart`,
+  `Project3/lib/widgets/basket_balance_sheet.dart`,
+  `Project3/lib/state/app_state.dart`, `Project3/lib/services/apl_service.dart`,
+  `Project3/lib/utils/wic_categories.dart`, nutrition scripts in
+  `Project3/scripts/` (`enrich_nutrition_off.cjs`, `seed_nutrition.cjs`,
+  `coverage_summary.cjs`), `Project3/firestore.rules`, tests in
+  `Project3/test/e2e/` and `Project3/integration_test/`, the
+  [nutrition recommendation rules](Project3/docs/nutrition_recommendation_rules.md),
+  and [Testing WolfBite](Project3/docs/TESTING.md).
+- **Task:** Turn the September 27 M2 prototype into an integrated feature:
+  basket-level nutrition balance with shopper-confirmed swap previews, backed
+  by real nutrition data, plus end-to-end tests across M0-M4.
+- **AI assistance:** Assisted with implementation, tests, data scripts, and
+  documentation:
+  - `BasketBalanceService`: quantity-weighted sodium, added-sugar, and fiber
+    averages compared with FDA label thresholds; same-category swaps ranked by
+    whole-basket effect (at most three); abstains on missing data or
+    inconsistent allowances. `AppState.swapItem` applies only confirmed swaps
+    and keeps quantity, category, and balances.
+  - Open Food Facts enrichment with consistency checks, and a dry-run-by-default,
+    create-only seeding script with read-back. Nutrition collection lookups sit
+    behind a revertible `config/nutrition` switch; APL values take precedence.
+  - One WIC category name per APL category code so allowances and swap pools
+    no longer split across spelling variants.
+  - Cross-milestone end-to-end tests, eight shopper journeys over a fake
+    Firestore seeded with real APL and Open Food Facts data, desktop
+    integration tests, and a live-app test that reads credentials from outside
+    the repository.
+  - An M3 desktop fix for a Basket Summary title overflow just above the 800px
+    breakpoint.
+- **Corrections found during the work:**
+  - An M1 regression in `AppState` loaded missing nutrition as `0.0`; it now
+    stays unknown. Five Project 1a tests that encoded the old zero defaults were
+    updated.
+  - `healthierSubstitutes` offered products with no nutrition as "healthier"
+    because they scored 0; they are now excluded.
+  - After seeding 574 nutrition records, review found bad crowdsourced values:
+    17 milks/yogurts with ~0.05 mg sodium, a cheese at ~8,300 mg/100 g, and a
+    juice at 12.5 g/100 g. The enrichment now rejects dairy sodium unit errors
+    and sodium above 2 g/100 g, while real salty products still pass.
+- **AI verification:** 377 Flutter tests and 13 Node enrichment tests passed.
+  Line coverage was 90.8%. Eleven of eleven shopper journeys and the M2 visual
+  flow passed on a Windows desktop build. `firestore.rules` (signed-in read for
+  `nutrition/` and `config/`, expired catch-all removed) passed 16 of 16 checks
+  with the Firebase rules test API before it was deployed on October 17, 2026.
+  `live_app_test.dart` has not been run to completion, and comparison targets are
+  illustrative, not personal dietary goals.
+- **Human review:** Aditya Mahajan
+
+### M2 conclusion reports and saved outputs
+
+| Date | Report / conclusion | Supporting output |
+| --- | --- | --- |
+| September 27 - October 17, 2026 | [Nutrition recommendation rules](Project3/docs/nutrition_recommendation_rules.md) and [nutrition profile review](Project3/docs/nutrition_profile_review.md) | [M2 service tests](Project3/test/services/basket_balance_service_test.dart), [M2 state tests](Project3/test/state/app_state_m2_test.dart), [scan-to-swap tests](Project3/test/e2e/m2_scan_to_swap_test.dart) |
+| October 17-20, 2026 | [Testing WolfBite](Project3/docs/TESTING.md): test layers, commands, CI results, and known gaps | [Shopper journeys](Project3/test/e2e/shopping_journeys_e2e_test.dart), [cross-milestone tests](Project3/test/e2e/milestones_e2e_test.dart), [M2 visual flow](Project3/integration_test/m2_flow_visual_test.dart) |
+
 ## M0 checkout-help baseline and evaluation - September 19-29, 2026
 
 - **AI tool:** OpenAI Codex.
