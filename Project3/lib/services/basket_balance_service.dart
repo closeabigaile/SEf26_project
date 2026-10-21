@@ -1,4 +1,4 @@
-/// M2: basket-wide balance check and one-swap suggestions.
+/// Basket-wide balance check and one-swap suggestions.
 ///
 /// Looks at the whole basket (quantities included), finds the nutrient with
 /// the largest gap against an illustrative per-serving target, and ranks
