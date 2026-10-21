@@ -5,6 +5,10 @@
 </p>
 
 <p align="center">
+    <a href="https://doi.org/10.5281/zenodo.23523951">
+        <img src="https://zenodo.org/badge/1343158445.svg"
+             alt="Zenodo DOI">
+    </a>
     <!-- Badges link to the latest published CI evidence for main. -->
     <a href="https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/main/README.md">
         <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/main/build.svg"
