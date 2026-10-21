@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108724297221",
+    "project_id": "wolfbyte-proj1",
+    "storage_bucket": "wolfbyte-proj1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108724297221:android:9b181d15eb9f18decac66c",
+        "android_client_info": {
+          "package_name": "com.example.wolfbite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOyrvRspFfoeE6CFZef4acr0Wov5kvIaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

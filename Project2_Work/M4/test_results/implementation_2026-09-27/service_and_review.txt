@@ -1,0 +1,115 @@
+00:00 +0: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart
+00:00 +0: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-01 returns the expected cause, explanation, and next step
+00:00 +1: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-01 preserves inputs and accepts read-only nested records
+00:00 +2: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-02 returns the expected cause, explanation, and next step
+00:00 +3: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-02 preserves inputs and accepts read-only nested records
+00:00 +4: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-03 returns the expected cause, explanation, and next step
+00:00 +5: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-03 preserves inputs and accepts read-only nested records
+00:00 +6: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-F01 returns the expected cause, explanation, and next step
+00:00 +7: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Shared M0/M4 scenarios M0-M4-F01 preserves inputs and accepts read-only nested records
+00:00 +8: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer uses original category even when the basket line is PAID
+00:00 +9: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer ignores misleading IDs, names, and expected-answer fields
+00:00 +10: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer supports other categories, decimal sizes, and matching units
+00:00 +11: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer uses supplied total units without multiplying by quantity again
+00:00 +12: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer equal available and required units do not establish a shortfall
+00:00 +13: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer both size mismatch and shortfall are ambiguous
+00:00 +14: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Evidence determines the answer matching size and sufficient balance do not explain a rejection
+00:00 +15: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness explicitly outdated item takes priority over size and balance
+00:00 +16: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness item freshness null cannot support a diagnosis
+00:00 +17: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness item freshness unknown cannot support a diagnosis
+00:00 +18: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness item freshness invalid cannot support a diagnosis
+00:00 +19: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness item freshness true cannot support a diagnosis
+00:00 +20: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness explicitly outdated benefit takes priority over size and balance
+00:00 +21: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness benefit freshness null cannot support a diagnosis
+00:00 +22: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness benefit freshness unknown cannot support a diagnosis
+00:00 +23: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness benefit freshness invalid cannot support a diagnosis
+00:00 +24: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness benefit freshness true cannot support a diagnosis
+00:00 +25: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness outdated evidence with replacement flag null is uncertain
+00:00 +26: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness outdated evidence with replacement flag true is uncertain
+00:00 +27: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Freshness outdated evidence with replacement flag "false" is uncertain
+00:00 +28: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence empty records return the complete fallback
+00:00 +29: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing item original_benefit_category does not produce a guess
+00:00 +30: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing item quantity does not produce a guess
+00:00 +31: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing item package_size does not produce a guess
+00:00 +32: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing item information_freshness does not produce a guess
+00:00 +33: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit category does not produce a guess
+00:00 +34: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit category_covered does not produce a guess
+00:00 +35: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit permitted_package_size does not produce a guess
+00:00 +36: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit required_units does not produce a guess
+00:00 +37: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit available_units_after_other_allocations does not produce a guess
+00:00 +38: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit units_allocated_to_affected_item does not produce a guess
+00:00 +39: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit unit does not produce a guess
+00:00 +40: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence missing benefit information_freshness does not produce a guess
+00:00 +41: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence different item and benefit categories conflict
+00:00 +42: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence uncovered category is outside the three supported causes
+00:00 +43: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence different size units cannot be compared without conversion
+00:00 +44: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence unknown size units cannot establish a mismatch
+00:00 +45: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence malformed nested package information does not throw
+00:00 +46: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence existing affected-item allocation requires more context
+00:00 +47: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence real benefit units are not silently treated as mock counts
+00:00 +48: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Missing, conflicting, or unsupported evidence a flagged separate current replacement needs its actual evidence
+00:00 +49: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid selected size null (Null) returns fallback
+00:00 +50: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid available balance null (Null) is not assumed to be zero
+00:00 +51: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid selected size 1 (String) returns fallback
+00:00 +52: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid available balance 1 (String) is not assumed to be zero
+00:00 +53: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid selected size -1 (int) returns fallback
+00:00 +54: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid available balance -1 (int) is not assumed to be zero
+00:00 +55: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid selected size NaN (double) returns fallback
+00:00 +56: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid available balance NaN (double) is not assumed to be zero
+00:00 +57: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid selected size Infinity (double) returns fallback
+00:00 +58: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers invalid available balance Infinity (double) is not assumed to be zero
+00:00 +59: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers zero required units do not explain an insufficient balance
+00:00 +60: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers zero package size is unusable
+00:00 +61: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Invalid numbers fractional package quantity is unusable
+00:00 +62: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases smaller packages can mismatch too; only exact permitted size matches
+00:00 +63: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases whole-number doubles compare like integers
+00:00 +64: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases category and unit spaces/case do not create a false conflict
+00:00 +65: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases missing original category cannot be replaced by basket classification
+00:00 +66: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases display identity is not evidence for the cause
+00:00 +67: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases coverage null must not be treated as true
+00:00 +68: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases coverage "true" must not be treated as true
+00:00 +69: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases coverage 1 must not be treated as true
+00:00 +70: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid category "" does not throw
+00:00 +71: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid category "   " does not throw
+00:00 +72: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid category 42 does not throw
+00:00 +73: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid category [] does not throw
+00:00 +74: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size [] returns fallback
+00:00 +75: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size {} returns fallback
+00:00 +76: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size true returns fallback
+00:00 +77: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units 0 (int) return fallback
+00:00 +78: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size 0 (int) returns fallback
+00:00 +79: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units -1 (int) return fallback
+00:00 +80: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size -1 (int) returns fallback
+00:00 +81: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units 1 (String) return fallback
+00:00 +82: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size 1 (String) returns fallback
+00:00 +83: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units true (bool) return fallback
+00:00 +84: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size true (bool) returns fallback
+00:00 +85: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units NaN (double) return fallback
+00:00 +86: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size NaN (double) returns fallback
+00:00 +87: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid required units Infinity (double) return fallback
+00:00 +88: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid permitted size Infinity (double) returns fallback
+00:00 +89: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid quantity 0 (int) returns fallback
+00:00 +90: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid quantity -1 (int) returns fallback
+00:00 +91: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid quantity 1 (String) returns fallback
+00:00 +92: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid quantity true (bool) returns fallback
+00:00 +93: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases invalid quantity Infinity (double) returns fallback
+00:00 +94: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases one explicitly outdated record still matters when the other is unknown
+00:00 +95: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases both outdated records return uncertainty, not a size or balance cause
+00:00 +96: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases unrelated calls cannot leak an earlier answer into the next case
+00:00 +97: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases ambiguous evidence stays unchanged, including extra nested metadata
+00:00 +98: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases a later input change cannot rewrite an already returned result
+00:00 +99: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases negative floating-point zero is displayed as an empty balance
+00:00 +100: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases large required amounts are displayed without integer overflow
+00:00 +101: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_service_test.dart: Additional edge and unusual cases very large finite sizes are displayed without integer overflow
+00:00 +102: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart
+00:00 +102: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_basket_acceptance_test.dart: A09 intended basket item exposes Get checkout help
+00:00 +103: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart
+00:01 +103: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A01 equivalent decimal package sizes should not invent a mismatch
+00:01 +104: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A02 decimal rounding alone should not invent a balance shortfall
+00:01 +105: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A03 a genuinely tiny positive balance still has a shortfall
+00:01 +106: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A04 a real small size difference must not be rounded away
+00:01 +107: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A05 two unknown unit labels do not establish comparable sizes
+00:01 +108: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A06 PAID is a payment classification, not an original benefit category
+00:01 +109: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A07 matching UNKNOWN categories do not classify an item
+00:01 +110: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/m4_review/checkout_help_adversarial_test.dart: A08 multiple permitted sizes require an explicit rule, not a guess
+00:01 +111: All tests passed!

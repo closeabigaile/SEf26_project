@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "description": "Hand-authored mock item and benefit records for M4 checkout help. These are not official benefit rules, real checkout responses, or participant results.",
+  "rejection_context": {
+    "source": "scripted_scenario",
+    "item_remains_in_basket": true,
+    "official_reason": null
+  },
+  "scenarios": [
+    {
+      "scenario_id": "M0-M4-01",
+      "title": "Package-size mismatch",
+      "synthetic": true,
+      "input": {
+        "item": {
+          "id": "mock-cereal-size-24oz",
+          "name": "Mock cereal - 24 oz",
+          "original_benefit_category": "CEREAL",
+          "basket_category": "CEREAL",
+          "quantity": 1,
+          "package_size": { "value": 24, "unit": "oz" },
+          "information_freshness": "current"
+        },
+        "benefit": {
+          "category": "CEREAL",
+          "category_covered": true,
+          "permitted_package_size": { "value": 18, "unit": "oz" },
+          "required_units": 1,
+          "available_units_after_other_allocations": 1,
+          "units_allocated_to_affected_item": 0,
+          "unit": "mock_benefit_unit",
+          "information_freshness": "current",
+          "verified_current_replacement_available": false
+        }
+      },
+      "expected_help": {
+        "possible_cause": "package_size_mismatch",
+        "explanation": "Possible cause: this package is 24 oz, while the benefit information available here lists a permitted package size of 18 oz. This may explain the rejection; it is not the checkout system's official reason.",
+        "suggested_next_step": "Check the package label against current benefit information and look for an otherwise eligible 18 oz package."
+      }
+    },
+    {
+      "scenario_id": "M0-M4-02",
+      "title": "Insufficient category balance",
+      "synthetic": true,
+      "input": {
+        "item": {
+          "id": "mock-cereal-balance-18oz",
+          "name": "Mock cereal - no available benefit units",
+          "original_benefit_category": "CEREAL",
+          "basket_category": "PAID",
+          "quantity": 1,
+          "package_size": { "value": 18, "unit": "oz" },
+          "information_freshness": "current"
+        },
+        "benefit": {
+          "category": "CEREAL",
+          "category_covered": true,
+          "permitted_package_size": { "value": 18, "unit": "oz" },
+          "required_units": 1,
+          "available_units_after_other_allocations": 0,
+          "units_allocated_to_affected_item": 0,
+          "unit": "mock_benefit_unit",
+          "information_freshness": "current",
+          "verified_current_replacement_available": false
+        }
+      },
+      "expected_help": {
+        "possible_cause": "insufficient_category_balance",
+        "explanation": "Possible cause: the available cereal balance is 0 units, and this item needs 1 unit. There may not be enough benefit balance to cover it. This is not the checkout system's official reason.",
+        "suggested_next_step": "Review the current cereal balance and reduce the quantity intended for benefit coverage to fit it. With zero units available for this item, a same-category substitution alone should not be presented as restoring coverage."
+      }
+    },
+    {
+      "scenario_id": "M0-M4-03",
+      "title": "Outdated information",
+      "synthetic": true,
+      "input": {
+        "item": {
+          "id": "mock-cereal-outdated-18oz",
+          "name": "Mock cereal - outdated benefit information",
+          "original_benefit_category": "CEREAL",
+          "basket_category": "CEREAL",
+          "quantity": 1,
+          "package_size": { "value": 18, "unit": "oz" },
+          "information_freshness": "current"
+        },
+        "benefit": {
+          "category": "CEREAL",
+          "category_covered": null,
+          "permitted_package_size": null,
+          "required_units": 1,
+          "available_units_after_other_allocations": null,
+          "units_allocated_to_affected_item": null,
+          "unit": "mock_benefit_unit",
+          "information_freshness": "outdated",
+          "verified_current_replacement_available": false
+        }
+      },
+      "expected_help": {
+        "possible_cause": "outdated_information",
+        "explanation": "Possible cause: the product or benefit information available here may be outdated. WolfBite is unable to determine why checkout rejected this item. This is not the checkout system's official reason.",
+        "suggested_next_step": "Verify current product and benefit information through the shopper's benefit information source, or ask the cashier to check before retrying. This does not assume WolfBite already provides a refresh feature."
+      }
+    },
+    {
+      "scenario_id": "M0-M4-F01",
+      "title": "Unable to determine",
+      "synthetic": true,
+      "input": {
+        "item": {
+          "id": "mock-cereal-unknown-size",
+          "name": "Mock cereal - incomplete information",
+          "original_benefit_category": "CEREAL",
+          "basket_category": "CEREAL",
+          "quantity": 1,
+          "package_size": null,
+          "information_freshness": "unknown"
+        },
+        "benefit": {
+          "category": "CEREAL",
+          "category_covered": null,
+          "permitted_package_size": null,
+          "required_units": null,
+          "available_units_after_other_allocations": null,
+          "units_allocated_to_affected_item": null,
+          "unit": "mock_benefit_unit",
+          "information_freshness": "unknown",
+          "verified_current_replacement_available": false
+        }
+      },
+      "expected_help": {
+        "possible_cause": "unable_to_determine",
+        "explanation": "Unable to determine a possible cause from the information available. WolfBite does not have the checkout system's official rejection reason.",
+        "suggested_next_step": "Ask the cashier to check the item and consult current benefit information before retrying."
+      }
+    }
+  ]
+}

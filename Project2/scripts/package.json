@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "seed:m2": "node seed_m2.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0",
+    "csv-parser": "^3.0.0"
+  }
+}

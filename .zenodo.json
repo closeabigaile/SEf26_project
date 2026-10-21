@@ -1,0 +1,26 @@
+{
+  "title": "WolfBite — Project 2, Team 7",
+  "version": "1.0.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "mit",
+  "creators": [
+    {
+      "name": "Close, Abigail",
+      "affiliation": "North Carolina State University"
+    },
+    {
+      "name": "Mahajan, Aditya",
+      "affiliation": "North Carolina State University"
+    },
+    {
+      "name": "Shah, Satwi",
+      "affiliation": "North Carolina State University"
+    },
+    {
+      "name": "Constantine, Supreme",
+      "affiliation": "North Carolina State University"
+    }
+  ],
+  "description": "<p>WolfBite is a Flutter/Firebase shopping-assistance prototype intended to help people shopping with WIC benefits look up products, manage their basket, review nutrition information, and understand checkout guidance.</p><p>This CSC 510 Project 2 update by Team 7 includes North Carolina Authorized Product List integration, clearer nutrition displays, basket-aware product-swap suggestions, interface improvements, item-level checkout help, and an automated checkout-help evaluation framework.</p><p>The project includes automated tests, installation instructions, a user guide, and Dart API documentation comments.</p><p>WolfBite uses application-managed demo allowances rather than official participant benefit accounts. Checkout-rejection scenarios and evaluation examples are synthetic; real-participant effectiveness has not been established.</p><p>This release builds on previous CSC 510 teams’ work. Their acknowledgments and existing copyright notices are retained in the repository.</p>"
+}

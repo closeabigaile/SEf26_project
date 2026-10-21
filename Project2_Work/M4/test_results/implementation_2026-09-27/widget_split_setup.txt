@@ -1,0 +1,32 @@
+00:00 +0: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart
+00:00 +0: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-01 opens selected-item help and closes without state or database changes
+00:00 +1: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-02 opens selected-item help and closes without state or database changes
+00:00 +2: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-03 opens selected-item help and closes without state or database changes
+00:00 +3: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: M0-M4-F01 opens selected-item help and closes without state or database changes
+00:00 +4: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: repeated openings on different items do not leak explanations
+00:01 +5: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: a real item sharing a sample UPC receives fallback without explicit sample linkage
+00:01 +6: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: a paid line sharing a UPC cannot inherit another lines sample evidence
+00:01 +7: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: balance changes invalidate an open explanation without undoing the change
+00:01 +8: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: removing the selected line does not switch help to the next item
+00:01 +9: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: a changed quantity cannot reuse the original prepared evidence after reopening
+00:01 +10: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: a delayed load cannot show evidence for an item changed while loading
+00:01 +11: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: load failure offers uncertainty and can still be closed
+00:01 +12: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: back and outside-tap dismissals preserve state
+00:01 +13: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: sample explorer runs all examples without touching real shopper data
+00:01 +14: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: help remains scrollable and closable on a narrow screen
+00:01 +15: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/screens/checkout_help_screen_test.dart: original category survives creating and reloading a paid line
+00:01 +16: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart
+00:02 +16: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: registered asset provides all examples with immutable evidence
+00:02 +17: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: explicit sample linkage requires the exact line identity and evidence quantity
+00:02 +18: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: very small decimal amounts retain meaningful shortfalls
+00:02 +19: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: large integer amounts keep exact comparisons and displayed values
+00:02 +20: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: a representable small decimal size difference remains a mismatch
+00:02 +21: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: placeholder categories are rejected after whitespace and case normalization
+00:02 +22: /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_repository_test.dart: matching unsupported measurement labels do not imply usable units
+00:02 +23: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_precision_test.dart
+00:02 +23 -1: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_precision_test.dart [E]
+  Failed to load "/Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_precision_test.dart": Does not exist.
+00:02 +23 -1: Some tests failed.
+
+Failing tests:
+  /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_precision_test.dart: loading /Users/abigailclose/Documents/CSC510/SEf26_project/Project3/test/services/checkout_help_precision_test.dart

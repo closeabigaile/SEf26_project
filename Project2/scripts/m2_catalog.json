@@ -1,0 +1,154 @@
+[
+  {
+    "upc": "299900000101",
+    "name": "Example Frosted Corn Flakes",
+    "category": "CEREAL",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 150 },
+      { "name": "Sodium, Na", "amount": 200 },
+      { "name": "Sugars, added", "amount": 12 },
+      { "name": "Fiber, total dietary", "amount": 1 },
+      { "name": "Protein", "amount": 2 }
+    ]
+  },
+  {
+    "upc": "299900000102",
+    "name": "Example Plain Toasted Oats",
+    "category": "CEREAL",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 140 },
+      { "name": "Sodium, Na", "amount": 140 },
+      { "name": "Sugars, added", "amount": 1 },
+      { "name": "Fiber, total dietary", "amount": 3 },
+      { "name": "Protein", "amount": 5 }
+    ]
+  },
+  {
+    "upc": "299900000103",
+    "name": "Example Bran Flakes",
+    "category": "CEREAL",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 130 },
+      { "name": "Sodium, Na", "amount": 210 },
+      { "name": "Sugars, added", "amount": 5 },
+      { "name": "Fiber, total dietary", "amount": 5.5 },
+      { "name": "Protein", "amount": 4 }
+    ]
+  },
+  {
+    "upc": "299900000201",
+    "name": "Example White Sandwich Bread",
+    "category": "BREAD",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 70 },
+      { "name": "Sodium, Na", "amount": 230 },
+      { "name": "Sugars, added", "amount": 3 },
+      { "name": "Fiber, total dietary", "amount": 0.6 },
+      { "name": "Protein", "amount": 2 }
+    ]
+  },
+  {
+    "upc": "299900000202",
+    "name": "Example Whole Wheat Bread",
+    "category": "BREAD",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 80 },
+      { "name": "Sodium, Na", "amount": 170 },
+      { "name": "Sugars, added", "amount": 2 },
+      { "name": "Fiber, total dietary", "amount": 2.8 },
+      { "name": "Protein", "amount": 4 }
+    ]
+  },
+  {
+    "upc": "299900000203",
+    "name": "Example Low-Sodium Whole Wheat Bread",
+    "category": "BREAD",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 80 },
+      { "name": "Sodium, Na", "amount": 60 },
+      { "name": "Sugars, added", "amount": 2 },
+      { "name": "Fiber, total dietary", "amount": 2.5 },
+      { "name": "Protein", "amount": 4 }
+    ]
+  },
+  {
+    "upc": "299900000301",
+    "name": "Example Canned Black Beans",
+    "category": "BEANS",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 110 },
+      { "name": "Sodium, Na", "amount": 460 },
+      { "name": "Sugars, added", "amount": 0 },
+      { "name": "Fiber, total dietary", "amount": 7 },
+      { "name": "Protein", "amount": 7 }
+    ]
+  },
+  {
+    "upc": "299900000302",
+    "name": "Example No-Salt-Added Black Beans",
+    "category": "BEANS",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 110 },
+      { "name": "Sodium, Na", "amount": 15 },
+      { "name": "Sugars, added", "amount": 0 },
+      { "name": "Fiber, total dietary", "amount": 7 },
+      { "name": "Protein", "amount": 7 }
+    ]
+  },
+  {
+    "upc": "299900000401",
+    "name": "Example Canned Corn",
+    "category": "CANNED VEGETABLES",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 70 },
+      { "name": "Sodium, Na", "amount": 360 },
+      { "name": "Sugars, added", "amount": 0 },
+      { "name": "Fiber, total dietary", "amount": 2 },
+      { "name": "Protein", "amount": 2 }
+    ]
+  },
+  {
+    "upc": "299900000402",
+    "name": "Example No-Salt-Added Corn",
+    "category": "CANNED VEGETABLES",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 70 },
+      { "name": "Sodium, Na", "amount": 10 },
+      { "name": "Sugars, added", "amount": 0 },
+      { "name": "Fiber, total dietary", "amount": 2 },
+      { "name": "Protein", "amount": 2 }
+    ]
+  },
+  {
+    "upc": "299900000501",
+    "name": "Example Snack Bar (no sodium data)",
+    "category": "CEREAL",
+    "eligible": true,
+    "catalogStatus": "m2_demo",
+    "foodNutrients": [
+      { "name": "Energy", "amount": 120 },
+      { "name": "Sugars, added", "amount": 2 },
+      { "name": "Fiber, total dietary", "amount": 4 }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "testProfile": "TEST PROFILE 3 - adult with energy goal",
+  "testOnlyAssumptions": "Illustrative 1800 kcal and 90 g protein goals; no personal weight plan was calculated.",
+  "asOf": "2026-09-27",
+  "basketUpcs": ["FDC1101707"],
+  "context": {
+    "mode": "fatLoss",
+    "lifeStage": "adult",
+    "mealsPerDay": 3,
+    "targets": {
+      "lifeStage": "adult",
+      "sourceUrl": "https://example.org/test-targets/fat-loss",
+      "caloriesPerDay": 1800,
+      "proteinGramsPerDay": 90,
+      "sodiumMgMaxPerDay": 2300
+    }
+  }
+}
