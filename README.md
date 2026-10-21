@@ -65,7 +65,7 @@
     </a>
 </p>
 
-**🎬 [Project 2 teaser — 18 seconds](Project3/docs/videos/Wolfbite%20Teaser%20Video.mov)**
+**🎬 [Project 2 teaser — 18 seconds](https://drive.google.com/file/d/10RyryAezlTAS2xHPVQu-Hz02ZHMnLhdU/view?usp=share_link)**
 
 [Feature walkthrough — 3 minutes, 26 seconds](Project3/docs/videos/WolfBite%20Walkthrough.mov)
 
