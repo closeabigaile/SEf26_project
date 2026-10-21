@@ -1,0 +1,32 @@
+{
+  "commit": "84bfcc69a4da7ab27fbc22891dab671ac79bb5ff",
+  "branch": "m3-ai-disclosure",
+  "run": "https://github.com/closeabigaile/SEf26_project/actions/runs/39549137820",
+  "run_id": 39549137820,
+  "attempt": 1,
+  "generated": "2026-10-21T05:25:52.220079+00:00",
+  "tests": {
+    "passed": 377,
+    "failed": 0,
+    "skipped": 0,
+    "complete": true,
+    "success": true
+  },
+  "coverage": {
+    "covered": 2388,
+    "total": 2596,
+    "percent": 92.0
+  },
+  "notes": [],
+  "badges": {
+    "build": "success",
+    "style": "success",
+    "formatter": "success",
+    "syntax": "success",
+    "python": "success",
+    "javascript": "success",
+    "firebase": "success",
+    "tests": "377/377 passing",
+    "coverage": "92.0%"
+  }
+}
