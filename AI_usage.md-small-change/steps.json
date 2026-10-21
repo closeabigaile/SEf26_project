@@ -1,0 +1,22 @@
+{
+  "format": {
+    "outputs": {},
+    "outcome": "success",
+    "conclusion": "success"
+  },
+  "analysis": {
+    "outputs": {},
+    "outcome": "success",
+    "conclusion": "success"
+  },
+  "build": {
+    "outputs": {},
+    "outcome": "success",
+    "conclusion": "success"
+  },
+  "tests": {
+    "outputs": {},
+    "outcome": "success",
+    "conclusion": "success"
+  }
+}
