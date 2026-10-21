@@ -14,7 +14,7 @@ recorded in the [earlier review](checkout_help_test_review.md). The existing
 
 ### Decimal comparisons
 
-[CheckoutHelpService](../../Project3/lib/services/checkout_help_service.dart)
+[CheckoutHelpService](../../Project2/lib/services/checkout_help_service.dart)
 now compares floating-point evidence at **15 significant decimal digits**.
 This is a documented input-precision policy: binary arithmetic noise such as
 `0.1 + 0.2` no longer creates a false difference from `0.3`. Unlike a fixed
@@ -60,7 +60,7 @@ A loading failure produces a closable fallback. Repeated taps do not stack
 multiple help dialogs. The existing nutrition label can now wrap on a narrow
 screen instead of overflowing.
 
-The [repository](../../Project3/lib/services/checkout_help_repository.dart)
+The [repository](../../Project2/lib/services/checkout_help_repository.dart)
 loads the registered sample asset and passes only evidence to the service.
 It never selects an answer from `expected_help`. A prepared basket line must
 explicitly contain `checkout_help_source: synthetic` and a matching
@@ -75,13 +75,13 @@ cause**: no verified product/benefit evidence provider exists in this app yet.
 
 Files implementing the flow:
 
-- [basket_screen.dart](../../Project3/lib/screens/basket_screen.dart): per-item action and sample navigation.
-- [checkout_help_dialog.dart](../../Project3/lib/widgets/checkout_help_dialog.dart): selected-item display, loading/error handling, invalidation, and closing.
-- [checkout_help_samples_screen.dart](../../Project3/lib/screens/checkout_help_samples_screen.dart): isolated sample explorer.
-- [checkout_help_repository.dart](../../Project3/lib/services/checkout_help_repository.dart): explicit evidence mapping and asset loading.
-- [checkout_help_service.dart](../../Project3/lib/services/checkout_help_service.dart): validation, comparison policy, and explanations.
-- [app_state.dart](../../Project3/lib/state/app_state.dart): retain original categories and explicit sample linkage across storage.
-- [pubspec.yaml](../../Project3/pubspec.yaml): register the sample asset.
+- [basket_screen.dart](../../Project2/lib/screens/basket_screen.dart): per-item action and sample navigation.
+- [checkout_help_dialog.dart](../../Project2/lib/widgets/checkout_help_dialog.dart): selected-item display, loading/error handling, invalidation, and closing.
+- [checkout_help_samples_screen.dart](../../Project2/lib/screens/checkout_help_samples_screen.dart): isolated sample explorer.
+- [checkout_help_repository.dart](../../Project2/lib/services/checkout_help_repository.dart): explicit evidence mapping and asset loading.
+- [checkout_help_service.dart](../../Project2/lib/services/checkout_help_service.dart): validation, comparison policy, and explanations.
+- [app_state.dart](../../Project2/lib/state/app_state.dart): retain original categories and explicit sample linkage across storage.
+- [pubspec.yaml](../../Project2/pubspec.yaml): register the sample asset.
 
 ## Tests and results
 
@@ -104,9 +104,9 @@ is recorded in the historical review and was not rerun for these app changes.
 
 The new tests protect specific risks:
 
-- [Precision tests](../../Project3/test/services/checkout_help_precision_test.dart): tiny genuine shortfalls, large exact integers, small real size differences, normalized placeholder categories, and unsupported measurement units.
-- [Repository tests](../../Project3/test/services/checkout_help_repository_test.dart): immutable sample evidence and rejection of mismatched item identity, quantity, classification, source, or scenario.
-- [Widget/state tests](../../Project3/test/screens/checkout_help_screen_test.dart): all four complete messages, selected-item identity, repeated switching, same-UPC collisions, missing evidence, stale state, removal, changed quantity, delayed or failed loads, all dismissal paths, isolated samples, small screens, and original-category persistence.
+- [Precision tests](../../Project2/test/services/checkout_help_precision_test.dart): tiny genuine shortfalls, large exact integers, small real size differences, normalized placeholder categories, and unsupported measurement units.
+- [Repository tests](../../Project2/test/services/checkout_help_repository_test.dart): immutable sample evidence and rejection of mismatched item identity, quantity, classification, source, or scenario.
+- [Widget/state tests](../../Project2/test/screens/checkout_help_screen_test.dart): all four complete messages, selected-item identity, repeated switching, same-UPC collisions, missing evidence, stale state, removal, changed quantity, delayed or failed loads, all dismissal paths, isolated samples, small screens, and original-category persistence.
 
 State tests use real `AppState` behavior with fake Firestore storage. They compare
 basket/balances and stored documents before and after help. Instrumented methods

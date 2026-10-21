@@ -29,7 +29,7 @@ and CLI login tokens must stay outside the repository.
 
 ## Verify locally
 
-From `Project3`:
+From `Project2`:
 
 ```sh
 python3 scripts/verify_firebase_config.py

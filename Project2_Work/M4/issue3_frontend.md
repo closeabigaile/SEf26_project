@@ -46,13 +46,13 @@ Most M4 work is in separate files:
 
 | File | Responsibility |
 | --- | --- |
-| [checkout_help_button.dart](../../Project3/lib/widgets/checkout_help_button.dart) | Reusable labeled action; selected-item tooltip; prevents duplicate dialogs from rapid taps. |
-| [checkout_help_dialog.dart](../../Project3/lib/widgets/checkout_help_dialog.dart) | Selected-item details, evidence loading, fallback/error states, uncertainty notice, scrollable content, and Close. |
-| [checkout_help_samples_screen.dart](../../Project3/lib/screens/checkout_help_samples_screen.dart) | Read-only sample basket and four item cards. |
-| [checkout_help_repository.dart](../../Project3/lib/services/checkout_help_repository.dart) | Loads prepared evidence and maps an explicitly linked line to its exact scenario. `toBasketLine()` creates an immutable sample card record. |
-| [checkout_help_service.dart](../../Project3/lib/services/checkout_help_service.dart) | Issue 2 decision logic; unchanged by this Issue 3 follow-up. |
+| [checkout_help_button.dart](../../Project2/lib/widgets/checkout_help_button.dart) | Reusable labeled action; selected-item tooltip; prevents duplicate dialogs from rapid taps. |
+| [checkout_help_dialog.dart](../../Project2/lib/widgets/checkout_help_dialog.dart) | Selected-item details, evidence loading, fallback/error states, uncertainty notice, scrollable content, and Close. |
+| [checkout_help_samples_screen.dart](../../Project2/lib/screens/checkout_help_samples_screen.dart) | Read-only sample basket and four item cards. |
+| [checkout_help_repository.dart](../../Project2/lib/services/checkout_help_repository.dart) | Loads prepared evidence and maps an explicitly linked line to its exact scenario. `toBasketLine()` creates an immutable sample card record. |
+| [checkout_help_service.dart](../../Project2/lib/services/checkout_help_service.dart) | Issue 2 decision logic; unchanged by this Issue 3 follow-up. |
 
-The shared [basket_screen.dart](../../Project3/lib/screens/basket_screen.dart)
+The shared [basket_screen.dart](../../Project2/lib/screens/basket_screen.dart)
 keeps its existing item layout, quantity controls, nutrition section, and
 checkout footer. Its M4 integration consists of imports, an optional repository,
 the sample-navigation app-bar action, and a `CheckoutHelpButton` inside each

@@ -12,7 +12,7 @@ change a failed check into a passing one.
 | Web build | `flutter build web --release --no-pub` outcome |
 | Flutter tests | Visible test results from the JSON reporter, excluding hidden successful loading/setup events; skipped tests shown separately |
 | Dart line coverage | Unique covered/total DA lines in the generated `lcov.info`; no additional exclusions |
-| Style and syntax | Both show the **same** strict `flutter analyze` result using `Project3/analysis_options.yaml`; they are not separate tools or independent checks |
+| Style and syntax | Both show the **same** strict `flutter analyze` result using `Project2/analysis_options.yaml`; they are not separate tools or independent checks |
 | Dart format | `dart format --output=none --set-exit-if-changed lib test tool` outcome |
 | Firebase config | `verify_firebase_config.py` outcome; local config consistency, not database access |
 | Python checks | Python job result, including M0/APL tests and reporting tests |

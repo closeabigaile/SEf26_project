@@ -4,7 +4,7 @@ The converter reads the `.xlsx` directly. Do not manually retype products or
 resave the UPC column as numbers. The source workbook is never modified, and
 conversion never contacts Firebase or requires credentials.
 
-From `Project3`, install the read-only spreadsheet dependency in a local environment:
+From `Project2`, install the read-only spreadsheet dependency in a local environment:
 
 ```sh
 python3 -m venv scripts/.venv-apl
@@ -126,7 +126,7 @@ the source's varying labels and should drive future benefit/category logic.
 The workbook provides no nutrition enrichment, and the current demo benefit
 allowances and healthier-alternative logic need separate implementation work.
 
-Run converter unit tests from `Project3`:
+Run converter unit tests from `Project2`:
 
 ```sh
 scripts/.venv-apl/bin/python -m unittest discover -s scripts -p 'test_*apl*.py'

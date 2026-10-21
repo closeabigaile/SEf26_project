@@ -40,7 +40,7 @@
         <img src="https://raw.githubusercontent.com/closeabigaile/SEf26_project/ci-evidence/docs/ReadMe_Update/javascript.svg"
              alt="JavaScript tests">
     </a>
-    <a href="Project3/LICENSE.md">
+    <a href="Project2/LICENSE.md">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg"
              alt="License: MIT">
     </a>
@@ -65,11 +65,14 @@
     </a>
 </p>
 
-**🎬 [Project 2 teaser — 18 seconds](https://drive.google.com/file/d/10RyryAezlTAS2xHPVQu-Hz02ZHMnLhdU/view?usp=share_link)**
+**🎬 Project 2 teaser — 18 seconds**
 
-[Feature walkthrough — 3 minutes, 26 seconds](Project3/docs/videos/WolfBite%20Walkthrough.mov)
+https://github.com/user-attachments/assets/b2ab8bb9-fdce-4d43-b549-b2f909a34a38
 
-Both videos are available in the repository. If GitHub does not show a player,
+[Feature walkthrough — 3 minutes, 26 seconds](Project2/docs/videos/WolfBite%20Walkthrough.mov)
+
+The [original teaser](Project2/docs/videos/Wolfbite%20Teaser%20Video.mov) and
+walkthrough are also available in the repository. To watch a repository video,
 select **View raw** or **Download raw file** and open the `.mov` file in a video player.
 
 These badges show the latest published CI evidence for **`docs/ReadMe_Update`**.
@@ -109,6 +112,9 @@ Team 7 is extending the previous teams’ Flutter/Firebase application
 for Project 2, including an imported North Carolina WIC Authorized
 Product List (APL) and item-level checkout help.
 
+The application is in `Project2/` (formerly `Project3/`). Historical reports
+and saved test logs retain the folder name used when they were recorded.
+
 ### Key Highlights
 
 - 🔍 **Product Lookup:** Scan or enter a barcode to look up products
@@ -133,12 +139,12 @@ does not guarantee acceptance at the register.
 
 ### Project 2
 
-- [Teaser — 18 seconds](Project3/docs/videos/Wolfbite%20Teaser%20Video.mov)
-- [Feature walkthrough — 3 minutes, 26 seconds](Project3/docs/videos/WolfBite%20Walkthrough.mov)
+- [Teaser — 18 seconds](https://github.com/user-attachments/assets/b2ab8bb9-fdce-4d43-b549-b2f909a34a38)
+- [Feature walkthrough — 3 minutes, 26 seconds](Project2/docs/videos/WolfBite%20Walkthrough.mov)
 
 The walkthrough shows product lookup, alternatives, nutrition details, basket
 quantities, benefits, and QR checkout. See the [User Guide](USER_GUIDE.md) for
-instructions and the [testing record](Project3/docs/TESTING.md) for the scope
+instructions and the [testing record](Project2/docs/TESTING.md) for the scope
 of automated checks and remaining demonstration verification.
 
 ### Previous - Team Demo
@@ -188,7 +194,7 @@ of automated checks and remaining demonstration verification.
   the app does not receive live retailer rejection data.
 
 These descriptions reflect the merged implementation and automated tests.
-See [Testing WolfBite](Project3/docs/TESTING.md) for commit-specific results,
+See [Testing WolfBite](Project2/docs/TESTING.md) for commit-specific results,
 manual checks, and remaining gaps; automated checks are not real-user outcomes.
 
 ### Inherited Features
@@ -220,7 +226,7 @@ Before you begin, ensure you have the following installed:
 - **Code editor (optional):** Android Studio, IntelliJ IDEA or [Visual Studio Code](https://code.visualstudio.com/) recommended.
 
 Firebase client configuration is included in the repository.
-Review [Firebase setup](Project3/FIREBASE_SETUP.md) before running the app.
+Review [Firebase setup](Project2/FIREBASE_SETUP.md) before running the app.
 
 
 ### Installation
@@ -229,7 +235,7 @@ Review [Firebase setup](Project3/FIREBASE_SETUP.md) before running the app.
 
    ```bash
    git clone https://github.com/closeabigaile/SEf26_project.git
-   cd SEf26_project/Project3
+   cd SEf26_project/Project2
    ```
 
    Run the remaining commands from this directory.
@@ -248,7 +254,7 @@ Review [Firebase setup](Project3/FIREBASE_SETUP.md) before running the app.
    Firebase project. An internet connection is required for authentication
    and catalog access.
 
-   See [Firebase setup](Project3/FIREBASE_SETUP.md) for configuration details.
+   See [Firebase setup](Project2/FIREBASE_SETUP.md) for configuration details.
 
 4. **Run the application**
 
@@ -286,8 +292,8 @@ Review [Firebase setup](Project3/FIREBASE_SETUP.md) before running the app.
 
 This table covers packages referenced by the application, tests, or development
 configuration. For all declared dependencies, see
-[pubspec.yaml](Project3/pubspec.yaml). Versions below are the exact versions
-recorded in [pubspec.lock](Project3/pubspec.lock), rather than the allowed
+[pubspec.yaml](Project2/pubspec.yaml). Versions below are the exact versions
+recorded in [pubspec.lock](Project2/pubspec.lock), rather than the allowed
 version ranges. SDK packages are supplied by Flutter; see Prerequisites for
 the configured SDK version. Transitive dependencies are listed in the lockfile.
 
@@ -315,7 +321,7 @@ versions. Refer to the linked package pages for full license text and notices.
 See [Third-Party Libraries](THIRD_PARTY_LIBRARIES.md)
 for the dependency and license inventory, its evidence, and its scope limits.
 
-> **Note:** Run `flutter pub get` from `Project3` to resolve and download
+> **Note:** Run `flutter pub get` from `Project2` to resolve and download
 > dependencies. Flutter SDK packages are supplied by the installed SDK.
 
 
@@ -347,10 +353,10 @@ Python, JavaScript, formatting, analysis, and build checks.
 - [Previous-team documentation](https://suyeshjadhav.github.io/CSC510_G19/) — Historical reference; use the guide above for the current application.
 
 - [Installation Guide](INSTALL.md) — Local setup, launch instructions, and troubleshooting.
-- [Firebase Setup](Project3/FIREBASE_SETUP.md) — Application configuration.
-- [APL Import Guide](Project3/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
-- [Contributing Guidelines](Project3/CONTRIBUTING.md) — Development and contribution process.
-- [Code of Conduct](Project3/CODE_OF_CONDUCT.md) — Community guidelines.
+- [Firebase Setup](Project2/FIREBASE_SETUP.md) — Application configuration.
+- [APL Import Guide](Project2/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
+- [Contributing Guidelines](Project2/CONTRIBUTING.md) — Development and contribution process.
+- [Code of Conduct](Project2/CODE_OF_CONDUCT.md) — Community guidelines.
 - [AI Usage and Human Review](AI_USAGE.md) — Recorded AI assistance and human review status.
 
 ---
@@ -359,7 +365,7 @@ Python, JavaScript, formatting, analysis, and build checks.
 
 We welcome contributions! Our contribution process builds on the
 previous team’s guidelines, updated for Team 7’s Project 2 work.
-See our [Contributing Guidelines](Project3/CONTRIBUTING.md) for details on:
+See our [Contributing Guidelines](Project2/CONTRIBUTING.md) for details on:
 
 - Setting up the development environment
 - Code style and standards
@@ -407,7 +413,7 @@ It also acknowledges Group 1.
 ## 📄 License
 
 This project is licensed under the MIT License.
-See [LICENSE.md](Project3/LICENSE.md), which retains the original
+See [LICENSE.md](Project2/LICENSE.md), which retains the original
 authors’ copyright notice.
 
 ---

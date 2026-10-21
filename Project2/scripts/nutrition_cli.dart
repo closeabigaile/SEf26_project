@@ -5,7 +5,7 @@ import 'package:wolfbite/services/nutrition_recommender.dart';
 
 /// Writes offline meal suggestions as JSON using a CSV catalog and JSON request.
 ///
-/// Run from Project3 with `--catalog file.csv --request request.json`.
+/// Run from Project2 with `--catalog file.csv --request request.json`.
 /// Reads local files and never contacts Firebase. Invalid arguments, malformed
 /// inputs, and file errors are printed to stderr with exit code 1.
 void main(List<String> args) {

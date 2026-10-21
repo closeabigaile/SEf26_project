@@ -4,13 +4,13 @@ name: M4 Checkout Help Verification
 on:
   push:
     paths:
-      - "Project3/**"
+      - "Project2/**"
       - "Project2_Work/M0/**"
       - "Project2_Work/M4/**"
       - ".github/workflows/**"
   pull_request:
     paths:
-      - "Project3/**"
+      - "Project2/**"
       - "Project2_Work/M0/**"
       - "Project2_Work/M4/**"
       - ".github/workflows/**"
@@ -40,7 +40,7 @@ jobs:
               test/m4_review/checkout_help_basket_acceptance_test.dart
     defaults:
       run:
-        working-directory: Project3
+        working-directory: Project2
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: m4-${{ matrix.suite }}-results
-          path: Project3/build/m4-results/*.txt
+          path: Project2/build/m4-results/*.txt
           if-no-files-found: warn
 
   m0-baseline:

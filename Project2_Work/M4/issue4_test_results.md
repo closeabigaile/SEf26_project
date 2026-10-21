@@ -55,12 +55,12 @@ tests passed. Subtotals above must not be added again to the 189-test total.
 | Existing M0 checkout behavior remains intact | The same 38 + 5 + 7 baseline selection used by the M0 workflow passes without modified baseline tests. | Pass |
 | Commands, results, failures, and limitations recorded | This report and linked raw logs. | Pass |
 
-Source tests: [service](../../Project3/test/services/checkout_help_service_test.dart),
-[screen/state](../../Project3/test/screens/checkout_help_screen_test.dart),
-[repository](../../Project3/test/services/checkout_help_repository_test.dart),
-[precision](../../Project3/test/services/checkout_help_precision_test.dart),
-[adversarial](../../Project3/test/m4_review/checkout_help_adversarial_test.dart),
-and [basket acceptance](../../Project3/test/m4_review/checkout_help_basket_acceptance_test.dart).
+Source tests: [service](../../Project2/test/services/checkout_help_service_test.dart),
+[screen/state](../../Project2/test/screens/checkout_help_screen_test.dart),
+[repository](../../Project2/test/services/checkout_help_repository_test.dart),
+[precision](../../Project2/test/services/checkout_help_precision_test.dart),
+[adversarial](../../Project2/test/m4_review/checkout_help_adversarial_test.dart),
+and [basket acceptance](../../Project2/test/m4_review/checkout_help_basket_acceptance_test.dart).
 
 Additional widget checks cover ambiguous/conflicting evidence, repeated openings,
 same-UPC collisions, delayed/failed loading, changed or removed items, changed

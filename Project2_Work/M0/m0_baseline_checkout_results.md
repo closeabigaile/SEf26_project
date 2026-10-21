@@ -29,13 +29,13 @@ The initial sandboxed launch could not write to Flutter's SDK cache and stopped 
 
 | Baseline behavior | Test evidence | Result |
 | --- | --- | --- |
-| QR handoff displays a QR widget | `test_uc19_qr_code_contains_current_basket_data` in [supreme_uc16-20_test.dart](../../Project3/test/project1a/supreme_uc16-20_test.dart); `renders QR code using basket JSON` in [qr_checkout_screen_test.dart](../../Project3/test/screens/qr_checkout_screen_test.dart) | Pass; widget presence only |
+| QR handoff displays a QR widget | `test_uc19_qr_code_contains_current_basket_data` in [supreme_uc16-20_test.dart](../../Project2/test/project1a/supreme_uc16-20_test.dart); `renders QR code using basket JSON` in [qr_checkout_screen_test.dart](../../Project2/test/screens/qr_checkout_screen_test.dart) | Pass; widget presence only |
 | Checkout clears the basket and retains used benefits | `test_uc20_checkout_clears_basket_but_retains_benefit_usage` in the UC16–UC20 file | Pass |
-| Checkout saves an empty basket with retained usage | `checkout saves an empty basket and retains used benefits` in [project1a_coverage_gaps_test.dart](../../Project3/test/active/project1a_coverage_gaps_test.dart) | Pass |
+| Checkout saves an empty basket with retained usage | `checkout saves an empty basket and retains used benefits` in [project1a_coverage_gaps_test.dart](../../Project2/test/active/project1a_coverage_gaps_test.dart) | Pass |
 | A save failure propagates an exception after local basket clearing | `save failure leaves the local basket cleared and reports failure` in the coverage-gap file | Pass; confirms an existing limitation |
-| A new item is refused when allowance is exhausted | `UC8-T2 exhausted allowance -> unchanged basket and usage` in [aditya_uc6-10_test.dart](../../Project3/test/project1a/aditya_uc6-10_test.dart) | Pass |
-| Increasing an existing item at its category cap creates a separate paid line | `test_uc15_increment_at_cap_creates_separate_paid_line` in [satwi_uc11-15_test.dart](../../Project3/test/project1a/satwi_uc11-15_test.dart) | Pass |
-| Basket display, quantity changes, paid-intent tooltip, clearing, and clear cancellation | UC12–UC17 tests, coverage-gap tests, and [basket_screen_test.dart](../../Project3/test/screens/basket_screen_test.dart) | Pass |
+| A new item is refused when allowance is exhausted | `UC8-T2 exhausted allowance -> unchanged basket and usage` in [aditya_uc6-10_test.dart](../../Project2/test/project1a/aditya_uc6-10_test.dart) | Pass |
+| Increasing an existing item at its category cap creates a separate paid line | `test_uc15_increment_at_cap_creates_separate_paid_line` in [satwi_uc11-15_test.dart](../../Project2/test/project1a/satwi_uc11-15_test.dart) | Pass |
+| Basket display, quantity changes, paid-intent tooltip, clearing, and clear cancellation | UC12–UC17 tests, coverage-gap tests, and [basket_screen_test.dart](../../Project2/test/screens/basket_screen_test.dart) | Pass |
 
 Per-file counts: UC16–UC20 **13**, UC11–UC15 **14**, coverage gaps **11**, selected UC8 **5**, inherited QR **1**, inherited basket **6**.
 

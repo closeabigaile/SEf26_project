@@ -128,7 +128,7 @@ To abandon a basket and release its allocations, use **Clear Cart** instead.
 
 | What you see | What to try |
 | --- | --- |
-| Sign-in or catalog error | Check connectivity and the account details. For setup problems, see [Firebase setup](Project3/FIREBASE_SETUP.md). |
+| Sign-in or catalog error | Check connectivity and the account details. For setup problems, see [Firebase setup](Project2/FIREBASE_SETUP.md). |
 | Camera unavailable | Use manual UPC entry, or upload an existing receipt image. Check device/browser camera permissions. |
 | Product not found | Preserve leading zeros, check the full code, and confirm that the product exists in the loaded catalog. |
 | Add disabled or an extra PAID line | Review Benefits and basket quantities; the app may have reached its saved category limit. |
@@ -142,7 +142,7 @@ result through [GitHub Issues](https://github.com/closeabigaile/SEf26_project/is
 ## Verification scope
 
 These instructions were checked against the current screen implementations
-and [automated shopping journeys](Project3/test/e2e/shopping_journeys_e2e_test.dart).
+and [automated shopping journeys](Project2/test/e2e/shopping_journeys_e2e_test.dart).
 Those tests use real widgets and repository product/nutrition fixtures with
 fake Firebase services. They do not establish that a feature works against
 every live catalog or on every device.

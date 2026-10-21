@@ -8,7 +8,7 @@ CI results and four-scenario walkthrough. Real evidence-provider integration
 remains outside the completed synthetic-data scope.
 
 Issue 1 prepared **mock data and expected messages only**. The four records are in
-[checkout_help_scenarios.json](../../Project3/assets/mock/checkout_help_scenarios.json)
+[checkout_help_scenarios.json](../../Project2/assets/mock/checkout_help_scenarios.json)
 and follow the accepted [M0/M4 shared use cases](../M0/m4_checkout_help_use_cases.md).
 The three primary scenario IDs and the additional fallback ID are unchanged.
 
@@ -91,7 +91,7 @@ python3 - <<'PY'
 import json
 from pathlib import Path
 
-path = Path("Project3/assets/mock/checkout_help_scenarios.json")
+path = Path("Project2/assets/mock/checkout_help_scenarios.json")
 dataset = json.loads(path.read_text(encoding="utf-8"))
 case = next(c for c in dataset["scenarios"] if c["scenario_id"] == "M0-M4-01")
 print(json.dumps(case, indent=2))
@@ -104,7 +104,7 @@ the answer from `scenario_id` or return `expected_help` as the implementation.
 The service tests compare the computed result with `expected_help`. Decode a fresh
 copy for each test so mutations cannot affect another case.
 
-For Flutter tests run from `Project3`, the relative file path is
+For Flutter tests run from `Project2`, the relative file path is
 `assets/mock/checkout_help_scenarios.json`. The file is located under assets so
 the basket integration registers it in `pubspec.yaml` and loads it for the
 prepared frontend demonstration. These evidence records are not replacements
@@ -147,8 +147,8 @@ pass, along with the original service tests and new integration checks.
 The earlier review is preserved as a record of the findings before these fixes.
 
 The service portion is implemented in
-[checkout_help_service_test.dart](../../Project3/test/services/checkout_help_service_test.dart).
-Run it from `Project3` with:
+[checkout_help_service_test.dart](../../Project2/test/services/checkout_help_service_test.dart).
+Run it from `Project2` with:
 
 ```bash
 flutter test --no-pub test/services/checkout_help_service_test.dart --concurrency=1 --reporter expanded
@@ -182,7 +182,7 @@ meaning and next step remain consistent with the shared M0/M4 specification.
 The test compares this expected text directly, without rewriting it at runtime.
 
 The original 102 tests cover the service. The added
-[widget and state tests](../../Project3/test/screens/checkout_help_screen_test.dart)
+[widget and state tests](../../Project2/test/screens/checkout_help_screen_test.dart)
 now verify opening and closing help for all four scenarios, selected-item
 identity, unchanged basket and benefit state, and protection against stale or
 mismatched evidence. See the latest report for commands and limitations.

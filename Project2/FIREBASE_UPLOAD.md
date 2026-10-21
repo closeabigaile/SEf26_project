@@ -59,7 +59,7 @@ for subsequent edits. The importer never deletes existing records.
 
 ## Repeat the preview or resume an interrupted upload
 
-Run from `Project3`, using Node and Firebase CLI 15.32.1. This importer uses the
+Run from `Project2`, using Node and Firebase CLI 15.32.1. This importer uses the
 CLI's authentication and REST helpers; its compatibility was tested with that
 version. No credentials are written into this repository. If the temporary CLI
 installation no longer exists, install that version in a tools directory and

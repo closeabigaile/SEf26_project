@@ -4,7 +4,7 @@
 
 Team 7 is extending WolfBite for CSC 510 Project 2 at NC State University,
 building on previous teams' Flutter/Firebase application. The application
-remains in the `Project3` folder; that folder name is inherited.
+is in the `Project2` folder.
 
 Discuss bugs and proposed changes in
 [GitHub Issues](https://github.com/closeabigaile/SEf26_project/issues).
@@ -27,18 +27,18 @@ If you have repository write access, clone the team repository:
 
 ```bash
 git clone https://github.com/closeabigaile/SEf26_project.git
-cd SEf26_project/Project3
+cd SEf26_project/Project2
 flutter pub get
 ```
 
 If you do not have write access, fork the repository on GitHub and clone your
-fork instead. Its application folder is also `Project3`.
+fork instead. Its application folder is also `Project2`.
 
 Firebase client configuration is included. Read [Firebase Setup](FIREBASE_SETUP.md)
 before changing it. Authentication and catalog access require an internet
 connection. Do not commit passwords, administrative credentials, or login tokens.
 
-From `Project3`, launch the web application:
+From `Project2`, launch the web application:
 
 ```bash
 flutter run -d chrome
@@ -124,7 +124,7 @@ has been configured to enforce them.
 
 ## 8. Testing and Checks
 
-Run these commands from `Project3` after `flutter pub get`:
+Run these commands from `Project2` after `flutter pub get`:
 
 ```bash
 # Check formatting without changing files
@@ -148,7 +148,7 @@ The [Flutter CI workflow](../.github/workflows/flutter-ci.yml) also defines Pyth
 and JavaScript checks. Use Python **3.12** and Node.js **22** to match CI.
 For Python setup, use the local environment instructions in the
 [APL conversion guide](scripts/APL_CONVERSION.md). With that environment active,
-run the following from `Project3` when changing the corresponding tools.
+run the following from `Project2` when changing the corresponding tools.
 If using the guide's macOS/Linux environment without activating it, replace
 `python` below with `scripts/.venv-apl/bin/python`.
 

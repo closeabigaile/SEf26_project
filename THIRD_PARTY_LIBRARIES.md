@@ -5,7 +5,7 @@ dependency additions and classifications updated on **2026-10-19**.
 
 ## Scope and evidence
 
-This inventory lists all **122 packages in [pubspec.lock](Project3/pubspec.lock)**:
+This inventory lists all **122 packages in [pubspec.lock](Project2/pubspec.lock)**:
 15 direct application dependencies, 8 direct development dependencies, and
 99 transitive dependencies. Seven of the 122 are supplied by the Flutter SDK.
 It also records the Python dependencies, Firebase tooling, Node packages imported
@@ -17,8 +17,8 @@ not mean every package is imported directly or used in every build. In particula
 `google_mlkit_text_recognition` remain declared dependencies even though the
 README's shorter table omits them.
 
-- **Dart versions and categories:** [pubspec.yaml](Project3/pubspec.yaml) and
-  [pubspec.lock](Project3/pubspec.lock).
+- **Dart versions and categories:** [pubspec.yaml](Project2/pubspec.yaml) and
+  [pubspec.lock](Project2/pubspec.lock).
 - **Hosted Dart licenses:** the original inventory used `LICENSE` files from
   matching package versions in the local Pub cache; `archive` also includes
   `LICENSE-other.md`. The additions use the published license pages for
@@ -41,7 +41,7 @@ the external tooling are distributed; do not infer them from a Dart wrapper's li
 
 ## Direct application dependencies
 
-Declared under `dependencies` in `Project3/pubspec.yaml`.
+Declared under `dependencies` in `Project2/pubspec.yaml`.
 
 | Package | Locked version / SDK | License summary | License source |
 | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ Declared under `dependencies` in `Project3/pubspec.yaml`.
 
 ## Direct development and test dependencies
 
-Declared under `dev_dependencies` in `Project3/pubspec.yaml`.
+Declared under `dev_dependencies` in `Project2/pubspec.yaml`.
 
 | Package | Locked version / SDK | License summary | License source |
 | --- | --- | --- | --- |
@@ -76,9 +76,9 @@ Declared under `dev_dependencies` in `Project3/pubspec.yaml`.
 | `integration_test` | Flutter SDK 3.47.2 | BSD-3-Clause | [License](https://github.com/flutter/flutter/blob/d3b14c876900e553bc736ca19295fc09e3853e8e/LICENSE) |
 | `mockito` | 5.6.4 | Apache-2.0 | [License](https://pub.dev/packages/mockito/versions/5.6.4/license) |
 
-Usage evidence: [device journeys](Project3/integration_test/journeys_device_test.dart)
+Usage evidence: [device journeys](Project2/integration_test/journeys_device_test.dart)
 imports `integration_test`. The
-[UC6–10 tests](Project3/test/project1a/aditya_uc6-10_test.dart) import
+[UC6–10 tests](Project2/test/project1a/aditya_uc6-10_test.dart) import
 `firebase_core_platform_interface` and `image_picker_platform_interface`;
 both are now classified as direct development dependencies in the lockfile.
 
@@ -212,8 +212,8 @@ A package's main license does not replace notices for code bundled inside it:
 
 ## Python catalog tooling
 
-[requirements-apl.txt](Project3/scripts/requirements-apl.txt) pins `openpyxl`.
-[convert_nc_apl.py](Project3/scripts/convert_nc_apl.py) imports it, and the
+[requirements-apl.txt](Project2/scripts/requirements-apl.txt) pins `openpyxl`.
+[convert_nc_apl.py](Project2/scripts/convert_nc_apl.py) imports it, and the
 [CI workflow](.github/workflows/flutter-ci.yml) installs the requirements file.
 The installed `openpyxl` 3.1.5 distribution metadata declares `et_xmlfile` as
 its dependency. Its local license files and those of `et_xmlfile` were inspected.
@@ -234,8 +234,8 @@ third-party package declarations.
 | --- | --- | --- | --- | --- |
 | `firebase-tools` | 15.32.1, documented as tested in the import guide; externally installed | Authentication and REST helpers loaded by the APL importer | MIT | [Published version metadata](https://registry.npmjs.org/firebase-tools/15.32.1) |
 
-Evidence: [import.js](Project3/scripts/import.js) loads Firebase CLI helpers, and
-[FIREBASE_UPLOAD.md](Project3/FIREBASE_UPLOAD.md) documents the tested version.
+Evidence: [import.js](Project2/scripts/import.js) loads Firebase CLI helpers, and
+[FIREBASE_UPLOAD.md](Project2/FIREBASE_UPLOAD.md) documents the tested version.
 This CLI is not a Flutter application package. Its external npm installation
 has no committed lockfile here, so its transitive package versions are not asserted.
 Node's `node:*` imports are built-in modules, not separate npm dependencies.
@@ -243,8 +243,8 @@ Node's `node:*` imports are built-in modules, not separate npm dependencies.
 ## Node catalog-seeding dependency
 
 The table below records a package both declared in
-[scripts/package.json](Project3/scripts/package.json) and imported by
-[seed_m2.js](Project3/scripts/seed_m2.js).
+[scripts/package.json](Project2/scripts/package.json) and imported by
+[seed_m2.js](Project2/scripts/seed_m2.js).
 
 | Package | Version evidence | Purpose | License | Source |
 | --- | --- | --- | --- | --- |
@@ -263,12 +263,12 @@ not establish that a native build was run or that a feature is exercised.
 
 | Dependency / tool | Declared version | License summary | Evidence / license source |
 | --- | --- | --- | --- |
-| Firebase Android BoM (`com.google.firebase:firebase-bom`) | 34.4.0 | Apache-2.0 | [Application declaration](Project3/android/app/build.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-bom/34.4.0/firebase-bom-34.4.0.pom) |
-| Firebase Analytics (`com.google.firebase:firebase-analytics`) | No explicit version; BoM 34.4.0 specifies 23.0.0 | Android Software Development Kit License, as stated in its POM | [Application declaration](Project3/android/app/build.gradle.kts); [23.0.0 POM](https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-analytics/23.0.0/firebase-analytics-23.0.0.pom) |
-| Android Gradle Plugin (`com.android.application`) | 8.9.1 | Apache-2.0 | [Plugin declaration](Project3/android/settings.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.9.1/gradle-8.9.1.pom) |
-| Google Services Gradle plugin (`com.google.gms.google-services`) | 4.3.15 | Apache-2.0 | [Plugin declaration](Project3/android/settings.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/google/gms/google-services/4.3.15/google-services-4.3.15.pom) |
-| Kotlin Android plugin (`org.jetbrains.kotlin.android`) | 2.1.0 | Apache-2.0; upstream includes third-party notices | [Plugin declaration](Project3/android/settings.gradle.kts); [Kotlin license](https://github.com/JetBrains/kotlin/blob/v2.1.0/license/LICENSE.txt); [notices](https://github.com/JetBrains/kotlin/blob/v2.1.0/license/README.md) |
-| Gradle wrapper distribution | 8.12 | Apache-2.0; distribution includes additional notices | [Wrapper configuration](Project3/android/gradle/wrapper/gradle-wrapper.properties); [license and notices](https://github.com/gradle/gradle/blob/v8.12.0/LICENSE) |
+| Firebase Android BoM (`com.google.firebase:firebase-bom`) | 34.4.0 | Apache-2.0 | [Application declaration](Project2/android/app/build.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-bom/34.4.0/firebase-bom-34.4.0.pom) |
+| Firebase Analytics (`com.google.firebase:firebase-analytics`) | No explicit version; BoM 34.4.0 specifies 23.0.0 | Android Software Development Kit License, as stated in its POM | [Application declaration](Project2/android/app/build.gradle.kts); [23.0.0 POM](https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-analytics/23.0.0/firebase-analytics-23.0.0.pom) |
+| Android Gradle Plugin (`com.android.application`) | 8.9.1 | Apache-2.0 | [Plugin declaration](Project2/android/settings.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.9.1/gradle-8.9.1.pom) |
+| Google Services Gradle plugin (`com.google.gms.google-services`) | 4.3.15 | Apache-2.0 | [Plugin declaration](Project2/android/settings.gradle.kts); [published POM](https://dl.google.com/dl/android/maven2/com/google/gms/google-services/4.3.15/google-services-4.3.15.pom) |
+| Kotlin Android plugin (`org.jetbrains.kotlin.android`) | 2.1.0 | Apache-2.0; upstream includes third-party notices | [Plugin declaration](Project2/android/settings.gradle.kts); [Kotlin license](https://github.com/JetBrains/kotlin/blob/v2.1.0/license/LICENSE.txt); [notices](https://github.com/JetBrains/kotlin/blob/v2.1.0/license/README.md) |
+| Gradle wrapper distribution | 8.12 | Apache-2.0; distribution includes additional notices | [Wrapper configuration](Project2/android/gradle/wrapper/gradle-wrapper.properties); [license and notices](https://github.com/gradle/gradle/blob/v8.12.0/LICENSE) |
 
 The Firebase BoM specifies compatible versions; it is not itself an Analytics
 implementation. The 23.0.0 entry above comes from that BoM, not an observed
@@ -279,12 +279,12 @@ no exact CocoaPods resolution is claimed here.
 ## Keeping this inventory current
 
 When dependencies change, compare this document with `pubspec.yaml`,
-`pubspec.lock`, the Python requirements, `Project3/scripts/package.json`, script
+`pubspec.lock`, the Python requirements, `Project2/scripts/package.json`, script
 imports, and the native/tooling declarations.
 Update versions and verify the corresponding license files, including bundled
 notices. Remove entries only when the underlying dependency is removed from
 the project's declarations/resolution. Recheck unpinned dependencies against
 the environment used for the submission.
 
-The application's own license is in [Project3/LICENSE.md](Project3/LICENSE.md).
+The application's own license is in [Project2/LICENSE.md](Project2/LICENSE.md).
 This inventory summarizes dependency licenses and links to their evidence.

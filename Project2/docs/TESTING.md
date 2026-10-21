@@ -1,6 +1,6 @@
 # Testing WolfBite
 
-All commands run from `Project3/`. Flutter: `flutter`, or the repo-local SDK.
+All commands run from `Project2/`. Flutter: `flutter`, or the repo-local SDK.
 
 ## Test layers
 

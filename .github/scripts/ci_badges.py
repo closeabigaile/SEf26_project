@@ -164,7 +164,7 @@ def generate(input_dir, output_dir, env):
             f'Generated: {metadata["generated"]}', "", "| Check | Result |", "| --- | --- |"]
     body += [f"| {label} | {message} |" for label, message, _ in badges.values()]
     body += ["", "Style and syntax badges both report the same strict `flutter analyze` run,",
-             "configured by `Project3/analysis_options.yaml`. They are not independent checks.",
+             "configured by `Project2/analysis_options.yaml`. They are not independent checks.",
              "Python checks include M0/APL tests, badge-report tests, and Firebase configuration validation.",
              "The Firebase badge reports local configuration consistency, not live database access.",
              "", "The test count covers visible Flutter tests; hidden successful loading/setup events",

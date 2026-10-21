@@ -27,7 +27,7 @@ class CheckoutHelpResult {
 /// and creates a result. It never changes records, balances, or basket items.
 ///
 /// References, from the repository root:
-/// - Project3/assets/mock/checkout_help_scenarios.json
+/// - Project2/assets/mock/checkout_help_scenarios.json
 /// - Project2_Work/M0/m4_checkout_help_use_cases.md
 /// - Project2_Work/M4/README.md
 ///

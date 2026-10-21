@@ -4,12 +4,12 @@ name: M0 Checkout Baseline
 on:
   push:
     paths:
-      - "Project3/**"
+      - "Project2/**"
       - "Project2_Work/M0/**"
       - ".github/workflows/m0-checkout-baseline.yml"
   pull_request:
     paths:
-      - "Project3/**"
+      - "Project2/**"
       - "Project2_Work/M0/**"
       - ".github/workflows/m0-checkout-baseline.yml"
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Project3
+        working-directory: Project2
 
     steps:
       - name: Check out repository
@@ -73,5 +73,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: m0-checkout-baseline-results
-          path: Project3/build/m0-baseline-results/*.txt
+          path: Project2/build/m0-baseline-results/*.txt
           if-no-files-found: warn

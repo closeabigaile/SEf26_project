@@ -31,7 +31,7 @@ clinical plans, WIC-approved products, or a validation of the full app.
   FNDDS food codes are not UPCs, and this flag does not establish WIC
   eligibility. `FDC...` is a test identifier derived from the USDA FDC ID.
 
-Run from `Project3`:
+Run from `Project2`:
 
 ```powershell
 python scripts/review_nutrition_profiles.py --dart path/to/dart

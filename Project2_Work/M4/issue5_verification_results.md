@@ -60,7 +60,7 @@ in GitHub CI. All four groups run on the caller's commit.
 
 ## Feature walkthrough
 
-The committed [walkthrough entry point](../../Project3/tool/m4_scenario_walkthrough.dart)
+The committed [walkthrough entry point](../../Project2/tool/m4_scenario_walkthrough.dart)
 was launched from the same clean copy as the local tests. It initializes
 explicit synthetic fixtures and local fake-Firestore state, then opens the
 production `BasketScreen`. No service or dialog is replaced with a fake answer.
@@ -96,7 +96,7 @@ benefit allowance nor usage changed. Instrumented methods retain the real
 AppState behavior and counted no checkout, reload, or clear calls.
 
 The browser comparison covers the complete walkthrough. Separately, the
-[screen/state tests](../../Project3/test/screens/checkout_help_screen_test.dart)
+[screen/state tests](../../Project2/test/screens/checkout_help_screen_test.dart)
 verify those properties **for each scenario**, both while help is open and after
 closing. They also compare saved fake-Firestore data and deliberately set its
 timestamp to a previous month after loading: an accidental reload would execute

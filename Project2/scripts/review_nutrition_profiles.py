@@ -1,7 +1,7 @@
 """Run five offline test profiles and check nutritional plausibility gates.
 
 These scenario gates are test assumptions, not clinical target recommendations.
-Run from Project3: python scripts/review_nutrition_profiles.py --dart path/to/dart
+Run from Project2: python scripts/review_nutrition_profiles.py --dart path/to/dart
 """
 
 import argparse

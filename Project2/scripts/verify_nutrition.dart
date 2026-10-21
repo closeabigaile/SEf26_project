@@ -9,7 +9,7 @@ void check(bool condition, String message) {
 
 /// Checks the synthetic nutrition CSV fixture and selected recommendation gates.
 ///
-/// Run from Project3. Reads local fixtures, uses fixed example dates/targets,
+/// Run from Project2. Reads local fixtures, uses fixed example dates/targets,
 /// and prints a success message or throws on a failed check. No Firebase access
 /// or participant evaluation occurs.
 void main() {

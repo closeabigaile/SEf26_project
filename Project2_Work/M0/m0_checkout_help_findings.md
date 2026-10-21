@@ -22,11 +22,11 @@ Application code lives in `Project3`. The following findings explain why checkou
 
 | Area | Current behavior | What M4 adds |
 | --- | --- | --- |
-| Product lookup | [ScanScreen._checkEligibility](../../Project3/lib/screens/scan_screen.dart) looks up a UPC through [AplService.findByUpc](../../Project3/lib/services/apl_service.dart). An unknown code produces a not-found message. Manual entry is available at widths of at least 600 pixels; narrower layouts use the camera. | Help for a selected basket item using mock product and benefit evidence. A missing APL record alone is not an official rejection or proof of ineligibility. |
-| Category balance | [AppState.canAdd and addItem](../../Project3/lib/state/app_state.dart) check allowed/used item counts. The scan page blocks a new addition when the category is full. Increasing an existing item can create a `PAID` line. | An explanation of the amount required versus the amount available for the affected item's original benefit category. |
-| Basket | [BasketScreen](../../Project3/lib/screens/basket_screen.dart) shows items, quantities, categories, and a “Will add as paid” tooltip at the limit. No checkout-help action exists. | An item-level help action with a possible cause, suggested next step, and return to the unchanged basket. |
-| Checkout | [QRCheckoutScreen](../../Project3/lib/screens/qr_checkout_screen.dart) displays basket data as a QR code. “Finish Transaction” calls `AppState.checkout`, which clears the basket and retains usage. No official rejection response is received. | A separate help interaction that does not finish checkout or clear the basket. |
-| Size and freshness evidence | [normalizeRecord](../../Project3/scripts/import.js) imports product identity/category, assumed eligibility, and an import timestamp. Basket records do not retain structured size restrictions. User-state timestamps in `AppState` support monthly resets, not source freshness checks. | Explicit mock package-size rules and freshness statuses. Neither an eligibility badge nor a write/import timestamp proves checkout acceptance or current source information. |
+| Product lookup | [ScanScreen._checkEligibility](../../Project2/lib/screens/scan_screen.dart) looks up a UPC through [AplService.findByUpc](../../Project2/lib/services/apl_service.dart). An unknown code produces a not-found message. Manual entry is available at widths of at least 600 pixels; narrower layouts use the camera. | Help for a selected basket item using mock product and benefit evidence. A missing APL record alone is not an official rejection or proof of ineligibility. |
+| Category balance | [AppState.canAdd and addItem](../../Project2/lib/state/app_state.dart) check allowed/used item counts. The scan page blocks a new addition when the category is full. Increasing an existing item can create a `PAID` line. | An explanation of the amount required versus the amount available for the affected item's original benefit category. |
+| Basket | [BasketScreen](../../Project2/lib/screens/basket_screen.dart) shows items, quantities, categories, and a “Will add as paid” tooltip at the limit. No checkout-help action exists. | An item-level help action with a possible cause, suggested next step, and return to the unchanged basket. |
+| Checkout | [QRCheckoutScreen](../../Project2/lib/screens/qr_checkout_screen.dart) displays basket data as a QR code. “Finish Transaction” calls `AppState.checkout`, which clears the basket and retains usage. No official rejection response is received. | A separate help interaction that does not finish checkout or clear the basket. |
+| Size and freshness evidence | [normalizeRecord](../../Project2/scripts/import.js) imports product identity/category, assumed eligibility, and an import timestamp. Basket records do not retain structured size restrictions. User-state timestamps in `AppState` support monthly resets, not source freshness checks. | Explicit mock package-size rules and freshness statuses. Neither an eligibility badge nor a write/import timestamp proves checkout acceptance or current source information. |
 
 ## 3. Shared M0/M4 Scenarios
 
@@ -129,10 +129,10 @@ M0 will compare the existing flow with the M4 help flow using the same scenarios
 
 Relevant baseline checks include:
 
-* [aditya_uc6-10_test.dart](../../Project3/test/project1a/aditya_uc6-10_test.dart): UC8-T2 checks refusal of a new item when allowance is exhausted.
-* [satwi_uc11-15_test.dart](../../Project3/test/project1a/satwi_uc11-15_test.dart): UC12–UC15 cover basket display, quantity controls, and paid overflow.
-* [supreme_uc16-20_test.dart](../../Project3/test/project1a/supreme_uc16-20_test.dart): UC20 checks basket clearing with retained usage.
-* [project1a_coverage_gaps_test.dart](../../Project3/test/active/project1a_coverage_gaps_test.dart): checkout tests check saved state and persistence failure behavior.
+* [aditya_uc6-10_test.dart](../../Project2/test/project1a/aditya_uc6-10_test.dart): UC8-T2 checks refusal of a new item when allowance is exhausted.
+* [satwi_uc11-15_test.dart](../../Project2/test/project1a/satwi_uc11-15_test.dart): UC12–UC15 cover basket display, quantity controls, and paid overflow.
+* [supreme_uc16-20_test.dart](../../Project2/test/project1a/supreme_uc16-20_test.dart): UC20 checks basket clearing with retained usage.
+* [project1a_coverage_gaps_test.dart](../../Project2/test/active/project1a_coverage_gaps_test.dart): checkout tests check saved state and persistence failure behavior.
 
 The [M0 baseline workflow](../../.github/workflows/m0-checkout-baseline.yml) now runs the selected checkout tests from `Project3`. The legacy [full-application workflow](../../.github/workflows/flutter-ci.yml) still points at `Project2` and targets `main`; that separate workflow needs review. M4 feature checks remain future work.
 

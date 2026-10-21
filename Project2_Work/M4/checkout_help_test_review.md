@@ -45,17 +45,17 @@ clear-cart actions. The fixtures are loaded directly by tests, not by the app.
 
 | Responsibility | Files inspected | What exists now |
 | --- | --- | --- |
-| Logic and result model | [checkout_help_service.dart](../../Project3/lib/services/checkout_help_service.dart) | Both `CheckoutHelpService` and `CheckoutHelpResult` are in this file. There is no separate typed input model. Inputs are maps. |
-| Prepared data and expected outputs | [checkout_help_scenarios.json](../../Project3/assets/mock/checkout_help_scenarios.json) | Three causes and the fallback; synthetic evidence only. |
-| Basket frontend | [basket_screen.dart](../../Project3/lib/screens/basket_screen.dart) | Real basket widget; no help button, dialog, or service call. |
-| Basket/balance storage | [app_state.dart](../../Project3/lib/state/app_state.dart) | Basket maps, allocations through category usage, persistence, checkout, and monthly reset. No checkout-help adapter. |
-| Adjacent checkout UI | [qr_checkout_screen.dart](../../Project3/lib/screens/qr_checkout_screen.dart) | QR display and Finish Transaction; this is not the help view. |
-| Routing and shared state | [app_router.dart](../../Project3/lib/app_router.dart), [main.dart](../../Project3/lib/main.dart) | Basket route and Provider wiring; no help route or service wiring. A future help dialog would not necessarily need its own route. |
-| Product lookup/alternatives | [apl_service.dart](../../Project3/lib/services/apl_service.dart), [scan_screen.dart](../../Project3/lib/screens/scan_screen.dart) | Catalog and healthier alternatives; no checkout-help evidence adapter. |
-| Assets/dependencies | [pubspec.yaml](../../Project3/pubspec.yaml) | Mock checkout-help JSON is not registered as an app asset. |
-| Existing M4 unit tests | [checkout_help_service_test.dart](../../Project3/test/services/checkout_help_service_test.dart) | 102 tests; no existing M4 widget tests. |
-| Existing M0 team baseline tests | [supreme_uc16-20_test.dart](../../Project3/test/project1a/supreme_uc16-20_test.dart), [satwi_uc11-15_test.dart](../../Project3/test/project1a/satwi_uc11-15_test.dart), [project1a_coverage_gaps_test.dart](../../Project3/test/active/project1a_coverage_gaps_test.dart), selected UC8 tests in [aditya_uc6-10_test.dart](../../Project3/test/project1a/aditya_uc6-10_test.dart) | 38 team tests plus 5 selected allowance tests. |
-| Existing basket/QR widget baseline | [basket_screen_test.dart](../../Project3/test/screens/basket_screen_test.dart), [qr_checkout_screen_test.dart](../../Project3/test/screens/qr_checkout_screen_test.dart) | 7 tests for existing controls/rendering; not help interactions. |
+| Logic and result model | [checkout_help_service.dart](../../Project2/lib/services/checkout_help_service.dart) | Both `CheckoutHelpService` and `CheckoutHelpResult` are in this file. There is no separate typed input model. Inputs are maps. |
+| Prepared data and expected outputs | [checkout_help_scenarios.json](../../Project2/assets/mock/checkout_help_scenarios.json) | Three causes and the fallback; synthetic evidence only. |
+| Basket frontend | [basket_screen.dart](../../Project2/lib/screens/basket_screen.dart) | Real basket widget; no help button, dialog, or service call. |
+| Basket/balance storage | [app_state.dart](../../Project2/lib/state/app_state.dart) | Basket maps, allocations through category usage, persistence, checkout, and monthly reset. No checkout-help adapter. |
+| Adjacent checkout UI | [qr_checkout_screen.dart](../../Project2/lib/screens/qr_checkout_screen.dart) | QR display and Finish Transaction; this is not the help view. |
+| Routing and shared state | [app_router.dart](../../Project2/lib/app_router.dart), [main.dart](../../Project2/lib/main.dart) | Basket route and Provider wiring; no help route or service wiring. A future help dialog would not necessarily need its own route. |
+| Product lookup/alternatives | [apl_service.dart](../../Project2/lib/services/apl_service.dart), [scan_screen.dart](../../Project2/lib/screens/scan_screen.dart) | Catalog and healthier alternatives; no checkout-help evidence adapter. |
+| Assets/dependencies | [pubspec.yaml](../../Project2/pubspec.yaml) | Mock checkout-help JSON is not registered as an app asset. |
+| Existing M4 unit tests | [checkout_help_service_test.dart](../../Project2/test/services/checkout_help_service_test.dart) | 102 tests; no existing M4 widget tests. |
+| Existing M0 team baseline tests | [supreme_uc16-20_test.dart](../../Project2/test/project1a/supreme_uc16-20_test.dart), [satwi_uc11-15_test.dart](../../Project2/test/project1a/satwi_uc11-15_test.dart), [project1a_coverage_gaps_test.dart](../../Project2/test/active/project1a_coverage_gaps_test.dart), selected UC8 tests in [aditya_uc6-10_test.dart](../../Project2/test/project1a/aditya_uc6-10_test.dart) | 38 team tests plus 5 selected allowance tests. |
+| Existing basket/QR widget baseline | [basket_screen_test.dart](../../Project2/test/screens/basket_screen_test.dart), [qr_checkout_screen_test.dart](../../Project2/test/screens/qr_checkout_screen_test.dart) | 7 tests for existing controls/rendering; not help interactions. |
 | Shared requirements | [m4_checkout_help_use_cases.md](../M0/m4_checkout_help_use_cases.md), [m0_checkout_help_findings.md](../M0/m0_checkout_help_findings.md) | Scenarios, uncertainty, original-category requirement, and unchanged-state acceptance criteria. |
 | M0 regression selection | [m0_baseline_checkout_results.md](../M0/m0_baseline_checkout_results.md) | Exact 50-test selection and its limitations. |
 | M0 scoring code and tests | [evaluate_checkout_trials.py](../M0/evaluate_checkout_trials.py), [test_evaluate_checkout_trials.py](../M0/test_evaluate_checkout_trials.py) | Separate evaluation calculator and 13 tests. These do not call the M4 service. |
@@ -181,8 +181,8 @@ behavior were left intact. Each new test has one purpose:
 | A08 | Several permitted-size records are supplied; prevents choosing the first and recommending a swap when that input shape is unsupported. | Pass |
 | A09 | Real basket with two items; looks for the help action within the intended item's card, rather than accepting a global or other-item control. | **Fail: action absent** |
 
-Sources: [A01–A08 service tests](../../Project3/test/m4_review/checkout_help_adversarial_test.dart)
-and [A09 basket acceptance test](../../Project3/test/m4_review/checkout_help_basket_acceptance_test.dart).
+Sources: [A01–A08 service tests](../../Project2/test/m4_review/checkout_help_adversarial_test.dart)
+and [A09 basket acceptance test](../../Project2/test/m4_review/checkout_help_basket_acceptance_test.dart).
 No additional integration harness was invented: with the basket connection
 absent, such a harness would test assumptions about future production code.
 

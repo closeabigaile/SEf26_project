@@ -4,7 +4,7 @@ Project 1a requires the team-designed tests to be run and reported separately
 from the tests inherited with WolfBite. The current team suite contains the
 four assigned use-case files plus the post-curation coverage-gap file.
 
-From `Project3`, run only the 86 team-designed Project 1a tests with:
+From `Project2`, run only the 86 team-designed Project 1a tests with:
 
 ```text
 flutter test test/project1a test/active/project1a_coverage_gaps_test.dart --concurrency=1 --coverage --reporter expanded

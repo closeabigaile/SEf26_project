@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wolfbite/services/checkout_help_service.dart';
 
 /// Read a fresh copy each time so one test cannot change another test's data.
-/// Run this suite from Project3; no Firebase connection or app asset loader
+/// Run this suite from Project2; no Firebase connection or app asset loader
 /// is needed for these service tests.
 Map<String, dynamic> _readCase(String id) {
   final dataset =

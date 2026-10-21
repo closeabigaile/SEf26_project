@@ -68,7 +68,7 @@ as pending until a reviewer records what they checked and any corrections.
   `flutter analyze --no-pub --fatal-infos --fatal-warnings` and the Firebase
   configuration check passed. The 377-test Flutter reporting result above
   remains the application-suite check; application code was unchanged.
-- **Human review:** Pending review of these follow-up changes.
+- **Human review:** Abagail Close
 
 ## Fresh-clone installation evidence - October 19, 2026
 
@@ -95,9 +95,9 @@ as pending until a reviewer records what they checked and any corrections.
 
 - **Contributor:** Abigail Close.
 - **AI tool:** OpenAI Codex.
-- **Files:** Documentation comments in `Project3/lib`,
-  `Project3/scripts/nutrition_cli.dart`, `Project3/scripts/verify_nutrition.dart`,
-  `Project3/tool/m4_scenario_walkthrough.dart`, and this disclosure.
+- **Files:** Documentation comments in `Project2/lib`,
+  `Project2/scripts/nutrition_cli.dart`, `Project2/scripts/verify_nutrition.dart`,
+  `Project2/tool/m4_scenario_walkthrough.dart`, and this disclosure.
 - **Task:** Use AI to help document what WolfBite's classes, functions, and
   components do so another team can understand and maintain the project.
 - **AI assistance:** Inspected the implementation, added Dart documentation
@@ -121,7 +121,7 @@ as pending until a reviewer records what they checked and any corrections.
 - **Task:** Add only dependencies supported by repository evidence, preserve
   existing entries, and update counts and wording as needed.
 - **AI assistance:** Added seven Dart/Flutter packages confirmed in the lockfile
-  and `firebase-admin`, imported by `Project3/scripts/seed_m2.js`. Reclassified two
+  and `firebase-admin`, imported by `Project2/scripts/seed_m2.js`. Reclassified two
   existing packages as direct development dependencies and verified the added
   license summaries using SDK/cache license files and published package sources.
   Left `csv-parser` out because no usage was found in tracked code.
@@ -136,15 +136,15 @@ as pending until a reviewer records what they checked and any corrections.
 - **Contributor:** Aditya Mahajan.
 - **AI tool:** Claude Code (Claude Opus 5.5). Each assisted commit carries a
   `Co-Authored-By: Claude Opus 5.5` trailer.
-- **Files:** `Project3/lib/services/basket_balance_service.dart`,
-  `Project3/lib/widgets/basket_balance_sheet.dart`,
-  `Project3/lib/state/app_state.dart`, `Project3/lib/services/apl_service.dart`,
-  `Project3/lib/utils/wic_categories.dart`, nutrition scripts in
-  `Project3/scripts/` (`enrich_nutrition_off.cjs`, `seed_nutrition.cjs`,
-  `coverage_summary.cjs`), `Project3/firestore.rules`, tests in
-  `Project3/test/e2e/` and `Project3/integration_test/`, the
-  [nutrition recommendation rules](Project3/docs/nutrition_recommendation_rules.md),
-  and [Testing WolfBite](Project3/docs/TESTING.md).
+- **Files:** `Project2/lib/services/basket_balance_service.dart`,
+  `Project2/lib/widgets/basket_balance_sheet.dart`,
+  `Project2/lib/state/app_state.dart`, `Project2/lib/services/apl_service.dart`,
+  `Project2/lib/utils/wic_categories.dart`, nutrition scripts in
+  `Project2/scripts/` (`enrich_nutrition_off.cjs`, `seed_nutrition.cjs`,
+  `coverage_summary.cjs`), `Project2/firestore.rules`, tests in
+  `Project2/test/e2e/` and `Project2/integration_test/`, the
+  [nutrition recommendation rules](Project2/docs/nutrition_recommendation_rules.md),
+  and [Testing WolfBite](Project2/docs/TESTING.md).
 - **Task:** Turn the September 27 M2 prototype into an integrated feature:
   basket-level nutrition balance with shopper-confirmed swap previews, backed
   by real nutrition data, plus end-to-end tests across M0-M4.
@@ -189,8 +189,8 @@ as pending until a reviewer records what they checked and any corrections.
 
 | Date | Report / conclusion | Supporting output |
 | --- | --- | --- |
-| September 27 - October 17, 2026 | [Nutrition recommendation rules](Project3/docs/nutrition_recommendation_rules.md) and [nutrition profile review](Project3/docs/nutrition_profile_review.md) | [M2 service tests](Project3/test/services/basket_balance_service_test.dart), [M2 state tests](Project3/test/state/app_state_m2_test.dart), [scan-to-swap tests](Project3/test/e2e/m2_scan_to_swap_test.dart) |
-| October 17-20, 2026 | [Testing WolfBite](Project3/docs/TESTING.md): test layers, commands, CI results, and known gaps | [Shopper journeys](Project3/test/e2e/shopping_journeys_e2e_test.dart), [cross-milestone tests](Project3/test/e2e/milestones_e2e_test.dart), [M2 visual flow](Project3/integration_test/m2_flow_visual_test.dart) |
+| September 27 - October 17, 2026 | [Nutrition recommendation rules](Project2/docs/nutrition_recommendation_rules.md) and [nutrition profile review](Project2/docs/nutrition_profile_review.md) | [M2 service tests](Project2/test/services/basket_balance_service_test.dart), [M2 state tests](Project2/test/state/app_state_m2_test.dart), [scan-to-swap tests](Project2/test/e2e/m2_scan_to_swap_test.dart) |
+| October 17-20, 2026 | [Testing WolfBite](Project2/docs/TESTING.md): test layers, commands, CI results, and known gaps | [Shopper journeys](Project2/test/e2e/shopping_journeys_e2e_test.dart), [cross-milestone tests](Project2/test/e2e/milestones_e2e_test.dart), [M2 visual flow](Project2/integration_test/m2_flow_visual_test.dart) |
 
 ## M0 checkout-help baseline and evaluation - September 19-29, 2026
 

@@ -27,7 +27,7 @@ These results do not describe a clean checkout or a GitHub Actions run.
 
 ## Service Coverage
 
-The [service suite](../../Project3/test/services/checkout_help_service_test.dart)
+The [service suite](../../Project2/test/services/checkout_help_service_test.dart)
 uses fresh Issue 1 records for each test. All four shared scenarios compare the
 complete possible-cause label, explanation, and suggested next step against
 `expected_help`. The approved general package-size wording is stored directly

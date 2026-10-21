@@ -146,7 +146,7 @@ and personal targets need their own provenance.
 
 ## Current implementation and use
 
-Run the local example from `Project3`:
+Run the local example from `Project2`:
 
 ```powershell
 dart scripts/nutrition_cli.dart --catalog test/fixtures/nutrition_catalog.csv --request test/fixtures/nutrition_request.json
