@@ -65,6 +65,12 @@
     </a>
 </p>
 
+**🎬 [Project 2 teaser — 18 seconds](Project3/docs/videos/Wolfbite%20Teaser%20Video.mov)**
+
+[Feature walkthrough — 3 minutes, 26 seconds](Project3/docs/videos/WolfBite%20Walkthrough.mov)
+
+Both videos are available in the repository. If GitHub does not show a player,
+select **View raw** or **Download raw file** and open the `.mov` file in a video player.
 
 These badges show the latest published CI evidence for **`docs/ReadMe_Update`**.
 For the final submission, switch the badge URLs and workflow filters to `main`
@@ -109,7 +115,9 @@ Product List (APL) and item-level checkout help.
   in the imported NC WIC APL.
 - 🛒 **Basket Management:** Add products, adjust quantities, and
   review the application's saved allowance information.
-- 💬 **Checkout Help (Partial Demo):** View guidance about items in
+- 🥗 **Nutrition and Basket Balance:** Read nutrient values with units and
+  missing-data labels, compare alternatives, and preview optional basket swaps.
+- 💬 **Checkout Help:** View guidance about items in
   your basket. Checkout-rejection explanations currently use
   synthetic sample scenarios for demonstration.
 - 🔐 **User Accounts:** Sign up and sign in using Firebase Authentication.
@@ -119,30 +127,19 @@ imported catalog version. WolfBite's demo allowances are not connected
 to a participant's official WIC benefit account, and checkout guidance
 does not guarantee acceptance at the register.
 
-<!-- UPDATE BEFORE FINAL SUBMISSION:
-Refresh the highlights to reflect verified, completed M0–M4 functionality.
-Keep catalog eligibility, demo allowances, and checkout guidance distinct.
--->
-
 ---
 
 ## 🎬 Demo Videos
 
-### Project 2 Teaser - Coming Soon
+### Project 2
 
-A 12–30-second introduction to Team 7’s WolfBite updates is in preparation.
+- [Teaser — 18 seconds](Project3/docs/videos/Wolfbite%20Teaser%20Video.mov)
+- [Feature walkthrough — 3 minutes, 26 seconds](Project3/docs/videos/WolfBite%20Walkthrough.mov)
 
-<!-- BEFORE SUBMISSION: Add the teaser near the top of this README. -->
-
-### Project 2 Feature Walkthrough - Coming Soon
-
-A 2–5-minute walkthrough of the completed Project 2 functionality
-is in preparation.
-
-<!-- BEFORE SUBMISSION:
-Add the final video link, verify access and duration, and ensure
-the walkthrough clearly distinguishes working features from demo behavior.
--->
+The walkthrough shows product lookup, alternatives, nutrition details, basket
+quantities, benefits, and QR checkout. See the [User Guide](USER_GUIDE.md) for
+instructions and the [testing record](Project3/docs/TESTING.md) for the scope
+of automated checks and remaining demonstration verification.
 
 ### Previous - Team Demo
 
@@ -159,28 +156,40 @@ the walkthrough clearly distinguishes working features from demo behavior.
   NC WIC catalog; catalog listing does not confirm remaining benefits.
 
 - **Checkout-Help Evaluation (M0):** Scenarios, tests, and scoring tools
-  support evaluation; participant results are not yet verified.
+  evaluate whether a shopper identifies the expected next step within
+  60 seconds. The scorer and CI exercise explicitly synthetic passing and
+  failing examples; a real-participant study has not been conducted.
+  See the [evaluation results and limitations](Project2_Work/M0/m0_evaluation_results.md).
 
-- **Clearer Nutrition Information (M1 — Pending Verification):**
-  Add units, comparison explanations, and clear labels for missing data.
+- **Clearer Nutrition Information (M1):**
+  Displays nutrient values with units, serving-basis labels, explanations,
+  and alternative-product tradeoffs. Missing values appear as **Unknown**
+  and do not earn favorable nutrition badges. Available nutrition comes from
+  product records or the separate nutrition collection; it is not available
+  for every APL product.
 
-- **Basket-Aware Suggestions (M2 — Pending Verification):**
-  Preview optional product swaps using a small demo catalog and
-  simulated allowances.
+- **Basket-Aware Suggestions (M2):**
+  **Check basket balance** summarizes the basket's nutrition with quantities
+  included and previews same-category swaps using available catalog and
+  nutrition data. A swap requires the shopper's confirmation. Suggestions
+  respect application-managed allowances and can be withheld when data is
+  insufficient. Comparison targets are illustrative, not personal dietary goals.
 
-- **Shopping Interface Improvements (M3 — Pending Verification):**
-  Improve scan, basket, and benefits screens, including loading,
-  error handling, and accessibility.
+- **Shopping Interface Improvements (M3):**
+  Updated scan, basket, benefits, and receipt screens provide product details,
+  quantity controls, and loading or empty states. Tests cover lookup errors,
+  allowance limits, small-screen scan layouts, basket-control tooltips, and
+  long product names.
 
-- **Item-Level Checkout Help (M4 — Partial Demo):**
-  View basket guidance and explore sample checkout-rejection explanations.
+- **Item-Level Checkout Help (M4):**
+  Opens guidance for basket items and provides **Try sample checkout help**
+  scenarios for checkout-rejection explanations. Sample scenarios are
+  synthetic; saved allowances are not official participant benefits, and
+  the app does not receive live retailer rejection data.
 
-<!-- UPDATE BEFORE FINAL SUBMISSION:
-- Verify M1–M3 implementation and replace pending labels with final status.
-- Update M0 with measured evaluation results.
-- Confirm M4's final behavior and retain any demo limitations.
-- Ensure every description matches the submitted version.
--->
+These descriptions reflect the merged implementation and automated tests.
+See [Testing WolfBite](Project3/docs/TESTING.md) for commit-specific results,
+manual checks, and remaining gaps; automated checks are not real-user outcomes.
 
 ### Inherited Features
 
@@ -188,9 +197,9 @@ the walkthrough clearly distinguishes working features from demo behavior.
 - **User Authentication:** Sign up and log in with Firebase Authentication.
 - **Shopping Basket:** Add items, change quantities, and save your basket.
 - **Demo Allowance Tracking:** Track application-managed category limits and usage.
-- **Experimental Nutrition and Alternatives:** Explore nutrition displays and alternative products; data handling still needs fixes.
+- **Nutrition and Alternatives:** Explore nutrition displays and alternative products, extended by the M1 and M2 improvements above; comparisons depend on available data.
 - **QR Basket Summary:** Generate a QR code containing your basket data; retailer checkout support is unverified.
-- **Receipt OCR Import:** Find product codes in receipt images and add catalog matches to your basket.
+- **Receipt OCR Import:** Sends a selected or captured receipt image to OCR.space, extracts product codes, and looks up catalog matches for the basket. A successful live receipt scan has not been verified in the recorded checks.
 
 ---
 
@@ -304,7 +313,7 @@ the configured SDK version. Transitive dependencies are listed in the lockfile.
 versions. Refer to the linked package pages for full license text and notices.
 
 See [Third-Party Libraries](THIRD_PARTY_LIBRARIES.md)
-for the complete dependency and license inventory.
+for the dependency and license inventory, its evidence, and its scope limits.
 
 > **Note:** Run `flutter pub get` from `Project3` to resolve and download
 > dependencies. Flutter SDK packages are supplied by the installed SDK.

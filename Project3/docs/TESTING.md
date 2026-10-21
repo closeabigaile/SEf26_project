@@ -62,23 +62,63 @@ flutter test integration_test/live_app_test.dart -d windows
 Desktop builds need Visual Studio C++ build tools (Windows). Device tests
 poll for results (`test/e2e/e2e_helpers.dart`) because lookups take real time.
 
-## Current numbers (2026-10-17)
+## Verified CI results (2026-10-20)
 
-- `flutter test`: 377 passed, 0 failed.
-- On device (Windows): 11 of 11 journeys passed; M2 visual flow passed.
-- Node script tests: 13 passed. Python APL tests and M0 scoring tests pass.
-- Line coverage: 90.8% overall. M2: `basket_balance_service.dart` 100%,
-  `app_state.dart` 98.7%, `apl_service.dart` 97.9%, `nutritional_utils.dart`
-  96.6%, `basket_balance_sheet.dart` 94.5%. Lowest: `nutritional_badges.dart`
-  64.8%, `receipt_scanner_screen.dart` 68.3%, `qr_checkout_screen.dart` 70%.
+The [Flutter CI run](https://github.com/closeabigaile/SEf26_project/actions/runs/39493687299)
+and [published dev report](https://github.com/closeabigaile/SEf26_project/blob/ci-evidence/dev/README.md)
+identify commit `e8228543ed3950d32a26736b06b90e3a9d14d47b`:
+
+- Flutter suite: **377 passed, 0 failed, 0 skipped**.
+- Dart line coverage: **92.0%** (2,388 of 2,596 measured lines).
+- Release web build, strict Dart analysis, formatting, Firebase configuration,
+  Python checks, and JavaScript tests: **passed**.
+- The [M0 baseline workflow](https://github.com/closeabigaile/SEf26_project/actions/runs/39493687288)
+  and [M4 verification workflow](https://github.com/closeabigaile/SEf26_project/actions/runs/39493687491)
+  also passed for this commit.
+
+These are recorded GitHub results, not a new local test run. The `dev` report
+updates on later pushes; use the linked run for this particular commit.
+Coverage measures Dart lines in the Flutter test report, not live Firebase,
+device-camera behavior, or participant outcomes.
+
+[Flutter CI](../../.github/workflows/flutter-ci.yml) runs on pushes to every
+branch except the generated `ci-evidence` branch, on pull requests, and when
+manually dispatched. It checks formatting without rewriting files and runs
+`flutter analyze --no-pub --fatal-infos --fatal-warnings`.
+Badge evidence publishes on branch pushes; documentation deploys only after
+successful checks on a push to `main`.
+
+## Recorded manual and device checks
+
+- The [October 19 fresh-clone record](../../Project2_Work/installation/2026-10-19/README.md)
+  documents macOS setup, 377 passing Flutter tests, a release web build, and
+  Abigail Close's successful live sign-in, product lookup, and add-to-basket
+  check at commit `3f1379ec15be9b7b093e5a291c6e05a9c50bf603`.
+- The October 17 version of this document reported 11/11 Windows device
+  journeys and an M2 visual-flow pass. Those are historical team-reported
+  results, not a fresh device verification of the October 20 commit.
+
+## Video evidence
+
+The [teaser](videos/Wolfbite%20Teaser%20Video.mov) is 18.2 seconds and the
+[walkthrough](videos/WolfBite%20Walkthrough.mov) is 3 minutes, 26 seconds,
+within the Project 2 duration limits. The files are publicly accessible on
+GitHub; its file viewer does not provide an inline player for these files.
+Use **View raw** or **Download raw file** to open them in a video player.
+
+Frames reviewed at one-second intervals across the full walkthrough timeline
+show lookup, alternatives, nutrition details, basket quantities, benefits, and
+QR checkout. This visual check did not assess narration. Coverage of the M2 basket-balance suggestion and
+confirmed swap, and the M4 checkout-help dialog, still needs verification.
+Opening the receipt screen does not demonstrate successful OCR import.
 
 ## Known gaps
 
-- CI (`.github/workflows/flutter-ci.yml`, main only) runs `flutter analyze
-  --fatal-infos --fatal-warnings` and a format check; 21 analyzer issues and
-  14 unformatted files (none in M2 code) would fail it today.
-- The live test has not been run yet (needs the credentials file).
-- Receipt scanning (camera + ML Kit OCR) is not covered end to end.
+- No completed run of `integration_test/live_app_test.dart` is recorded here;
+  it needs the credentials file. The manual fresh-clone check above is separate.
+- Receipt scanning uses `image_picker` and the remote OCR.space API through
+  `http`, not ML Kit. Successful camera/image-to-OCR-to-basket behavior has not
+  been verified end to end in the recorded checks.
 - Scan screen: when a category is full the Add button is disabled, so the
   "Paid" fallback inside `_addToBasket` is unreachable; overflow to PAID only
   happens through "+" on an existing basket line (J1 documents this).
