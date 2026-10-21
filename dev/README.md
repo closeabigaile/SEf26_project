@@ -1,9 +1,9 @@
 # WolfBite CI evidence
 
 Branch: `dev`  
-Commit: [`a8dbc0a256621c620a983eeaba2ca192b59f2c4b`](https://github.com/closeabigaile/SEf26_project/commit/a8dbc0a256621c620a983eeaba2ca192b59f2c4b)  
-[GitHub Actions run](https://github.com/closeabigaile/SEf26_project/actions/runs/39525938833)  
-Generated: 2026-10-21T01:15:58.931755+00:00
+Commit: [`1e24abaff7d7671249fd8731b8c7caa475e8dcba`](https://github.com/closeabigaile/SEf26_project/commit/1e24abaff7d7671249fd8731b8c7caa475e8dcba)  
+[GitHub Actions run](https://github.com/closeabigaile/SEf26_project/actions/runs/39529965754)  
+Generated: 2026-10-21T01:57:46.151312+00:00
 
 | Check | Result |
 | --- | --- |
@@ -18,7 +18,7 @@ Generated: 2026-10-21T01:15:58.931755+00:00
 | Dart line coverage | 92.0% |
 
 Style and syntax badges both report the same strict `flutter analyze` run,
-configured by `Project3/analysis_options.yaml`. They are not independent checks.
+configured by `Project2/analysis_options.yaml`. They are not independent checks.
 Python checks include M0/APL tests, badge-report tests, and Firebase configuration validation.
 The Firebase badge reports local configuration consistency, not live database access.
 
