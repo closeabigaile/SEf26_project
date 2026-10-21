@@ -1,6 +1,10 @@
 # WolfBite 🐺
 
 <p align="center">
+    <strong>A WIC shopping assistant for product lookup, basket management, and checkout guidance</strong>
+</p>
+
+<p align="center">
     <!-- Working-branch preview. Before final submission, change all nine badge
          image/report paths to ci-evidence/main/ and both workflow branch
          filters to main, then verify the published main reports. -->
@@ -75,16 +79,6 @@ The [original teaser](Project2/docs/videos/Wolfbite%20Teaser%20Video.mov) and
 walkthrough are also available in the repository. To watch a repository video,
 select **View raw** or **Download raw file** and open the `.mov` file in a video player.
 
-These badges show the latest published CI evidence for **`docs/ReadMe_Update`**.
-For the final submission, switch the badge URLs and workflow filters to `main`
-and verify its published reports. Style and syntax
-share the strict Dart analyzer result; tests and coverage cover the Flutter
-suite. Each generated badge links to the report, source commit, and CI run.
-See [badge reporting](.github/scripts/README.md) for scope and publication details.
-
-<p align="center">
-    <strong>A WIC shopping assistant for product lookup, basket management, and checkout guidance</strong>
-</p>
 
 <p align="center">
     Extended by Team 7 for CSC 510 Project 2 at NC State University,
@@ -139,7 +133,7 @@ does not guarantee acceptance at the register.
 
 ### Project 2
 
-- [Teaser — 18 seconds](https://github.com/user-attachments/assets/b2ab8bb9-fdce-4d43-b549-b2f909a34a38)
+- [Teaser — 18 seconds](Project2/docs/videos/Wolfbite%20Teaser%20Video.mov)
 - [Feature walkthrough — 3 minutes, 26 seconds](Project2/docs/videos/WolfBite%20Walkthrough.mov)
 
 The walkthrough shows product lookup, alternatives, nutrition details, basket
@@ -353,6 +347,9 @@ Python, JavaScript, formatting, analysis, and build checks.
 - [Previous-team documentation](https://suyeshjadhav.github.io/CSC510_G19/) — Historical reference; use the guide above for the current application.
 
 - [Installation Guide](INSTALL.md) — Local setup, launch instructions, and troubleshooting.
+- [Testing](Project2/docs/TESTING.md) — Test commands, CI results, manual checks, and known gaps.
+- [Third-Party Libraries](THIRD_PARTY_LIBRARIES.md) — Dependency and license inventory, supporting evidence, and scope limits.
+<!-- Add the Dart API documentation link here after publication and verification. -->
 - [Firebase Setup](Project2/FIREBASE_SETUP.md) — Application configuration.
 - [APL Import Guide](Project2/FIREBASE_UPLOAD.md) — Catalog import instructions and results.
 - [Contributing Guidelines](Project2/CONTRIBUTING.md) — Development and contribution process.
@@ -422,7 +419,7 @@ authors’ copyright notice.
 ## 📞 Support
 
 - **Questions and bug reports**: [GitHub Issues](https://github.com/closeabigaile/SEf26_project/issues)
-- **Email**: Coming soon.
+- **Email**: closeabigaile@gmail.com
 
 ---
 
